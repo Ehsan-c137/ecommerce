@@ -3,25 +3,50 @@
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+   --background: #ffffff;
+   --foreground: #171717;
 }
 
 @media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+   :root {
+      --background: #0a0a0a;
+      --foreground: #ededed;
+   }
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+   color: var(--foreground);
+   background: var(--background);
+   font-family: Arial, Helvetica, sans-serif;
 }
 
 @layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+   .text-balance {
+      text-wrap: balance;
+   }
+}
+
+@layer base {
+   h1 {
+      @apply text-[40px] font-semibold;
+   }
+
+   h2 {
+      @apply text-[32px] font-semibold;
+   }
+
+   h3 {
+      @apply text-2xl font-bold;
+   }
+
+   p {
+      @apply text-sm;
+   }
+}
+
+.text-label {
+   @apply text-xs font-medium;
+}
+.btn {
+   @apply flex items-center bg-neutral-900 text-white-900  rounded-[4px] px-6 py-3;
 }
