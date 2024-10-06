@@ -1,101 +1,139 @@
+import { Icons } from "@/components/Icons/icons";
 import Image from "next/image";
+import Card from "@/components/Card/Card";
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="https://nextjs.org/icons/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
+   return (
+      <main className="flex flex-col gap-8  items-center sm:items-start p-4 lg:p-0">
+         <section className="w-full items-end">
+            <div className="container  mx-auto grid grid-cols-1 md:grid-cols-2 justify-between items-end h-full gap-4 lg:gap-0">
+               <div className="flex flex-col items-start justify-center  h-full">
+                  <h2 className="text-natural-800">Fresh Arrivals Online</h2>
+                  <p className="text-neutral-600 mt-2">
+                     Discover Our Newest Collection Today.
+                  </p>
+                  <button className="btn mt-10">
+                     <p>View Collection</p>
+                     <span className="ml-2">
+                        <Icons.ArrowRight className="fill-neutral-100" />
+                     </span>
+                  </button>
+               </div>
+               <div className="flex items-center justify-center">
+                  <Image
+                     src="/Hero-Image.svg"
+                     alt="hero image"
+                     width={346}
+                     height={382}
+                  />
+               </div>
+            </div>
+         </section>
+         <section className="grid grid-cols-1 items-center justify-center  md:grid-cols-2 lg:grid-cols-3 gap-32 container mx-auto py-20">
+            <div className="flex flex-col gap-4 items-center lg:items-start">
+               <div className="w-12 h-12 flex items-center justify-center rounded-full bg-white-100">
+                  <Icons.Truck className="w-7 h-7" />
+               </div>
+               <h5 className="font-bold">Free Shipping</h5>
+               <p>
+                  Upgrade your style today and get FREE <br /> shipping on all
+                  orders! Don't miss out.
+               </p>
+            </div>
+            <div className="flex flex-col gap-4  items-center lg:items-start">
+               <div className="w-12 h-12 flex items-center justify-center rounded-full bg-white-100">
+                  <Icons.StarBadge className="w-7 h-7" />
+               </div>
+               <h5 className="font-bold">Satisfaction Guarantee</h5>
+               <p>
+                  Shop confidently with our Satisfaction <br /> Guarantee: Love
+                  it or get a refund.
+               </p>
+            </div>
+            <div className="flex flex-col gap-4  items-center lg:items-start text-center">
+               <div className="w-12 h-12 flex items-center justify-center rounded-full bg-white-100">
+                  <Icons.ShieldCheck className="w-7 h-7" />
+               </div>
+               <h5 className="font-bold">Secure Payment</h5>
+               <p>
+                  Your security is our priority. Your payments are secure with
+                  us.
+               </p>
+            </div>
+         </section>
+         <section className="flex flex-col justify-center items-center w-full gap-14 container mx-auto">
+            <div className="flex flex-col items-center gap-4">
+               <p className="text-neutral-300 text-label">SHOP NOW</p>
+               <h3 className="text-neutral-900">Best Selling</h3>
+            </div>
+            <div className="flex items-center w-full justify-between gap-6">
+               <Card />
+               {/* <Card />
+               <Card />
+               <Card /> */}
+            </div>
+         </section>
+         <section className="bg-white-100 w-full p-4 pt-0 lg:p-0">
+            <div className="container mx-auto grid grid-cols-1 lg:grid-cols-2 justify-between items-center">
+               <div className="flex flex-col gap-8 items-start">
+                  <h3 className="text-neutral-900">
+                     Browse Our Fashion Paradise!
+                  </h3>
+                  <p className="text-neutral-500">
+                     Step into a world of style and explore our diverse
+                     collection of clothing categories.
+                  </p>
+                  <button className="btn">
+                     <p>Start Browsing</p>
+                     <span className="ml-2">
+                        <Icons.ArrowRight className="fill-neutral-100" />
+                     </span>
+                  </button>
+               </div>
+               <div className="flex justify-center -order-1 lg:order-1">
+                  <Image
+                     src={"/tshirt.png"}
+                     alt="clothes"
+                     width={237}
+                     height={312}
+                  />
+               </div>
+            </div>
+         </section>
+         <section className="flex flex-col gap-12 justify-center items-center w-full container mx-auto">
+            <div className="flex gap-[10px] items-center">
+               <button className="px-4 py-1 border border-neutral-100 rounded-full">
+                  Featured
+               </button>
+               <button className="px-4 py-1 border border-neutral-100 rounded-full">
+                  Latest
+               </button>
+            </div>
+            <div className="flex justify-between w-full">
+               <Card />
+               {/* <Card />
+               <Card />
+               <Card /> */}
+            </div>
+         </section>
+         <section className="w-full bg-white-100 py-20">
+            <div className="container mx-auto grid grid-cols-1 lg:grid-cols-2 items-center justify-between gap-8 p-4 lg:p-0">
+               <div className="flex flex-col gap-6">
+                  <h3 className="text-neutral-900">Join Our Newsletter</h3>
+                  <p className="text-neutral-500">
+                     We love to surprise our subscribers with occasional gifts.
+                  </p>
+               </div>
+               <div className="flex flex-col lg:flex-row items-start gap-4">
+                  <input
+                     type="email"
+                     placeholder="Your email Address"
+                     className="text-sm text-neutral-300 rounded-md pl-2 pr-8 py-1 outline-none border border-transparent focus-within:border-neutral-900 transition bg-white-100"
+                  />
+                  <button className="btn">Subsribe</button>
+               </div>
+            </div>
+         </section>
       </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
-  );
+   );
 }
