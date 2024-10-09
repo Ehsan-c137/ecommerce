@@ -4,7 +4,7 @@ import Link from "next/link";
 export default function Footer() {
    return (
       <footer className="grid grid-cols-1 gap-8 w-full  pt-20">
-         <div className="grid grid-cols-1 lg:grid-cols-3 lg:justify-between gap-8 p-4 lg:p-0 w-full container mx-auto">
+         <div className="grid grid-cols-1 lg:grid-cols-3 justify-between gap-8 p-4 lg:p-0 w-full container mx-auto">
             <div className="flex flex-col gap-4">
                <div className="flex items-center gap-4">
                   <Icons.Logo />
@@ -65,7 +65,7 @@ export default function Footer() {
                   </div>
                </div>
             </div>
-            <div className="flex flex-col gap-6">
+            <div className="flex flex-col justify-center gap-6">
                <p className="text-neutral-300">ACCEPTED PAYMENTS</p>
                <div className="flex gap-4">
                   <Icons.Mastercard />
