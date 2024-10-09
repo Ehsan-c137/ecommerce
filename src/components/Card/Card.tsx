@@ -8,7 +8,7 @@ interface IProps {
 
 export default function Card({ name, price, isInStock }: IProps) {
    return (
-      <div className="rounded-[4px] max-w-[264px] max-h-[434px] flex flex-col gap-6 py-4 px-8">
+      <div className="rounded-[4px]  flex flex-col gap-6">
          <div className="w-[248px] h-[312px] bg-neutral-100">
             <Image src={"/tshirt.png"} alt="clothes" width={237} height={312} />
          </div>
