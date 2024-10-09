@@ -5,6 +5,7 @@
 :root {
    --background: #ffffff;
    --foreground: #171717;
+   --header-height: 84px;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -48,5 +49,9 @@ body {
    @apply text-xs font-medium;
 }
 .btn {
-   @apply flex items-center bg-neutral-900 text-white-900  rounded-[4px] px-6 py-3;
+   @apply flex items-center bg-neutral-900 text-white-900  rounded-[4px] px-6 py-2;
+}
+
+.btn-outline {
+   @apply px-4 py-1 border border-neutral-100 rounded-full flex items-center;
 }
