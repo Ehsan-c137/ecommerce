@@ -6,7 +6,7 @@ export default function Home() {
    return (
       <main className="flex flex-col gap-8  items-center sm:items-start p-4 lg:p-0">
          <section className="w-full items-end">
-            <div className="container  mx-auto grid grid-cols-1 md:grid-cols-2 justify-between items-end h-full gap-4 lg:gap-0">
+            <div className="container mx-auto grid grid-cols-1 md:grid-cols-2 justify-items-between lg:justify-center items-end h-full gap-4 lg:gap-0">
                <div className="flex flex-col items-start justify-center  h-full">
                   <h2 className="text-natural-800">Fresh Arrivals Online</h2>
                   <p className="text-neutral-600 mt-2">
@@ -29,7 +29,7 @@ export default function Home() {
                </div>
             </div>
          </section>
-         <section className="grid grid-cols-1 items-center justify-center  md:grid-cols-2 lg:grid-cols-3 gap-32 container mx-auto py-20">
+         <section className="grid grid-cols-1 items-center justify-items-between  md:grid-cols-2 lg:grid-cols-3 gap-32 container mx-auto py-20">
             <div className="flex flex-col gap-4 items-center lg:items-start">
                <div className="w-12 h-12 flex items-center justify-center rounded-full bg-white-100">
                   <Icons.Truck className="w-7 h-7" />
@@ -37,7 +37,7 @@ export default function Home() {
                <h5 className="font-bold">Free Shipping</h5>
                <p>
                   Upgrade your style today and get FREE <br /> shipping on all
-                  orders! Don't miss out.
+                  orders! Don&apos;t miss out.
                </p>
             </div>
             <div className="flex flex-col gap-4  items-center lg:items-start">
@@ -52,7 +52,7 @@ export default function Home() {
             </div>
             <div className="flex flex-col gap-4  items-center lg:items-start text-center">
                <div className="w-12 h-12 flex items-center justify-center rounded-full bg-white-100">
-                  <Icons.ShieldCheck className="w-7 h-7" />
+                  <Icons.ShieldCheck />
                </div>
                <h5 className="font-bold">Secure Payment</h5>
                <p>
@@ -102,12 +102,8 @@ export default function Home() {
          </section>
          <section className="flex flex-col gap-12 justify-center items-center w-full container mx-auto">
             <div className="flex gap-[10px] items-center">
-               <button className="px-4 py-1 border border-neutral-100 rounded-full">
-                  Featured
-               </button>
-               <button className="px-4 py-1 border border-neutral-100 rounded-full">
-                  Latest
-               </button>
+               <button className="btn-outline">Featured</button>
+               <button className="btn-outline">Latest</button>
             </div>
             <div className="flex justify-between w-full">
                <Card />
@@ -124,13 +120,13 @@ export default function Home() {
                      We love to surprise our subscribers with occasional gifts.
                   </p>
                </div>
-               <div className="flex flex-col lg:flex-row items-start gap-4">
+               <div className="flex flex-col justify-center lg:flex-row lg:items-center items-start gap-4 h-11">
                   <input
                      type="email"
                      placeholder="Your email Address"
-                     className="text-sm text-neutral-300 rounded-md pl-2 pr-8 py-1 outline-none border border-transparent focus-within:border-neutral-900 transition bg-white-100"
+                     className="text-sm text-neutral-300 rounded-md h-full pl-2 pr-8 outline-none border border-transparent focus-within:border-neutral-900 transition bg-white-100"
                   />
-                  <button className="btn">Subsribe</button>
+                  <button className="btn h-full">Subsribe</button>
                </div>
             </div>
          </section>
