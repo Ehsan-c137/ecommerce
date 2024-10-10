@@ -3,6 +3,7 @@ import Header from "@/components/Header/Header";
 import Footer from "@/components/Footer/Footer";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import Providers from "@/providers";
 
 export const metadata: Metadata = {
    title: "Create Next App",
@@ -19,9 +20,11 @@ export default function RootLayout({
    return (
       <html lang="en">
          <body className={`antialiased ${inter.className}`}>
-            <Header />
-            <main className="mt-[84px]">{children}</main>
-            <Footer />
+            <Providers>
+               <Header />
+               <main className="mt-[84px]">{children}</main>
+               <Footer />
+            </Providers>
          </body>
       </html>
    );
