@@ -4,7 +4,7 @@ import Card from "@/components/Card/Card";
 
 export default function Home() {
    return (
-      <main className="flex flex-col gap-8  items-center sm:items-start p-4 lg:p-0">
+      <main className="flex flex-col gap-8  items-center sm:items-start p-4 lg:p-0 mt-[64px]">
          <section className="w-full items-end">
             <div className="container mx-auto grid grid-cols-1 md:grid-cols-2 justify-items-between lg:justify-center items-end h-full gap-4 lg:gap-0">
                <div className="flex flex-col items-start justify-center  h-full">
@@ -102,10 +102,40 @@ export default function Home() {
          </section>
          <section className="flex flex-col gap-12 justify-center items-center w-full container mx-auto">
             <div className="flex gap-[10px] items-center">
-               <button className="btn-outline">Featured</button>
-               <button className="btn-outline">Latest</button>
+               <div>
+                  <input
+                     id="featured"
+                     type="radio"
+                     className="appearance-none peer"
+                     name="featured"
+                  />
+                  <label
+                     htmlFor="featured"
+                     className="cursor-pointer transition-colors font-medium text-sm px-4 py-1 rounded-full border peer-checked:border-neutral-500  border-[rgba(0,0,0,0)]"
+                  >
+                     Featured
+                  </label>
+               </div>
+               <div>
+                  <input
+                     id="latest"
+                     type="radio"
+                     className="appearance-none peer"
+                     name="featured"
+                  />
+                  <label
+                     htmlFor="latest"
+                     className="cursor-pointer transition-colors font-medium text-sm px-4 py-1 rounded-full border peer-checked:border-neutral-500  border-[rgba(0,0,0,0)]"
+                  >
+                     Latest
+                  </label>
+               </div>
             </div>
             <div className="flex justify-between w-full">
+               {/* <div className="hidden peer-[.is-check-2]:checked:flex">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  Earum, laboriosam!
+               </div> */}
                <Card />
                {/* <Card />
                <Card />
@@ -113,7 +143,7 @@ export default function Home() {
             </div>
          </section>
          <section className="w-full bg-white-100 py-20">
-            <div className="container mx-auto grid grid-cols-1 lg:grid-cols-2 items-center justify-between gap-8 p-4 lg:p-0">
+            <div className="container mx-auto grid grid-cols-1 lg:grid-cols-2 items-center justify-between gap-10 p-4 lg:p-0">
                <div className="flex flex-col gap-6">
                   <h3 className="text-neutral-900">Join Our Newsletter</h3>
                   <p className="text-neutral-500">
@@ -124,7 +154,7 @@ export default function Home() {
                   <input
                      type="email"
                      placeholder="Your email Address"
-                     className="text-sm text-neutral-300 rounded-md h-full pl-2 pr-8 outline-none border border-transparent focus-within:border-neutral-900 transition bg-white-100"
+                     className="text-sm p-3 lg:py-3 text-neutral-300 rounded-md pl-2 pr-8 outline-none border border-transparent focus-within:border-neutral-900 transition bg-white-100"
                   />
                   <button className="btn h-full">Subsribe</button>
                </div>
