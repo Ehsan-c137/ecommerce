@@ -5,33 +5,27 @@ import Products from "./Products";
 import { useRouter, usePathname, useSearchParams } from "next/navigation";
 import { useQuery } from "@tanstack/react-query";
 import getAllCategory from "@/services/store/category/getAllCategory";
-import { useState } from "react";
+import useGetAllSearchParams from "@/utils/useGetAllSearchParams";
 
 export default function Filters() {
    const searchParams = useSearchParams();
    const pathname = usePathname();
    const router = useRouter();
 
-   // const [priceRange, setPriceRange] = useState<{
-   //    min: number;
-   //    max: number | null;
-   // }>({
-   //    min: 0,
-   //    max: null,
-   // });
-
-   // const handlePriceRange = (event) => {
-   //    setPriceRange({
-   //       ...priceRange,
-   //       [event.target.value]: event.target.value,
-   //    });
-   // };
+   const AllSearchParams = useGetAllSearchParams();
 
    const sizes = ["S", "M", "L", "XL", "XXL"];
+   const colors = ["yellow", "red", "blue"];
    const { data: categories, isLoading } = useQuery({
       queryKey: ["categories"],
       queryFn: () => getAllCategory(),
    });
+
+   // const test = [];
+   // AllSearchParams.map((item) => {
+   //    test[item.name] = [[...item.value]];
+   // });
+   // console.log(test);
 
    const handleQueryParams = (name: string, value: string) => {
       const current = new URLSearchParams(Array.from(searchParams.entries()));
@@ -84,9 +78,9 @@ export default function Filters() {
                               />
                               <label
                                  htmlFor={item + "-checkbox"}
-                                 className="ms-2 text-sm font-medium text-neutral-600  w-full cursor-pointer"
+                                 className="ms-2 text-sm font-medium text-neutral-700  w-full cursor-pointer"
                               >
-                                 {item}
+                                 {item[0].toUpperCase() + item.slice(1)}
                               </label>
                            </div>
                         );
@@ -97,21 +91,68 @@ export default function Filters() {
             <div className="flex flex-col gap-4 px-4">
                <p className="text-neutral-900 font-medium">Color</p>
                <div className="flex items-center gap-3">
-                  <div className="w-7 h-7 rounded-full bg-red-r200 border border-neutral-900 p-[3px] bg-clip-content cursor-pointer"></div>
-                  <div className="w-7 h-7 rounded-full bg-yellow-y200 border border-neutral-900 p-[3px] bg-clip-content cursor-pointer"></div>
-                  <div className="w-7 h-7 rounded-full bg-blue-b200 border border-neutral-900 p-[3px] bg-clip-content cursor-pointer"></div>
+                  {colors.map((item) => {
+                     const isChecked = searchParams
+                        .getAll("color")
+                        ?.includes(item);
+                     return (
+                        <div key={item} className="flex items-center">
+                           <label
+                              style={{
+                                 border: "1px solid transparent",
+                                 borderColor: isChecked
+                                    ? "black"
+                                    : "transparent",
+                              }}
+                              htmlFor={`${item}--color`}
+                              className={`w-7 h-7 rounded-full transition p-[3px] bg-clip-content bg-red-r200 borderp-[3px]  cursor-pointer`}
+                           ></label>
+                           <input
+                              type="checkbox"
+                              value={item}
+                              id={`${item}--color`}
+                              className="hidden"
+                              checked={isChecked}
+                              onChange={(e) => {
+                                 handleQueryParams("color", e.target.value);
+                              }}
+                           />
+                        </div>
+                     );
+                  })}
                </div>
             </div>
             <div className="flex flex-col gap-4 px-4">
                <p className="text-neutral-900 font-medium">Color</p>
-               <div className="flex items-center gap-3 text-sm">
+               <div className="flex items-center flex-wrap gap-3 text-sm">
                   {sizes.map((item) => {
+                     const isChecked = searchParams
+                        .getAll("size")
+                        ?.includes(item);
+
                      return (
-                        <div
-                           key={item}
-                           className="flex items-center justify-center w-10 h-10 rounded-md border border-neutral-100  bg-clip-content cursor-pointer"
-                        >
-                           {item}
+                        <div key={item} className="flex items-center">
+                           <label
+                              style={{
+                                 borderColor: isChecked
+                                    ? "black"
+                                    : "transparent",
+                              }}
+                              htmlFor={`${item}--size`}
+                              className="flex items-center justify-center w-10 h-10 rounded-md cursor-pointer border border-neutral-100 transition"
+                           >
+                              {item}
+                           </label>
+                           <input
+                              type="checkbox"
+                              value={item}
+                              id={`${item}--size`}
+                              className="hidden"
+                              checked={isChecked}
+                              onChange={(e) => {
+                                 handleQueryParams("size", e.target.value);
+                              }}
+                           />
                         </div>
                      );
                   })}
@@ -131,29 +172,25 @@ export default function Filters() {
             </div>
          </div>
          <div className="flex flex-col gap-3 w-full">
-            <p className="text-neutral-900 font-medium">Applied Filters:</p>
-            <div className="flex gap-3">
-               {searchParams.getAll("category").map((item) => (
+            {AllSearchParams.length > 0 && (
+               <p className="text-neutral-900 font-medium">Applied Filters:</p>
+            )}
+            <div className="flex flex-wrap gap-3">
+               {AllSearchParams.map((item: { name: string; value: string }) => (
                   <button
-                     className="btn-outline text-label flex gap-4 transition"
-                     key={item}
+                     className="btn-outline text-label flex justify-between items-center gap-2 transition"
+                     key={item.value}
                   >
-                     {item[0].toUpperCase() + item.slice(1)}
+                     {item.value[0]?.toUpperCase() + item.value?.slice(1)}
                      <div
                         onClick={() => {
-                           handleQueryParams("category", item);
+                           handleQueryParams(item.name, item.value);
                         }}
                      >
                         <Icons.X />
                      </div>
                   </button>
                ))}
-               {/* <button className="btn-outline text-label">
-                  Perfume <Icons.X />
-               </button>
-               <button className="btn-outline text-label space-x-2">
-                  <span>Size: M</span> <Icons.X />
-               </button> */}
             </div>
             <div className="text-neutral-500 justify-between flex items-center w-full py-4">
                <p>Showing 1-9 of 36 results.</p>
