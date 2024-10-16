@@ -5,25 +5,48 @@ import products from "@/services/store/products";
 import { useQuery } from "@tanstack/react-query";
 
 export default function Products() {
-   const { data } = useQuery({
+   const { data, isLoading, isError, error } = useQuery({
       queryKey: ["allproducts"],
-      queryFn: () => products(),
+      queryFn: () => products(2, 1),
    });
 
-   console.log(data);
-
    return (
-      <div className="grid grid-cols-1 justify-items-center md:justify-items-start md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-6 gap-y-8 ">
-         <Card />
-         <Card />
-         <Card />
-         <Card />
-         <Card />
-         <Card />
-         <Card />
-         <Card />
-         <Card />
-         <Card />
+      <div className="grid grid-cols-1 justify-items-center md:justify-items-start md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-x-6 gap-y-8 ">
+         {isError && <p>{error.message}</p>}
+         {isLoading && (
+            <>
+               <div
+                  className=" bg-white-200 animate-pulse"
+                  style={{
+                     width: "304px",
+                     height: "394px",
+                  }}
+               >
+                  &nbsp;
+               </div>
+               <div
+                  className=" bg-white-200 animate-pulse"
+                  style={{
+                     width: "304px",
+                     height: "394px",
+                  }}
+               >
+                  &nbsp;
+               </div>
+               <div
+                  className=" bg-white-200 animate-pulse"
+                  style={{
+                     width: "304px",
+                     height: "394px",
+                  }}
+               >
+                  &nbsp;
+               </div>
+            </>
+         )}
+         {data?.map((product: any) => (
+            <Card key={product.id} data={product} />
+         ))}
       </div>
    );
 }
