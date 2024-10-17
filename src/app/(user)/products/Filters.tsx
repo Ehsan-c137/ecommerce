@@ -13,6 +13,12 @@ export default function Filters() {
    const router = useRouter();
 
    const AllSearchParams = useGetAllSearchParams();
+   const groupped = Object.groupBy(AllSearchParams, (item) => item.name);
+
+   const AllSearchParamsObj = {};
+   Object.entries(groupped).forEach(([key, value]) => {
+      AllSearchParamsObj[key] = value.map((item) => item.value);
+   });
 
    const sizes = ["S", "M", "L", "XL", "XXL"];
    const colors = ["yellow", "red", "blue"];
@@ -20,12 +26,6 @@ export default function Filters() {
       queryKey: ["categories"],
       queryFn: () => getAllCategory(),
    });
-
-   // const test = [];
-   // AllSearchParams.map((item) => {
-   //    test[item.name] = [[...item.value]];
-   // });
-   // console.log(test);
 
    const handleQueryParams = (name: string, value: string) => {
       const current = new URLSearchParams(Array.from(searchParams.entries()));
@@ -166,7 +166,7 @@ export default function Filters() {
                   max={1000}
                   onChange={(e: { min: number; max: number }): void => {
                      // setPriceRange({ min: e.min, max: e.max });
-                     console.log("hello world");
+                     console.log("from range picker");
                   }}
                />
             </div>
@@ -175,8 +175,36 @@ export default function Filters() {
             {AllSearchParams.length > 0 && (
                <p className="text-neutral-900 font-medium">Applied Filters:</p>
             )}
+
             <div className="flex flex-wrap gap-3">
-               {AllSearchParams.map((item: { name: string; value: string }) => (
+               {Object.entries(AllSearchParamsObj).map(([key, value]) => {
+                  console.log(key, value);
+                  return (
+                     <div key={key} className="flex items-center gap-2">
+                        <p className="font-medium">
+                           {key[0].toUpperCase() + key.slice(1)}:
+                        </p>
+                        {value.map((item) => {
+                           return (
+                              <button
+                                 className="btn-outline text-label flex justify-between items-center gap-2 transition"
+                                 key={item}
+                              >
+                                 {item[0]?.toUpperCase() + item?.slice(1)}
+                                 <div
+                                    onClick={() => {
+                                       handleQueryParams(key, item);
+                                    }}
+                                 >
+                                    <Icons.X />
+                                 </div>
+                              </button>
+                           );
+                        })}
+                     </div>
+                  );
+               })}
+               {/* {AllSearchParams.map((item: { name: string; value: string }) => (
                   <button
                      className="btn-outline text-label flex justify-between items-center gap-2 transition"
                      key={item.value}
@@ -190,7 +218,7 @@ export default function Filters() {
                         <Icons.X />
                      </div>
                   </button>
-               ))}
+               ))} */}
             </div>
             <div className="text-neutral-500 justify-between flex items-center w-full py-4">
                <p>Showing 1-9 of 36 results.</p>
