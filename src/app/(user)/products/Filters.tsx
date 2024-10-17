@@ -178,7 +178,6 @@ export default function Filters() {
 
             <div className="flex flex-wrap gap-3">
                {Object.entries(AllSearchParamsObj).map(([key, value]) => {
-                  console.log(key, value);
                   return (
                      <div key={key} className="flex items-center gap-2">
                         <p className="font-medium">
@@ -204,21 +203,6 @@ export default function Filters() {
                      </div>
                   );
                })}
-               {/* {AllSearchParams.map((item: { name: string; value: string }) => (
-                  <button
-                     className="btn-outline text-label flex justify-between items-center gap-2 transition"
-                     key={item.value}
-                  >
-                     {item.value[0]?.toUpperCase() + item.value?.slice(1)}
-                     <div
-                        onClick={() => {
-                           handleQueryParams(item.name, item.value);
-                        }}
-                     >
-                        <Icons.X />
-                     </div>
-                  </button>
-               ))} */}
             </div>
             <div className="text-neutral-500 justify-between flex items-center w-full py-4">
                <p>Showing 1-9 of 36 results.</p>
