@@ -16,6 +16,8 @@ export default function Product({ params }: { params: { slug: string } }) {
       queryFn: () => getSingleProduct(slug),
    });
 
+   const isRemaining = data?.remaining > 0;
+
    return (
       <div className="flex flex-col container mx-auto">
          <div className="py-6">
@@ -46,7 +48,16 @@ export default function Product({ params }: { params: { slug: string } }) {
                            <Icons.Star />
                            <p className="text-neutral-400">4.2 -- 54 Review</p>
                         </div>
-                        <p className="btn-outline">IN STOCK</p>
+                        <p
+                           className="btn-outline"
+                           style={{
+                              textDecoration: !isRemaining
+                                 ? "line-through"
+                                 : "none",
+                           }}
+                        >
+                           IN STOCK
+                        </p>
                      </div>
                      <h4 className="font-bold text-neutral-900">
                         ${data?.price}
@@ -131,15 +142,15 @@ export default function Product({ params }: { params: { slug: string } }) {
                   <>
                      <h5 className="font-semibold mb-4">Detail</h5>
                      <p className="text-neutral-500">
-                        Elevate your everyday style with our Men's Black
+                        Elevate your everyday style with our Men&apos;s Black
                         T-Shirts, the ultimate wardrobe essential for modern
                         men. Crafted with meticulous attention to detail and
                         designed for comfort, these versatile black tees are a
                         must-have addition to your collection. The classic black
-                        color never goes out of style. Whether you're dressing
-                        up for a special occasion or keeping it casual, these
-                        black t-shirts are the perfect choice, effortlessly
-                        complementing any outfit.
+                        color never goes out of style. Whether you&apos;re
+                        dressing up for a special occasion or keeping it casual,
+                        these black t-shirts are the perfect choice,
+                        effortlessly complementing any outfit.
                      </p>
                   </>
                )}
