@@ -166,7 +166,7 @@ export default function Filters() {
                   max={1000}
                   onChange={(e: { min: number; max: number }): void => {
                      // setPriceRange({ min: e.min, max: e.max });
-                     console.log("from range picker");
+                     console.log("from range picker", e);
                   }}
                />
             </div>
@@ -209,30 +209,8 @@ export default function Filters() {
 
                <p>SORT BY</p>
             </div>
-
             <Products />
          </div>
       </>
    );
 }
-
-// const createQueryString = (name: string, value: string) => {
-//    const current = new URLSearchParams(Array.from(searchParams.entries()));
-//    const queryName = current.get(name)?.split(",");
-
-//    if (queryName?.includes(value)) {
-//       current.set(
-//          name,
-//          queryName.filter((item) => item !== value).join(",")
-//       );
-//    } else {
-//       const queryValue = current.get(name)
-//          ? `${current.get(name)},${value}`
-//          : value;
-//       current.set(name, queryValue);
-//    }
-
-//    const search = current.toString();
-//    const query = search ? `?${search}` : "";
-//    router.push(`${pathname}${query}`);
-// };
