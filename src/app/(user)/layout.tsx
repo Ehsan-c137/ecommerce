@@ -15,7 +15,7 @@ export default function RootLayout({
    return (
       <>
          <Header />
-         <main className="mt-[64px]">{children}</main>
+         <main className="mt-[var(--header-height)]">{children}</main>
          <Footer />
       </>
    );
