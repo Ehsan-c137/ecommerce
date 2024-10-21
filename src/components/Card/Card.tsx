@@ -27,7 +27,13 @@ export default function Card({ data }) {
          <div className="flex flex-col gap-3">
             <p className="font-medium text-neutral-900">{data?.name}</p>
             <div className="flex items-center gap-2">
-               <p className="px-4 py-[2px] border border-neutral-100 rounded-full">
+               <p
+                  style={{
+                     textDecoration:
+                        data?.remaining == 0 ? "line-through" : "none",
+                  }}
+                  className={`px-4 py-[2px] border border-neutral-100 rounded-full`}
+               >
                   IN STOCK
                </p>
                <p className="text-neutral-600">${data?.price}</p>
