@@ -1,46 +1,89 @@
-"use client";
-import DoubleRangePicker from "@/components/DubleRangePicker/DoubleRangePicker";
-import { Icons } from "@/components/Icons/icons";
-import Products from "./Products";
-import { useRouter, usePathname, useSearchParams } from "next/navigation";
-import { useQuery } from "@tanstack/react-query";
-import getAllCategory from "@/services/store/category/getAllCategory";
-import useGetAllSearchParams from "@/utils/useGetAllSearchParams";
+"use client"
+import DoubleRangePicker from "@/components/DubleRangePicker/DoubleRangePicker"
+import Products from "./Products"
+import { useRouter, usePathname, useSearchParams } from "next/navigation"
+import { useQuery } from "@tanstack/react-query"
+import getAllCategory from "@/services/store/category/getAllCategory"
+import { useCallback } from "react"
+import products from "@/services/store/product/products"
+import { useMemo } from "react"
 
 export default function Filters() {
-   const searchParams = useSearchParams();
-   const pathname = usePathname();
-   const router = useRouter();
+   const searchParams = useSearchParams()
+   const searchParamsMemo = useMemo(() => searchParams, [searchParams])
+   const pathname = usePathname()
+   const router = useRouter()
 
-   const AllSearchParams = useGetAllSearchParams();
-   const groupped = Object.groupBy(AllSearchParams, (item) => item.name);
+   const sizes = ["S", "M", "L", "XL", "XXL"]
+   const colors = ["yellow", "red", "blue"]
 
-   const AllSearchParamsObj = {};
-   Object.entries(groupped).forEach(([key, value]) => {
-      AllSearchParamsObj[key] = value.map((item) => item.value);
-   });
-
-   const sizes = ["S", "M", "L", "XL", "XXL"];
-   const colors = ["yellow", "red", "blue"];
    const { data: categories, isLoading } = useQuery({
       queryKey: ["categories"],
       queryFn: () => getAllCategory(),
-   });
+   })
 
-   const handleQueryParams = (name: string, value: string) => {
-      const current = new URLSearchParams(Array.from(searchParams.entries()));
-      const currentQuery = current.getAll(name);
+   const {
+      data: allProducts,
+      isLoading: allProductLoading,
+      isError,
+      error,
+   } = useQuery({
+      queryKey: ["allproducts"],
+      queryFn: () => products(2, 1),
+   })
 
-      if (currentQuery.includes(value)) {
-         current.delete(name, value);
-      } else {
-         current.append(name, value);
+   const minPrice = allProducts?.reduce(
+      (min, item) => Math.min(min, item.price),
+      allProducts[0]?.price
+   )
+
+   const maxPrice = allProducts?.reduce(
+      (max, item) => Math.max(max, item.price),
+      allProducts[0]?.price
+   )
+
+   const handleQueryParams = useCallback(
+      (name: string, value: string) => {
+         const current = new URLSearchParams(
+            Array.from(searchParamsMemo.entries())
+         )
+         const currentQuery = current.getAll(name)
+
+         if (currentQuery.includes(value)) {
+            current.delete(name, value)
+         } else {
+            current.append(name, value)
+         }
+
+         const search = current.toString()
+
+         router.push(`${pathname}${search ? `?${search}` : ""}`)
+      },
+      [router, searchParamsMemo, pathname]
+   )
+
+   // const handleSetMinPrice = (min: number) => {
+   //    // handleQueryParams("min price", min.toString())
+   // }
+
+   // const handleMaxPrice = (max: number) => {
+   //    // if (min === minPrice && max !== maxPrice) {
+   //    //    return
+   //    // }
+   //    // handleQueryParams("max price", max.toString())
+   // }
+
+   const handleSetMinPrice = (min: number) => {
+      if (min !== minPrice) {
+         handleQueryParams("min price", `${min}`)
       }
+   }
 
-      const search = current.toString();
-
-      router.push(`${pathname}${search ? `?${search}` : ""}`);
-   };
+   const handleSetMaxPrice = (max: number) => {
+      if (maxPrice !== max) {
+         handleQueryParams("max price", `${max}`)
+      }
+   }
 
    return (
       <>
@@ -53,10 +96,10 @@ export default function Filters() {
                         <div className="w-full bg-white-200 animate-pulse h-10 rounded-md"></div>
                      )}
                      {categories?.map((data) => {
-                        const item = data.name;
-                        const isChecked = searchParams
+                        const item = data.name
+                        const isChecked = searchParamsMemo
                            .getAll("category")
-                           ?.includes(item);
+                           ?.includes(item)
 
                         return (
                            <div
@@ -72,7 +115,7 @@ export default function Filters() {
                                     handleQueryParams(
                                        "category",
                                        e.target.value
-                                    );
+                                    )
                                  }}
                                  className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                               />
@@ -83,7 +126,7 @@ export default function Filters() {
                                  {item[0].toUpperCase() + item.slice(1)}
                               </label>
                            </div>
-                        );
+                        )
                      })}
                   </div>
                </div>
@@ -92,9 +135,9 @@ export default function Filters() {
                <p className="text-neutral-900 font-medium">Color</p>
                <div className="flex items-center gap-3">
                   {colors.map((item) => {
-                     const isChecked = searchParams
+                     const isChecked = searchParamsMemo
                         .getAll("color")
-                        ?.includes(item);
+                        ?.includes(item)
                      return (
                         <div key={item} className="flex items-center">
                            <label
@@ -114,11 +157,11 @@ export default function Filters() {
                               className="hidden"
                               checked={isChecked}
                               onChange={(e) => {
-                                 handleQueryParams("color", e.target.value);
+                                 handleQueryParams("color", e.target.value)
                               }}
                            />
                         </div>
-                     );
+                     )
                   })}
                </div>
             </div>
@@ -126,9 +169,9 @@ export default function Filters() {
                <p className="text-neutral-900 font-medium">Color</p>
                <div className="flex items-center flex-wrap gap-3 text-sm">
                   {sizes.map((item) => {
-                     const isChecked = searchParams
+                     const isChecked = searchParamsMemo
                         .getAll("size")
-                        ?.includes(item);
+                        ?.includes(item)
 
                      return (
                         <div key={item} className="flex items-center">
@@ -150,67 +193,32 @@ export default function Filters() {
                               className="hidden"
                               checked={isChecked}
                               onChange={(e) => {
-                                 handleQueryParams("size", e.target.value);
+                                 handleQueryParams("size", e.target.value)
                               }}
                            />
                         </div>
-                     );
+                     )
                   })}
                </div>
             </div>
 
             <div className="flex flex-col gap-4 px-4">
                <p className="text-neutral-900 font-medium">Price</p>
-               <DoubleRangePicker
-                  min={100}
-                  max={1000}
-                  onChange={(e: { min: number; max: number }): void => {
-                     // setPriceRange({ min: e.min, max: e.max });
-                     console.log("from range picker", e);
-                  }}
-               />
+               {allProductLoading ? (
+                  "loading"
+               ) : (
+                  <DoubleRangePicker
+                     min={minPrice}
+                     max={maxPrice}
+                     setMaxPrice={handleSetMaxPrice}
+                     setMinPrice={handleSetMinPrice}
+                  />
+               )}
             </div>
          </div>
          <div className="flex flex-col gap-3 w-full">
-            {AllSearchParams.length > 0 && (
-               <p className="text-neutral-900 font-medium">Applied Filters:</p>
-            )}
-
-            <div className="flex flex-wrap gap-3">
-               {Object.entries(AllSearchParamsObj).map(([key, value]) => {
-                  return (
-                     <div key={key} className="flex items-center gap-2">
-                        <p className="font-medium">
-                           {key[0].toUpperCase() + key.slice(1)}:
-                        </p>
-                        {value.map((item) => {
-                           return (
-                              <button
-                                 className="btn-outline text-label flex justify-between items-center gap-2 transition"
-                                 key={item}
-                              >
-                                 {item[0]?.toUpperCase() + item?.slice(1)}
-                                 <div
-                                    onClick={() => {
-                                       handleQueryParams(key, item);
-                                    }}
-                                 >
-                                    <Icons.X />
-                                 </div>
-                              </button>
-                           );
-                        })}
-                     </div>
-                  );
-               })}
-            </div>
-            <div className="text-neutral-500 justify-between flex items-center w-full py-4">
-               <p>Showing 1-9 of 36 results.</p>
-
-               <p>SORT BY</p>
-            </div>
-            <Products />
+            <Products minPrice={minPrice} maxPrice={maxPrice} />
          </div>
       </>
-   );
+   )
 }
