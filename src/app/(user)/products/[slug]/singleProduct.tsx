@@ -9,6 +9,7 @@ import getSingleProduct from "@/services/store/product/singleProduct";
 import { useRouter, useSearchParams } from "next/navigation";
 import useHandleQueryParam from "@/utils/useHandleQueryParams";
 import putCart from "@/services/store/cart/putCart";
+import { IPutCart } from "@/services/store/cart/putCart";
 
 export default function SingleProduct({ slug }: { slug: string }) {
    const searchParams = useSearchParams();
@@ -21,16 +22,10 @@ export default function SingleProduct({ slug }: { slug: string }) {
    });
 
    const mutation = useMutation({
-      mutationFn: () =>
-         putCart({
-            product_slug: slug,
-            count: productCount,
-            colors: searchParams.getAll("colors"),
-            sizes: searchParams.getAll("sizes"),
-         }),
+      mutationFn: (data: IPutCart) => putCart(data),
    });
 
-   const copyToClipboard = (e) => {
+   const copyToClipboard = () => {
       navigator.clipboard.writeText(window.location.toString());
    };
 
@@ -61,6 +56,12 @@ export default function SingleProduct({ slug }: { slug: string }) {
          router.refresh();
       }
    };
+
+   const handleCart = () => {};
+
+   const isItOkToOrder =
+      searchParams.getAll("color").length > 0 &&
+      searchParams.getAll("size").length > 0;
 
    return (
       <div className="flex flex-col container mx-auto">
@@ -148,7 +149,7 @@ export default function SingleProduct({ slug }: { slug: string }) {
                                        className={`w-7 h-7 rounded-full transition p-[3px] bg-clip-content bg-red-r200 borderp-[3px]  cursor-pointer`}
                                     ></label>
                                     <input
-                                       type="checkbox"
+                                       type="radio"
                                        value={color}
                                        id={`${color}--color-single`}
                                        className="hidden"
@@ -248,8 +249,26 @@ export default function SingleProduct({ slug }: { slug: string }) {
                               opacity: !isRemaining ? 0.5 : 1,
                               cursor: !isRemaining ? "not-allowed" : "pointer",
                            }}
+                           onClick={() => {
+                              mutation.mutate({
+                                 product_slug: slug,
+                                 count: productCount,
+                                 colors: searchParams.getAll("color"),
+                                 sizes: searchParams.getAll("size"),
+                              });
+                              console.log({
+                                 product_slug: slug,
+                                 count: productCount,
+                                 colors: searchParams.getAll("color"),
+                                 sizes: searchParams.getAll("size"),
+                              });
+                           }}
+                           disabled={!isItOkToOrder}
                         >
                            Add to cart
+                           {mutation.isPending && (
+                              <span className="loader"></span>
+                           )}
                         </button>
                         <div
                            className="border border-neutral-200 rounded-md flex items-center justify-center w-[43px]"
