@@ -10,7 +10,6 @@ import { useMemo } from "react"
 
 export default function Filters() {
    const searchParams = useSearchParams()
-   const searchParamsMemo = useMemo(() => searchParams, [searchParams])
    const pathname = usePathname()
    const router = useRouter()
 
@@ -44,9 +43,7 @@ export default function Filters() {
 
    const handleQueryParams = useCallback(
       (name: string, value: string) => {
-         const current = new URLSearchParams(
-            Array.from(searchParamsMemo.entries())
-         )
+         const current = new URLSearchParams(Array.from(searchParams.entries()))
          const currentQuery = current.getAll(name)
 
          if (currentQuery.includes(value)) {
@@ -59,30 +56,21 @@ export default function Filters() {
 
          router.push(`${pathname}${search ? `?${search}` : ""}`)
       },
-      [router, searchParamsMemo, pathname]
+      [router, searchParams, pathname]
    )
 
-   // const handleSetMinPrice = (min: number) => {
-   //    // handleQueryParams("min price", min.toString())
-   // }
-
-   // const handleMaxPrice = (max: number) => {
-   //    // if (min === minPrice && max !== maxPrice) {
-   //    //    return
-   //    // }
-   //    // handleQueryParams("max price", max.toString())
-   // }
-
    const handleSetMinPrice = (min: number) => {
-      if (min !== minPrice) {
-         handleQueryParams("min price", `${min}`)
-      }
+      const current = new URLSearchParams(Array.from(searchParams.entries()))
+      current.set("min price", `${min}`)
+      const search = current.toString()
+      router.push(`${pathname}${search ? `?${search}` : ""}`)
    }
 
    const handleSetMaxPrice = (max: number) => {
-      if (maxPrice !== max) {
-         handleQueryParams("max price", `${max}`)
-      }
+      const current = new URLSearchParams(Array.from(searchParams.entries()))
+      current.set("max price", `${max}`)
+      const search = current.toString()
+      router.push(`${pathname}${search ? `?${search}` : ""}`)
    }
 
    return (
@@ -97,7 +85,7 @@ export default function Filters() {
                      )}
                      {categories?.map((data) => {
                         const item = data.name
-                        const isChecked = searchParamsMemo
+                        const isChecked = searchParams
                            .getAll("category")
                            ?.includes(item)
 
@@ -135,7 +123,7 @@ export default function Filters() {
                <p className="text-neutral-900 font-medium">Color</p>
                <div className="flex items-center gap-3">
                   {colors.map((item) => {
-                     const isChecked = searchParamsMemo
+                     const isChecked = searchParams
                         .getAll("color")
                         ?.includes(item)
                      return (
@@ -169,7 +157,7 @@ export default function Filters() {
                <p className="text-neutral-900 font-medium">Color</p>
                <div className="flex items-center flex-wrap gap-3 text-sm">
                   {sizes.map((item) => {
-                     const isChecked = searchParamsMemo
+                     const isChecked = searchParams
                         .getAll("size")
                         ?.includes(item)
 
@@ -217,7 +205,10 @@ export default function Filters() {
             </div>
          </div>
          <div className="flex flex-col gap-3 w-full">
-            <Products minPrice={minPrice} maxPrice={maxPrice} />
+            <Products
+               minPrice={searchParams.get("min price") ?? maxPrice}
+               maxPrice={searchParams.get("max price") ?? minPrice}
+            />
          </div>
       </>
    )
