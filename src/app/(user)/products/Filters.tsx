@@ -6,7 +6,6 @@ import { useQuery } from "@tanstack/react-query"
 import getAllCategory from "@/services/store/category/getAllCategory"
 import { useCallback } from "react"
 import products from "@/services/store/product/products"
-import { useMemo } from "react"
 
 export default function Filters() {
    const searchParams = useSearchParams()
@@ -21,12 +20,7 @@ export default function Filters() {
       queryFn: () => getAllCategory(),
    })
 
-   const {
-      data: allProducts,
-      isLoading: allProductLoading,
-      isError,
-      error,
-   } = useQuery({
+   const { data: allProducts, isLoading: allProductLoading } = useQuery({
       queryKey: ["allproducts"],
       queryFn: () => products(2, 1),
    })
@@ -60,17 +54,31 @@ export default function Filters() {
    )
 
    const handleSetMinPrice = (min: number) => {
-      const current = new URLSearchParams(Array.from(searchParams.entries()))
-      current.set("min price", `${min}`)
-      const search = current.toString()
-      router.push(`${pathname}${search ? `?${search}` : ""}`)
+      if (min > minPrice) {
+         const current = new URLSearchParams(Array.from(searchParams.entries()))
+         current.set("min price", `${min}`)
+         const search = current.toString()
+         router.push(`${pathname}${search ? `?${search}` : ""}`)
+      } else {
+         const current = new URLSearchParams(Array.from(searchParams.entries()))
+         current.delete("min price")
+         const search = current.toString()
+         router.push(`${pathname}${search ? `?${search}` : ""}`)
+      }
    }
 
    const handleSetMaxPrice = (max: number) => {
-      const current = new URLSearchParams(Array.from(searchParams.entries()))
-      current.set("max price", `${max}`)
-      const search = current.toString()
-      router.push(`${pathname}${search ? `?${search}` : ""}`)
+      if (max <= maxPrice) {
+         const current = new URLSearchParams(Array.from(searchParams.entries()))
+         current.set("max price", `${max}`)
+         const search = current.toString()
+         router.push(`${pathname}${search ? `?${search}` : ""}`)
+      } else {
+         const current = new URLSearchParams(Array.from(searchParams.entries()))
+         current.delete("max price")
+         const search = current.toString()
+         router.push(`${pathname}${search ? `?${search}` : ""}`)
+      }
    }
 
    return (
@@ -206,8 +214,8 @@ export default function Filters() {
          </div>
          <div className="flex flex-col gap-3 w-full">
             <Products
-               minPrice={searchParams.get("min price") ?? maxPrice}
-               maxPrice={searchParams.get("max price") ?? minPrice}
+               minPrice={searchParams.get("min price") ?? minPrice}
+               maxPrice={searchParams.get("max price") ?? maxPrice}
             />
          </div>
       </>
