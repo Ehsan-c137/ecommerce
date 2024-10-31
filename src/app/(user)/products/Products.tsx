@@ -47,6 +47,9 @@ export default function Products({ maxPrice, minPrice }) {
                productSizes
             )
 
+            const productPrice = Number(product.price)
+            const minPriceN = Number(minPrice)
+
             if (allSearchParams.length > 0) {
                if (isThereColor) {
                   return product
@@ -54,7 +57,7 @@ export default function Products({ maxPrice, minPrice }) {
                if (isThereSize) {
                   return product
                }
-               if (product.price >= minPrice && product.price <= maxPrice) {
+               if (productPrice >= minPriceN && productPrice <= maxPrice) {
                   return product
                }
 
@@ -69,7 +72,7 @@ export default function Products({ maxPrice, minPrice }) {
             }
          })
       },
-      [allSearchParams, searchParams]
+      [allSearchParams, searchParams, minPrice, maxPrice]
    )
 
    const filteredData = useMemo(
@@ -87,10 +90,10 @@ export default function Products({ maxPrice, minPrice }) {
 
          <div className="flex flex-wrap gap-3">
             {Object.entries(allSearchParamsObj).map(([key, value]) => {
-               if (key === "max price" && Number(value[0]) === maxPrice) {
+               if (key === "max price") {
                   return
                }
-               if (key === "min price" && Number(value[0]) === minPrice) {
+               if (key === "min price") {
                   return
                }
                return (
