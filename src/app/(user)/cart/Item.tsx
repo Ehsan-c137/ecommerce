@@ -1,7 +1,12 @@
-import { Icons } from "@/components/Icons/icons";
-import Image from "next/image";
+import { Icons } from "@/components/Icons/icons"
+import Image from "next/image"
+import { useState } from "react"
+import { useMutation } from "@tanstack/react-query"
 
-export default function Item() {
+export default function Item({ item, handleCart }) {
+   const [count, setCount] = useState(item.count)
+   const { remaining } = item.data
+
    return (
       <div className="flex  items-center gap-8">
          <div className="w-20 h-20 bg-white-100 flex items-center justify-center relative">
@@ -9,7 +14,7 @@ export default function Item() {
                <Icons.X />
             </div>
             <Image
-               src={"/tshirt.png"}
+               src={item.data.main_image}
                alt="product"
                width={60}
                height={60}
@@ -18,22 +23,50 @@ export default function Item() {
          </div>
          <div className="flex flex-col md:flex-row gap-8">
             <div className="flex flex-row md:flex-row items-center gap-8">
-               <p className="text-neutral-900">Raw Black T-Shirt Lineup</p>
-               <p className="text-neutral-500">Color: RED — Size: M</p>
+               <p className="text-neutral-900">{item.data.name}</p>
+               <p className="text-neutral-500">
+                  Color: {item.colors} — Size: {item.sizes}
+               </p>
             </div>
             <div className="flex items-center gap-8">
-               <p className="text-neutral-900 font-medium text-base">$75.00</p>
+               <p className="text-neutral-900 font-medium text-base nowrap">
+                  $ {item?.data.price}
+               </p>
                <div className="flex items-center border border-neutral-100 rounded-md">
-                  <div className="h-10 w-10 flex items-center justify-center">
+                  <button
+                     className="h-10 w-10 flex items-center justify-center cursor-pointer"
+                     onClick={() => {
+                        setCount(count - 1)
+                        handleCart(
+                           item.data.id,
+                           count - 1,
+                           item.colors,
+                           item.sizes
+                        )
+                     }}
+                     disabled={count == 1}
+                  >
                      <Icons.Minus />
-                  </div>
+                  </button>
 
                   <p className="h-10 w-10 text-center  flex justify-center items-center">
-                     5
+                     {count}
                   </p>
-                  <div className="h-10 w-10 flex items-center justify-center">
+                  <button
+                     className="h-10 w-10 flex items-center justify-center cursor-pointer"
+                     onClick={() => {
+                        setCount(count + 1)
+                        handleCart(
+                           item.data.id,
+                           count + 1,
+                           item.colors,
+                           item.sizes
+                        )
+                     }}
+                     disabled={count == remaining}
+                  >
                      <Icons.Plus />
-                  </div>
+                  </button>
                </div>
             </div>
          </div>
@@ -41,5 +74,5 @@ export default function Item() {
             <Icons.X />
          </div>
       </div>
-   );
+   )
 }
