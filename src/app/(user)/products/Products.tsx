@@ -9,8 +9,11 @@ import { useSearchParams } from "next/navigation"
 import { useCallback, useMemo } from "react"
 import useHandleQueryParams from "@/utils/useHandleQueryParams"
 import { Icons } from "@/components/Icons/icons"
+import { useState } from "react"
+import Link from "next/link"
 
 export default function Products({ maxPrice, minPrice }) {
+   const [isDropdownOpen, setIsDropdownOpen] = useState(false)
    const searchParams = useSearchParams()
    const allSearchParams = useGetAllSearchParams()
    const groupped = Object.groupBy(allSearchParams, (item) => item.name)
@@ -32,6 +35,13 @@ export default function Products({ maxPrice, minPrice }) {
 
    const filterProduct = useCallback(
       (data) => {
+         if (!data) return
+         if (searchParams.get("ascending") === "true") {
+            data?.sort((a, b) => a.price - b.price)
+         }
+         if (searchParams.get("ascending") === "false") {
+            data?.sort((a, b) => b.price - a.price)
+         }
          return data?.filter((product) => {
             const productColors = product.options?.colors
             const productSizes = product.options?.sizes
@@ -83,7 +93,10 @@ export default function Products({ maxPrice, minPrice }) {
    return (
       <>
          {allSearchParams.filter(
-            (item) => item.name !== "max price" && item.name !== "min price"
+            (item) =>
+               item.name !== "max price" &&
+               item.name !== "min price" &&
+               item.name !== "ascending"
          ).length > 0 && (
             <p className="text-neutral-900 font-medium">Applied Filters:</p>
          )}
@@ -94,6 +107,9 @@ export default function Products({ maxPrice, minPrice }) {
                   return
                }
                if (key === "min price") {
+                  return
+               }
+               if (key === "ascending") {
                   return
                }
                return (
@@ -122,10 +138,48 @@ export default function Products({ maxPrice, minPrice }) {
                )
             })}
          </div>
-         <div className="text-neutral-500 justify-between flex items-center w-full py-4">
-            <p>Showing 1-9 of {filteredData?.length} results.</p>
+         <div className="text-neutral-500 justify-end flex items-center w-full py-4">
+            {/* <p>Showing 1-9 of {filteredData?.length} results.</p> */}
 
-            <p>SORT BY</p>
+            <div>
+               <div className="relative inline-block text-left">
+                  <button
+                     type="button"
+                     className="uppercase flex item-center text-sm  text-neutral-900 "
+                     id="menu-button"
+                     onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                  >
+                     Sort by
+                     <Icons.ChevronDown />
+                  </button>
+                  {isDropdownOpen && (
+                     <div
+                        className="absolute right-0 z-10 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white-900 shadow-lg ring-1 ring-neutral-200 ring-opacity-5 focus:outline-none"
+                        role="menu"
+                        tabIndex={-1}
+                     >
+                        <div className="py-1" role="none">
+                           <Link
+                              href={
+                                 searchParams.get("ascending") === "true"
+                                    ? "?ascending=false"
+                                    : "?ascending=true"
+                              }
+                              className="block px-4 py-2 text-sm text-gray-700"
+                              role="menuitem"
+                              onClick={() => setIsDropdownOpen(false)}
+                              tabIndex={-1}
+                              id="menu-item-0"
+                           >
+                              {searchParams.get("ascending") === "true"
+                                 ? "Descending"
+                                 : "Ascending"}
+                           </Link>
+                        </div>
+                     </div>
+                  )}
+               </div>
+            </div>
          </div>
 
          <div className="grid grid-cols-1 justify-items-center md:justify-items-start md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-x-6 gap-y-8 ">
@@ -161,6 +215,7 @@ export default function Products({ maxPrice, minPrice }) {
                   </div>
                </>
             )}
+
             {filteredData?.map((product: any) => (
                <Card key={product.id} data={product} />
             ))}
