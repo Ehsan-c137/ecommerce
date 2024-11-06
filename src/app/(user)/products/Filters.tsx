@@ -6,6 +6,7 @@ import { useQuery } from "@tanstack/react-query"
 import getAllCategory from "@/services/store/category/getAllCategory"
 import { useCallback } from "react"
 import products from "@/services/store/product/products"
+import { Colors } from "@/utils/constant"
 
 export default function Filters() {
    const searchParams = useSearchParams()
@@ -13,7 +14,7 @@ export default function Filters() {
    const router = useRouter()
 
    const sizes = ["S", "M", "L", "XL", "XXL"]
-   const colors = ["yellow", "red", "blue"]
+   const colors = ["yellow", "red", "blue", "black", "white"]
 
    const { data: categories, isLoading } = useQuery({
       queryKey: ["categories"],
@@ -142,6 +143,7 @@ export default function Filters() {
                                  borderColor: isChecked
                                     ? "black"
                                     : "transparent",
+                                 backgroundColor: Colors[item],
                               }}
                               htmlFor={`${item}--color`}
                               className={`w-7 h-7 rounded-full transition p-[3px] bg-clip-content bg-red-r200 borderp-[3px]  cursor-pointer`}
@@ -162,7 +164,7 @@ export default function Filters() {
                </div>
             </div>
             <div className="flex flex-col gap-4 px-4">
-               <p className="text-neutral-900 font-medium">Color</p>
+               <p className="text-neutral-900 font-medium">Sized</p>
                <div className="flex items-center flex-wrap gap-3 text-sm">
                   {sizes.map((item) => {
                      const isChecked = searchParams
@@ -173,9 +175,7 @@ export default function Filters() {
                         <div key={item} className="flex items-center">
                            <label
                               style={{
-                                 borderColor: isChecked
-                                    ? "black"
-                                    : "transparent",
+                                 borderColor: isChecked ? "black" : "#e6e7e8",
                               }}
                               htmlFor={`${item}--size`}
                               className="flex items-center justify-center w-10 h-10 rounded-md cursor-pointer border border-neutral-100 transition"
