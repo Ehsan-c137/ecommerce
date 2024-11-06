@@ -1,12 +1,13 @@
-"use client";
+"use client"
 
-import Link from "next/link";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import signin from "@/services/user/signin";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
-import { useRouter } from "next/navigation";
+import Link from "next/link"
+import { useMutation, useQueryClient } from "@tanstack/react-query"
+import signin from "@/services/user/signin"
+import { useForm } from "react-hook-form"
+import { zodResolver } from "@hookform/resolvers/zod"
+import { string, z } from "zod"
+import { useRouter } from "next/navigation"
+import toast from "react-hot-toast"
 
 const SigninSchema = z.object({
    username_login: z
@@ -15,9 +16,9 @@ const SigninSchema = z.object({
    password_login: z
       .string()
       .min(8, { message: "Password must be at least 8 characters long" }),
-});
+})
 
-type TSigninSchema = z.infer<typeof SigninSchema>;
+type TSigninSchema = z.infer<typeof SigninSchema>
 
 export default function Login() {
    const {
@@ -27,40 +28,46 @@ export default function Login() {
    } = useForm<TSigninSchema>({
       resolver: zodResolver(SigninSchema),
       mode: "onChange",
-   });
+   })
 
-   const queryClient = useQueryClient();
-   const router = useRouter();
+   const queryClient = useQueryClient()
+   const router = useRouter()
 
    const signinMutation = useMutation({
-      mutationFn: signin,
+      mutationFn: (data: { username: string; password: string }) =>
+         signin(data),
       onSuccess: (data) => {
          // toast
 
          if (data?.message?.includes("already exists")) {
-            toast.error("user already exist");
+            toast.error("user already exist")
+            return
          }
-         queryClient.invalidateQueries({ queryKey: ["profile"] });
-         router.push("/");
-         console.log(data);
+         if (data?.status == "failed") {
+            toast.error("enter valid username and password")
+            return
+         }
+         queryClient.invalidateQueries({ queryKey: ["profile"] })
+         router.push("/")
+         console.log(data)
       },
       onError: (error) => {
-         console.log("error");
-         console.log(error.message);
+         console.log("error")
+         console.log(error.message)
       },
-   });
+   })
 
    const handleSignin = (e: React.FormEvent) => {
-      e.preventDefault();
+      e.preventDefault()
       signinMutation.mutate({
          username: getValues("username_login"),
          password: getValues("password_login"),
-      });
-   };
+      })
+   }
 
    return (
       <div className="container mx-auto w-full flex flex-col gap-6 items-center justify-center min-h-[80vh]">
-         <form action="" className="flex flex-col items-start gap-4">
+         <form action="" className="flex flex-col items-start gap-4 w-[250px]">
             <div className="flex flex-col">
                <label
                   htmlFor="username_login"
@@ -91,7 +98,7 @@ export default function Login() {
                   {...register("password_login")}
                   type="text"
                   id="password_login"
-                  className="border border-neutral-100 focus-within:border-neutral-900 px-4 py-2 outline-none transition-colors rounded-md"
+                  className=" border border-neutral-100 focus-within:border-neutral-900 px-4 py-2 outline-none transition-colors rounded-md"
                />
                <p className="text-red-r500 mt-2 text-wrap">
                   {errors.password_login?.message}
@@ -113,5 +120,5 @@ export default function Login() {
             Don&apos;t have an account? <Link href="/signup"> Sign up </Link>
          </p>
       </div>
-   );
+   )
 }
