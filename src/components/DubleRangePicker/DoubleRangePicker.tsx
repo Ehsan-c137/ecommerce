@@ -1,15 +1,7 @@
 "use client"
 
-import React, {
-   useCallback,
-   useEffect,
-   useState,
-   useRef,
-   useLayoutEffect,
-} from "react"
+import React, { useCallback, useEffect, useState, useRef } from "react"
 import "./DoubleRangePicker.css"
-import products from "@/services/store/product/products"
-import { useQuery } from "@tanstack/react-query"
 import { useSearchParams } from "next/navigation"
 
 interface IProps {
@@ -26,7 +18,7 @@ function DoubleRangePicker({ min, max, setMaxPrice, setMinPrice }: IProps) {
    const [maxVal, setMaxVal] = useState(max)
    const minValRef = useRef(minVal)
    const maxValRef = useRef(maxVal)
-   const range = useRef(null) as any
+   const range = useRef(null)
 
    // Convert to percentage
    const getPercent = useCallback(
@@ -52,7 +44,6 @@ function DoubleRangePicker({ min, max, setMaxPrice, setMinPrice }: IProps) {
    useEffect(() => {
       const maxPercent = getPercent(maxVal)
       const minPercent = getPercent(minValRef.current)
-      console.log(`${maxPercent - minPercent}%`)
       if (range.current) {
          range.current.style.width = `${maxPercent - minPercent}%`
       }
@@ -114,21 +105,3 @@ function DoubleRangePicker({ min, max, setMaxPrice, setMinPrice }: IProps) {
 }
 
 export default DoubleRangePicker
-
-// useEffect(() => {
-//    const delayChange = setTimeout(() => {
-//       setMaxPrice(maxVal)
-//    }, 500)
-
-//    return () => {
-//       clearTimeout(delayChange)
-//    }
-// }, [maxVal, setMaxPrice])
-
-// useEffect(() => {
-//    const delayChange = setTimeout(() => {
-//       setMinPrice(minVal)
-//    }, 500)
-
-//    return () => clearTimeout(delayChange)
-// }, [setMinPrice, minVal])
