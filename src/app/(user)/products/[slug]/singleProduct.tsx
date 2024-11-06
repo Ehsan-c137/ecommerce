@@ -1,67 +1,128 @@
-"use client";
+"use client"
 
-import Image from "next/image";
-import { Icons } from "@/components/Icons/icons";
-import { useState } from "react";
-import Breadcrumb from "@/components/Breadcrumb/Breadcrumb";
-import { useQuery, useMutation } from "@tanstack/react-query";
-import getSingleProduct from "@/services/store/product/singleProduct";
-import { useRouter, useSearchParams } from "next/navigation";
-import useHandleQueryParam from "@/utils/useHandleQueryParams";
-import putCart from "@/services/store/cart/putCart";
-import { IPutCart } from "@/services/store/cart/putCart";
+import Image from "next/image"
+import { Icons } from "@/components/Icons/icons"
+import { useState } from "react"
+import Breadcrumb from "@/components/Breadcrumb/Breadcrumb"
+import { useQuery, useMutation } from "@tanstack/react-query"
+import getSingleProduct from "@/services/store/product/singleProduct"
+import { usePathname, useRouter, useSearchParams } from "next/navigation"
+import useHandleQueryParam from "@/utils/useHandleQueryParams"
+import { IPutCart, putCart, getCart } from "@/services/store/cart/Cart"
+import product from "@/services/store/product/products"
+import { Colors } from "@/utils/constant"
+import toast from "react-hot-toast"
+import checkLoggedin from "@/services/user/check_loggedin"
 
 export default function SingleProduct({ slug }: { slug: string }) {
-   const searchParams = useSearchParams();
-   const [section, setSection] = useState<"details" | "reviews">("details");
-   const [productCount, setProductCount] = useState(1);
+   const searchParams = useSearchParams()
+   const router = useRouter()
+   const pathname = usePathname()
+
+   const { data: isLogged } = useQuery({
+      queryKey: ["isLogged"],
+      queryFn: () => checkLoggedin(),
+   })
+
+   const [section, setSection] = useState<"details" | "reviews">("details")
+   const [productCount, setProductCount] = useState(1)
 
    const { data } = useQuery({
       queryKey: ["single product", slug],
       queryFn: () => getSingleProduct(slug),
-   });
+   })
 
    const mutation = useMutation({
-      mutationFn: (data: IPutCart) => putCart(data),
-   });
+      mutationFn: (data: IPutCart[]) => putCart(data),
+      onSuccess: (data) => {
+         console.log("added to cart", data)
+         toast.success("added to cart")
+      },
+      onError: (error) => {
+         console.log("error", error)
+         toast.error("something went wrong")
+      },
+   })
+
+   const { data: cart } = useQuery({
+      queryKey: ["cart"],
+      queryFn: () => getCart(),
+   })
 
    const copyToClipboard = () => {
-      navigator.clipboard.writeText(window.location.toString());
-   };
+      navigator.clipboard.writeText(window.location.toString())
+   }
 
-   const router = useRouter();
-
-   const isRemaining = data?.remaining > 0;
-   const isHaveRating = data?.rate > 0;
-   const isHavecomments = data?.comments.length > 0;
+   const isRemaining = data?.remaining > 0
+   const isHaveRating = data?.rate > 0
+   const isHavecomments = data?.comments.length > 0
    const isFavorite = JSON.parse(
       localStorage.getItem("favorite") as string
-   )?.includes(slug);
+   )?.includes(slug)
 
-   const sizes = ["S", "M", "L", "XL", "XXL"];
-   const colors = ["yellow", "red", "blue"];
+   const sizes = data?.options?.sizes
+   const colors = data?.options?.colors
 
-   const handleQueryParams = useHandleQueryParam();
+   // const handleQueryParams = useHandleQueryParam()
+   const handleQueryParams = function (key, value) {
+      const url = new URL(window.location.href)
+      url.searchParams.set(key, value)
+      router.push(url.toString())
+   }
 
    const handleFavorite = () => {
       const oldFavorite =
-         JSON.parse(localStorage.getItem("favorite") as string) || [];
+         JSON.parse(localStorage.getItem("favorite") as string) || []
       if (oldFavorite.includes(slug)) {
-         oldFavorite.splice(oldFavorite.indexOf(slug), 1);
-         localStorage.setItem("favorite", JSON.stringify(oldFavorite));
-         router.refresh();
+         oldFavorite.splice(oldFavorite.indexOf(slug), 1)
+         localStorage.setItem("favorite", JSON.stringify(oldFavorite))
+         router.refresh()
       } else {
-         oldFavorite.push(slug);
-         localStorage.setItem("favorite", JSON.stringify(oldFavorite));
-         router.refresh();
+         oldFavorite.push(slug)
+         localStorage.setItem("favorite", JSON.stringify(oldFavorite))
+         router.refresh()
       }
-   };
+   }
 
-   const handleCart = () => {};
+   const oldCartData = cart?.data
+
+   const handleCart = () => {
+      if (!isLogged) {
+         router.push("/login")
+         return
+      }
+      const duplicateProuduct = oldCartData?.findIndex(
+         (item) =>
+            item.colors === searchParams.get("color") &&
+            item.sizes === searchParams.get("size")
+      )
+
+      console.log(duplicateProuduct)
+
+      if (duplicateProuduct === -1 || duplicateProuduct === undefined) {
+         console.log("not found")
+         mutation.mutate([
+            ...oldCartData,
+            {
+               data,
+               count: productCount,
+               colors: searchParams.get("color")!,
+               sizes: searchParams.get("size")!,
+            },
+         ])
+      } else {
+         console.log("found in cart")
+         const oldProduct = oldCartData?.[duplicateProuduct]
+         oldProduct.count += productCount
+         mutation.mutate(
+            oldCartData.splice(oldCartData[duplicateProuduct], 1, oldProduct)
+         )
+      }
+   }
 
    const isItOkToOrder =
       searchParams.getAll("color").length > 0 &&
-      searchParams.getAll("size").length > 0;
+      searchParams.getAll("size").length > 0
 
    return (
       <div className="flex flex-col container mx-auto">
@@ -69,7 +130,7 @@ export default function SingleProduct({ slug }: { slug: string }) {
             <Breadcrumb />
          </div>
          <section className="grid grid-cols-1 md:grid-cols-2 lg:gap-[120px] flex-1">
-            <div className="w-[574px] h-[574px] bg-white-100 flex items-center justify-center ">
+            <div className="w-full h-full bg-white-100 flex items-center justify-center ">
                <Image
                   src={data?.main_image}
                   alt="profile"
@@ -131,16 +192,17 @@ export default function SingleProduct({ slug }: { slug: string }) {
                            available colors
                         </p>
                         <div className="flex items-center  gap-2">
-                           {colors.map((color) => {
+                           {colors?.map((color: string) => {
                               const isChecked = searchParams
                                  .getAll("color")
-                                 ?.includes(color);
+                                 ?.includes(color)
 
                               return (
                                  <div key={color} className="flex items-center">
                                     <label
                                        style={{
                                           border: "1px solid transparent",
+                                          backgroundColor: Colors[color],
                                           borderColor: isChecked
                                              ? "black"
                                              : "transparent",
@@ -158,11 +220,11 @@ export default function SingleProduct({ slug }: { slug: string }) {
                                           handleQueryParams(
                                              "color",
                                              e.target.value
-                                          );
+                                          )
                                        }}
                                     />
                                  </div>
-                              );
+                              )
                            })}
                         </div>
                      </div>
@@ -171,10 +233,10 @@ export default function SingleProduct({ slug }: { slug: string }) {
                            select size
                         </p>
                         <div className="flex items-center gap-2">
-                           {sizes.map((item) => {
+                           {sizes?.map((item) => {
                               const isChecked = searchParams
                                  .getAll("size")
-                                 ?.includes(item);
+                                 ?.includes(item)
 
                               return (
                                  <div key={item} className="flex items-center">
@@ -185,7 +247,7 @@ export default function SingleProduct({ slug }: { slug: string }) {
                                              : "#e6e7e8",
                                        }}
                                        htmlFor={`${item}--size`}
-                                       className="flex items-center text-sm justify-center w-10 h-10 rounded-md cursor-pointer border border-neutral-100 transition"
+                                       className="flex items-center text-sm uppercase justify-center w-10 h-10 rounded-md cursor-pointer border border-neutral-100 transition"
                                     >
                                        {item}
                                     </label>
@@ -199,11 +261,11 @@ export default function SingleProduct({ slug }: { slug: string }) {
                                           handleQueryParams(
                                              "size",
                                              e.target.value
-                                          );
+                                          )
                                        }}
                                     />
                                  </div>
-                              );
+                              )
                            })}
                         </div>
                      </div>
@@ -233,7 +295,7 @@ export default function SingleProduct({ slug }: { slug: string }) {
                                     data?.remaining == productCount ? 0.4 : 1,
                               }}
                               onClick={() => {
-                                 setProductCount((prev) => prev + 1);
+                                 setProductCount((prev) => prev + 1)
                               }}
                            >
                               <Icons.Plus />
@@ -249,20 +311,7 @@ export default function SingleProduct({ slug }: { slug: string }) {
                               opacity: !isRemaining ? 0.5 : 1,
                               cursor: !isRemaining ? "not-allowed" : "pointer",
                            }}
-                           onClick={() => {
-                              mutation.mutate({
-                                 product_slug: slug,
-                                 count: productCount,
-                                 colors: searchParams.getAll("color"),
-                                 sizes: searchParams.getAll("size"),
-                              });
-                              console.log({
-                                 product_slug: slug,
-                                 count: productCount,
-                                 colors: searchParams.getAll("color"),
-                                 sizes: searchParams.getAll("size"),
-                              });
-                           }}
+                           onClick={handleCart}
                            disabled={!isItOkToOrder}
                         >
                            Add to cart
@@ -351,5 +400,5 @@ export default function SingleProduct({ slug }: { slug: string }) {
             </div>
          </section>
       </div>
-   );
+   )
 }
