@@ -22,8 +22,8 @@ export default function Item({ item, handleCart }) {
             />
          </div>
          <div className="flex flex-col md:flex-row gap-8">
-            <div className="flex flex-row md:flex-row items-center gap-8">
-               <p className="text-neutral-900">{item.data.name}</p>
+            <div className="flex flex-row flex-wrap md:flex-row items-center gap-8">
+               <p className="text-neutral-900 w-40">{item.data.name}</p>
                <p className="text-neutral-500">
                   Color: {item.colors} — Size: {item.sizes}
                </p>
