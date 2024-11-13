@@ -1,11 +1,12 @@
 import { Icons } from "@/components/Icons/icons"
 import Image from "next/image"
 import { useState } from "react"
-import { useMutation } from "@tanstack/react-query"
+import { useQueryClient } from "@tanstack/react-query"
 
 export default function Item({ item, handleCart }) {
    const [count, setCount] = useState(item.count)
    const { remaining } = item.data
+   const queryClient = useQueryClient()
 
    return (
       <div className="flex  items-center gap-8">
@@ -43,6 +44,9 @@ export default function Item({ item, handleCart }) {
                            item.colors,
                            item.sizes
                         )
+                        queryClient.invalidateQueries({
+                           queryKey: ["cart"],
+                        })
                      }}
                      disabled={count == 1}
                   >
@@ -62,6 +66,9 @@ export default function Item({ item, handleCart }) {
                            item.colors,
                            item.sizes
                         )
+                        queryClient.invalidateQueries({
+                           queryKey: ["cart"],
+                        })
                      }}
                      disabled={count == remaining}
                   >
