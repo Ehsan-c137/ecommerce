@@ -13,6 +13,8 @@ import product from "@/services/store/product/products"
 import { Colors } from "@/utils/constant"
 import toast from "react-hot-toast"
 import checkLoggedin from "@/services/user/check_loggedin"
+import Reviews from "./singleproduct/Reviews"
+import Details from "./singleproduct/Details"
 
 export default function SingleProduct({ slug }: { slug: string }) {
    const searchParams = useSearchParams()
@@ -44,7 +46,7 @@ export default function SingleProduct({ slug }: { slug: string }) {
       },
    })
 
-   const { data: cart } = useQuery({
+   const { data: cart, isLoading: cartLoading } = useQuery({
       queryKey: ["cart"],
       queryFn: () => getCart(),
    })
@@ -86,16 +88,19 @@ export default function SingleProduct({ slug }: { slug: string }) {
 
    const oldCartData = cart?.data
 
+   const duplicateProuduct = oldCartData?.findIndex(
+      (item) =>
+         item.colors === searchParams.get("color") &&
+         item.sizes === searchParams.get("size")
+   )
+
+   const dataInCart = oldCartData?.[duplicateProuduct]
+   console.log(dataInCart, "data in cart")
    const handleCart = () => {
       if (!isLogged) {
          router.push("/login")
          return
       }
-      const duplicateProuduct = oldCartData?.findIndex(
-         (item) =>
-            item.colors === searchParams.get("color") &&
-            item.sizes === searchParams.get("size")
-      )
 
       console.log(duplicateProuduct)
 
@@ -276,7 +281,9 @@ export default function SingleProduct({ slug }: { slug: string }) {
                         <div className="w-[164px] h-[44px] flex justify-between items-center border border-white-200 rounded-md">
                            <button
                               className="flex items-center justify-center  cursor-pointer w-full"
-                              disabled={productCount == 1}
+                              disabled={
+                                 productCount == 1 && dataInCart?.count == 1
+                              }
                               style={{
                                  opacity: productCount === 1 ? "0.4" : 1,
                               }}
@@ -286,7 +293,13 @@ export default function SingleProduct({ slug }: { slug: string }) {
                            >
                               <Icons.Minus />
                            </button>
-                           <p className="w-full text-center">{productCount}</p>
+                           <p className="w-full text-center">
+                              {cartLoading ? (
+                                 <span className="loader"></span>
+                              ) : (
+                                 dataInCart?.count ?? productCount
+                              )}
+                           </p>
                            <button
                               className="flex items-center justify-center  w-full"
                               disabled={data?.remaining == productCount}
@@ -352,51 +365,8 @@ export default function SingleProduct({ slug }: { slug: string }) {
                </button>
             </div>
             <div className="max-w-[725px]">
-               {section == "details" && (
-                  <>
-                     <h5 className="font-semibold mb-4">Detail</h5>
-                     <p className="text-neutral-500">
-                        Elevate your everyday style with our Men&apos;s Black
-                        T-Shirts, the ultimate wardrobe essential for modern
-                        men. Crafted with meticulous attention to detail and
-                        designed for comfort, these versatile black tees are a
-                        must-have addition to your collection. The classic black
-                        color never goes out of style. Whether you&apos;re
-                        dressing up for a special occasion or keeping it casual,
-                        these black t-shirts are the perfect choice,
-                        effortlessly complementing any outfit.
-                     </p>
-                  </>
-               )}
-               {section == "reviews" && (
-                  <div className="flex flex-col items-start gap-6 min-w-[360px] lg:w-[727px] max-w-[727px]">
-                     {isHavecomments && (
-                        <div>
-                           <h5 className="font-semibold mb-4">reviews</h5>
-                           <div className="flex items-center gap-3">
-                              <h2 className="text-neutral-900">4.2</h2>
-                              <p className="text-neutral-400">— 54 Reviews</p>
-                           </div>
-                        </div>
-                     )}
-
-                     <button className="text-sm flex items-start font-medium border px-4 py-2 rounded-md border-neutral-900">
-                        {isHavecomments
-                           ? " Write a review"
-                           : "Write first review"}
-                     </button>
-                     {isHavecomments && (
-                        <div className="flex flex-col gap-3 w-full">
-                           <div className="flex justify-end w-full">
-                              <button className="flex items-center gap-2 uppercase text-sm text-neutral-500">
-                                 Sort by <Icons.ChevronDown />
-                              </button>
-                           </div>
-                           <span className="h-[1px] border-b-neutral-200 bg-neutral-200 w-full"></span>
-                        </div>
-                     )}
-                  </div>
-               )}
+               {section == "details" && <Details />}
+               {section == "reviews" && <Reviews />}
             </div>
          </section>
       </div>
