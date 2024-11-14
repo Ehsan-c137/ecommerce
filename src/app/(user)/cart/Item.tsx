@@ -6,7 +6,9 @@ import { useQueryClient } from "@tanstack/react-query"
 export default function Item({ item, handleCart }) {
    const [count, setCount] = useState(item.count)
    const { remaining } = item.data
-   const queryClient = useQueryClient()
+   const handleDeleteFromCart = () => {
+      handleCart(item.data.id, 0, item.colors, item.sizes)
+   }
 
    return (
       <div className="flex  items-center gap-8">
@@ -30,7 +32,7 @@ export default function Item({ item, handleCart }) {
                </p>
             </div>
             <div className="flex items-center gap-8">
-               <p className="text-neutral-900 font-medium text-base nowrap">
+               <p className="text-neutral-900 font-medium text-base text-nowrap">
                   $ {item?.data.price}
                </p>
                <div className="flex items-center border border-neutral-100 rounded-md">
@@ -44,9 +46,6 @@ export default function Item({ item, handleCart }) {
                            item.colors,
                            item.sizes
                         )
-                        queryClient.invalidateQueries({
-                           queryKey: ["cart"],
-                        })
                      }}
                      disabled={count == 1}
                   >
@@ -66,9 +65,6 @@ export default function Item({ item, handleCart }) {
                            item.colors,
                            item.sizes
                         )
-                        queryClient.invalidateQueries({
-                           queryKey: ["cart"],
-                        })
                      }}
                      disabled={count == remaining}
                   >
@@ -77,7 +73,10 @@ export default function Item({ item, handleCart }) {
                </div>
             </div>
          </div>
-         <div className="h-10 w-10  items-center justify-center bg-white-100 rounded-md hidden md:flex">
+         <div
+            className="h-10 w-10 cursor-pointer items-center justify-center bg-white-100 rounded-md hidden md:flex"
+            onClick={handleDeleteFromCart}
+         >
             <Icons.X />
          </div>
       </div>
