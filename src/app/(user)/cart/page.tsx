@@ -2,19 +2,19 @@
 
 import Breadcrumb from "@/components/Breadcrumb/Breadcrumb"
 import Item from "./Item"
-import Link from "next/link"
 import { useQuery, useMutation } from "@tanstack/react-query"
 import { getCart } from "@/services/store/cart/Cart"
 import toast from "react-hot-toast"
-
+import { useQueryClient } from "@tanstack/react-query"
 import { IPutCart, putCart } from "@/services/store/cart/Cart"
-import { Span } from "next/dist/trace"
 
 export default function Cart() {
    const { data: cart, isLoading } = useQuery({
       queryKey: ["cart"],
       queryFn: () => getCart(),
    })
+
+   const queryClient = useQueryClient()
 
    const mutation = useMutation({
       mutationFn: (data: IPutCart[]) => putCart(data),
@@ -30,10 +30,16 @@ export default function Cart() {
          (item) =>
             item.data.id == id && item.colors == colors && item.sizes == sizes
       )
-
-      newDataCart.data[findIndex].count = count
+      if (count === 0) {
+         newDataCart.data.splice(findIndex, 1)
+      } else {
+         newDataCart.data[findIndex].count = count
+      }
 
       mutation.mutate(newDataCart.data)
+      queryClient.invalidateQueries({
+         queryKey: ["cart"],
+      })
    }
 
    return (
