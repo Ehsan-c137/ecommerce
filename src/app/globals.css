@@ -52,6 +52,10 @@ body {
    @apply flex items-center bg-neutral-800 text-white-900  rounded-[4px] px-6 py-2 hover:opacity-70 transition;
 }
 
+.btn_outline {
+   @apply flex items-center  text-neutral-900 border font-medium border-neutral-900  rounded-[4px] px-6 py-2 hover:opacity-70 transition;
+}
+
 .btn-outline {
    @apply px-4 py-1 border border-neutral-100 rounded-full flex items-center;
 }
@@ -74,4 +78,31 @@ body {
    100% {
       transform: rotate(360deg);
    }
+}
+
+li:has(a:is(:hover, :focus-visible)) {
+   anchor-name: --a;
+}
+ul::before {
+   left: anchor(--a left);
+   width: anchor-size(--a width);
+}
+
+.transition-custom {
+   transition-timing-function: linear(
+      0 0%,
+      0.2342 12.49%,
+      0.4374 24.99%,
+      0.6093 37.49%,
+      0.6835 43.74%,
+      0.7499 49.99%,
+      0.8086 56.25%,
+      0.8593 62.5%,
+      0.9023 68.75%,
+      0.9375 75%,
+      0.9648 81.25%,
+      0.9844 87.5%,
+      0.9961 93.75%,
+      1 100%
+   );
 }
