@@ -1,10 +1,10 @@
-import { Icons } from "@/components/Icons/icons";
-import Image from "next/image";
-import Card from "@/components/Card/Card";
+import { Icons } from "@/components/Icons/icons"
+import Image from "next/image"
+import Card from "@/components/UI/Card"
 
 export default function Home() {
    return (
-      <main className="flex flex-col gap-8  items-center sm:items-start p-4 lg:p-0 mt-[64px]">
+      <main className="flex flex-col gap-8  items-center sm:items-start p-4 mt-[64px]">
          <section className="w-full items-end">
             <div className="container mx-auto grid grid-cols-1 md:grid-cols-2 justify-items-between lg:justify-center items-end h-full gap-4 lg:gap-0">
                <div className="flex flex-col items-start justify-center  h-full">
@@ -161,5 +161,5 @@ export default function Home() {
             </div>
          </section>
       </main>
-   );
+   )
 }
