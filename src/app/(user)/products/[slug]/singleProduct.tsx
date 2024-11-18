@@ -3,7 +3,7 @@
 import Image from "next/image"
 import { Icons } from "@/components/Icons/icons"
 import { useState } from "react"
-import Breadcrumb from "@/components/Breadcrumb/Breadcrumb"
+import Breadcrumb from "@/components/UI/Breadcrumb"
 import { useQuery, useMutation } from "@tanstack/react-query"
 import getSingleProduct from "@/services/store/product/singleProduct"
 import { usePathname, useRouter, useSearchParams } from "next/navigation"
@@ -130,10 +130,7 @@ export default function SingleProduct({ slug }: { slug: string }) {
       searchParams.getAll("size").length > 0
 
    return (
-      <div className="flex flex-col container mx-auto">
-         <div className="py-6">
-            <Breadcrumb />
-         </div>
+      <div className="flex flex-col p-4 container mx-auto">
          <section className="grid grid-cols-1 md:grid-cols-2 lg:gap-[120px] flex-1">
             <div className="w-full h-full bg-white-100 flex items-center justify-center ">
                <Image
