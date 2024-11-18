@@ -1,6 +1,6 @@
 "use client"
 
-import Card from "@/components/Card/Card"
+import Card from "@/components/UI/Card"
 import products from "@/services/store/product/products"
 import useGetAllSearchParams from "@/utils/useGetAllSearchParams"
 import { useQuery } from "@tanstack/react-query"
