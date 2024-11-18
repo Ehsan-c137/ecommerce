@@ -1,6 +1,6 @@
 "use client"
 
-import Breadcrumb from "@/components/Breadcrumb/Breadcrumb"
+import Breadcrumb from "@/components/UI/Breadcrumb"
 import Item from "./Item"
 import { useQuery, useMutation } from "@tanstack/react-query"
 import { getCart } from "@/services/store/cart/Cart"
