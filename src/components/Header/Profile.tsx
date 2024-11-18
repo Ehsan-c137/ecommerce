@@ -1,18 +1,18 @@
-"use client";
-import { useQuery } from "@tanstack/react-query";
-import getProfile from "@/services/user/change_info";
-import logout from "@/services/user/logout";
-import { Icons } from "../Icons/icons";
-import Link from "next/link";
+"use client"
+import { useQuery } from "@tanstack/react-query"
+import getProfile from "@/services/user/change_info"
+import logout from "@/services/user/logout"
+import { Icons } from "../Icons/icons"
+import Link from "next/link"
 
-import { useRouter } from "next/navigation";
+import { useRouter } from "next/navigation"
 
 export default function Profile() {
    const { data, status } = useQuery({
       queryKey: ["profile"],
       queryFn: () => getProfile(),
-   });
-   const router = useRouter();
+   })
+   const router = useRouter()
 
    return (
       <>
@@ -35,7 +35,7 @@ export default function Profile() {
                   >
                      <div className="flex flex-col gap-2 px-3 py-2 text-sm text-gray-500 transition-opacity duration-300 bg-white-100 border border-white-200 rounded-lg shadow-sm opacity-1 dark:text-gray-400 dark:border-gray-600 dark:bg-gray-800">
                         <Link
-                           href={"/user/profile"}
+                           href={"/profile"}
                            className="flex justify-between items-center gap-4 text-neutral-500 hover:text-neutral-900 transition-colors"
                         >
                            <Icons.Profile />
@@ -44,8 +44,8 @@ export default function Profile() {
                         <button
                            className="text-neutral-500 hover:text-neutral-900 flex justify-between items-center gap-4"
                            onClick={() => {
-                              logout();
-                              router.refresh();
+                              logout()
+                              router.refresh()
                            }}
                         >
                            <Icons.Logout />
@@ -58,5 +58,5 @@ export default function Profile() {
             </div>
          )}
       </>
-   );
+   )
 }
