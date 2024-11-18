@@ -1,7 +1,7 @@
 "use client"
 
 import { useQuery } from "@tanstack/react-query"
-import Breadcrumb from "@/components/Breadcrumb/Breadcrumb"
+import Breadcrumb from "@/components/UI/Breadcrumb"
 import { getCart } from "@/services/store/cart/Cart"
 import { ReactNode } from "react"
 import Link from "next/link"
@@ -21,12 +21,6 @@ export default function CartLayout({ children }: { children: ReactNode }) {
 
    return (
       <>
-         <div className="bg-white-100 h-40 flex items-center ">
-            <div className="container mx-auto flex flex-col gap-1 px-4 lg:px-0 ">
-               <h3 className="text-neutral-900">Cart</h3>
-               <Breadcrumb />
-            </div>
-         </div>
          <div className="container flex flex-col md:flex-row gap-12 justify-between pt-10 px-4 lg:px-0">
             <div>{children}</div>
             <div className="flex flex-col border border-neutral-100 rounded-md px-6 py-8 w-[300px] max-w-[340px]">
