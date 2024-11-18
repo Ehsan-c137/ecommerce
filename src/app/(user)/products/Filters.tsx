@@ -19,11 +19,13 @@ export default function Filters() {
    const { data: categories, isLoading } = useQuery({
       queryKey: ["categories"],
       queryFn: () => getAllCategory(),
+      refetchOnWindowFocus: false,
    })
 
    const { data: allProducts, isLoading: allProductLoading } = useQuery({
       queryKey: ["allproducts"],
       queryFn: () => products(2, 1),
+      refetchOnWindowFocus: false,
    })
 
    const minPrice = allProducts?.reduce(
