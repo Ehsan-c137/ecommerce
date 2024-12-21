@@ -1,6 +1,6 @@
 "use client"
 import { useQuery } from "@tanstack/react-query"
-import getProfile from "@/services/user/change_info"
+import { getUserInfo } from "@/services/user/change_info"
 import logout from "@/services/user/logout"
 import { Icons } from "../Icons/icons"
 import Link from "next/link"
@@ -10,7 +10,7 @@ import { useRouter } from "next/navigation"
 export default function Profile() {
    const { data, status } = useQuery({
       queryKey: ["profile"],
-      queryFn: () => getProfile(),
+      queryFn: () => getUserInfo(),
    })
    const router = useRouter()
 
