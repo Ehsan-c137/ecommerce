@@ -38,6 +38,12 @@ export default function UserInfo() {
    } = useForm<TAddressSchema>({
       resolver: zodResolver(AddressSchema),
       mode: "onChange",
+      defaultValues: {
+         firstname: data?.firstname,
+         lastname: data?.lastname,
+         phone: data?.phone,
+         email: data?.email,
+      },
    })
 
    return (
