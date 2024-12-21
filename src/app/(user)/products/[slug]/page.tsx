@@ -1,16 +1,39 @@
-import api from "@/services/index";
-import SingleProduct from "./singleProduct";
+import api from "@/services/index"
+import SingleProduct from "./singleProduct"
+import type { Metadata } from "next"
+import { BASE_URL } from "@/services/index"
 
-export async function generateStaticParams() {
-   const products = await api.get("/store/product");
-
-   return products.data.map((product) => {
-      slug: product.slug;
-   });
+type Props = {
+   params: Promise<{ slug: string }>
+   searchParams: Promise<{ [key: string]: string | string[] | undefined }>
 }
 
-export default function Product({ params }: { params: { slug: string } }) {
-   const slug = params.slug as string;
+export async function generateStaticParams() {
+   const products = await api.get("/store/product")
 
-   return <SingleProduct slug={slug} />;
+   return products.data.map((product: { slug: string }) => {
+      return {
+         slug: product.slug,
+      }
+   })
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+   // read route params
+   const id = (await params).slug
+
+   // fetch data
+   const product = await fetch(`${BASE_URL}/store/product/${id}`).then((res) =>
+      res.json()
+   )
+
+   return {
+      title: product.title,
+   }
+}
+
+export default async function Page({ params }: Props) {
+   const slug = (await params).slug
+
+   return <SingleProduct slug={slug} />
 }
