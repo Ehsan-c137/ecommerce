@@ -138,7 +138,7 @@ export default function Products({ maxPrice, minPrice }) {
                )
             })}
          </div>
-         <div className="text-neutral-500 justify-end flex items-center w-full py-4">
+         <div className="text-neutral-500 justify-end flex items-center w-full">
             {/* <p>Showing 1-9 of {filteredData?.length} results.</p> */}
 
             <div>
