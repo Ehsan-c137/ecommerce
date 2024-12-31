@@ -52,7 +52,14 @@ export default function SingleProduct({ slug }: { slug: string }) {
    })
 
    const copyToClipboard = () => {
-      navigator.clipboard.writeText(window.location.toString())
+      navigator.clipboard
+         .writeText(window.location.toString())
+         .then(() => {
+            toast.success("copied to clipboard")
+         })
+         .catch(() => {
+            toast.error("something went wrong")
+         })
    }
 
    const isRemaining = data?.remaining > 0
