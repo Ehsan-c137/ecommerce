@@ -6,7 +6,7 @@ export default function NotFound() {
          <p className="font-bold ">404</p>
          <p>|</p>
          <Link href={"/"} className="hover:underline transition">
-            Go to home
+            HOME
          </Link>
       </div>
    )
