@@ -1,17 +1,16 @@
-import Link from "next/link";
-import { Icons } from "../Icons/icons";
-import checkLoggedin from "@/services/user/check_loggedin";
-import Profile from "./Profile";
+import Link from "next/link"
+import { Icons } from "../Icons/icons"
+import checkLoggedin from "@/services/user/check_loggedin"
+import Profile from "./Profile"
 
 export default async function Header() {
-   const isLogged = await checkLoggedin();
+   const isLogged = await checkLoggedin()
 
    return (
       <header className="fixed w-full h-21 top-0 z-10 bg-white-900 px-4">
          <div className="flex items-center justify-between h-[84px] 3xl:container mx-auto">
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-4 lg:w-[337px]">
                <Icons.Logo />
-               <h2 className="text-neutral-900 hidden lg:flex">Ecommerce</h2>
             </div>
             <nav>
                <ul className="hidden lg:flex justify-between gap-8 text-neutral-500">
@@ -57,5 +56,5 @@ export default async function Header() {
             </div>
          </div>
       </header>
-   );
+   )
 }
