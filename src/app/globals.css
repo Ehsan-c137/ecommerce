@@ -106,3 +106,30 @@ ul::before {
       1 100%
    );
 }
+
+.link_slide::after {
+   content: "";
+   position: absolute;
+   bottom: 0;
+   left: 0;
+   width: 101%;
+   height: 0.1em;
+   background-color: black;
+   opacity: 0;
+   transition: opacity 300ms, transform 300ms;
+}
+
+.link_slide {
+   overflow: hidden;
+   position: relative;
+   padding: 2px;
+}
+
+.link_slide::after {
+   opacity: 1;
+   transform: translateX(-100%);
+}
+
+.link_slide:hover::after {
+   transform: translateX(0);
+}
