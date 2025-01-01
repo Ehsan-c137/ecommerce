@@ -14,25 +14,20 @@ export default async function Header() {
             </div>
             <nav>
                <ul className="hidden lg:flex justify-between gap-8 text-neutral-500">
-                  <li className="hover:text-neutral-900 transition-colors">
+                  <li className="hover:text-neutral-900 transition-colors link_slide">
                      <Link href={"/"}>Home</Link>
                   </li>
-                  <li className="hover:text-neutral-900 transition-colors">
+                  <li className="hover:text-neutral-900 transition-colors link_slide">
                      <Link href={"/categories"}>Categories</Link>
                   </li>
-                  <li className="hover:text-neutral-900 transition-colors">
+                  <li className="hover:text-neutral-900 transition-colors link_slide">
                      <Link href={"/products"}>Products</Link>
                   </li>
-                  <li className="hover:text-neutral-900 transition-colors">
+                  <li className="hover:text-neutral-900 transition-colors link_slide">
                      <Link href={"/about"}>About</Link>
                   </li>
-                  <li>
-                     <Link
-                        className="hover:text-neutral-900 transition-colors"
-                        href={"/contact"}
-                     >
-                        Contact
-                     </Link>
+                  <li className="link_slide">
+                     <Link href={"/contact"}>Contact</Link>
                   </li>
                </ul>
             </nav>
