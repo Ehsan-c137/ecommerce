@@ -1,17 +1,17 @@
-"use client";
+"use client"
 
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-import React from "react";
-import { Icons } from "@/components/Icons/icons";
-import Breadcrumb from "@/components/Breadcrumb/Breadcrumb";
+import Link from "next/link"
+import { usePathname } from "next/navigation"
+import React from "react"
+import { Icons } from "@/components/Icons/icons"
+import Breadcrumb from "@/components/UI/Breadcrumb"
 
 export default function AdminPanelLayout({
    children,
 }: {
-   children: React.ReactNode;
+   children: React.ReactNode
 }) {
-   const pathname = usePathname();
+   const pathname = usePathname()
    const items = [
       "Dashboard",
       "products",
@@ -19,11 +19,11 @@ export default function AdminPanelLayout({
       "Customers",
       "Reviews",
       "Settings",
-   ];
+   ]
 
    const NavItems = items.map((item) => {
-      const url = `/admin/${item.toLowerCase()}`;
-      const isActive = pathname === url;
+      const url = `/admin/${item.toLowerCase()}`
+      const isActive = pathname === url
       return (
          <Link
             key={item}
@@ -34,8 +34,8 @@ export default function AdminPanelLayout({
          >
             {item}
          </Link>
-      );
-   });
+      )
+   })
 
    return (
       <div className="bg-white-100 h-[100vh] flex gap-10">
@@ -56,5 +56,5 @@ export default function AdminPanelLayout({
             <div>{children}</div>
          </div>
       </div>
-   );
+   )
 }
