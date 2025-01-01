@@ -1,5 +1,5 @@
-import { Icons } from "../Icons/icons";
-import Link from "next/link";
+import { Icons } from "../Icons/icons"
+import Link from "next/link"
 
 export default function Footer() {
    return (
@@ -21,17 +21,26 @@ export default function Footer() {
                   <Icons.Youtube />
                </div>
             </div>
-            <div className="flex gap-16 text-sm lg:text-base text-nowrap">
+            <div className="flex gap-16 text-sm lg:text-base text-nowrap ">
                <div className="grid grid-cols-1 gap-7">
                   <p className="text-neutral-300">SUPPPORT</p>
                   <div className="grid grid-cols-1 gap-4">
-                     <Link href={"/about"} className="text-neutral-500">
+                     <Link
+                        href={"/about"}
+                        className="text-neutral-500 hover:text-neutral-900 transition-colors"
+                     >
                         FAQ
                      </Link>
-                     <Link href={"/about"} className="text-neutral-500">
+                     <Link
+                        href={"/about"}
+                        className="text-neutral-500 hover:text-neutral-900 transition-colors"
+                     >
                         Terms of use
                      </Link>
-                     <Link href={"/about"} className="text-neutral-500">
+                     <Link
+                        href={"/about"}
+                        className="text-neutral-500 hover:text-neutral-900 transition-colors"
+                     >
                         Privacy Policy
                      </Link>
                   </div>
@@ -39,13 +48,22 @@ export default function Footer() {
                <div className="grid grid-cols-1 gap-7">
                   <p className="text-neutral-300">COMPANY</p>
                   <div className="grid grid-cols-1 gap-4">
-                     <Link href={"/about"} className="text-neutral-500">
+                     <Link
+                        href={"/about"}
+                        className="text-neutral-500 hover:text-neutral-900 transition-colors"
+                     >
                         About us
                      </Link>
-                     <Link href={"/about"} className="text-neutral-500">
+                     <Link
+                        href={"/about"}
+                        className="text-neutral-500 hover:text-neutral-900 transition-colors"
+                     >
                         Contact
                      </Link>
-                     <Link href={"/about"} className="text-neutral-500">
+                     <Link
+                        href={"/about"}
+                        className="text-neutral-500 hover:text-neutral-900 transition-colors"
+                     >
                         Careers
                      </Link>
                   </div>
@@ -53,13 +71,22 @@ export default function Footer() {
                <div className="grid grid-cols-1 gap-7">
                   <p className="text-neutral-300">SHOP</p>
                   <div className="grid grid-cols-1 gap-4">
-                     <Link href={"/about"} className="text-neutral-500">
+                     <Link
+                        href={"/about"}
+                        className="text-neutral-500 hover:text-neutral-900 transition-colors"
+                     >
                         My Account
                      </Link>
-                     <Link href={"/about"} className="text-neutral-500">
+                     <Link
+                        href={"/about"}
+                        className="text-neutral-500 hover:text-neutral-900 transition-colors"
+                     >
                         Checkout
                      </Link>
-                     <Link href={"/about"} className="text-neutral-500">
+                     <Link
+                        href={"/about"}
+                        className="text-neutral-500 hover:text-neutral-900 transition-colors"
+                     >
                         Cart
                      </Link>
                   </div>
@@ -76,9 +103,9 @@ export default function Footer() {
          </div>
          <div className="flex items-center justify-center w-full border-t border-neutral-100 p-4 bg-white-100 ">
             <p className="text-neutral-500 ">
-               © 2024 ECM. All rights reserved.
+               © 2025 ECM. All rights reserved.
             </p>
          </div>
       </footer>
-   );
+   )
 }
