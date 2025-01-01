@@ -1,6 +1,5 @@
 import { Icons } from "@/components/Icons/icons"
 import Image from "next/image"
-import Card from "@/components/UI/Card"
 import Link from "next/link"
 import checkLoggedin from "@/services/user/check_loggedin"
 import Profile from "@/components/Header/Profile"
@@ -19,17 +18,11 @@ export default async function Home() {
                <div className="flex items-center justify-between h-[84px] 3xl:container mx-auto">
                   <Link href={"/"} className="flex items-center gap-4">
                      <Icons.Logo />
-                     <h2 className="text-neutral-900 hidden lg:flex">
-                        {/* Ecommerce */}
-                     </h2>
                   </Link>
                   <nav>
                      <ul className="hidden lg:flex justify-between gap-8 text-neutral-500">
                         <li className="hover:text-neutral-900 transition-colors">
                            <Link href={"/"}>Home</Link>
-                        </li>
-                        <li className="hover:text-neutral-900 transition-colors">
-                           <Link href={"/categories"}>Categories</Link>
                         </li>
                         <li className="hover:text-neutral-900 transition-colors">
                            <Link href={"/products"}>Products</Link>
@@ -60,7 +53,7 @@ export default async function Home() {
             </header>
             <Image
                src="/hero-image.jpg"
-               alt="shop"
+               alt="spring season"
                width={0}
                height={0}
                sizes="100vw"
@@ -71,16 +64,23 @@ export default async function Home() {
                   objectPosition: "bottom",
                }}
             />
-            <p className="font-bold text-neutral-500 absolute left-20 bottom-20 text-2xl">
+            <p className="font-bold text-neutral-500 absolute left-[50%] md:left-10 -translate-x-[50%] bottom-[75%] lg:translate-x-0 lg:left-20 lg:bottom-20 text-2xl">
                Spring Season
             </p>
-            <Link className="absolute right-20 bottom-20" href={"/product"}>
-               View Collecion
+            <Link
+               className="absolute bottom-[70%] right-[50%] translate-x-[50%] md:translate-x-0 md:right-10 lg:bottom-20  bg-[#d26110] text-white-100 px-2 py-1"
+               href={"/product"}
+            >
+               View Collection
             </Link>
          </section>
          <section className="flex justify-around items-center w-full py-10 bg-[#FC7A1D]">
-            <Icons.NumeroIcon />
-            <Icons.KinfolkIcon />
+            <span className="hidden md:block">
+               <Icons.NumeroIcon />
+            </span>
+            <span className="hidden md:block">
+               <Icons.KinfolkIcon />
+            </span>
             <Icons.FashionBeansIcon />
             <Icons.HyperbeastLogo />
          </section>
@@ -116,8 +116,8 @@ export default async function Home() {
                </Link>
             </div>
          </section>
-         <section className="flex flex-wrap justify-center md:grid-cols-2 gap-4 container mx-auto w-full mt-10">
-            <div className="max-w-[596px] h-[600px] bg-white-200 rounded-md flex justify-center items-center relative">
+         <section className="flex flex-col md:flex-row justify-center gap-4 container mx-auto w-full mt-10">
+            <div className="max-w-[596px] h-[600px] bg-white-200 rounded-md flex justify-end items-center relative">
                <Image
                   src={"/hero-image-2.png"}
                   alt="image"
@@ -147,7 +147,7 @@ export default async function Home() {
                <p>— Guera Latissa, Creative Director</p>
             </div>
          </section>
-         <section className="flex flex-wrap justify-center w-full pt-0 mx-auto container mt-10">
+         <section className="flex flex-col md:flex-row flex-wrap justify-center w-full pt-0 mx-auto container mt-10">
             <div className="bg-['#FC7A1D'] relative h-[600px] lg:w-[586px] flex">
                <Image
                   src={"/womens.jpg"}
@@ -155,13 +155,12 @@ export default async function Home() {
                   sizes="100vw"
                   width={0}
                   height={0}
+                  className="lg:rounded-l-md"
                   style={{
                      width: "100%",
                      height: "100%",
                      objectFit: "cover",
                      objectPosition: "center",
-                     borderTopLeftRadius: "6px",
-                     borderBottomLeftRadius: "6px",
                   }}
                />
                <Link
@@ -179,13 +178,12 @@ export default async function Home() {
                   sizes="100vw"
                   width={0}
                   height={0}
+                  className="lg:rounded-r-md"
                   style={{
                      width: "100%",
                      height: "100%",
                      objectFit: "cover",
                      objectPosition: "center",
-                     borderTopRightRadius: "6px",
-                     borderBottomRightRadius: "6px",
                   }}
                />
                <Link
@@ -197,7 +195,7 @@ export default async function Home() {
                </Link>
             </div>
          </section>
-         <section className="flex flex-wrap w-full justify-center mx-auto container my-10 rounded-md">
+         <section className="flex flex-col md:flex-row w-full justify-center mx-auto container my-10 rounded-md">
             <div className="lg:w-[580px]">
                <Image
                   src="/visit-our.jpg"
