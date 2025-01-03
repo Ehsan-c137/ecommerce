@@ -12,14 +12,22 @@ import { Icons } from "@/components/Icons/icons"
 import { useState } from "react"
 import Link from "next/link"
 
-export default function Products({ maxPrice, minPrice }) {
+export default function Products({
+   maxPrice,
+   minPrice,
+}: {
+   maxPrice: number
+   minPrice: number
+}) {
    const [isDropdownOpen, setIsDropdownOpen] = useState(false)
    const searchParams = useSearchParams()
    const allSearchParams = useGetAllSearchParams()
    const groupped = Object.groupBy(allSearchParams, (item) => item.name)
-   const allSearchParamsObj = {}
+
+   const allSearchParamsObj: { [key: string]: string[] } = {}
    Object.entries(groupped).forEach(([key, value]) => {
-      allSearchParamsObj[key] = value.map((item) => item.value)
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+      allSearchParamsObj[key] = value!.map((item) => item.value)
    })
 
    const handleQueryParams = useHandleQueryParams()
@@ -40,8 +48,11 @@ export default function Products({ maxPrice, minPrice }) {
             data?.sort((a, b) => a.price - b.price)
          }
          if (searchParams.get("ascending") === "false") {
-            data?.sort((a, b) => b.price - a.price)
+            data?.sort(
+               (a: { price: number }, b: { price: number }) => b.price - a.price
+            )
          }
+         // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
          return data?.filter((product) => {
             const productColors = product.options?.colors
             const productSizes = product.options?.sizes
@@ -216,7 +227,7 @@ export default function Products({ maxPrice, minPrice }) {
                </>
             )}
 
-            {filteredData?.map((product: any) => (
+            {filteredData?.map((product: { id: string }) => (
                <Card key={product.id} data={product} />
             ))}
          </div>
