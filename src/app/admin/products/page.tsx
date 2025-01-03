@@ -1,16 +1,23 @@
-"use client";
-import { Icons } from "@/components/Icons/icons";
-import { useState } from "react";
-import AddProduct from "./AddProduct";
+"use client"
+import { Icons } from "@/components/Icons/icons"
+import { useState } from "react"
+import AddProduct from "./AddProduct"
 
 export default function Products() {
-   const [isAddProduct, setIsAddProduct] = useState(true);
+   const [isAddProduct, setIsAddProduct] = useState(true)
+   const handleClick = () => {
+      setIsAddProduct(false)
+   }
+
    return (
       <div className="flex flex-col bg-white-900 rounded-lg">
          {isAddProduct && <AddProduct />}
          {!isAddProduct && (
             <>
-               <div className="flex justify-between items-center px-6 py-5">
+               <div
+                  className="flex justify-between items-center px-6 py-5"
+                  onClick={() => handleClick}
+               >
                   <h5 className="text-neutral-900 font-bold">Products</h5>
                   <div className="flex items-center gap-4">
                      <button className="font-bold btn">Add Product</button>
@@ -45,5 +52,5 @@ export default function Products() {
             </>
          )}
       </div>
-   );
+   )
 }
