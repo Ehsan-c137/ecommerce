@@ -1,6 +1,5 @@
 "use client"
 
-import Breadcrumb from "@/components/UI/Breadcrumb"
 import { Icons } from "@/components/Icons/icons"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
