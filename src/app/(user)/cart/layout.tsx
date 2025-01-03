@@ -1,7 +1,6 @@
 "use client"
 
 import { useQuery } from "@tanstack/react-query"
-import Breadcrumb from "@/components/UI/Breadcrumb"
 import { getCart } from "@/services/store/cart/Cart"
 import { ReactNode } from "react"
 import Link from "next/link"
@@ -15,9 +14,15 @@ export default function CartLayout({ children }: { children: ReactNode }) {
       queryFn: () => getCart(),
    })
 
-   const total = cart?.data?.reduce((acc, item) => {
-      return item.count * Number(item.data?.price) + acc
-   }, 0)
+   const total = cart?.data?.reduce(
+      (
+         acc: number,
+         item: { count: number; data: { price: number | string } }
+      ) => {
+         return item.count * Number(item.data?.price) + acc
+      },
+      0
+   )
 
    return (
       <>
