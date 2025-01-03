@@ -1,26 +1,26 @@
 "use client"
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import "./Carousel.css"
 import Image from "next/image"
 import { Icons } from "../Icons/icons"
 
-const CarouselIndicators = ({ images, activeIndex, onClick }) => {
-   return (
-      <div className="carousel__indicators">
-         {images.map((_, index) => (
-            <span
-               key={index}
-               className={`carousel__indicator ${
-                  index === activeIndex ? "active" : ""
-               }`}
-               onClick={() => onClick(index)}
-            />
-         ))}
-      </div>
-   )
-}
-const Carousel = ({ images, interval = 3000 }) => {
+// const CarouselIndicators = ({ images, activeIndex, onClick }) => {
+//    return (
+//       <div className="carousel__indicators">
+//          {images.map((_, index) => (
+//             <span
+//                key={index}
+//                className={`carousel__indicator ${
+//                   index === activeIndex ? "active" : ""
+//                }`}
+//                onClick={() => onClick(index)}
+//             />
+//          ))}
+//       </div>
+//    )
+// }
+const Carousel = ({ images }: { images: [] }) => {
    const [activeIndex, setActiveIndex] = useState(0)
    const nextSlide = () => {
       setActiveIndex((prevIndex) =>
@@ -32,6 +32,16 @@ const Carousel = ({ images, interval = 3000 }) => {
          prevIndex === 0 ? images.length - 1 : prevIndex - 1
       )
    }
+
+   useEffect(() => {
+      const timer = setInterval(() => {
+         setActiveIndex((prev) => (prev === images.length - 1 ? 0 : prev + 1))
+      }, 3000)
+
+      return () => {
+         clearInterval(timer)
+      }
+   }, [activeIndex, images.length])
 
    return (
       <div className="carousel flex items-center max-w-[600px]">
