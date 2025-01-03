@@ -1,6 +1,5 @@
 "use client"
 
-import Breadcrumb from "@/components/UI/Breadcrumb"
 import Item from "./Item"
 import { useQuery, useMutation } from "@tanstack/react-query"
 import { getCart } from "@/services/store/cart/Cart"
@@ -24,10 +23,21 @@ export default function Cart() {
       },
    })
 
-   const handleCart = (id, count, colors, sizes) => {
+   const handleCart = (
+      id: string,
+      count: number,
+      colors: string,
+      sizes: string
+   ) => {
       const newDataCart = cart
       const findIndex = newDataCart?.data?.findIndex(
-         (item) =>
+         (item: {
+            data: {
+               id: string
+            }
+            colors: string
+            sizes: string
+         }) =>
             item.data.id == id && item.colors == colors && item.sizes == sizes
       )
       if (count === 0) {
@@ -49,13 +59,26 @@ export default function Cart() {
                <div className="animate-pulse w-full h-40 bg-neutral-200"></div>
             )}
             {cart?.data?.length === 0 && "Your cart is empty"}
-            {cart?.data?.map((item) => (
-               <Item
-                  key={item.colors + item.sizes}
-                  item={item}
-                  handleCart={handleCart}
-               />
-            ))}
+            {cart?.data?.map(
+               (item: {
+                  data: {
+                     id: string
+                     main_image: string
+                     name: string
+                     price: number | string
+                     remaining: number
+                  }
+                  count: number
+                  colors: string
+                  sizes: string
+               }) => (
+                  <Item
+                     key={item.colors + item.sizes}
+                     item={item}
+                     handleCart={handleCart}
+                  />
+               )
+            )}
          </div>
       </>
    )
