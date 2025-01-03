@@ -10,6 +10,7 @@ const SigninSchema = z.object({
       .min(3, { message: "title must be at least 3 characters long" }),
    phone: z.number().min(1, { message: "price must bte at least 1" }),
    name: z.string().min(1, { message: "category is required" }),
+   price: z.number(),
 })
 
 type TSigninSchema = z.infer<typeof SigninSchema>
@@ -17,8 +18,7 @@ type TSigninSchema = z.infer<typeof SigninSchema>
 export default function Checkout() {
    const {
       register,
-      getValues,
-      formState: { errors, isValid },
+      formState: { errors },
    } = useForm<TSigninSchema>({
       resolver: zodResolver(SigninSchema),
       mode: "onChange",
@@ -35,13 +35,13 @@ export default function Checkout() {
             </label>
             <input
                autoComplete="true"
-               {...register("title")}
+               {...register("name")}
                type="text"
                id="title"
                className="border border-neutral-100 focus-within:border-neutral-900 px-4 py-2 outline-none transition-colors rounded-md"
             />
             <p className="text-red-r500 mt-2 text-wrap">
-               {errors.title?.message}
+               {errors.name?.message}
             </p>
          </div>
          <div className="flex flex-col">
@@ -72,14 +72,14 @@ export default function Checkout() {
             </label>
             <input
                autoComplete="true"
-               {...register("category")}
+               {...register("addresName")}
                type="number"
                required
-               id="category"
+               id="addresName"
                className="border border-neutral-100 focus-within:border-neutral-900 px-4 py-2 outline-none transition-colors rounded-md"
             />
             <p className="text-red-r500 mt-2 text-wrap">
-               {errors.category?.message}
+               {errors.addresName?.message}
             </p>
          </div>
       </div>
