@@ -3,14 +3,10 @@
 import Image from "next/image"
 import { Icons } from "@/components/Icons/icons"
 import { useState } from "react"
-import Breadcrumb from "@/components/UI/Breadcrumb"
 import { useQuery, useMutation } from "@tanstack/react-query"
 import getSingleProduct from "@/services/store/product/singleProduct"
-import { usePathname, useRouter, useSearchParams } from "next/navigation"
-import useHandleQueryParam from "@/utils/useHandleQueryParams"
+import { useRouter, useSearchParams } from "next/navigation"
 import { IPutCart, putCart, getCart } from "@/services/store/cart/Cart"
-import product from "@/services/store/product/products"
-import { Colors } from "@/utils/constant"
 import toast from "react-hot-toast"
 import checkLoggedin from "@/services/user/check_loggedin"
 import Reviews from "./singleproduct/Reviews"
@@ -19,7 +15,6 @@ import Details from "./singleproduct/Details"
 export default function SingleProduct({ slug }: { slug: string }) {
    const searchParams = useSearchParams()
    const router = useRouter()
-   const pathname = usePathname()
 
    const { data: isLogged } = useQuery({
       queryKey: ["isLogged"],
@@ -73,7 +68,7 @@ export default function SingleProduct({ slug }: { slug: string }) {
    const colors = data?.options?.colors
 
    // const handleQueryParams = useHandleQueryParam()
-   const handleQueryParams = function (key, value) {
+   const handleQueryParams = function (key: string, value: string) {
       const url = new URL(window.location.href)
       url.searchParams.set(key, value)
       router.push(url.toString())
@@ -96,7 +91,7 @@ export default function SingleProduct({ slug }: { slug: string }) {
    const oldCartData = cart?.data
 
    const duplicateProuduct = oldCartData?.findIndex(
-      (item) =>
+      (item: { colors: string; sizes: string }) =>
          item.colors === searchParams.get("color") &&
          item.sizes === searchParams.get("size")
    )
@@ -211,7 +206,7 @@ export default function SingleProduct({ slug }: { slug: string }) {
                                     <label
                                        style={{
                                           border: "1px solid transparent",
-                                          backgroundColor: Colors[color],
+                                          backgroundColor: color,
                                           borderColor: isChecked
                                              ? "black"
                                              : "transparent",
@@ -242,7 +237,7 @@ export default function SingleProduct({ slug }: { slug: string }) {
                            select size
                         </p>
                         <div className="flex items-center gap-2">
-                           {sizes?.map((item) => {
+                           {sizes?.map((item: string) => {
                               const isChecked = searchParams
                                  .getAll("size")
                                  ?.includes(item)
@@ -370,7 +365,7 @@ export default function SingleProduct({ slug }: { slug: string }) {
             </div>
             <div className="max-w-[725px]">
                {section == "details" && <Details />}
-               {section == "reviews" && <Reviews />}
+               {isHavecomments && section == "reviews" && <Reviews />}
             </div>
          </section>
       </div>
