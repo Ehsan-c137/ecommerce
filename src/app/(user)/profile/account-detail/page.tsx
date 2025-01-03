@@ -24,7 +24,7 @@ const AddressSchema = z.object({
 type TAddressSchema = z.infer<typeof AddressSchema>
 
 export default function UserInfo() {
-   const { data, status, isSuccess, isLoading } = useQuery({
+   const { data } = useQuery({
       queryKey: ["profile"],
       queryFn: () => getUserInfo(),
    })
@@ -33,8 +33,8 @@ export default function UserInfo() {
 
    const {
       register,
-      getValues,
-      formState: { errors, isValid },
+
+      formState: { errors },
    } = useForm<TAddressSchema>({
       resolver: zodResolver(AddressSchema),
       mode: "onChange",
