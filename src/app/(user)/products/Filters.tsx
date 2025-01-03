@@ -29,12 +29,12 @@ export default function Filters() {
    })
 
    const minPrice = allProducts?.reduce(
-      (min, item) => Math.min(min, item.price),
+      (min: number, item: { price: number }) => Math.min(min, item.price),
       allProducts[0]?.price
    )
 
    const maxPrice = allProducts?.reduce(
-      (max, item) => Math.max(max, item.price),
+      (max: number, item: { price: number }) => Math.max(max, item.price),
       allProducts[0]?.price
    )
 
@@ -94,7 +94,7 @@ export default function Filters() {
                      {isLoading && (
                         <div className="w-full bg-white-200 animate-pulse h-10 rounded-md"></div>
                      )}
-                     {categories?.map((data) => {
+                     {categories?.map((data: { name: string }) => {
                         const item = data.name
                         const isChecked = searchParams
                            .getAll("category")
@@ -145,7 +145,7 @@ export default function Filters() {
                                  borderColor: isChecked
                                     ? "black"
                                     : "transparent",
-                                 backgroundColor: Colors[item],
+                                 backgroundColor: item,
                               }}
                               htmlFor={`${item}--color`}
                               className={`w-7 h-7 rounded-full transition p-[3px] bg-clip-content bg-red-r200 borderp-[3px]  cursor-pointer`}
