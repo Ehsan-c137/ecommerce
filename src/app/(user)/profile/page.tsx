@@ -1,13 +1,11 @@
 "use client"
 
-import Link from "next/link"
-import { Icons } from "../Icons/icons"
-import { useQuery, useQueryClient } from "@tanstack/react-query"
-import logout from "@/services/user/logout"
-import getUserInfo from "@/services/user/change_info"
+import { useQuery } from "@tanstack/react-query"
+
+import { getUserInfo } from "@/services/user/change_info"
 
 export default function Profile() {
-   const { data, status, isSuccess, isLoading } = useQuery({
+   const { data, isLoading } = useQuery({
       queryKey: ["profile"],
       queryFn: () => getUserInfo(),
    })
