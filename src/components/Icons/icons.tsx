@@ -1,4 +1,4 @@
-import React, { SVGProps } from "react"
+import React from "react"
 
 export const Icons = {
    Logo: () => (
@@ -115,8 +115,9 @@ export const Icons = {
          />
       </svg>
    ),
-   ArrowRight: (props) => (
+   ArrowRight: (props: React.SVGProps<SVGSVGElement>) => (
       <svg
+         {...props}
          width="24"
          height="20"
          viewBox="0 0 24 20"
@@ -143,7 +144,7 @@ export const Icons = {
          />
       </svg>
    ),
-   Truck: (props) => (
+   Truck: (props: React.SVGProps<SVGSVGElement>) => (
       <svg
          {...props}
          width="24"
@@ -161,7 +162,7 @@ export const Icons = {
          />
       </svg>
    ),
-   StarBadge: (props) => (
+   StarBadge: (props: React.SVGProps<SVGSVGElement>) => (
       <svg
          {...props}
          width="24"
@@ -642,6 +643,7 @@ export const Icons = {
    ),
    Password: (props: React.SVGProps<SVGSVGElement>) => (
       <svg
+         {...props}
          width="24"
          height="24"
          viewBox="0 0 24 24"
@@ -670,6 +672,7 @@ export const Icons = {
    ),
    Address: (props: React.SVGProps<SVGSVGElement>) => (
       <svg
+         {...props}
          width="24"
          height="24"
          viewBox="0 0 24 24"
