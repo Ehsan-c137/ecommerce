@@ -55,7 +55,7 @@ const Carousel = ({ images }: { images: [] }) => {
             <div
                style={{
                   transform: `translateX(-${activeIndex * 100}%)`,
-                  transitionDuration: "400ms",
+                  transitionDuration: "500ms",
                }}
                className=" w-full items-center flex [transition-timing-function:cubic-bezier(0.61,1,0.88,1)]"
             >
