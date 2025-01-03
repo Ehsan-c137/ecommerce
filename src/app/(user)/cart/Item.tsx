@@ -1,9 +1,28 @@
 import { Icons } from "@/components/Icons/icons"
 import Image from "next/image"
 import { useState } from "react"
-import { useQueryClient } from "@tanstack/react-query"
 
-export default function Item({ item, handleCart }) {
+interface IProps {
+   handleCart: (
+      id: string,
+      count: number,
+      colors: string,
+      sizes: string
+   ) => void
+   item: {
+      data: {
+         id: string
+         main_image: string
+         name: string
+         price: number | string
+         remaining: number
+      }
+      count: number
+      colors: string
+      sizes: string
+   }
+}
+export default function Item({ item, handleCart }: IProps) {
    const [count, setCount] = useState(item.count)
    const { remaining } = item.data
    const handleDeleteFromCart = () => {
