@@ -1,13 +1,14 @@
-"use client";
+"use client"
 
-import Link from "next/link";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import signin from "@/services/user/signin";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
-import { useRouter } from "next/navigation";
-import { Icons } from "@/components/Icons/icons";
+import Link from "next/link"
+import { useMutation, useQueryClient } from "@tanstack/react-query"
+import signin from "@/services/user/signin"
+import { useForm } from "react-hook-form"
+import { zodResolver } from "@hookform/resolvers/zod"
+import { z } from "zod"
+import { useRouter } from "next/navigation"
+import { Icons } from "@/components/Icons/icons"
+import toast from "react-hot-toast"
 
 const SigninSchema = z.object({
    title: z
@@ -23,26 +24,25 @@ const SigninSchema = z.object({
    stock_status: z.string().min(1, { message: "stock status is required" }),
    available_quantity: z.number().min(0, { message: "quantity is required" }),
    description: z.string(),
-});
+})
 
-type TSigninSchema = z.infer<typeof SigninSchema>;
+type TSigninSchema = z.infer<typeof SigninSchema>
 
 export default function AddProduct() {
    const {
       register,
-      getValues,
       formState: { errors, isValid },
    } = useForm<TSigninSchema>({
       resolver: zodResolver(SigninSchema),
       mode: "onChange",
-   });
+   })
 
-   const colors = ["yellow", "red", "blue"];
+   // const colors = ["yellow", "red", "blue"];
 
-   const sizes = ["s", "m", "xl", "xxl", "xxl"];
+   // const sizes = ["s", "m", "xl", "xxl", "xxl"];
 
-   const queryClient = useQueryClient();
-   const router = useRouter();
+   const queryClient = useQueryClient()
+   const router = useRouter()
 
    const signinMutation = useMutation({
       mutationFn: signin,
@@ -50,25 +50,25 @@ export default function AddProduct() {
          // toast
 
          if (data?.message?.includes("already exists")) {
-            toast.error("user already exist");
+            toast.error("user already exist")
          }
-         queryClient.invalidateQueries({ queryKey: ["profile"] });
-         router.push("/");
-         console.log(data);
+         queryClient.invalidateQueries({ queryKey: ["profile"] })
+         router.push("/")
+         console.log(data)
       },
       onError: (error) => {
-         console.log("error");
-         console.log(error.message);
+         console.log("error")
+         console.log(error.message)
       },
-   });
+   })
 
    const handleSignin = (e: React.FormEvent) => {
-      e.preventDefault();
-      signinMutation.mutate({
-         username: getValues("username_login"),
-         password: getValues("password_login"),
-      });
-   };
+      e.preventDefault()
+      // signinMutation.mutate({
+      //    username: getValues("username_login"),
+      //    password: getValues("password_login"),
+      // });
+   }
 
    return (
       <div className="w-full flex flex-col gap-6 justify-center">
@@ -299,5 +299,5 @@ export default function AddProduct() {
             Don&apos;t have an account? <Link href="/signup"> Sign up </Link>
          </p>
       </div>
-   );
+   )
 }
