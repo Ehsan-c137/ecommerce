@@ -1,5 +1,4 @@
 import Filters from "./Filters"
-import Breadcrumb from "@/components/UI/Breadcrumb"
 
 export default function Page() {
    return (
