@@ -69,7 +69,7 @@ export default async function Home() {
             </p>
             <Link
                className="absolute bottom-[70%] right-[50%] translate-x-[50%] md:translate-x-0 md:right-10 lg:bottom-20  bg-[#d26110] text-white-100 px-2 py-1"
-               href={"/product"}
+               href={"/products"}
             >
                View Collection
             </Link>
