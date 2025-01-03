@@ -1,4 +1,7 @@
+import { Icons } from "@/components/Icons/icons"
+
 export default function Reviews() {
+   const isHavecomments = true
    return (
       <div className="flex flex-col items-start gap-6 min-w-[360px] lg:w-[727px] max-w-[727px]">
          {isHavecomments && (
