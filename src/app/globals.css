@@ -8,6 +8,24 @@
    --header-height: 84px;
 }
 
+.background {
+   background-image: url("/nnnoise.svg");
+   transition: transform cubic-bezier(0.32, 0.72, 0, 1) 500ms;
+   height: auto;
+}
+
+.backdrop header {
+   border-top-right-radius: 18px;
+   border-top-left-radius: 18px;
+   transition: cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+.backdrop.background {
+   transform: scale(0.94, 0.99);
+   border-top-left-radius: 16px;
+   border-top-right-radius: 16px;
+}
+
 @media (prefers-color-scheme: dark) {
    :root {
       --background: #0a0a0a;
@@ -18,46 +36,12 @@
 body {
    color: var(--foreground);
    background: var(--background);
-   font-family: Inter, Arial, Helvetica, sans-serif;
 }
 
 @layer utilities {
    .text-balance {
       text-wrap: balance;
    }
-}
-
-@layer base {
-   h1 {
-      @apply text-[40px] font-semibold;
-   }
-
-   h2 {
-      @apply text-[32px] font-semibold;
-   }
-
-   h3 {
-      @apply text-2xl font-bold;
-   }
-
-   p {
-      @apply text-sm;
-   }
-}
-
-.text-label {
-   @apply text-xs font-medium;
-}
-.btn {
-   @apply flex items-center bg-neutral-800 text-white-900  rounded-[4px] px-6 py-2 hover:opacity-70 transition;
-}
-
-.btn_outline {
-   @apply flex items-center  text-neutral-900 border font-medium border-neutral-900  rounded-[4px] px-6 py-2 hover:opacity-70 transition;
-}
-
-.btn-outline {
-   @apply px-4 py-1 border border-neutral-100 rounded-full flex items-center;
 }
 
 .loader {
@@ -80,14 +64,6 @@ body {
    }
 }
 
-li:has(a:is(:hover, :focus-visible)) {
-   anchor-name: --a;
-}
-ul::before {
-   left: anchor(--a left);
-   width: anchor-size(--a width);
-}
-
 .transition-custom {
    transition-timing-function: linear(
       0 0%,
@@ -108,7 +84,7 @@ ul::before {
 }
 
 .link_slide::after {
-   content: "";
+   content: " ";
    position: absolute;
    bottom: 0;
    left: 0;
@@ -124,12 +100,55 @@ ul::before {
    position: relative;
    padding: 2px;
 }
-
 .link_slide::after {
    opacity: 1;
    transform: translateX(-100%);
 }
-
 .link_slide:hover::after {
    transform: translateX(0);
+}
+
+/* typography */
+.title {
+   font-size: 18px;
+   letter-spacing: 4px;
+   font-weight: regular;
+   line-height: 40px;
+}
+.subtitle {
+   font-size: 16px;
+   letter-spacing: 2px;
+   font-weight: regular;
+   line-height: 24px;
+}
+.subtitle-2 {
+   font-size: 14px;
+   letter-spacing: 2px;
+   font-weight: regular;
+   line-height: 20px;
+}
+.body-1 {
+   font-size: 16px;
+   letter-spacing: 0px;
+
+   line-height: 24px;
+}
+.body-m {
+   font-size: 14px;
+   letter-spacing: 0px;
+   line-height: 24px;
+}
+.body-s {
+   font-size: 12px;
+   letter-spacing: 0px;
+   line-height: 18px;
+}
+
+.test {
+   position: relative;
+   border: 1px solid black;
+   content: " ";
+   width: 6px;
+   height: 6px;
+   transform: translateX(-50%) rotate(45deg);
 }
