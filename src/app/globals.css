@@ -12,6 +12,7 @@
    background-image: url("/nnnoise.svg");
    transition: transform cubic-bezier(0.32, 0.72, 0, 1) 500ms;
    height: auto;
+   opacity: 1;
 }
 
 .backdrop header {
@@ -24,6 +25,7 @@
    transform: scale(0.94, 0.99);
    border-top-left-radius: 16px;
    border-top-right-radius: 16px;
+   opacity: 0.8;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -108,6 +110,25 @@ body {
    transform: translateX(0);
 }
 
+.active-border {
+   width: 100%;
+   height: 1px;
+   background-color: #dd8560;
+   position: relative;
+}
+.active-border::after {
+   content: "";
+   position: absolute;
+   bottom: -2px;
+   left: 50%;
+   width: 6px;
+   height: 6px;
+   rotate: 45deg;
+   background-color: #dd8560;
+   opacity: 1;
+   transition: opacity 300ms, transform 300ms;
+}
+
 /* typography */
 .title {
    font-size: 18px;
@@ -151,4 +172,24 @@ body {
    width: 6px;
    height: 6px;
    transform: translateX(-50%) rotate(45deg);
+}
+
+/* scrollbar width */
+::-webkit-scrollbar {
+   width: 6px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+   background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+   background: #dd8560;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+   background: #a8715a;
 }
