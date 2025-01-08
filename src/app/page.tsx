@@ -2,7 +2,6 @@ import { Icons } from "@/components/Icons/icons"
 import { Bodoni_Moda } from "next/font/google"
 import Image from "next/image"
 import Link from "next/link"
-import checkLoggedin from "@/services/user/check_loggedin"
 import Footer from "@/components/Footer/Footer"
 import MobileNav from "@/components/Header/MobileNav"
 import Product from "@/components/UI/Product"
@@ -15,8 +14,6 @@ const bodoniModa = Bodoni_Moda({
 })
 
 export default async function Home() {
-   const isLogged = await checkLoggedin()
-
    return (
       <div className="background">
          <MobileNav />
