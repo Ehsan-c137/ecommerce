@@ -1,12 +1,11 @@
 "use client"
-import DoubleRangePicker from "@/components/DubleRangePicker/DoubleRangePicker"
+import DoubleRangePicker from "@/components/UI/DubleRangePicker/DoubleRangePicker"
 import Products from "./Products"
 import { useRouter, usePathname, useSearchParams } from "next/navigation"
 import { useQuery } from "@tanstack/react-query"
 import getAllCategory from "@/services/store/category/getAllCategory"
 import { useCallback } from "react"
 import products from "@/services/store/product/products"
-import { Colors } from "@/utils/constant"
 
 export default function Filters() {
    const searchParams = useSearchParams()
