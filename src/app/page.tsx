@@ -6,7 +6,7 @@ import checkLoggedin from "@/services/user/check_loggedin"
 import Footer from "@/components/Footer/Footer"
 import MobileNav from "@/components/Header/MobileNav"
 import Product from "@/components/UI/Product"
-import Carousel from "@/components/Carousel/Carousel"
+import Carousel from "@/components/UI/Carousel/Carousel"
 
 const bodoniModa = Bodoni_Moda({
    subsets: ["latin"],
@@ -76,7 +76,7 @@ export default async function Home() {
                <div className="grid grid-cols-3 py-6 place-items-center items-center justify-center gap-4">
                   <Icons.Prada />
                   <Icons.Burberry />
-                  <Icons.HugoBoss />
+                  <Icons.HugoBossIcon />
                   <br />
                   <Icons.Cartier />
                </div>
