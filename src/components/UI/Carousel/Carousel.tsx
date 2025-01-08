@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react"
 import "./Carousel.css"
 import Image from "next/image"
-import { Icons } from "../Icons/icons"
+import { Icons } from "../../Icons/icons"
 
 // const CarouselIndicators = ({ images, activeIndex, onClick }) => {
 //    return (
@@ -20,7 +20,7 @@ import { Icons } from "../Icons/icons"
 //       </div>
 //    )
 // }
-const Carousel = ({ images }: { images: [] }) => {
+const Carousel = ({ images }: { images: string[] }) => {
    const [activeIndex, setActiveIndex] = useState(0)
    const nextSlide = () => {
       setActiveIndex((prevIndex) =>

@@ -1,0 +1,68 @@
+.burgerMenu {
+   position: relative;
+   display: block;
+   width: 36px;
+   height: 28px;
+   display: block;
+   margin: 0 auto;
+   transition: all 0.3s ease-out;
+   cursor: pointer;
+}
+
+.burgerMenu .bar {
+   transition: all 0.3s ease-out;
+   height: 2px;
+   width: 100%;
+   display: block;
+   background-color: #1b2126;
+}
+
+.burgerMenu .bar:nth-of-type(2) {
+   margin: 8px 0;
+}
+
+.burgerMenuClosed {
+   transition-delay: 0.3s;
+}
+
+.burgerMenuClosed .bar:nth-of-type(2) {
+   width: 28px;
+   transition-property: margin, height, width;
+   transition-delay: 0.3s, 0.3s, 0s;
+}
+
+.burgerMenuClosed .bar:nth-of-type(3) {
+   width: 32px;
+}
+
+.burgerMenuClosed:hover .bar:nth-of-type(2) {
+   width: 100%;
+}
+
+.burgerMenuClosed:hover .bar:nth-of-type(3) {
+   width: 100%;
+}
+
+.burgerMenuOpened {
+   padding-top: 12px;
+}
+
+.burgerMenuOpened .bar:nth-of-type(1) {
+   -webkit-transform: rotate(45deg);
+   transform: rotate(45deg);
+   transition-delay: 0.3s;
+   height: 2px;
+}
+
+.burgerMenuOpened .bar:nth-of-type(2) {
+   opacity: 0;
+   height: 0;
+   margin: -4px 0;
+}
+
+.burgerMenuOpened .bar:nth-of-type(3) {
+   -webkit-transform: rotate(-45deg);
+   transform: rotate(-45deg);
+   transition-delay: 0.3s;
+   height: 2px;
+}
