@@ -8,7 +8,6 @@ export default function Footer() {
             <div className="flex flex-col gap-4">
                <div className="flex items-center gap-4">
                   <Icons.Logo />
-                  <p className="font-extrabold">ecommerce</p>
                </div>
                <p className="text-neutral-500">
                   Lorem ipsum dolor sit amet consectetur, adipisicing elit.{" "}
