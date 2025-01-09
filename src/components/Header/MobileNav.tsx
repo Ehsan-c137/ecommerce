@@ -1,6 +1,7 @@
 import Drawer from "../UI/Drawer/Drawer"
 import { Icons } from "../Icons/icons"
 import checkLoggedin from "@/services/user/check_loggedin"
+import Link from "next/link"
 
 export default async function MobileNav() {
    const isLoggedin = await checkLoggedin()
@@ -10,10 +11,16 @@ export default async function MobileNav() {
          <div className="w-[56px] flex items-center">
             <Drawer />
          </div>
-         <Icons.Logo />
+         <Link href={"/"}>
+            <Icons.Logo />
+         </Link>
          <div className="flex items-center gap-2">
             <Icons.Search />
-            {isLoggedin && <Icons.ShopCart />}
+            {isLoggedin && (
+               <Link href={"/cart"}>
+                  <Icons.ShopCart />
+               </Link>
+            )}
          </div>
       </header>
    )
