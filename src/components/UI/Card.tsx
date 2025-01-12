@@ -1,31 +1,62 @@
+"use client"
+
+import clsx from "clsx"
 import Image from "next/image"
 import Link from "next/link"
+import { Icons } from "../Icons/icons"
+import { useState } from "react"
 
-interface IProps {
-   name?: string
-   price?: string | number
-   isInStock?: boolean
-}
-
-export default function Card({ data }) {
+export default function Card({
+   data,
+   isListView = true,
+}: {
+   data: TProduct
+   isListView?: boolean
+}) {
+   const [imageLoaded, setImageLoaded] = useState(false)
+   const handleImageLoad = () => {
+      setImageLoaded(true)
+   }
    return (
-      <Link
-         href={`products/${data?.slug?.toLowerCase()}`}
-         className="rounded-[4px] flex flex-col gap-2 w-[165px]"
+      <div
+         className={clsx("item-card flex gap-2 ", {
+            "flex-row w-full h-[134px]": isListView,
+            "w-[165px]  flex-col": !isListView,
+         })}
       >
-         <div className="flex items-center justify-center w-[165px] h-[220px] bg-neutral-100">
+         <Link
+            href={`products/${data?.slug?.toLowerCase()}`}
+            className={clsx(
+               "flex items-center justify-center transition opacity-0 duration-500",
+               {
+                  "w-[130px] h-[134px]": isListView,
+                  "!opacity-100": imageLoaded,
+               }
+            )}
+         >
             <Image
                src={data?.main_image}
                alt={data?.name}
-               width={165}
-               height={220}
+               width={100}
+               height={134}
+               sizes="100vw"
+               style={{
+                  width: "auto",
+                  height: "auto",
+                  objectFit: "contain",
+               }}
+               onLoad={handleImageLoad}
                unoptimized
-               objectFit="cover"
-               className="object-contain"
             />
-         </div>
-         <div className="flex flex-col">
-            <p className="font-medium text-titleActive">{data?.name}</p>
+         </Link>
+         <div
+            className={clsx("flex flex-col justify-between", {
+               "py-2 w-full": isListView,
+            })}
+         >
+            <Link href={`products/${data?.slug?.toLowerCase()}`}>
+               <p className="font-medium text-titleActive">{data?.name}</p>
+            </Link>
             <div className="flex items-center">
                {/* <p
                   style={{
@@ -36,9 +67,26 @@ export default function Card({ data }) {
                >
                   IN STOCK
                </p> */}
+            </div>
+            <div className="flex-col gap-2 w-full">
                <p className="text-secondary">${data?.price}</p>
+               <div className="flex justify-between w-full">
+                  <div className="flex gap-2">
+                     <p className="text-label">size</p>
+                     {data?.options?.sizes?.map((item) => (
+                        <div
+                           key={item}
+                           className="w-[24px] h-[24px] rounded-full border flex items-center justify-center"
+                        >
+                           <p className="text-label text-xs">{item}</p>
+                        </div>
+                     ))}
+                  </div>
+
+                  <Icons.CardHeart />
+               </div>
             </div>
          </div>
-      </Link>
+      </div>
    )
 }
