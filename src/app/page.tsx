@@ -3,9 +3,10 @@ import { Bodoni_Moda } from "next/font/google"
 import Image from "next/image"
 import Link from "next/link"
 import Footer from "@/components/Footer/Footer"
-import MobileNav from "@/components/Header/MobileNav"
 import Product from "@/components/UI/Product"
 import Carousel from "@/components/UI/Carousel/Carousel"
+import ScrollToTop from "@/components/UI/ScrollToTop/ScrollToTop"
+import Header from "@/components/Header/Header"
 
 const bodoniModa = Bodoni_Moda({
    subsets: ["latin"],
@@ -16,7 +17,8 @@ const bodoniModa = Bodoni_Moda({
 export default async function Home() {
    return (
       <div className="background">
-         <MobileNav />
+         <Header />
+         <ScrollToTop />
          <main className="flex flex-col mx-auto items-center sm:items-start">
             <section className="w-full items-end relative h-[600px]">
                <Image
