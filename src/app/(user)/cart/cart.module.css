@@ -1,0 +1,26 @@
+.show_button {
+   animation: showButtonAnimation 500ms cubic-bezier(0.32, 0.72, 0, 1) forwards;
+}
+
+@keyframes showButtonAnimation {
+   from {
+      bottom: -60px;
+   }
+   to {
+      bottom: 0px;
+   }
+}
+
+.show_info {
+   animation: showInfoAnimation 500ms cubic-bezier(0.32, 0.72, 0, 1) forwards;
+   animation-delay: 500ms;
+}
+
+@keyframes showInfoAnimation {
+   from {
+      opacity: 0;
+   }
+   to {
+      opacity: 1;
+   }
+}
