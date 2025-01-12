@@ -6,6 +6,10 @@ import { getCart } from "@/services/store/cart/Cart"
 import toast from "react-hot-toast"
 import { useQueryClient } from "@tanstack/react-query"
 import { IPutCart, putCart } from "@/services/store/cart/Cart"
+import Link from "next/link"
+import { Icons } from "@/components/Icons/icons"
+import style from "./cart.module.css"
+import clsx from "clsx"
 
 export default function Cart() {
    const { data: cart, isLoading } = useQuery({
@@ -52,34 +56,91 @@ export default function Cart() {
       })
    }
 
+   const isCartEmpty = !cart?.data?.length
+
    return (
-      <>
-         <div className="flex flex-col pt-12 gap-10">
-            {isLoading && (
-               <div className="animate-pulse w-full h-40 bg-neutral-200"></div>
-            )}
-            {cart?.data?.length === 0 && "Your cart is empty"}
-            {cart?.data?.map(
-               (item: {
-                  data: {
-                     id: string
-                     main_image: string
-                     name: string
-                     price: number | string
-                     remaining: number
-                  }
-                  count: number
-                  colors: string
-                  sizes: string
-               }) => (
-                  <Item
-                     key={item.colors + item.sizes}
-                     item={item}
-                     handleCart={handleCart}
-                  />
-               )
+      <div className="h-full">
+         <div className="flex flex-col gap-4 px-4 h-full overflow-auto">
+            {isLoading ? (
+               <div className="w-full flex justify-center min-h-[300px]">
+                  <span className="loader-black"></span>
+               </div>
+            ) : (
+               <>
+                  {cart?.data?.map(
+                     (item: {
+                        data: {
+                           id: string
+                           main_image: string
+                           name: string
+                           price: number | string
+                           remaining: number
+                        }
+                        count: number
+                        colors: string
+                        sizes: string
+                     }) => (
+                        <Item
+                           key={item.colors + item.sizes}
+                           item={item}
+                           handleCart={handleCart}
+                        />
+                     )
+                  )}
+
+                  {isCartEmpty && (
+                     <div className="w-full h-full flex items-center justify-center min-h-[300px]">
+                        <p className="text-placeholder">
+                           You have no items in your Shopping Bag.
+                        </p>
+                     </div>
+                  )}
+               </>
             )}
          </div>
-      </>
+         {!isCartEmpty && (
+            <div
+               className={clsx(
+                  "fixed bottom-[56px] pb-4 pt-2 w-full px-4 opacity-0",
+                  {
+                     [style.show_info]: !isLoading,
+                  }
+               )}
+            >
+               <div className="border-t flex flex-col gap-4 py-4 px-2">
+                  <div className="flex justify-between">
+                     <p className="subtitle uppercase">Sub Total</p>
+                     <p className="text-secondary subtitle tracking-[3px]">
+                        {/* ${subtotal} */}
+                     </p>
+                  </div>
+                  <p className="body-m text-placeholder">
+                     *shipping charges, taxes and discount codes are calculated
+                     at the time of accounting.
+                  </p>
+               </div>
+            </div>
+         )}
+         <Link
+            href={isCartEmpty ? "/products" : "/cart/checkout"}
+            className={clsx(
+               "fixed -bottom-[60px] w-full text-offWhite flex justify-center items-center gap-6 bg-black h-[56px]",
+               {
+                  [style.show_button]: !isLoading,
+               }
+            )}
+         >
+            {isLoading ? (
+               <span className="loader"></span>
+            ) : (
+               <>
+                  <Icons.ShoppingBagWhite />
+                  <p className="text-[18px] uppercase">
+                     {isCartEmpty ? "Continue shopping" : `Buy now`}
+                  </p>
+               </>
+            )}
+         </Link>
+      </div>
    )
 }
