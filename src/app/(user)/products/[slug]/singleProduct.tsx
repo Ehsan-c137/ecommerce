@@ -11,6 +11,10 @@ import toast from "react-hot-toast"
 import checkLoggedin from "@/services/user/check_loggedin"
 import Reviews from "./singleproduct/Reviews"
 import Details from "./singleproduct/Details"
+import clsx from "clsx"
+import Card from "@/components/UI/Card"
+import Product from "@/components/UI/Product"
+import Footer from "@/components/Footer/Footer"
 
 export default function SingleProduct({ slug }: { slug: string }) {
    const searchParams = useSearchParams()
@@ -24,7 +28,7 @@ export default function SingleProduct({ slug }: { slug: string }) {
    const [section, setSection] = useState<"details" | "reviews">("details")
    const [productCount, setProductCount] = useState(1)
 
-   const { data } = useQuery({
+   const { data, isLoading } = useQuery({
       queryKey: ["single product", slug],
       queryFn: () => getSingleProduct(slug),
    })
@@ -132,22 +136,35 @@ export default function SingleProduct({ slug }: { slug: string }) {
       searchParams.getAll("size").length > 0
 
    return (
-      <div className="flex flex-col p-4 container mx-auto">
-         <section className="grid grid-cols-1 md:grid-cols-2 lg:gap-[120px] flex-1">
-            <div className="w-full h-full bg-white-100 flex items-center justify-center ">
+      <div className="flex flex-col pt-4 container mx-auto">
+         <section className="grid grid-cols-1 md:grid-cols-2 lg:gap-[120px] gap-4 flex-1 px-4">
+            <div
+               className={clsx(
+                  "w-full h-full bg-white-100 flex items-center justify-center min-h-[460px]",
+                  {
+                     "animate-pulse bg-background": isLoading,
+                  }
+               )}
+            >
                <Image
                   src={data?.main_image}
-                  alt="profile"
+                  alt={data?.name}
                   width="255"
                   height="0"
                   objectFit="cover"
+                  unoptimized
                   style={{
                      height: "auto",
+                     width: "100%",
                   }}
                />
             </div>
-            <div className="flex flex-col gap-2 flex-1 max-w-[438px]">
-               <div className="flex items-center justify-between">
+            <div className="flex flex-col gap-4 flex-1 max-w-[438px]">
+               <div
+                  className={clsx("flex items-center justify-between", {
+                     "animate-pulse bg-background": isLoading,
+                  })}
+               >
                   <h3 className="font-bold">{data?.name}</h3>
                   <div
                      className="flex items-center justify-center cursor-pointer"
@@ -156,8 +173,9 @@ export default function SingleProduct({ slug }: { slug: string }) {
                      <Icons.Share />
                   </div>
                </div>
-               <div className="flex flex-col gap-8">
-                  <div className="flex flex-col gap-4">
+               <div className="flex flex-col">
+                  <div className="flex items-center justify-between gap-4">
+                     <h4 className="text-secondary">${data?.price}</h4>
                      <div className="flex items-center gap-2">
                         {isHaveRating && (
                            <div className="flex items-center rounded-full bg-neutral-100 h-7 px-4">
@@ -168,7 +186,7 @@ export default function SingleProduct({ slug }: { slug: string }) {
                            </div>
                         )}
                         <p
-                           className="btn-outline"
+                           className="btn-outline text-xs uppercase"
                            style={{
                               textDecoration: !isRemaining
                                  ? "line-through"
@@ -178,9 +196,6 @@ export default function SingleProduct({ slug }: { slug: string }) {
                            IN STOCK
                         </p>
                      </div>
-                     <h4 className="font-bold text-neutral-900">
-                        ${data?.price}
-                     </h4>
                   </div>
                   <div
                      style={{
@@ -189,11 +204,11 @@ export default function SingleProduct({ slug }: { slug: string }) {
                            ? "not-allowed !important"
                            : "auto",
                      }}
-                     className="flex flex-col gap-8"
+                     className="flex gap-9 h-[56px]"
                   >
-                     <div className="flex flex-col gap-2">
+                     <div className="flex gap-4 items-center">
                         <p className="label font-medium text-xs text-neutral-500 uppercase">
-                           available colors
+                           color
                         </p>
                         <div className="flex items-center  gap-2">
                            {colors?.map((color: string) => {
@@ -202,7 +217,10 @@ export default function SingleProduct({ slug }: { slug: string }) {
                                  ?.includes(color)
 
                               return (
-                                 <div key={color} className="flex items-center">
+                                 <div
+                                    key={color}
+                                    className="flex items-center w-[16px] h-[16px]"
+                                 >
                                     <label
                                        style={{
                                           border: "1px solid transparent",
@@ -212,7 +230,7 @@ export default function SingleProduct({ slug }: { slug: string }) {
                                              : "transparent",
                                        }}
                                        htmlFor={`${color}--color-single`}
-                                       className={`w-7 h-7 rounded-full transition p-[3px] bg-clip-content bg-red-r200 borderp-[3px]  cursor-pointer`}
+                                       className={`w-['24px'] h-["24px"] rounded-full transition p-[3px] bg-clip-content bg-red-r200 borderp-[3px]  cursor-pointer`}
                                     ></label>
                                     <input
                                        type="radio"
@@ -232,9 +250,9 @@ export default function SingleProduct({ slug }: { slug: string }) {
                            })}
                         </div>
                      </div>
-                     <div className="flex flex-col gap-2">
+                     <div className="flex gap-4 items-center">
                         <p className="label font-medium text-xs text-neutral-500 uppercase">
-                           select size
+                           size
                         </p>
                         <div className="flex items-center gap-2">
                            {sizes?.map((item: string) => {
@@ -249,9 +267,15 @@ export default function SingleProduct({ slug }: { slug: string }) {
                                           borderColor: isChecked
                                              ? "black"
                                              : "#e6e7e8",
+                                          backgroundColor: isChecked
+                                             ? "black"
+                                             : "transparent",
+                                          color: isChecked
+                                             ? "#e6e7e8"
+                                             : "black",
                                        }}
                                        htmlFor={`${item}--size`}
-                                       className="flex items-center text-sm uppercase justify-center w-10 h-10 rounded-md cursor-pointer border border-neutral-100 transition"
+                                       className="flex items-center text-[10px] uppercase justify-center w-[24px] h-[24px] rounded-full text-inputBackground cursor-pointer border border-neutral-100 transition"
                                     >
                                        {item}
                                     </label>
@@ -273,93 +297,84 @@ export default function SingleProduct({ slug }: { slug: string }) {
                            })}
                         </div>
                      </div>
-                     <div className="flex flex-col gap-2">
-                        <p className="label font-medium text-xs text-neutral-500 uppercase">
-                           quantity
-                        </p>
-                        <div className="w-[164px] h-[44px] flex justify-between items-center border border-white-200 rounded-md">
-                           <button
-                              className="flex items-center justify-center  cursor-pointer w-full"
-                              disabled={
-                                 productCount == 1 && dataInCart?.count == 1
-                              }
-                              style={{
-                                 opacity: productCount === 1 ? "0.4" : 1,
-                              }}
-                              onClick={() =>
-                                 setProductCount((prev) => prev - 1)
-                              }
-                           >
-                              <Icons.Minus />
-                           </button>
-                           <p className="w-full text-center">
-                              {cartLoading ? (
-                                 <span className="loader"></span>
-                              ) : (
-                                 dataInCart?.count ?? productCount
-                              )}
-                           </p>
-                           <button
-                              className="flex items-center justify-center  w-full"
-                              disabled={data?.remaining == productCount}
-                              style={{
-                                 opacity:
-                                    data?.remaining == productCount ? 0.4 : 1,
-                              }}
-                              onClick={() => {
-                                 setProductCount((prev) => prev + 1)
-                              }}
-                           >
-                              <Icons.Plus />
-                           </button>
-                        </div>
-                     </div>
-                  </div>
-                  <div className="flex flex-col gap-8">
-                     <div className="flex gap-4 cursor-pointer">
-                        <button
-                           className="px-24 py-2 bg-neutral-900 text-center rounded-md text-white-100"
-                           style={{
-                              opacity: !isRemaining ? 0.5 : 1,
-                              cursor: !isRemaining ? "not-allowed" : "pointer",
-                           }}
-                           onClick={handleCart}
-                           disabled={!isItOkToOrder}
-                        >
-                           Add to cart
-                           {mutation.isPending && (
-                              <span className="loader"></span>
-                           )}
-                        </button>
-                        <div
-                           className="border border-neutral-200 rounded-md flex items-center justify-center w-[43px]"
-                           onClick={handleFavorite}
-                        >
-                           {isFavorite ? <Icons.HeartRed /> : <Icons.Heart />}
-                        </div>
-                     </div>
                   </div>
                </div>
             </div>
          </section>
-         <section className="flex items-center justify-start gap-10 min-h-64">
-            <div className="flex flex-col gap-4">
+         <div className="w-full bg-black flex justify-between px-4 gap-4 mt-4 cursor-pointer h-[56px]">
+            <button
+               className="flex items-center gap-2 py-2 text-center rounded-md text-white-100 uppercase"
+               style={{
+                  opacity: !isRemaining ? 0.5 : 1,
+                  cursor: !isRemaining ? "not-allowed" : "pointer",
+               }}
+               onClick={handleCart}
+               disabled={!isItOkToOrder}
+            >
+               <Icons.PlusWhite />
+               <p>
+                  Add
+                  {mutation.isPending && <span className="loader"></span>}
+               </p>
+            </button>
+            {/* <button
+               className="flex items-center justify-center  cursor-pointer w-full"
+               disabled={productCount == 1 && dataInCart?.count == 1}
+               style={{
+                  opacity: productCount === 1 ? "0.4" : 1,
+               }}
+               onClick={() => setProductCount((prev) => prev - 1)}
+            >
+               <Icons.Minus />
+            </button>
+            <p className="w-full text-center">
+               {cartLoading ? (
+                  <span className="loader"></span>
+               ) : (
+                  dataInCart?.count ?? productCount
+               )}
+            </p>
+            <button
+               className="flex items-center justify-center  w-full"
+               disabled={data?.remaining == productCount}
+               style={{
+                  opacity: data?.remaining == productCount ? 0.4 : 1,
+               }}
+               onClick={() => {
+                  setProductCount((prev) => prev + 1)
+               }}
+            >
+               <Icons.Plus />
+            </button> */}
+            <div
+               className="flex items-center justify-center w-[43px]"
+               onClick={handleFavorite}
+            >
+               {isFavorite ? <Icons.HeartRed /> : <Icons.Heart />}
+            </div>
+         </div>
+         <section className="flex flex-col items-center justify-start gap-4 min-h-64">
+            <div className="flex items-center w-full">
                <button
-                  className={`flex transition rounded-lg w-40 font-medium gap-2 items-center text-neutral-900 py-2 px-4 ${
-                     section === "details" && "bg-white-100"
-                  }`}
+                  className={clsx(
+                     "h-[56px] w-full justify-center first-letter flex transition font-medium gap-2 items-center text-neutral-900 py-2 px-4 border-b border-transparent uppercase",
+                     {
+                        "border-black": section === "details",
+                     }
+                  )}
                   onClick={() => setSection("details")}
                >
-                  <Icons.More />
                   Details
                </button>
                <button
-                  className={`flex gap-2 rounded-lg w-40 transition items-center font-medium text-neutral-900  py-2 px-4 ${
-                     section === "reviews" && "bg-white-100"
-                  }`}
+                  className={clsx(
+                     "h-[56px] w-full justify-center first-letter flex transition font-medium gap-2 items-center text-neutral-900 py-2 px-4 border-b border-transparent uppercase",
+                     {
+                        "border-black": section === "reviews",
+                     }
+                  )}
                   onClick={() => setSection("reviews")}
                >
-                  <Icons.Star />
                   Reviews
                </button>
             </div>
@@ -368,6 +383,19 @@ export default function SingleProduct({ slug }: { slug: string }) {
                {isHavecomments && section == "reviews" && <Reviews />}
             </div>
          </section>
+         <section className="text-center flex flex-col items-center mt-4">
+            <div className="flex flex-col items-center gap-2 py-4">
+               <p className="uppercase">You may also like</p>
+               <Icons.Border />
+            </div>
+            <div className="grid grid-cols-2 gap-4">
+               <Product />
+               <Product />
+               <Product />
+               <Product />
+            </div>
+         </section>
+         <Footer />
       </div>
    )
 }
