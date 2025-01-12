@@ -213,7 +213,7 @@ export default function Filters() {
                )}
             </div>
          </div>
-         <div className="flex flex-col gap-3 w-full">
+         <div className="flex flex-col gap-1 w-full">
             <Products
                minPrice={searchParams.get("min price") ?? minPrice}
                maxPrice={searchParams.get("max price") ?? maxPrice}
