@@ -1,6 +1,6 @@
 "use client"
 
-import { useCallback, useEffect, useRef, useState } from "react"
+import { useCallback, useEffect, useRef } from "react"
 import style from "./Drawer.module.css"
 import clsx from "clsx"
 import CreatePortal from "@/components/CreatePortal"
