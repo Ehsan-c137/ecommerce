@@ -17,6 +17,7 @@ import Product from "@/components/UI/Product"
 import Footer from "@/components/Footer/Footer"
 
 export default function SingleProduct({ slug }: { slug: string }) {
+   const [isImageLoaded, setIsImageLoaded] = useState(false)
    const searchParams = useSearchParams()
    const router = useRouter()
 
@@ -140,7 +141,7 @@ export default function SingleProduct({ slug }: { slug: string }) {
          <section className="grid grid-cols-1 md:grid-cols-2 lg:gap-[120px] gap-4 flex-1 px-4">
             <div
                className={clsx(
-                  "w-full h-full bg-white-100 flex items-center justify-center min-h-[460px]",
+                  "w-full h-[464px] bg-white-100 flex items-center justify-center min-h-[460px] ",
                   {
                      "animate-pulse bg-background": isLoading,
                   }
@@ -151,12 +152,15 @@ export default function SingleProduct({ slug }: { slug: string }) {
                   alt={data?.name}
                   width="255"
                   height="0"
-                  objectFit="cover"
                   unoptimized
+                  className="transition duration-500"
                   style={{
-                     height: "auto",
+                     height: "100%",
                      width: "100%",
+                     objectFit: "contain",
+                     opacity: isImageLoaded ? 1 : 0,
                   }}
+                  onLoad={() => setIsImageLoaded(true)}
                />
             </div>
             <div className="flex flex-col gap-4 flex-1 max-w-[438px]">
