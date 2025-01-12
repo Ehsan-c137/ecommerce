@@ -1,0 +1,14 @@
+.show_button {
+   animation: showbutton 500ms ease-in-out forwards;
+   background-color: rgba(49, 49, 49, 0.105);
+}
+
+@keyframes showbutton {
+   from {
+      opacity: 0;
+   }
+   to {
+      display: flex;
+      opacity: 1;
+   }
+}
