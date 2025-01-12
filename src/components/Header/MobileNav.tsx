@@ -1,4 +1,4 @@
-import Drawer from "../UI/Drawer/Drawer"
+import HamburgerMenu from "@/components/UI/HamburgerMenu/HamburgerMenu"
 import { Icons } from "../Icons/icons"
 import checkLoggedin from "@/services/user/check_loggedin"
 import Link from "next/link"
@@ -9,7 +9,7 @@ export default async function MobileNav() {
    return (
       <header className="flex justify-between py-3 px-4">
          <div className="w-[56px] flex items-center">
-            <Drawer />
+            <HamburgerMenu />
          </div>
          <Link href={"/"}>
             <Icons.Logo />
