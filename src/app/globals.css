@@ -57,6 +57,17 @@ body {
    animation: rotation 1s linear infinite;
 }
 
+.loader-black {
+   width: 20px;
+   height: 20px;
+   border: 2px solid #000;
+   border-bottom-color: transparent;
+   border-radius: 50%;
+   display: inline-block;
+   box-sizing: border-box;
+   animation: rotation 1s linear infinite;
+}
+
 @keyframes rotation {
    0% {
       transform: rotate(0deg);
@@ -151,7 +162,6 @@ body {
 .body-1 {
    font-size: 16px;
    letter-spacing: 0px;
-
    line-height: 24px;
 }
 .body-m {
@@ -192,4 +202,18 @@ body {
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
    background: #a8715a;
+}
+
+.animate-opacity {
+   animation: change-opacity 500ms ease-in-out forwards;
+   animation-delay: 500ms;
+}
+
+@keyframes change-opacity {
+   from {
+      opacity: 0;
+   }
+   to {
+      opacity: 1;
+   }
 }
