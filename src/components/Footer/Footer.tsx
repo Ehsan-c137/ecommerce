@@ -15,7 +15,7 @@ export default function Footer() {
                   Quae possimus autem, voluptate esse quidem in!
                </p>
                <div className="flex items-center gap-6 text-">
-                  <Icons.Github />
+                  <Icons.Twitter />
                   <Icons.Instagram />
                   <Icons.Youtube />
                </div>
