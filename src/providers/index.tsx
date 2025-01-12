@@ -34,7 +34,7 @@ export default function Providers({ children }: { children: React.ReactNode }) {
    const [queryClient] = useState(getQueryClient())
    return (
       <>
-         <Toaster />
+         <Toaster position="bottom-center" />
          <div id="my-portal"></div>
          <QueryClientProvider client={queryClient}>
             {children}
