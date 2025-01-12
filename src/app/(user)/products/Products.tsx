@@ -6,11 +6,13 @@ import useGetAllSearchParams from "@/utils/useGetAllSearchParams"
 import { useQuery } from "@tanstack/react-query"
 import { Categories } from "@/utils/constant"
 import { useSearchParams } from "next/navigation"
-import { useCallback, useMemo } from "react"
+import { useCallback, useMemo, useRef } from "react"
 import useHandleQueryParams from "@/utils/useHandleQueryParams"
 import { Icons } from "@/components/Icons/icons"
 import { useState } from "react"
 import Link from "next/link"
+import { useGSAP } from "@gsap/react"
+import gsap from "gsap"
 
 export default function Products({
    maxPrice,
@@ -26,7 +28,6 @@ export default function Products({
 
    const allSearchParamsObj: { [key: string]: string[] } = {}
    Object.entries(groupped).forEach(([key, value]) => {
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
       allSearchParamsObj[key] = value!.map((item) => item.value)
    })
 
@@ -42,18 +43,16 @@ export default function Products({
    })
 
    const filterProduct = useCallback(
-      (data) => {
+      (data: TProduct[]) => {
          if (!data) return
          if (searchParams.get("ascending") === "true") {
-            data?.sort((a, b) => a.price - b.price)
+            data?.sort((a, b) => parseInt(a.price, 10) - parseInt(b.price, 10))
          }
          if (searchParams.get("ascending") === "false") {
-            data?.sort(
-               (a: { price: number }, b: { price: number }) => b.price - a.price
-            )
+            data?.sort((a, b) => parseInt(b.price, 10) - parseInt(a.price, 10))
          }
-         // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-         return data?.filter((product) => {
+
+         return data?.filter((product: TProduct) => {
             const productColors = product.options?.colors
             const productSizes = product.options?.sizes
             const productCategory = product.category
@@ -101,17 +100,103 @@ export default function Products({
       [data, filterProduct]
    )
 
+   const cardContainerRef = useRef()
+
+   useGSAP(
+      () => {
+         gsap.fromTo(
+            ".card-item",
+            {
+               opacity: 0,
+               ease: "power3.inOut",
+               duration: 300,
+            },
+            { opacity: 1, stagger: 0.25 }
+         )
+      },
+      {
+         scope: cardContainerRef.current,
+         dependencies: [filteredData],
+      }
+   )
+
    return (
       <>
-         {allSearchParams.filter(
+         {/* {allSearchParams.filter(
             (item) =>
                item.name !== "max price" &&
                item.name !== "min price" &&
                item.name !== "ascending"
          ).length > 0 && (
             <p className="text-neutral-900 font-medium">Applied Filters:</p>
-         )}
+         )} */}
+         <div className="text-neutral-500 justify-end flex items-center w-full mt-4">
+            {/* <p>Showing 1-9 of {filteredData?.length} results.</p> */}
 
+            <div>
+               <div className="relative inline-block text-left">
+                  <div className="flex items-center gap-2">
+                     <button className="w-[72px] h-[36px] bg-[#c4c4c42c] flex items-center justify-center rounded-full gap-2">
+                        <p>New</p>
+                        <svg
+                           width="8"
+                           height="6"
+                           viewBox="0 0 8 6"
+                           fill="none"
+                           xmlns="http://www.w3.org/2000/svg"
+                        >
+                           <path
+                              d="M3.71492 5.27472L0.235658 0.574577L7.19418 0.574577L3.71492 5.27472Z"
+                              fill="#333333"
+                           />
+                        </svg>
+                     </button>
+                     <button
+                        id="menu-button"
+                        onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                        onBlur={() => setIsDropdownOpen(false)}
+                        className="w-[36px] h-[36px] p-2 bg-[#c4c4c42c] flex items-center justify-center rounded-full"
+                     >
+                        <Icons.ListView />
+                     </button>
+                     <button
+                        id="menu-button"
+                        onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                        onBlur={() => setIsDropdownOpen(false)}
+                        className="w-[36px] h-[36px] bg-[#c4c4c42c] flex items-center justify-center rounded-full"
+                     >
+                        <Icons.Filter />
+                     </button>
+                  </div>
+                  {isDropdownOpen && (
+                     <div
+                        className="absolute right-0 z-10 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white-900 shadow-lg ring-1 ring-neutral-200 ring-opacity-5 focus:outline-none"
+                        role="menu"
+                        tabIndex={0}
+                     >
+                        <div className="py-1" role="none">
+                           <a
+                              href={
+                                 searchParams.get("ascending") === "true"
+                                    ? "?ascending=false"
+                                    : "?ascending=true"
+                              }
+                              className="block px-4 py-2 text-sm text-gray-700"
+                              role="menuitem"
+                              // onClick={() => setIsDropdownOpen(false)}
+                              tabIndex={-1}
+                              id="menu-item-0"
+                           >
+                              {searchParams.get("ascending") === "true"
+                                 ? "Descending"
+                                 : "Ascending"}
+                           </a>
+                        </div>
+                     </div>
+                  )}
+               </div>
+            </div>
+         </div>
          <div className="flex flex-wrap gap-3">
             {Object.entries(allSearchParamsObj).map(([key, value]) => {
                if (key === "max price") {
@@ -149,60 +234,10 @@ export default function Products({
                )
             })}
          </div>
-         <div className="text-neutral-500 justify-end flex items-center w-full">
-            {/* <p>Showing 1-9 of {filteredData?.length} results.</p> */}
-
-            <div>
-               <div className="relative inline-block text-left">
-                  <div className="flex items-center gap-2">
-                     <button
-                        id="menu-button"
-                        onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-                        onBlur={() => setIsDropdownOpen(false)}
-                        className="w-[36px] h-[36px] bg-[#c4c4c42c] flex items-center justify-center rounded-full"
-                     >
-                        <Icons.ListView />
-                     </button>
-                     <button
-                        id="menu-button"
-                        onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-                        onBlur={() => setIsDropdownOpen(false)}
-                        className="w-[36px] h-[36px] bg-[#c4c4c42c] flex items-center justify-center rounded-full"
-                     >
-                        <Icons.Filter />
-                     </button>
-                  </div>
-                  {isDropdownOpen && (
-                     <div
-                        className="absolute right-0 z-10 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white-900 shadow-lg ring-1 ring-neutral-200 ring-opacity-5 focus:outline-none"
-                        role="menu"
-                        tabIndex={0}
-                     >
-                        <div className="py-1" role="none">
-                           <Link
-                              href={
-                                 searchParams.get("ascending") === "true"
-                                    ? "?ascending=false"
-                                    : "?ascending=true"
-                              }
-                              className="block px-4 py-2 text-sm text-gray-700"
-                              role="menuitem"
-                              onClick={() => setIsDropdownOpen(false)}
-                              tabIndex={-1}
-                              id="menu-item-0"
-                           >
-                              {searchParams.get("ascending") === "true"
-                                 ? "Descending"
-                                 : "Ascending"}
-                           </Link>
-                        </div>
-                     </div>
-                  )}
-               </div>
-            </div>
-         </div>
-
-         <div className="grid grid-cols-2 justify-items-center md:justify-items-start md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-x-6 gap-y-8 ">
+         <div
+            ref={cardContainerRef}
+            className="grid grid-cols-1 md:justify-items-start md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-x-6 gap-4 py-2"
+         >
             {isError && <p>{error.message}</p>}
             {isLoading && (
                <>
@@ -236,9 +271,13 @@ export default function Products({
                </>
             )}
 
-            {filteredData?.map((product: { id: string }) => (
-               <Card key={product.id} data={product} />
-            ))}
+            {filteredData?.map((product: TProduct) => {
+               return (
+                  <div key={product.id} className="card-item">
+                     <Card data={product} />
+                  </div>
+               )
+            })}
          </div>
       </>
    )
