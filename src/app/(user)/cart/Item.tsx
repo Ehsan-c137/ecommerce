@@ -30,33 +30,31 @@ export default function Item({ item, handleCart }: IProps) {
    }
 
    return (
-      <div className="flex  items-center gap-8">
-         <div className="w-20 h-20 bg-white-100 flex items-center justify-center relative">
+      <div className="flex gap-4 items-center">
+         <div className="w-[134px] h-[134px] bg-white-100 flex items-center justify-center relative">
             <div className="absolute top-0 right-0 bg-white-200 md:hidden">
                <Icons.X />
             </div>
             <Image
                src={item.data.main_image}
-               alt="product"
-               width={60}
-               height={60}
+               alt={item.data.name}
+               width={100}
+               height={134}
+               sizes="100vw"
                objectFit="cover"
             />
          </div>
-         <div className="flex flex-col md:flex-row gap-8">
-            <div className="flex flex-row flex-wrap md:flex-row items-center gap-8">
-               <p className="text-neutral-900 w-40">{item.data.name}</p>
-               <p className="text-neutral-500">
+         <div className="flex flex-col md:flex-row gap-2 py-1 h-[134px]">
+            <div className="flex flex-row flex-wrap md:flex-row items-center gap-2">
+               <p className="text-titleActive">{item.data.name}</p>
+               <p className="text-label">
                   Color: {item.colors} — Size: {item.sizes}
                </p>
             </div>
             <div className="flex items-center gap-8">
-               <p className="text-neutral-900 font-medium text-base text-nowrap">
-                  $ {item?.data.price}
-               </p>
-               <div className="flex items-center border border-neutral-100 rounded-md">
+               <div className="flex items-center gap-2">
                   <button
-                     className="h-10 w-10 flex items-center justify-center cursor-pointer"
+                     className="h-[24px] w-[24px] border rounded-full flex items-center justify-center p-1"
                      onClick={() => {
                         setCount(count - 1)
                         handleCart(
@@ -71,11 +69,11 @@ export default function Item({ item, handleCart }: IProps) {
                      <Icons.Minus />
                   </button>
 
-                  <p className="h-10 w-10 text-center  flex justify-center items-center">
+                  <p className="h-[24px] w-[24px] text-center  flex justify-center items-center">
                      {count}
                   </p>
                   <button
-                     className="h-10 w-10 flex items-center justify-center cursor-pointer"
+                     className="h-[24px] w-[24px] border rounded-full flex items-center justify-center p-1"
                      onClick={() => {
                         setCount(count + 1)
                         handleCart(
@@ -91,6 +89,9 @@ export default function Item({ item, handleCart }: IProps) {
                   </button>
                </div>
             </div>
+            <p className="text-secondary font-medium text-base text-nowrap ">
+               $ {item?.data.price}
+            </p>
          </div>
          <div
             className="h-10 w-10 cursor-pointer items-center justify-center bg-white-100 rounded-md hidden md:flex"
