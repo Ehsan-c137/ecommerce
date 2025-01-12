@@ -154,20 +154,29 @@ export default function Products({
 
             <div>
                <div className="relative inline-block text-left">
-                  <button
-                     type="button"
-                     className="uppercase flex item-center text-sm  text-neutral-900 "
-                     id="menu-button"
-                     onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-                  >
-                     Sort by
-                     <Icons.ChevronDown />
-                  </button>
+                  <div className="flex items-center gap-2">
+                     <button
+                        id="menu-button"
+                        onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                        onBlur={() => setIsDropdownOpen(false)}
+                        className="w-[36px] h-[36px] bg-[#c4c4c42c] flex items-center justify-center rounded-full"
+                     >
+                        <Icons.ListView />
+                     </button>
+                     <button
+                        id="menu-button"
+                        onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                        onBlur={() => setIsDropdownOpen(false)}
+                        className="w-[36px] h-[36px] bg-[#c4c4c42c] flex items-center justify-center rounded-full"
+                     >
+                        <Icons.Filter />
+                     </button>
+                  </div>
                   {isDropdownOpen && (
                      <div
                         className="absolute right-0 z-10 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white-900 shadow-lg ring-1 ring-neutral-200 ring-opacity-5 focus:outline-none"
                         role="menu"
-                        tabIndex={-1}
+                        tabIndex={0}
                      >
                         <div className="py-1" role="none">
                            <Link
@@ -193,7 +202,7 @@ export default function Products({
             </div>
          </div>
 
-         <div className="grid grid-cols-1 justify-items-center md:justify-items-start md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-x-6 gap-y-8 ">
+         <div className="grid grid-cols-2 justify-items-center md:justify-items-start md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-x-6 gap-y-8 ">
             {isError && <p>{error.message}</p>}
             {isLoading && (
                <>
