@@ -23,9 +23,10 @@ export async function getUserInfo() {
    }
 }
 
-export async function changePassword(data) {
+export async function changePassword() {
+   const body = {}
    try {
-      const response = await api.put("user/change_password/", data, {
+      const response = await api.put("user/change_password/", body, {
          headers: {
             Authorization: `Token ${cookies().get("session")?.value}`,
             "Content-Type": "application/json",
