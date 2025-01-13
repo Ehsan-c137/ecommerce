@@ -24,6 +24,7 @@ const SigninSchema = z.object({
    stock_status: z.string().min(1, { message: "stock status is required" }),
    available_quantity: z.number().min(0, { message: "quantity is required" }),
    description: z.string(),
+   image: z.string(),
 })
 
 type TSigninSchema = z.infer<typeof SigninSchema>
