@@ -18,11 +18,11 @@ function DoubleRangePicker({ min, max, setMaxPrice, setMinPrice }: IProps) {
    const [maxVal, setMaxVal] = useState(max)
    const minValRef = useRef(minVal)
    const maxValRef = useRef(maxVal)
-   const range = useRef(null)
+   const range = useRef<HTMLInputElement | null>(null)
 
    // Convert to percentage
    const getPercent = useCallback(
-      (value) => Math.round(((value - min) / (max - min)) * 100),
+      (value: number) => Math.round(((value - min) / (max - min)) * 100),
       [min, max]
    )
 
@@ -76,7 +76,7 @@ function DoubleRangePicker({ min, max, setMaxPrice, setMinPrice }: IProps) {
                setMinPrice(minVal)
             }}
             className="thumb thumb--left"
-            style={{ zIndex: minVal > max - 100 && "5" }}
+            style={{ zIndex: minVal > max - 100 ? "5" : "auto" }}
          />
          <input
             type="range"
