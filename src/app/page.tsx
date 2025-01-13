@@ -12,6 +12,7 @@ const bodoniModa = Bodoni_Moda({
    subsets: ["latin"],
    display: "swap",
    style: "italic",
+   adjustFontFallback: false,
 })
 
 export default async function Home() {
