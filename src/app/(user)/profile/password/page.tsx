@@ -36,7 +36,10 @@ export default function Address() {
          username: string
          oldPassword: string
          newPassword: string
-      }) => changePassword(data),
+      }) => {
+         console.log(data)
+         return changePassword()
+      },
       onSuccess: () => {
          console.log("changed")
       },
