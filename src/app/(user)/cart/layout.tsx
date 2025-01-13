@@ -2,9 +2,12 @@
 
 import { useQuery } from "@tanstack/react-query"
 import { getCart } from "@/services/store/cart/Cart"
-import { ReactNode } from "react"
+import { ReactNode, useEffect, useRef } from "react"
 import Link from "next/link"
 import { usePathname, useRouter } from "next/navigation"
+import gsap from "gsap"
+import { Flip } from "gsap/Flip"
+import { useGSAP } from "@gsap/react"
 
 export default function CartLayout({ children }: { children: ReactNode }) {
    const pathname = usePathname()
@@ -13,8 +16,10 @@ export default function CartLayout({ children }: { children: ReactNode }) {
       queryKey: ["cart"],
       queryFn: () => getCart(),
    })
+   gsap.registerPlugin(Flip)
 
-   const total = cart?.data?.reduce(
+   const pathnameRef = useRef<HTMLDivElement | null>(null)
+   const subtotal = cart?.data?.reduce(
       (
          acc: number,
          item: { count: number; data: { price: number | string } }
@@ -26,10 +31,18 @@ export default function CartLayout({ children }: { children: ReactNode }) {
 
    return (
       <>
-         <div className="container flex flex-col md:flex-row gap-12 justify-between pt-10 px-4 lg:px-0">
+         <div className="container flex flex-col md:flex-row gap-4 justify-between pt-4 pathContainer">
+            <div
+               className="text-titleActive uppercase px-4 pathnameref flex items-center gap-2"
+               ref={pathnameRef}
+            >
+               {pathname.split("/").map((item) => {
+                  return <p key={item}>{item}</p>
+               })}
+            </div>
             <div>{children}</div>
             {cart?.data.length > 0 && (
-               <div className="flex flex-col border border-neutral-100 rounded-md px-6 py-8 w-[300px] max-w-[340px]">
+               <div className="hidden lg:flex flex-col border border-neutral-100 rounded-md px-6 py-8 w-[300px] max-w-[340px]">
                   <h5 className="text-neutral-900 font-normal mb-10">
                      {pathname === "/cart" && "Order Summary"}
                      {pathname === "/cart/checkout" && "Your Order"}
@@ -59,7 +72,7 @@ export default function CartLayout({ children }: { children: ReactNode }) {
                            </div>
                         ) : (
                            <p className="text-neutral-900 text-nowrap">
-                              ${total}
+                              ${subtotal}
                            </p>
                         )}
                      </div>
@@ -85,7 +98,7 @@ export default function CartLayout({ children }: { children: ReactNode }) {
                               <div className="sr-only">loading</div>
                            </div>
                         ) : (
-                           <p className="text-neutral-900">${total + 3}</p>
+                           <p className="text-neutral-900">${subtotal + 3}</p>
                         )}
                      </div>
                      <Link
