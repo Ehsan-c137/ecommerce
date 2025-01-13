@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 "use client"
 
 import Card from "@/components/UI/Card"
@@ -10,9 +11,10 @@ import { useCallback, useMemo, useRef } from "react"
 import useHandleQueryParams from "@/utils/useHandleQueryParams"
 import { Icons } from "@/components/Icons/icons"
 import { useState } from "react"
-import Link from "next/link"
 import { useGSAP } from "@gsap/react"
 import gsap from "gsap"
+import clsx from "clsx"
+import Link from "next/link"
 
 export default function Products({
    maxPrice,
@@ -22,6 +24,8 @@ export default function Products({
    minPrice: number
 }) {
    const [isDropdownOpen, setIsDropdownOpen] = useState(false)
+   const [isListView, setIsListView] = useState(false)
+   const handleQueryParams = useHandleQueryParams()
    const searchParams = useSearchParams()
    const allSearchParams = useGetAllSearchParams()
    const groupped = Object.groupBy(allSearchParams, (item) => item.name)
@@ -30,8 +34,6 @@ export default function Products({
    Object.entries(groupped).forEach(([key, value]) => {
       allSearchParamsObj[key] = value!.map((item) => item.value)
    })
-
-   const handleQueryParams = useHandleQueryParams()
 
    const checkParams = (array: string[], items: []) => {
       return items?.some((item) => array?.includes(item))
@@ -42,13 +44,17 @@ export default function Products({
       queryFn: () => products(2, 1),
    })
 
+   // useEffect(() => {
+   //    handleQueryParams("ascending", "false")
+   // }, [])
+
    const filterProduct = useCallback(
       (data: TProduct[]) => {
          if (!data) return
          if (searchParams.get("ascending") === "true") {
             data?.sort((a, b) => parseInt(a.price, 10) - parseInt(b.price, 10))
          }
-         if (searchParams.get("ascending") === "false") {
+         if (searchParams.get("decending") === "true") {
             data?.sort((a, b) => parseInt(b.price, 10) - parseInt(a.price, 10))
          }
 
@@ -100,7 +106,7 @@ export default function Products({
       [data, filterProduct]
    )
 
-   const cardContainerRef = useRef()
+   const cardContainerRef = useRef<HTMLDivElement | null>(null)
 
    useGSAP(
       () => {
@@ -115,8 +121,9 @@ export default function Products({
          )
       },
       {
-         scope: cardContainerRef.current,
-         dependencies: [filteredData],
+         scope: cardContainerRef.current!,
+         dependencies: [filteredData, isListView],
+         revertOnUpdate: false,
       }
    )
 
@@ -153,20 +160,41 @@ export default function Products({
                      </button>
                      <button
                         id="menu-button"
-                        onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-                        onBlur={() => setIsDropdownOpen(false)}
+                        onClick={() =>
+                           handleQueryParams(
+                              "listView",
+                              searchParams.get("listView") == "true"
+                                 ? "false"
+                                 : "true"
+                           )
+                        }
                         className="w-[36px] h-[36px] p-2 bg-[#c4c4c42c] flex items-center justify-center rounded-full"
                      >
-                        <Icons.ListView />
+                        {searchParams.get("listView") == "true" ? (
+                           <Icons.GroupView />
+                        ) : (
+                           <Icons.ListView />
+                        )}
                      </button>
-                     <button
+                     <Link
                         id="menu-button"
-                        onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-                        onBlur={() => setIsDropdownOpen(false)}
+                        href={
+                           searchParams.get("decending") === "true"
+                              ? "?decending=false"
+                              : "?decending=true"
+                        }
+                        // onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                        // onBlur={() => setIsDropdownOpen(false)}
                         className="w-[36px] h-[36px] bg-[#c4c4c42c] flex items-center justify-center rounded-full"
                      >
-                        <Icons.Filter />
-                     </button>
+                        <Icons.Filter
+                           color={
+                              searchParams.get("decending") === "true"
+                                 ? "#DD8560"
+                                 : "black"
+                           }
+                        />
+                     </Link>
                   </div>
                   {isDropdownOpen && (
                      <div
@@ -174,7 +202,7 @@ export default function Products({
                         role="menu"
                         tabIndex={0}
                      >
-                        <div className="py-1" role="none">
+                        <div className="py-1" role="dialog">
                            <a
                               href={
                                  searchParams.get("ascending") === "true"
@@ -236,7 +264,12 @@ export default function Products({
          </div>
          <div
             ref={cardContainerRef}
-            className="grid grid-cols-1 md:justify-items-start md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-x-6 gap-4 py-2"
+            className={clsx(
+               "grid grid-cols-1 md:justify-items-start md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-x-6 gap-y-1 gap-4 py-2",
+               {
+                  "grid-cols-2": !isListView,
+               }
+            )}
          >
             {isError && <p>{error.message}</p>}
             {isLoading && (
@@ -244,8 +277,8 @@ export default function Products({
                   <div
                      className=" bg-white-200 animate-pulse"
                      style={{
-                        width: "304px",
-                        height: "394px",
+                        width: "165px",
+                        height: "302px",
                      }}
                   >
                      &nbsp;
@@ -253,8 +286,8 @@ export default function Products({
                   <div
                      className=" bg-white-200 animate-pulse"
                      style={{
-                        width: "304px",
-                        height: "394px",
+                        width: "165px",
+                        height: "302px",
                      }}
                   >
                      &nbsp;
@@ -262,8 +295,8 @@ export default function Products({
                   <div
                      className=" bg-white-200 animate-pulse"
                      style={{
-                        width: "304px",
-                        height: "394px",
+                        width: "165px",
+                        height: "302px",
                      }}
                   >
                      &nbsp;
@@ -274,7 +307,7 @@ export default function Products({
             {filteredData?.map((product: TProduct) => {
                return (
                   <div key={product.id} className="card-item">
-                     <Card data={product} />
+                     <Card data={product} isListView={isListView} />
                   </div>
                )
             })}
