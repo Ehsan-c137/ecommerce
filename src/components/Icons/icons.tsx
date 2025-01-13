@@ -1364,7 +1364,7 @@ export const Icons = {
          </g>
       </svg>
    ),
-   Filter: () => (
+   Filter: ({ color }: { color: string }) => (
       <svg
          width="24"
          height="24"
@@ -1376,7 +1376,7 @@ export const Icons = {
             fillRule="evenodd"
             clipRule="evenodd"
             d="M3 7.5V8.5H21V7.5H3ZM10 16.5H14V15.5H10V16.5ZM18 12.5H6V11.5H18V12.5Z"
-            fill="black"
+            fill={color ?? "black"}
          />
       </svg>
    ),
@@ -1406,6 +1406,46 @@ export const Icons = {
             d="M1.84806 2.51478C0.272813 4.09003 0.272814 6.64402 1.84806 8.21927L7.95796 14.3292L7.99995 14.2872L8.042 14.3292L14.1519 8.21932C15.7271 6.64407 15.7271 4.09008 14.1519 2.51483C12.5766 0.939582 10.0227 0.939583 8.44741 2.51483L8.35356 2.60868C8.1583 2.80394 7.84171 2.80394 7.64645 2.60868L7.55255 2.51478C5.9773 0.939531 3.42331 0.939531 1.84806 2.51478Z"
             stroke="#DD8560"
          />
+      </svg>
+   ),
+   GroupView: () => (
+      <svg
+         width="20"
+         height="21"
+         viewBox="0 0 20 21"
+         fill="none"
+         xmlns="http://www.w3.org/2000/svg"
+      >
+         <g opacity="0.5">
+            <rect
+               x="3.8335"
+               y="3.93961"
+               width="4.83333"
+               height="4.83333"
+               stroke="#14142B"
+            />
+            <rect
+               x="3.8335"
+               y="11.4396"
+               width="4.83333"
+               height="4.83333"
+               stroke="#14142B"
+            />
+            <rect
+               x="11.3335"
+               y="3.93961"
+               width="4.83333"
+               height="4.83333"
+               stroke="#14142B"
+            />
+            <rect
+               x="11.3335"
+               y="11.4396"
+               width="4.83333"
+               height="4.83333"
+               stroke="#14142B"
+            />
+         </g>
       </svg>
    ),
 }
