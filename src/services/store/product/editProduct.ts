@@ -1,11 +1,12 @@
-import api from "@/services/index";
+import api from "@/services/index"
 
-export default async function getSingleProduct(slug: string, body) {
+export default async function getSingleProduct(slug: string) {
+   const body = {}
    try {
-      const response = await api.put(`/store/product/slug/${slug}`, body);
-      console.log(response.data);
-      return response.data;
+      const response = await api.put(`/store/product/slug/${slug}`, body)
+      console.log(response.data)
+      return response.data
    } catch (error) {
-      console.log(error);
+      console.log(error)
    }
 }
