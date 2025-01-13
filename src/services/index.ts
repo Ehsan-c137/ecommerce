@@ -1,10 +1,10 @@
-export const BASE_URL = "http://localhost:8000";
+export const BASE_URL = "http://localhost:8000"
 
-import axios from "axios";
+import axios from "axios"
 
 export default axios.create({
-   baseURL: BASE_URL,
+   baseURL: process.env.BASE_URL,
    headers: {
       "Content-Type": "application/json",
    },
-});
+})
