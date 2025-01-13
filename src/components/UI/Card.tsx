@@ -20,16 +20,17 @@ export default function Card({
    return (
       <div
          className={clsx("item-card flex gap-2 ", {
-            "flex-row w-full h-[134px]": isListView,
-            "w-[165px]  flex-col": !isListView,
+            "flex-row w-full h-[130px]": isListView,
+            "w-[165px] h-[302px] flex-col": !isListView,
          })}
       >
          <Link
             href={`products/${data?.slug?.toLowerCase()}`}
             className={clsx(
-               "flex items-center justify-center transition opacity-0 duration-500",
+               "flex items-center justify-center transition opacity-0 duration-500 overflow-hidden",
                {
                   "w-[130px] h-[134px]": isListView,
+                  "h-[222px]": !isListView,
                   "!opacity-100": imageLoaded,
                }
             )}
@@ -43,19 +44,32 @@ export default function Card({
                style={{
                   width: "auto",
                   height: "auto",
-                  objectFit: "contain",
+                  objectFit: "cover",
                }}
                onLoad={handleImageLoad}
                unoptimized
             />
          </Link>
+         <div className="gap-2 hidden">
+            <p className="text-label">size</p>
+            {data?.options?.sizes?.map((item) => (
+               <div
+                  key={item}
+                  className="w-[24px] h-[24px] rounded-full border flex items-center justify-center"
+               >
+                  <p className="text-label text-xs">{item}</p>
+               </div>
+            ))}
+         </div>
          <div
             className={clsx("flex flex-col justify-between", {
                "py-2 w-full": isListView,
             })}
          >
             <Link href={`products/${data?.slug?.toLowerCase()}`}>
-               <p className="font-medium text-titleActive">{data?.name}</p>
+               <p className="font-medium text-titleActive truncate">
+                  {data?.name}
+               </p>
             </Link>
             <div className="flex items-center">
                {/* <p
@@ -68,23 +82,10 @@ export default function Card({
                   IN STOCK
                </p> */}
             </div>
-            <div className="flex-col gap-2 w-full">
+            <div className="flex justify-between items-center w-full">
                <p className="text-secondary">${data?.price}</p>
-               <div className="flex justify-between w-full">
-                  <div className="flex gap-2">
-                     <p className="text-label">size</p>
-                     {data?.options?.sizes?.map((item) => (
-                        <div
-                           key={item}
-                           className="w-[24px] h-[24px] rounded-full border flex items-center justify-center"
-                        >
-                           <p className="text-label text-xs">{item}</p>
-                        </div>
-                     ))}
-                  </div>
 
-                  <Icons.CardHeart />
-               </div>
+               <Icons.CardHeart />
             </div>
          </div>
       </div>
