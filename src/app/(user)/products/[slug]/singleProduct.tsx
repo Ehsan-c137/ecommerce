@@ -12,7 +12,6 @@ import checkLoggedin from "@/services/user/check_loggedin"
 import Reviews from "./singleproduct/Reviews"
 import Details from "./singleproduct/Details"
 import clsx from "clsx"
-import Card from "@/components/UI/Card"
 import Product from "@/components/UI/Product"
 import Footer from "@/components/Footer/Footer"
 
@@ -27,6 +26,7 @@ export default function SingleProduct({ slug }: { slug: string }) {
    })
 
    const [section, setSection] = useState<"details" | "reviews">("details")
+   // eslint-disable-next-line @typescript-eslint/no-unused-vars
    const [productCount, setProductCount] = useState(1)
 
    const { data, isLoading } = useQuery({
@@ -46,7 +46,7 @@ export default function SingleProduct({ slug }: { slug: string }) {
       },
    })
 
-   const { data: cart, isLoading: cartLoading } = useQuery({
+   const { data: cart } = useQuery({
       queryKey: ["cart"],
       queryFn: () => getCart(),
    })
@@ -64,7 +64,7 @@ export default function SingleProduct({ slug }: { slug: string }) {
 
    const isRemaining = data?.remaining > 0
    const isHaveRating = data?.rate > 0
-   const isHavecomments = data?.comments.length > 0
+   // const isHavecomments = data?.comments.length > 0
    const isFavorite = JSON.parse(
       localStorage.getItem("favorite") as string
    )?.includes(slug)
@@ -157,7 +157,7 @@ export default function SingleProduct({ slug }: { slug: string }) {
                   style={{
                      height: "100%",
                      width: "100%",
-                     objectFit: "contain",
+                     objectFit: "cover",
                      opacity: isImageLoaded ? 1 : 0,
                   }}
                   onLoad={() => setIsImageLoaded(true)}
@@ -363,7 +363,7 @@ export default function SingleProduct({ slug }: { slug: string }) {
                   className={clsx(
                      "h-[56px] w-full justify-center first-letter flex transition font-medium gap-2 items-center text-neutral-900 py-2 px-4 border-b border-transparent uppercase",
                      {
-                        "border-black": section === "details",
+                        "!border-black": section === "details",
                      }
                   )}
                   onClick={() => setSection("details")}
@@ -374,7 +374,7 @@ export default function SingleProduct({ slug }: { slug: string }) {
                   className={clsx(
                      "h-[56px] w-full justify-center first-letter flex transition font-medium gap-2 items-center text-neutral-900 py-2 px-4 border-b border-transparent uppercase",
                      {
-                        "border-black": section === "reviews",
+                        "!border-black": section === "reviews",
                      }
                   )}
                   onClick={() => setSection("reviews")}
@@ -382,9 +382,9 @@ export default function SingleProduct({ slug }: { slug: string }) {
                   Reviews
                </button>
             </div>
-            <div className="max-w-[725px]">
+            <div className="max-w-[725px] h-fit">
                {section == "details" && <Details />}
-               {isHavecomments && section == "reviews" && <Reviews />}
+               {section == "reviews" && <Reviews />}
             </div>
          </section>
          <section className="text-center flex flex-col items-center mt-4">
