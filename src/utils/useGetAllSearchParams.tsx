@@ -1,12 +1,12 @@
-import { useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation"
 
 export default function useGetAllSearchParams() {
-   const searchParams = useSearchParams();
-   const params = [];
+   const searchParams = useSearchParams()
+   const params = [] as { name: string; value: string }[]
 
    searchParams.forEach((value, key) => {
-      params.push({ name: key, value: value });
-   });
+      params.push({ name: key, value: value })
+   })
 
-   return params;
+   return params
 }
