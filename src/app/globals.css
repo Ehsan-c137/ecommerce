@@ -16,8 +16,6 @@
 }
 
 .backdrop header {
-   border-top-right-radius: 18px;
-   border-top-left-radius: 18px;
    transition: cubic-bezier(0.075, 0.82, 0.165, 1);
 }
 
