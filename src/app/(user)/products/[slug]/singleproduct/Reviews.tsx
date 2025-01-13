@@ -3,7 +3,7 @@ import { Icons } from "@/components/Icons/icons"
 export default function Reviews() {
    const isHavecomments = true
    return (
-      <div className="flex flex-col items-start gap-6 min-w-[360px] lg:w-[727px] max-w-[727px] px-4">
+      <div className="flex flex-col items-start gap-6 min-w-[360px] min-h-[300px] lg:w-[727px] max-w-[727px] px-4">
          {isHavecomments && (
             <div>
                <h5 className="font-semibold mb-4">reviews</h5>
@@ -13,8 +13,7 @@ export default function Reviews() {
                </div>
             </div>
          )}
-
-         <button className="text-sm flex items-start font-medium border px-4 py-2 rounded-md border-neutral-900">
+         <button className="text-sm flex items-start font-medium border px-4 py-2 border-neutral-900">
             {isHavecomments ? " Write a review" : "Write first review"}
          </button>
          {isHavecomments && (
