@@ -1,7 +1,7 @@
 import Footer from "@/components/Footer/Footer"
 import Header from "@/components/Header/Header"
 import { Icons } from "@/components/Icons/icons"
-import Link from "next/link"
+import NotFoundButton from "@/components/NotFound"
 
 export default function NotFound() {
    return (
@@ -18,15 +18,11 @@ export default function NotFound() {
                      fontSize: "16px",
                   }}
                >
-                  We can't find the page you looking for, it will return to the
+                  We can&apos;t find the page you looking for, it will return to
+                  the
                </p>
 
-               <Link
-                  href={"/"}
-                  className="hover:underline transition bg-black text-white-100 px-8 py-2 "
-               >
-                  HOME
-               </Link>
+               <NotFoundButton />
             </div>
          </div>
          <Footer />
