@@ -23,9 +23,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
    const id = (await params).slug
 
    // fetch data
-   const product = await fetch(`${BASE_URL}/store/product/slug/${id}`).then(
-      (res) => res.json()
-   )
+   const product = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/store/product/slug/${id}`
+   ).then((res) => res.json())
 
    return {
       title: product?.name,
