@@ -14,13 +14,8 @@ export default function Footer() {
                   <br />
                   Quae possimus autem, voluptate esse quidem in!
                </p>
-               <div className="flex items-center gap-6 text-">
-                  <Icons.Twitter />
-                  <Icons.Instagram />
-                  <Icons.Youtube />
-               </div>
             </div>
-            <div className="flex gap-16 text-sm lg:text-base text-nowrap ">
+            <div className="flex gap-16 text-sm lg:text-base text-nowrap">
                <div className="grid grid-cols-1 gap-7">
                   <p className="text-neutral-300">SUPPPORT</p>
                   <div className="grid grid-cols-1 gap-4">
@@ -90,6 +85,11 @@ export default function Footer() {
                      </Link>
                   </div>
                </div>
+            </div>
+            <div className="flex items-center gap-6 text-">
+               <Icons.Twitter />
+               <Icons.Instagram />
+               <Icons.Youtube />
             </div>
             <div className="flex flex-col justify-center gap-6">
                <p className="text-neutral-300">ACCEPTED PAYMENTS</p>
