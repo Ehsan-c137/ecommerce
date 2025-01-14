@@ -108,24 +108,26 @@ export default function Products({
 
    const cardContainerRef = useRef<HTMLDivElement | null>(null)
 
-   useGSAP(
-      () => {
-         gsap.fromTo(
-            ".card-item",
-            {
-               opacity: 0,
-               ease: "power3.inOut",
-               duration: 300,
-            },
-            { opacity: 1, stagger: 0.25 }
-         )
-      },
-      {
-         scope: cardContainerRef.current!,
-         dependencies: [filteredData, isListView],
-         revertOnUpdate: false,
-      }
-   )
+   // useGSAP(
+   //    () => {
+   //       if (cardContainerRef.current) {
+   //          gsap.fromTo(
+   //             ".card-item",
+   //             {
+   //                opacity: 0,
+   //                ease: "power3.inOut",
+   //                duration: 300,
+   //             },
+   //             { opacity: 1, stagger: 0.25 }
+   //          )
+   //       }
+   //    },
+   //    {
+   //       scope: cardContainerRef.current!,
+   //       dependencies: [filteredData, isListView],
+   //       revertOnUpdate: false,
+   //    }
+   // )
 
    return (
       <>
