@@ -267,7 +267,7 @@ export default function Products({
          <div
             ref={cardContainerRef}
             className={clsx(
-               "grid grid-cols-1 md:justify-items-start md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-x-6 gap-y-1 gap-4 py-2",
+               "grid grid-cols-1 md:justify-items-start md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-4 py-2",
                {
                   "grid-cols-2": !isListView,
                }
@@ -276,6 +276,33 @@ export default function Products({
             {isError && <p>{error.message}</p>}
             {isLoading && (
                <>
+                  <div
+                     className=" bg-white-200 animate-pulse"
+                     style={{
+                        width: "165px",
+                        height: "302px",
+                     }}
+                  >
+                     &nbsp;
+                  </div>
+                  <div
+                     className=" bg-white-200 animate-pulse"
+                     style={{
+                        width: "165px",
+                        height: "302px",
+                     }}
+                  >
+                     &nbsp;
+                  </div>
+                  <div
+                     className=" bg-white-200 animate-pulse"
+                     style={{
+                        width: "165px",
+                        height: "302px",
+                     }}
+                  >
+                     &nbsp;
+                  </div>
                   <div
                      className=" bg-white-200 animate-pulse"
                      style={{
