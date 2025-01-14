@@ -21,7 +21,7 @@ export default function Card({
       <div
          className={clsx("item-card flex gap-2 ", {
             "flex-row w-full h-[130px]": isListView,
-            "w-[165px] h-[302px] flex-col": !isListView,
+            "w-[165px] h-[278px] flex-col": !isListView,
          })}
       >
          <Link
