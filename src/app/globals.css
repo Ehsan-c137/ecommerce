@@ -20,9 +20,6 @@
 }
 
 .backdrop.background {
-   transform: scale(0.94, 0.99);
-   border-top-left-radius: 16px;
-   border-top-right-radius: 16px;
    opacity: 0.8;
 }
 
