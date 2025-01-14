@@ -8,6 +8,8 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { z } from "zod"
 import { useRouter } from "next/navigation"
 import toast from "react-hot-toast"
+import Input from "@/components/UI/Input"
+import { Icons } from "@/components/Icons/icons"
 
 const SigninSchema = z.object({
    username_login: z
@@ -75,12 +77,11 @@ export default function Login() {
                >
                   Username
                </label>
-               <input
+               <Input
                   autoComplete="true"
                   {...register("username_login")}
                   type="text"
                   id="username_login"
-                  className="border border-neutral-100 focus-within:border-neutral-900 px-4 py-2 outline-none transition-colors rounded-md"
                />
                <p className="text-red-r500 mt-2 text-wrap">
                   {errors.username_login?.message}
@@ -93,12 +94,11 @@ export default function Login() {
                >
                   Password
                </label>
-               <input
+               <Input
                   autoComplete="true"
                   {...register("password_login")}
                   type="text"
                   id="password_login"
-                  className=" border border-neutral-100 focus-within:border-neutral-900 px-4 py-2 outline-none transition-colors rounded-md"
                />
                <p className="text-red-r500 mt-2 text-wrap">
                   {errors.password_login?.message}
@@ -116,6 +116,7 @@ export default function Login() {
                {signinMutation.isPending && <span className="loader"></span>}
             </button>
          </form>
+         <Icons.Border />
          <p className="text-neutral-500">
             Don&apos;t have an account? <Link href="/signup"> Sign up </Link>
          </p>
