@@ -27,7 +27,7 @@ export default function Card({
          <Link
             href={`products/${data?.slug?.toLowerCase()}`}
             className={clsx(
-               "flex items-center justify-center transition opacity-0 duration-500 overflow-hidden",
+               "flex items-center justify-center transition opacity-0 duration-300 overflow-hidden",
                {
                   "w-[130px] h-[134px]": isListView,
                   "h-[222px]": !isListView,
