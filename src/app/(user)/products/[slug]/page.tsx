@@ -1,7 +1,6 @@
 import api from "@/services/index"
 import SingleProduct from "./singleProduct"
 import type { Metadata } from "next"
-import { BASE_URL } from "@/services/index"
 
 type Props = {
    params: Promise<{ slug: string }>
@@ -33,7 +32,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function Page({ params }: Props) {
-   const slug = (await params).slug
+   const slug = (await params).slug.toLowerCase()
 
    return <SingleProduct slug={slug} />
 }
