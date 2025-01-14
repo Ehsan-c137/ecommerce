@@ -141,7 +141,7 @@ export default function SingleProduct({ slug }: { slug: string }) {
          <section className="grid grid-cols-1 md:grid-cols-2 lg:gap-[120px] gap-4 flex-1 px-4">
             <div
                className={clsx(
-                  "w-full h-[464px] bg-white-100 flex items-center justify-center min-h-[460px] ",
+                  "w-full h-[464px] bg-white-100 flex items-center justify-center min-h-[460px] border border-[#0000006e]",
                   {
                      "animate-pulse bg-background": isLoading,
                   }
@@ -223,18 +223,19 @@ export default function SingleProduct({ slug }: { slug: string }) {
                               return (
                                  <div
                                     key={color}
-                                    className="flex items-center w-[16px] h-[16px]"
+                                    className="flex items-center w-[24px] h-[24px]"
                                  >
                                     <label
                                        style={{
-                                          border: "1px solid transparent",
+                                          border:
+                                             "1px solid transparent w-full h-full",
                                           backgroundColor: color,
                                           borderColor: isChecked
                                              ? "black"
                                              : "transparent",
                                        }}
                                        htmlFor={`${color}--color-single`}
-                                       className={`w-['24px'] h-["24px"] rounded-full transition p-[3px] bg-clip-content bg-red-r200 borderp-[3px]  cursor-pointer`}
+                                       className={`w-[24px] h-[24px] rounded-full transition p-[3px] bg-clip-content border-[1px] bg-black cursor-pointer`}
                                     ></label>
                                     <input
                                        type="radio"
@@ -305,22 +306,22 @@ export default function SingleProduct({ slug }: { slug: string }) {
                </div>
             </div>
          </section>
-         <div className="w-full bg-black flex justify-between px-4 gap-4 mt-4 cursor-pointer h-[56px]">
-            <button
-               className="flex items-center gap-2 py-2 text-center rounded-md text-white-100 uppercase"
-               style={{
-                  opacity: !isRemaining ? 0.5 : 1,
-                  cursor: !isRemaining ? "not-allowed" : "pointer",
-               }}
-               onClick={handleCart}
-               disabled={!isItOkToOrder}
-            >
-               <Icons.PlusWhite />
-               <p>
-                  Add
-                  {mutation.isPending && <span className="loader"></span>}
-               </p>
-            </button>
+         <div className="w-full bg-black flex justify-between items-center px-4 gap-4 mt-4 cursor-pointer h-[56px]">
+            <div className="flex items-center gap-4">
+               <button
+                  className="flex items-center gap-2 py-2 text-center rounded-md text-white-100 uppercase"
+                  style={{
+                     opacity: !isRemaining || mutation.isPending ? 0.5 : 1,
+                     cursor: !isRemaining ? "not-allowed" : "pointer",
+                  }}
+                  onClick={handleCart}
+                  disabled={!isItOkToOrder || mutation.isPending}
+               >
+                  <Icons.PlusWhite />
+                  <p>Add</p>
+               </button>
+               {mutation.isPending && <span className="loader"></span>}
+            </div>
             {/* <button
                className="flex items-center justify-center  cursor-pointer w-full"
                disabled={productCount == 1 && dataInCart?.count == 1}
