@@ -3,7 +3,7 @@
 import Image from "next/image"
 import { Icons } from "@/components/Icons/icons"
 import { useState } from "react"
-import { useQuery, useMutation } from "@tanstack/react-query"
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query"
 import getSingleProduct from "@/services/store/product/singleProduct"
 import { useRouter, useSearchParams } from "next/navigation"
 import { IPutCart, putCart, getCart } from "@/services/store/cart/Cart"
@@ -19,6 +19,7 @@ export default function SingleProduct({ slug }: { slug: string }) {
    const [isImageLoaded, setIsImageLoaded] = useState(false)
    const searchParams = useSearchParams()
    const router = useRouter()
+   const queryClient = useQueryClient()
 
    const { data: isLogged } = useQuery({
       queryKey: ["isLogged"],
@@ -130,6 +131,7 @@ export default function SingleProduct({ slug }: { slug: string }) {
             oldCartData.splice(oldCartData[duplicateProuduct], 1, oldProduct)
          )
       }
+      queryClient.invalidateQueries({ queryKey: ["cart"] })
    }
 
    const isItOkToOrder =
