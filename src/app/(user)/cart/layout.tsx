@@ -40,7 +40,7 @@ export default function CartLayout({ children }: { children: ReactNode }) {
                })}
             </div>
             <div>{children}</div>
-            {cart?.data.length > 0 && (
+            {cart?.data?.length > 0 && (
                <div className="hidden lg:flex flex-col border border-neutral-100 rounded-md px-6 py-8 w-[300px] max-w-[340px]">
                   <h5 className="text-neutral-900 font-normal mb-10">
                      {pathname === "/cart" && "Order Summary"}
