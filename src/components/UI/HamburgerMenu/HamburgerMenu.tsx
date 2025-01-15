@@ -105,8 +105,12 @@ export default function HamburgerMenu() {
                <div className="flex flex-col w-full items-center gap-4">
                   <Icons.Border />
                   <div className="flex gap-6">
-                     <Link href="/profile">Profile</Link>
-                     <Link href="/login">Login</Link>
+                     <Link href="/profile" className="uppercase">
+                        Profile
+                     </Link>
+                     <Link href="/login" className="uppercase">
+                        Login
+                     </Link>
                   </div>
                </div>
             </div>
