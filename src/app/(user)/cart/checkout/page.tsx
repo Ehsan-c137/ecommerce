@@ -87,6 +87,7 @@ export default function Checkout() {
                            name: string
                            price: number | string
                            remaining: number
+                           slug: string
                         }
                         count: number
                         colors: string
