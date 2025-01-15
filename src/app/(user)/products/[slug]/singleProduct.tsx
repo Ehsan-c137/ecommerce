@@ -149,21 +149,23 @@ export default function SingleProduct({ slug }: { slug: string }) {
                   }
                )}
             >
-               <Image
-                  src={data?.main_image}
-                  alt={data?.name}
-                  width="255"
-                  height="0"
-                  unoptimized
-                  className="transition duration-500"
-                  style={{
-                     height: "100%",
-                     width: "100%",
-                     objectFit: "cover",
-                     opacity: isImageLoaded ? 1 : 0,
-                  }}
-                  onLoad={() => setIsImageLoaded(true)}
-               />
+               {!isLoading && (
+                  <Image
+                     src={data?.main_image}
+                     alt={data?.name}
+                     width="255"
+                     height="0"
+                     unoptimized
+                     className="transition duration-500"
+                     style={{
+                        height: "100%",
+                        width: "100%",
+                        objectFit: "cover",
+                        opacity: isImageLoaded ? 1 : 0,
+                     }}
+                     onLoad={() => setIsImageLoaded(true)}
+                  />
+               )}
             </div>
             <div className="flex flex-col gap-4 flex-1 max-w-[438px]">
                <div
