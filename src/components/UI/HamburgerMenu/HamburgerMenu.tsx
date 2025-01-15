@@ -113,7 +113,10 @@ export default function HamburgerMenu({ isLoggedIn }: { isLoggedIn: boolean }) {
                <div className="flex flex-col w-full items-center gap-4">
                   <Icons.Border />
                   <div className="flex gap-6 w-full justify-between">
-                     <Link href="/profile" className="uppercase">
+                     <Link
+                        href="/profile"
+                        className="uppercase text-titleActive"
+                     >
                         Profile
                      </Link>
                      {!isLoggedIn ? (
