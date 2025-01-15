@@ -48,17 +48,18 @@ export default function Item({ item, handleCart }: IProps) {
                alt={item.data.name}
                width={100}
                height={134}
-               objectFit="cover"
                style={{
                   maxWidth: "134px"!,
+                  maxHeight: "100%",
+                  objectFit: "cover",
                }}
             />
          </Link>
-         <div className="flex flex-col md:flex-row gap-2 py-1 h-[134px]">
+         <div className="flex flex-col md:flex-row gap-2 py-1 h-[134px] overflow-x-hidden">
             <div className="flex flex-row flex-wrap md:flex-row items-center gap-2">
                <Link
                   href={`products/"${item.data?.slug}`}
-                  className="text-titleActive"
+                  className="text-titleActive truncate"
                >
                   {item.data.name}
                </Link>
