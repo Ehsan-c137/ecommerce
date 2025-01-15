@@ -94,7 +94,7 @@ export default function SingleProduct({ slug }: { slug: string }) {
       }
    }
 
-   const oldCartData = cart?.data
+   const oldCartData = cart?.data ?? []
 
    const duplicateProuduct = oldCartData?.findIndex(
       (item: { colors: string; sizes: string }) =>
