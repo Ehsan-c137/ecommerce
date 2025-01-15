@@ -34,7 +34,7 @@ export default function Item({ item, handleCart }: IProps) {
    return (
       <div className="flex gap-4 items-center">
          <Link
-            href={`products/"${item.data?.slug}`}
+            href={`products/${item.data?.slug}`}
             className="w-[134px] h-[134px] bg-white-100 flex items-center justify-center relative"
          >
             <div className="absolute top-0 right-0 bg-white-200 md:hidden">
