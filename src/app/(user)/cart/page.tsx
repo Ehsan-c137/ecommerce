@@ -60,7 +60,7 @@ export default function Cart() {
 
    return (
       <div className="h-full">
-         <div className="flex flex-col gap-4 px-4 h-full overflow-auto">
+         <div className="flex flex-col gap-4 px-4 h-full pb-[224px] overflow-auto">
             {isLoading ? (
                <div className="w-full flex justify-center min-h-[300px]">
                   <span className="loader-black"></span>
@@ -101,7 +101,7 @@ export default function Cart() {
          {!isCartEmpty && (
             <div
                className={clsx(
-                  "fixed bottom-[56px] pb-4 pt-2 w-full px-4 opacity-0",
+                  "fixed bottom-[56px] pb-4 w-full px-4 opacity-0 noisy-background",
                   {
                      [style.show_info]: !isLoading,
                   }
