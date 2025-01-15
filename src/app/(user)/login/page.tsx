@@ -10,6 +10,7 @@ import { useRouter } from "next/navigation"
 import toast from "react-hot-toast"
 import Input from "@/components/UI/Input"
 import { Icons } from "@/components/Icons/icons"
+import { Button } from "@/components/UI/Button"
 
 const SigninSchema = z.object({
    username_login: z
@@ -70,24 +71,19 @@ export default function Login() {
    return (
       <div className="container mx-auto w-full flex flex-col gap-6 items-center justify-center min-h-[80vh]">
          <form action="" className="flex flex-col items-start gap-4 w-[250px]">
-            <div className="flex flex-col">
+            <div className="flex flex-col w-full">
                <label
                   htmlFor="username_login"
                   className="text-neutral-600 font-medium text-sm"
                >
                   Username
                </label>
-               <Input
-                  autoComplete="true"
-                  {...register("username_login")}
-                  type="text"
-                  id="username_login"
-               />
+               <Input {...register("username_login")} />
                <p className="text-red-r500 mt-2 text-wrap">
                   {errors.username_login?.message}
                </p>
             </div>
-            <div className="flex flex-col">
+            <div className="flex flex-col w-full">
                <label
                   htmlFor="password_login"
                   className="text-neutral-600 font-medium text-sm"
@@ -95,10 +91,8 @@ export default function Login() {
                   Password
                </label>
                <Input
-                  autoComplete="true"
                   {...register("password_login")}
-                  type="text"
-                  id="password_login"
+                  className="text-titleActive"
                />
                <p className="text-red-r500 mt-2 text-wrap">
                   {errors.password_login?.message}
@@ -107,14 +101,15 @@ export default function Login() {
             <div className="flex justify-end">
                <p className="text-label">Forget Password?</p>
             </div>
-            <button
+            <Button
+               intent={"primary"}
                className="btn w-full flex items-center justify-center gap-4"
                disabled={!isValid || signinMutation.isPending}
                onClick={handleSignin}
             >
                Login
                {signinMutation.isPending && <span className="loader"></span>}
-            </button>
+            </Button>
          </form>
          <Icons.Border />
          <p className="text-neutral-500">
