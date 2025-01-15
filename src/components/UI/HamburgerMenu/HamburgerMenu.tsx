@@ -74,19 +74,19 @@ export default function HamburgerMenu({ isLoggedIn }: { isLoggedIn: boolean }) {
                <div>
                   <div className="uppercase transition justify-around items-center border-b grid grid-cols-3 relative">
                      <p
-                        className="w-full text-center py-4 cursor-pointer"
+                        className="w-full text-center py-4 cursor-pointer text-titleActive"
                         onClick={() => setActiveTab(1)}
                      >
                         Women
                      </p>
                      <p
-                        className="w-full text-center py-4 cursor-pointer"
+                        className="w-full text-center py-4 cursor-pointer text-titleActive"
                         onClick={() => setActiveTab(2)}
                      >
                         man
                      </p>
                      <p
-                        className="w-full h-full text-center py-4 cursor-pointer"
+                        className="w-full h-full text-center py-4 cursor-pointer text-titleActive"
                         onClick={() => setActiveTab(3)}
                      >
                         kids
@@ -117,11 +117,17 @@ export default function HamburgerMenu({ isLoggedIn }: { isLoggedIn: boolean }) {
                         Profile
                      </Link>
                      {!isLoggedIn ? (
-                        <Link href="/login" className="uppercase">
+                        <Link
+                           href="/login"
+                           className="uppercase text-titleActive"
+                        >
                            Login
                         </Link>
                      ) : (
-                        <button className="uppercase" onClick={handleLogout}>
+                        <button
+                           className="uppercase text-titleActive"
+                           onClick={handleLogout}
+                        >
                            Logout
                         </button>
                      )}
