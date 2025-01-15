@@ -5,7 +5,6 @@
    left: 0px;
    bottom: 0px;
    z-index: 10;
-   background-image: url("/nnnoise.svg");
    background-color: white;
    border-top-left-radius: 16px;
    border-top-right-radius: 16px;
@@ -48,12 +47,12 @@
    /* height: 28px; */
    display: block;
    margin: 0 auto;
-   transition: all 0.5s cubic-bezier(0.32, 0.72, 0, 1);
+   transition: all 0.3s cubic-bezier(0.32, 0.72, 0, 1);
    cursor: pointer;
 }
 
 .burgerMenu .bar {
-   transition: all 0.5s cubic-bezier(0.32, 0.72, 0, 1);
+   transition: all 0.3s cubic-bezier(0.32, 0.72, 0, 1);
    height: 1px;
    width: 100%;
    display: block;
@@ -116,7 +115,7 @@
 
 .border {
    opacity: 0;
-   animation: opacityAnimation 0.5s ease-in-out forwards;
+   animation: opacityAnimation 0.3s ease-in-out forwards;
    animation-delay: 0.3s;
 }
 
