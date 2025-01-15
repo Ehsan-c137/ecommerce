@@ -426,15 +426,14 @@ export const Icons = {
    ),
    Plus: ({ ...props }) => (
       <svg
-         {...props}
          width="24"
          height="24"
          viewBox="0 0 24 24"
          fill="none"
          xmlns="http://www.w3.org/2000/svg"
       >
-         <path d="M12 3V21" stroke="white" />
-         <path d="M3 12L21 12" stroke="white" />
+         <path d="M12 3V21" stroke="black" />
+         <path d="M3 12L21 12" stroke="black" />
       </svg>
    ),
    PlusWhite: () => {
