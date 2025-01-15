@@ -1,10 +1,10 @@
 import HamburgerMenu from "@/components/UI/HamburgerMenu/HamburgerMenu"
 import { Icons } from "../Icons/icons"
-import checkLoggedin from "@/services/user/check_loggedin"
+// import checkLoggedin from "@/services/user/check_loggedin"
 import Link from "next/link"
 
 export default async function MobileNav() {
-   const isLoggedin = await checkLoggedin()
+   // const isLoggedin = await checkLoggedin()
 
    return (
       <header className="flex justify-between py-3 px-4">
@@ -16,11 +16,9 @@ export default async function MobileNav() {
          </Link>
          <div className="flex items-center gap-2">
             <Icons.Search />
-            {isLoggedin && (
-               <Link href={"/cart"}>
-                  <Icons.ShopCart />
-               </Link>
-            )}
+            <Link href={"/cart"}>
+               <Icons.ShopCart />
+            </Link>
          </div>
       </header>
    )
