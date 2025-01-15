@@ -7,6 +7,8 @@ import CreatePortal from "@/components/CreatePortal"
 import { Icons } from "@/components/Icons/icons"
 import Accordion from "../Accordion/Accordion"
 import Link from "next/link"
+import logout from "@/services/user/logout"
+import { useRouter } from "next/navigation"
 
 enum Tabs {
    Women = 1,
@@ -14,13 +16,19 @@ enum Tabs {
    Kids = 3,
 }
 
-export default function HamburgerMenu() {
+export default function HamburgerMenu({ isLoggedIn }: { isLoggedIn: boolean }) {
    const [isOpen, setIsOpen] = useState(false)
    const [activeTab, setActiveTab] = useState(2)
+   const router = useRouter()
    const ref = useRef<Element | null>(null)
 
    const handleCloseDrawer = () => {
       setIsOpen(false)
+   }
+
+   const handleLogout = async () => {
+      await logout()
+      router.refresh()
    }
 
    useEffect(() => {
@@ -104,13 +112,19 @@ export default function HamburgerMenu() {
                </div>
                <div className="flex flex-col w-full items-center gap-4">
                   <Icons.Border />
-                  <div className="flex gap-6">
+                  <div className="flex gap-6 w-full justify-between">
                      <Link href="/profile" className="uppercase">
                         Profile
                      </Link>
-                     <Link href="/login" className="uppercase">
-                        Login
-                     </Link>
+                     {!isLoggedIn ? (
+                        <Link href="/login" className="uppercase">
+                           Login
+                        </Link>
+                     ) : (
+                        <button className="uppercase" onClick={handleLogout}>
+                           Logout
+                        </button>
+                     )}
                   </div>
                </div>
             </div>
