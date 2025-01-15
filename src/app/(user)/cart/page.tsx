@@ -75,6 +75,7 @@ export default function Cart() {
                            name: string
                            price: number | string
                            remaining: number
+                           slug: string
                         }
                         count: number
                         colors: string
