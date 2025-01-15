@@ -173,7 +173,7 @@ export default function SingleProduct({ slug }: { slug: string }) {
                      "animate-pulse bg-background": isLoading,
                   })}
                >
-                  <h3 className="font-bold">{data?.name}</h3>
+                  <h3 className="font-bold text-titleActive">{data?.name}</h3>
                   <div
                      className="flex items-center justify-center cursor-pointer"
                      onClick={copyToClipboard}
@@ -394,7 +394,7 @@ export default function SingleProduct({ slug }: { slug: string }) {
          </section>
          <section className="text-center flex flex-col items-center mt-4">
             <div className="flex flex-col items-center gap-2 py-4">
-               <p className="uppercase">You may also like</p>
+               <p className="uppercase text-titleActive">You may also like</p>
                <Icons.Border />
             </div>
             <div className="grid grid-cols-2 gap-4">
