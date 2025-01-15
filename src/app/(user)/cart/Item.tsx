@@ -58,7 +58,7 @@ export default function Item({ item, handleCart }: IProps) {
          <div className="flex flex-col md:flex-row gap-2 py-1 h-[134px] overflow-x-hidden">
             <div className="flex flex-row flex-wrap md:flex-row items-center gap-2">
                <Link
-                  href={`products/"${item.data?.slug}`}
+                  href={`products/${item.data?.slug}`}
                   className="text-titleActive truncate"
                >
                   {item.data.name}
