@@ -6,6 +6,7 @@ import clsx from "clsx"
 import CreatePortal from "@/components/CreatePortal"
 import { Icons } from "@/components/Icons/icons"
 import Accordion from "../Accordion/Accordion"
+import Link from "next/link"
 
 enum Tabs {
    Women = 1,
@@ -104,9 +105,8 @@ export default function HamburgerMenu() {
                <div className="flex flex-col w-full items-center gap-4">
                   <Icons.Border />
                   <div className="flex gap-6">
-                     <Icons.Instagram />
-                     <Icons.Youtube />
-                     <Icons.Twitter />
+                     <Link href="/profile">Profile</Link>
+                     <Link href="/login">Login</Link>
                   </div>
                </div>
             </div>
