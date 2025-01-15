@@ -1,5 +1,6 @@
 import { Icons } from "@/components/Icons/icons"
 import Image from "next/image"
+import Link from "next/link"
 import { useState } from "react"
 
 interface IProps {
@@ -16,6 +17,7 @@ interface IProps {
          name: string
          price: number | string
          remaining: number
+         slug: string
       }
       count: number
       colors: string
@@ -31,7 +33,10 @@ export default function Item({ item, handleCart }: IProps) {
 
    return (
       <div className="flex gap-4 items-center">
-         <div className="w-[134px] h-[134px] bg-white-100 flex items-center justify-center relative">
+         <Link
+            href={`products/"${item.data?.slug}`}
+            className="w-[134px] h-[134px] bg-white-100 flex items-center justify-center relative"
+         >
             <div className="absolute top-0 right-0 bg-white-200 md:hidden">
                <Icons.X />
             </div>
@@ -43,10 +48,15 @@ export default function Item({ item, handleCart }: IProps) {
                sizes="100vw"
                objectFit="cover"
             />
-         </div>
+         </Link>
          <div className="flex flex-col md:flex-row gap-2 py-1 h-[134px]">
             <div className="flex flex-row flex-wrap md:flex-row items-center gap-2">
-               <p className="text-titleActive">{item.data.name}</p>
+               <Link
+                  href={`products/"${item.data?.slug}`}
+                  className="text-titleActive"
+               >
+                  {item.data.name}
+               </Link>
                <p className="text-label">
                   Color: {item.colors} — Size: {item.sizes}
                </p>
