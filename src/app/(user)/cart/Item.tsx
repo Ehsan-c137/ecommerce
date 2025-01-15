@@ -35,7 +35,10 @@ export default function Item({ item, handleCart }: IProps) {
       <div className="flex gap-4 items-center">
          <Link
             href={`products/${item.data?.slug}`}
-            className="w-[134px] h-[134px] bg-white-100 flex items-center justify-center relative"
+            className="w-[134px] h-[134px] bg-white-100 flex items-center justify-center relative max-w-auto"
+            style={{
+               maxWidth: "auto",
+            }}
          >
             <div className="absolute top-0 right-0 bg-white-200 md:hidden">
                <Icons.X />
@@ -45,8 +48,10 @@ export default function Item({ item, handleCart }: IProps) {
                alt={item.data.name}
                width={100}
                height={134}
-               sizes="100vw"
                objectFit="cover"
+               style={{
+                  maxWidth: "134px"!,
+               }}
             />
          </Link>
          <div className="flex flex-col md:flex-row gap-2 py-1 h-[134px]">
