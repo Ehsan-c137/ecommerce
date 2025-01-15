@@ -1,13 +1,14 @@
-"use client";
+"use client"
 
-import Link from "next/link";
-import { useMutation } from "@tanstack/react-query";
-import signup from "@/services/user/signup";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
-import toast from "react-hot-toast";
-import { useRouter } from "next/navigation";
+import Link from "next/link"
+import { useMutation } from "@tanstack/react-query"
+import signup from "@/services/user/signup"
+import { useForm } from "react-hook-form"
+import { zodResolver } from "@hookform/resolvers/zod"
+import { z } from "zod"
+import toast from "react-hot-toast"
+import { useRouter } from "next/navigation"
+import Input from "@/components/UI/Input"
 
 const SignupSchema = z
    .object({
@@ -30,9 +31,9 @@ const SignupSchema = z
    .refine((data) => data.password === data.confirmPassword, {
       message: "Passwords do not match",
       path: ["confirmPassword"],
-   });
+   })
 
-export type TSignupSchema = z.infer<typeof SignupSchema>;
+export type TSignupSchema = z.infer<typeof SignupSchema>
 
 export default function Signup() {
    const {
@@ -42,33 +43,33 @@ export default function Signup() {
    } = useForm<TSignupSchema>({
       resolver: zodResolver(SignupSchema),
       mode: "onChange",
-   });
+   })
 
-   const router = useRouter();
+   const router = useRouter()
    const signupMutation = useMutation({
       mutationFn: signup,
       onSuccess: (data) => {
          if (data?.message?.includes("already exists")) {
-            toast.error("user already exist");
+            toast.error("user already exist")
          }
-         router.push("/");
-         console.log(data);
+         router.push("/")
+         console.log(data)
       },
       onError: (error) => {
-         console.log("error");
+         console.log("error")
 
-         console.log(error.message);
+         console.log(error.message)
       },
-   });
+   })
 
    const handleSignup = (e: React.FormEvent) => {
-      e.preventDefault();
+      e.preventDefault()
       signupMutation.mutate({
          email: getValues("email"),
          password: getValues("password"),
          username: getValues("username"),
-      });
-   };
+      })
+   }
 
    return (
       <div className="container mx-auto w-full flex flex-col items-center justify-center min-h-[80vh]">
@@ -80,12 +81,7 @@ export default function Signup() {
                >
                   Username
                </label>
-               <input
-                  {...register("username")}
-                  type="text"
-                  id="username"
-                  className="border border-neutral-100 focus-within:border-neutral-900 px-4 py-2 outline-none transition-colors rounded-md"
-               />
+               <Input {...register("username")} />
                <p className="text-red-r500 mt-2 text-wrap">
                   {errors.username?.message}
                </p>
@@ -97,12 +93,8 @@ export default function Signup() {
                >
                   Email
                </label>
-               <input
-                  {...register("email")}
-                  type="text"
-                  id="email"
-                  className="border border-neutral-100 focus-within:border-neutral-900 px-4 py-2 outline-none transition-colors rounded-md"
-               />
+
+               <Input {...register("email")} type="text" id="email" />
                <p className="text-red-r500 mt-2 text-wrap">
                   {errors.email?.message}
                </p>
@@ -114,12 +106,7 @@ export default function Signup() {
                >
                   Password
                </label>
-               <input
-                  {...register("password")}
-                  type="text"
-                  id="password"
-                  className="border border-neutral-100 focus-within:border-neutral-900 px-4 py-2 outline-none transition-colors rounded-md"
-               />
+               <Input {...register("password")} type="text" id="password" />
                <p className="text-red-r500 mt-2 text-wrap">
                   {errors.password?.message}
                </p>
@@ -138,5 +125,5 @@ export default function Signup() {
             Already have an account? <Link href="/login"> Log in </Link>
          </p>
       </div>
-   );
+   )
 }
