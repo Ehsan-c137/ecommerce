@@ -2,12 +2,11 @@
 
 import { useQuery } from "@tanstack/react-query"
 import { getCart } from "@/services/store/cart/Cart"
-import { ReactNode, useEffect, useRef } from "react"
+import { ReactNode, useRef } from "react"
 import Link from "next/link"
 import { usePathname, useRouter } from "next/navigation"
 import gsap from "gsap"
 import { Flip } from "gsap/Flip"
-import { useGSAP } from "@gsap/react"
 
 export default function CartLayout({ children }: { children: ReactNode }) {
    const pathname = usePathname()
