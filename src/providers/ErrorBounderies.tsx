@@ -33,13 +33,14 @@ export class ErrorBoundary extends React.Component<
                <Header />
                <div className="w-[100vw] h-[100vh] flex flex-col p-8 text-center items-center justify-around">
                   <div className="w-full h-100 d-flex flex-column gap-8 justify-content-center align-items-center text-center">
-                     <p>Something went wrong</p>
+                     <p className="text-titleActive">Something went wrong</p>
                   </div>
                   <div className="flex flex-col items-center gap-10">
                      <p>
                         <Icons.Dress />
                      </p>
                      <p
+                        className="text-titleActive"
                         style={{
                            fontSize: "16px",
                         }}
@@ -50,12 +51,14 @@ export class ErrorBoundary extends React.Component<
 
                      <div className="d-flex gap-4">
                         <Button
+                           className="text-titleActive"
                            intent={"primary"}
                            onClick={() => this.navigate("/")}
                         >
                            Home
                         </Button>
                         <Button
+                           className="text-titleActive"
                            intent={"primary"}
                            onClick={() => window.location.reload()}
                         >
