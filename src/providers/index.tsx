@@ -7,7 +7,6 @@ import {
 } from "@tanstack/react-query"
 import { useState } from "react"
 import { Toaster } from "react-hot-toast"
-import { ErrorBoundary } from "./ErrorBounderies"
 
 function makeQueryClient() {
    return new QueryClient({
