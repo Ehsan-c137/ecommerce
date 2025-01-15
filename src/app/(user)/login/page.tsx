@@ -52,7 +52,6 @@ export default function Login() {
          }
          queryClient.invalidateQueries({ queryKey: ["profile"] })
          router.push("/")
-         console.log(data)
       },
       onError: (error) => {
          console.log("error")
