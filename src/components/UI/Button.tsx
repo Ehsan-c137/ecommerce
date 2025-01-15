@@ -4,17 +4,12 @@ import { cva, type VariantProps } from "class-variance-authority"
 const button = cva("button", {
    variants: {
       intent: {
-         primary: [
-            "bg-blue-500",
-            "text-white",
-            "border-transparent",
-            "hover:bg-blue-600",
-         ],
-         secondary: [
-            "bg-white",
-            "text-gray-800",
-            "border-gray-400",
-            "hover:bg-gray-100",
+         primary: ["bg-black", "text-offWhite", "border-transparent"],
+         outline: [
+            "bg-transparent",
+            "border border-[#DEDEDE]",
+            "text-titleActive",
+            "hover:border-black",
          ],
       },
       size: {
