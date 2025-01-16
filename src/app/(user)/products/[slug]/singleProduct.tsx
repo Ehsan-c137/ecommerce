@@ -1,7 +1,6 @@
 "use client"
 
 import Image from "next/image"
-import { revalidatePath } from "next/cache"
 import { Icons } from "@/components/Icons/icons"
 import { useState } from "react"
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query"
@@ -28,8 +27,6 @@ export default function SingleProduct({ slug }: { slug: string }) {
    })
 
    const [section, setSection] = useState<"details" | "reviews">("details")
-   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-   const [productCount, setProductCount] = useState(1)
 
    const { data, isLoading } = useQuery({
       queryKey: ["single product", slug],
@@ -122,7 +119,7 @@ export default function SingleProduct({ slug }: { slug: string }) {
             ...oldCartData,
             {
                data,
-               count: productCount,
+               count: 1,
                colors: searchParams.get("color")!,
                sizes: searchParams.get("size")!,
             },
@@ -130,7 +127,7 @@ export default function SingleProduct({ slug }: { slug: string }) {
       } else {
          console.log("found in cart")
          const oldProduct = oldCartData?.[duplicateProuduct]
-         oldProduct.count += productCount
+         oldProduct.count += 1
          mutation.mutate(
             oldCartData.splice(oldCartData[duplicateProuduct], 1, oldProduct)
          )
