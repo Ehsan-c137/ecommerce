@@ -19,6 +19,7 @@ export class ErrorBoundary extends React.Component<
 
    componentDidCatch(error: Error) {
       this.setState({ error: `${error.name}: ${error.message}` })
+      console.log(error)
    }
 
    navigate(path: string) {
