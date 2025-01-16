@@ -21,6 +21,11 @@ export default function Cart() {
 
    const mutation = useMutation({
       mutationFn: (data: IPutCart[]) => putCart(data),
+      onSuccess: () => {
+         queryClient.invalidateQueries({
+            queryKey: ["cart"],
+         })
+      },
       onError: (error) => {
          console.log("error", error)
          toast.error("something went wrong")
@@ -28,7 +33,7 @@ export default function Cart() {
    })
 
    const handleCart = (
-      id: string,
+      id: number,
       count: number,
       colors: string,
       sizes: string
@@ -37,7 +42,7 @@ export default function Cart() {
       const findIndex = newDataCart?.data?.findIndex(
          (item: {
             data: {
-               id: string
+               id: number
             }
             colors: string
             sizes: string
@@ -51,9 +56,6 @@ export default function Cart() {
       }
 
       mutation.mutate(newDataCart.data)
-      queryClient.invalidateQueries({
-         queryKey: ["cart"],
-      })
    }
 
    const isCartEmpty = !cart?.data?.length
@@ -69,14 +71,7 @@ export default function Cart() {
                <>
                   {cart?.data?.map(
                      (item: {
-                        data: {
-                           id: string
-                           main_image: string
-                           name: string
-                           price: number | string
-                           remaining: number
-                           slug: string
-                        }
+                        data: TProduct
                         count: number
                         colors: string
                         sizes: string
@@ -85,6 +80,7 @@ export default function Cart() {
                            key={item.colors + item.sizes}
                            item={item}
                            handleCart={handleCart}
+                           isLoading={mutation.isPending}
                         />
                      )
                   )}
