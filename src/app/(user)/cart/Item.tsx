@@ -1,31 +1,25 @@
 import { Icons } from "@/components/Icons/icons"
 import Image from "next/image"
 import Link from "next/link"
-import { useState } from "react"
+import clsx from "clsx"
 
 interface IProps {
    handleCart: (
-      id: string,
+      id: number,
       count: number,
       colors: string,
       sizes: string
    ) => void
+   isLoading: boolean
    item: {
-      data: {
-         id: string
-         main_image: string
-         name: string
-         price: number | string
-         remaining: number
-         slug: string
-      }
+      data: TProduct
       count: number
       colors: string
       sizes: string
    }
 }
-export default function Item({ item, handleCart }: IProps) {
-   const [count, setCount] = useState(item.count)
+export default function Item({ item, handleCart, isLoading }: IProps) {
+   // const [count, setCount] = useState(item.count)
    const { remaining } = item.data
    const handleDeleteFromCart = () => {
       handleCart(item.data.id, 0, item.colors, item.sizes)
@@ -33,14 +27,16 @@ export default function Item({ item, handleCart }: IProps) {
 
    return (
       <div className="flex gap-4 items-center">
-         <Link
-            href={`products/${item.data?.slug}`}
+         <div
             className="w-[134px] h-[134px] bg-white-100 flex items-center justify-center relative max-w-auto"
             style={{
                maxWidth: "auto",
             }}
          >
-            <div className="absolute top-0 right-0 bg-white-200 md:hidden">
+            <div
+               className="absolute top-0 right-0 bg-white-200 md:hidden"
+               onClick={handleDeleteFromCart}
+            >
                <Icons.X />
             </div>
             <Image
@@ -54,7 +50,7 @@ export default function Item({ item, handleCart }: IProps) {
                   objectFit: "cover",
                }}
             />
-         </Link>
+         </div>
          <div className="flex flex-col md:flex-row gap-2 py-1 h-[134px] overflow-x-hidden">
             <div className="flex flex-row flex-wrap md:flex-row items-center gap-2">
                <Link
@@ -72,34 +68,39 @@ export default function Item({ item, handleCart }: IProps) {
                   <button
                      className="h-[24px] w-[24px] border rounded-full flex items-center justify-center p-1"
                      onClick={() => {
-                        setCount(count - 1)
                         handleCart(
                            item.data.id,
-                           count - 1,
+                           item.count - 1,
                            item.colors,
                            item.sizes
                         )
                      }}
-                     disabled={count == 1}
+                     disabled={item.count == 1}
                   >
                      <Icons.Minus />
                   </button>
 
-                  <p className="h-[24px] w-[24px] text-center  flex justify-center items-center">
-                     {count}
+                  <p
+                     className={clsx(
+                        "h-[24px] w-[24px] text-center flex justify-center items-center",
+                        {
+                           "opacity-55": isLoading,
+                        }
+                     )}
+                  >
+                     {item.count}
                   </p>
                   <button
                      className="h-[24px] w-[24px] border rounded-full flex items-center justify-center p-1"
                      onClick={() => {
-                        setCount(count + 1)
                         handleCart(
                            item.data.id,
-                           count + 1,
+                           item.count + 1,
                            item.colors,
                            item.sizes
                         )
                      }}
-                     disabled={count == remaining}
+                     disabled={item.count == remaining}
                   >
                      <Icons.Plus />
                   </button>
