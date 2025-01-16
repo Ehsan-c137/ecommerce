@@ -113,7 +113,7 @@ export default function Signup() {
             </div>
 
             <button
-               className="btn w-full flex items-center justify-center"
+               className="btn w-full flex items-center justify-center text-titleActive"
                disabled={isValid || signupMutation.isPending}
                onClick={handleSignup}
             >
