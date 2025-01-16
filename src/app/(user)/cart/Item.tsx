@@ -28,7 +28,7 @@ export default function Item({ item, handleCart, isLoading }: IProps) {
    return (
       <div className="flex gap-4 items-center">
          <div
-            className="w-[134px] h-[134px] bg-white-100 flex items-center justify-center relative max-w-auto"
+            className="h-[134px] bg-white-100 flex items-center justify-center relative max-w-auto"
             style={{
                maxWidth: "auto",
             }}
@@ -45,8 +45,8 @@ export default function Item({ item, handleCart, isLoading }: IProps) {
                width={100}
                height={134}
                style={{
-                  maxWidth: "134px"!,
-                  maxHeight: "100%",
+                  maxWidth: "100px"!,
+                  maxHeight: "134px!",
                   objectFit: "cover",
                }}
             />
@@ -82,7 +82,7 @@ export default function Item({ item, handleCart, isLoading }: IProps) {
 
                   <p
                      className={clsx(
-                        "h-[24px] w-[24px] text-center flex justify-center items-center",
+                        "h-[24px] w-[24px] text-center flex justify-center items-center transition",
                         {
                            "opacity-55": isLoading,
                         }
