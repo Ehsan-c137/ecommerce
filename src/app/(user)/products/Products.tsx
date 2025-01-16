@@ -160,16 +160,20 @@ export default function Products({
                            />
                         </svg>
                      </button>
-                     <button
-                        id="menu-button"
-                        onClick={() =>
-                           handleQueryParams(
-                              "listView",
-                              searchParams.get("listView") == "true"
-                                 ? "false"
-                                 : "true"
-                           )
+                     <Link
+                        href={
+                           searchParams.get("listView") === "true"
+                              ? "?listView=false"
+                              : "?listView=true"
                         }
+                        id="menu-button"
+                        onClick={() => {
+                           if (searchParams.get("listView") === "true") {
+                              setIsListView(false)
+                           } else {
+                              setIsListView(true)
+                           }
+                        }}
                         className="w-[36px] h-[36px] p-2 bg-[#c4c4c42c] flex items-center justify-center rounded-full"
                      >
                         {searchParams.get("listView") == "true" ? (
@@ -177,7 +181,7 @@ export default function Products({
                         ) : (
                            <Icons.ListView />
                         )}
-                     </button>
+                     </Link>
                      <Link
                         id="menu-button"
                         href={
@@ -185,8 +189,6 @@ export default function Products({
                               ? "?decending=false"
                               : "?decending=true"
                         }
-                        // onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-                        // onBlur={() => setIsDropdownOpen(false)}
                         className="w-[36px] h-[36px] bg-[#c4c4c42c] flex items-center justify-center rounded-full"
                      >
                         <Icons.Filter
@@ -229,13 +231,14 @@ export default function Products({
          </div>
          <div className="flex flex-wrap gap-3">
             {Object.entries(allSearchParamsObj).map(([key, value]) => {
-               if (key === "max price") {
-                  return
-               }
-               if (key === "min price") {
-                  return
-               }
-               if (key === "ascending") {
+               const skip = [
+                  "max price",
+                  "min price",
+                  "acending",
+                  "decending",
+                  "listView",
+               ]
+               if (skip.includes(key)) {
                   return
                }
                return (
@@ -267,7 +270,7 @@ export default function Products({
          <div
             ref={cardContainerRef}
             className={clsx(
-               "grid grid-cols-1 md:justify-items-start md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-4 py-2",
+               "grid grid-cols-1 justify-items-center md:justify-items-start md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-4 py-2",
                {
                   "grid-cols-2": !isListView,
                }
