@@ -144,7 +144,7 @@ export default function SingleProduct({ slug }: { slug: string }) {
          <section className="grid grid-cols-1 md:grid-cols-2 lg:gap-[120px] gap-4 flex-1 px-4">
             <div
                className={clsx(
-                  "w-full h-[464px] bg-white-100 flex items-center justify-center min-h-[460px] border border-[#0000006e]",
+                  "w-full h-[464px] bg-white-100 flex items-center justify-center min-h-[460px]",
                   {
                      "animate-pulse bg-background": isLoading,
                   }
