@@ -19,7 +19,6 @@ interface IProps {
    }
 }
 export default function Item({ item, handleCart, isLoading }: IProps) {
-   // const [count, setCount] = useState(item.count)
    const { remaining } = item.data
    const handleDeleteFromCart = () => {
       handleCart(item.data.id, 0, item.colors, item.sizes)
@@ -75,17 +74,14 @@ export default function Item({ item, handleCart, isLoading }: IProps) {
                            item.sizes
                         )
                      }}
-                     disabled={item.count == 1}
+                     disabled={item.count == 1 || isLoading}
                   >
                      <Icons.Minus />
                   </button>
 
                   <p
                      className={clsx(
-                        "h-[24px] w-[24px] text-center flex justify-center items-center transition",
-                        {
-                           "opacity-55": isLoading,
-                        }
+                        "h-[24px] w-[24px] text-center flex justify-center items-center transition"
                      )}
                   >
                      {item.count}
@@ -100,7 +96,7 @@ export default function Item({ item, handleCart, isLoading }: IProps) {
                            item.sizes
                         )
                      }}
-                     disabled={item.count == remaining}
+                     disabled={item.count == remaining || isLoading}
                   >
                      <Icons.Plus />
                   </button>
