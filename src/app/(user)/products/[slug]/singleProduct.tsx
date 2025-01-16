@@ -1,6 +1,7 @@
 "use client"
 
 import Image from "next/image"
+import { revalidatePath } from "next/cache"
 import { Icons } from "@/components/Icons/icons"
 import { useState } from "react"
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query"
@@ -40,6 +41,9 @@ export default function SingleProduct({ slug }: { slug: string }) {
       onSuccess: (data) => {
          console.log("added to cart", data)
          toast.success("added to cart")
+         queryClient.invalidateQueries({
+            queryKey: ["cart"],
+         })
       },
       onError: (error) => {
          console.log("error", error)
