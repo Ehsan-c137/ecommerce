@@ -14,25 +14,25 @@ export default function Drawer({
    isOpen: boolean
    setIsOpen: (isOpen: boolean) => void
 }) {
-   // const [isOpen, setIsOpen] = useState(false)
    const ref = useRef<Element | null>(null)
-
-   const handleCloseDrawer = useCallback(() => setIsOpen(false), [setIsOpen])
+   const handleCloseDrawer = useCallback(() => {
+      setIsOpen(false)
+   }, [setIsOpen])
 
    useEffect(() => {
       ref.current = document.querySelector(".background")
+
       if (isOpen) {
-         ref.current?.classList.add("backdrop")
          document.body.style.height = "100vh"
          document.body.style.overflow = "hidden"
          ref.current?.addEventListener("click", handleCloseDrawer)
       } else {
-         ref.current?.classList.remove("backdrop")
          document.body.style.height = "auto"
          document.body.style.overflow = "auto"
          ref.current?.removeEventListener("click", handleCloseDrawer)
       }
    }, [isOpen, handleCloseDrawer])
+
    return (
       <>
          <CreatePortal show={isOpen} selector="my-portal">
