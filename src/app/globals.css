@@ -6,6 +6,7 @@
    --background: #ffffff;
    --foreground: #171717;
    --header-height: 84px;
+   --custom-ease: cubic-bezier(0.32, 0.72, 0, 1);
 }
 
 .background {
@@ -58,8 +59,8 @@ body {
 }
 
 .loader-black {
-   width: 20px;
-   height: 20px;
+   width: 18px;
+   height: 18px;
    border: 2px solid #000;
    border-bottom-color: transparent;
    border-radius: 50%;
