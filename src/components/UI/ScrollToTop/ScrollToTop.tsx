@@ -24,7 +24,7 @@ export default function ScrollToTop() {
             backgroundColor: "rgba(49, 49, 49, 0.105)",
          }}
          className={clsx(
-            "fixed z-50 w-[30px] h-[30px] justify-center items-center bottom-2 right-2 bg-[#00000] bg-opacity-75 text-white p-2 rounded-full hover:bg-neutral-800 transition duration-300 ease-in-out opacity-0",
+            "fixed z-50 w-[30px] h-[30px] justify-center items-center bottom-4 right-4 bg-[#00000] bg-opacity-75 text-white p-2 rounded-full hover:bg-neutral-800 transition duration-300 ease-in-out opacity-0",
             {
                flex: isScrolled,
                [style.show_button]: isScrolled,
