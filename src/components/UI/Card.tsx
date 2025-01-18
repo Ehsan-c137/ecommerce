@@ -20,7 +20,7 @@ export default function Card({
    return (
       <div
          className={clsx("item-card flex gap-2 ", {
-            "flex-row w-full h-[130px]": isListView,
+            "flex-row w-full h-[130px] justify-between": isListView,
             "w-[165px] h-[278px] flex-col": !isListView,
          })}
       >
@@ -38,12 +38,12 @@ export default function Card({
             <Image
                src={data?.main_image}
                alt={data?.name}
-               width={100}
-               height={134}
+               width={isListView ? 130 : 165}
+               height={isListView ? 165 : 134}
                sizes="100vw"
                style={{
                   width: "auto",
-                  height: "auto",
+                  height: isListView ? "100%" : "auto",
                   objectFit: "cover",
                }}
                onLoad={handleImageLoad}
