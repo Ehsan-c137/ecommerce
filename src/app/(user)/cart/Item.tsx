@@ -10,7 +10,7 @@ interface IProps {
       colors: string,
       sizes: string
    ) => void
-   isLoading: boolean
+   isLoading?: boolean
    item: {
       data: TProduct
       count: number
