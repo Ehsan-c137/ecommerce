@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 "use client"
 
 import Card from "@/components/UI/Card"
@@ -11,8 +10,6 @@ import { useCallback, useMemo, useRef } from "react"
 import useHandleQueryParams from "@/utils/useHandleQueryParams"
 import { Icons } from "@/components/Icons/icons"
 import { useState } from "react"
-import { useGSAP } from "@gsap/react"
-import gsap from "gsap"
 import clsx from "clsx"
 import Link from "next/link"
 
@@ -23,10 +20,10 @@ export default function Products({
    maxPrice: number
    minPrice: number
 }) {
-   const [isDropdownOpen, setIsDropdownOpen] = useState(false)
-   const [isListView, setIsListView] = useState(false)
-   const handleQueryParams = useHandleQueryParams()
    const searchParams = useSearchParams()
+   const [isDropdownOpen, setIsDropdownOpen] = useState(false)
+   const [isListView, setIsListView] = useState(!!searchParams.get("listView"))
+   const handleQueryParams = useHandleQueryParams()
    const allSearchParams = useGetAllSearchParams()
    const groupped = Object.groupBy(allSearchParams, (item) => item.name)
 
@@ -43,10 +40,6 @@ export default function Products({
       queryKey: ["allproducts"],
       queryFn: () => products(2, 1),
    })
-
-   // useEffect(() => {
-   //    handleQueryParams("ascending", "false")
-   // }, [])
 
    const filterProduct = useCallback(
       (data: TProduct[]) => {
@@ -145,7 +138,10 @@ export default function Products({
             <div>
                <div className="relative inline-block text-left">
                   <div className="flex items-center gap-2">
-                     <button className="w-[72px] h-[36px] bg-[#c4c4c42c] flex items-center justify-center rounded-full gap-2">
+                     <button
+                        className="w-[72px] h-[36px] bg-[#c4c4c42c] flex items-center justify-center rounded-full gap-2"
+                        onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                     >
                         <p>New</p>
                         <svg
                            width="8"
@@ -160,19 +156,11 @@ export default function Products({
                            />
                         </svg>
                      </button>
-                     <Link
-                        href={
-                           searchParams.get("listView") === "true"
-                              ? "?listView=false"
-                              : "?listView=true"
-                        }
+                     <button
                         id="menu-button"
                         onClick={() => {
-                           if (searchParams.get("listView") === "true") {
-                              setIsListView(false)
-                           } else {
-                              setIsListView(true)
-                           }
+                           handleQueryParams("listView", "true")
+                           setIsListView((prev) => !prev)
                         }}
                         className="w-[36px] h-[36px] p-2 bg-[#c4c4c42c] flex items-center justify-center rounded-full"
                      >
@@ -181,14 +169,12 @@ export default function Products({
                         ) : (
                            <Icons.ListView />
                         )}
-                     </Link>
-                     <Link
+                     </button>
+                     <button
                         id="menu-button"
-                        href={
-                           searchParams.get("decending") === "true"
-                              ? "?decending=false"
-                              : "?decending=true"
-                        }
+                        onClick={() => {
+                           handleQueryParams("decending", "true")
+                        }}
                         className="w-[36px] h-[36px] bg-[#c4c4c42c] flex items-center justify-center rounded-full"
                      >
                         <Icons.Filter
@@ -198,13 +184,14 @@ export default function Products({
                                  : "black"
                            }
                         />
-                     </Link>
+                     </button>
                   </div>
                   {isDropdownOpen && (
                      <div
                         className="absolute right-0 z-10 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white-900 shadow-lg ring-1 ring-neutral-200 ring-opacity-5 focus:outline-none"
                         role="menu"
                         tabIndex={0}
+                        onBlur={() => setIsDropdownOpen(false)}
                      >
                         <div className="py-1" role="dialog">
                            <a
@@ -231,14 +218,14 @@ export default function Products({
          </div>
          <div className="flex flex-wrap gap-3">
             {Object.entries(allSearchParamsObj).map(([key, value]) => {
-               const skip = [
+               const skipKey = [
                   "max price",
                   "min price",
                   "acending",
                   "decending",
                   "listView",
                ]
-               if (skip.includes(key)) {
+               if (skipKey.includes(key)) {
                   return
                }
                return (
@@ -277,70 +264,29 @@ export default function Products({
             )}
          >
             {isError && <p>{error.message}</p>}
-            {isLoading && (
-               <>
-                  <div
-                     className=" bg-white-200 animate-pulse"
-                     style={{
-                        width: "165px",
-                        height: "302px",
-                     }}
-                  >
-                     &nbsp;
-                  </div>
-                  <div
-                     className=" bg-white-200 animate-pulse"
-                     style={{
-                        width: "165px",
-                        height: "302px",
-                     }}
-                  >
-                     &nbsp;
-                  </div>
-                  <div
-                     className=" bg-white-200 animate-pulse"
-                     style={{
-                        width: "165px",
-                        height: "302px",
-                     }}
-                  >
-                     &nbsp;
-                  </div>
-                  <div
-                     className=" bg-white-200 animate-pulse"
-                     style={{
-                        width: "165px",
-                        height: "302px",
-                     }}
-                  >
-                     &nbsp;
-                  </div>
-                  <div
-                     className=" bg-white-200 animate-pulse"
-                     style={{
-                        width: "165px",
-                        height: "302px",
-                     }}
-                  >
-                     &nbsp;
-                  </div>
-                  <div
-                     className=" bg-white-200 animate-pulse"
-                     style={{
-                        width: "165px",
-                        height: "302px",
-                     }}
-                  >
-                     &nbsp;
-                  </div>
-               </>
-            )}
+            {isLoading &&
+               Array.from({ length: 6 }).map((_, i) => {
+                  return (
+                     <div
+                        key={i}
+                        className=" bg-white-200 animate-pulse"
+                        style={{
+                           width: isListView ? "343px" : "165px",
+                           height: isListView ? "134px" : "302px",
+                        }}
+                     >
+                        &nbsp;
+                     </div>
+                  )
+               })}
 
             {filteredData?.map((product: TProduct) => {
                return (
-                  <div key={product.id} className="card-item">
-                     <Card data={product} isListView={isListView} />
-                  </div>
+                  <Card
+                     key={product.id}
+                     data={product}
+                     isListView={isListView}
+                  />
                )
             })}
          </div>
