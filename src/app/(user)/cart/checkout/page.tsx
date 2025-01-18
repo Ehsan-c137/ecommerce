@@ -27,7 +27,7 @@ export default function Checkout() {
    const queryClient = useQueryClient()
 
    const handleCart = (
-      id: string,
+      id: number,
       count: number,
       colors: string,
       sizes: string
@@ -36,7 +36,7 @@ export default function Checkout() {
       const findIndex = newDataCart?.data?.findIndex(
          (item: {
             data: {
-               id: string
+               id: number
             }
             colors: string
             sizes: string
@@ -81,14 +81,7 @@ export default function Checkout() {
                <div className="flex flex-col gap-2 px-4 h-full overflow-auto">
                   {cart?.data?.map(
                      (item: {
-                        data: {
-                           id: string
-                           main_image: string
-                           name: string
-                           price: number | string
-                           remaining: number
-                           slug: string
-                        }
+                        data: TProduct
                         count: number
                         colors: string
                         sizes: string
