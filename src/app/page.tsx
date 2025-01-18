@@ -73,12 +73,13 @@ export default async function Home() {
             </section>
             <section className="grid grid-cols-1 items-center justify-items-center md:grid-cols-2 container mx-auto my-4">
                <Icons.Border />
-               <div className="grid grid-cols-3 py-6 place-items-center items-center justify-center gap-4">
+               <div className="grid grid-cols-3 py-6 place-items-center items-center justify-center gap-6">
                   <Icons.Prada />
                   <Icons.Burberry />
                   <Icons.HugoBossIcon />
-                  <br />
+                  <Icons.Gucci />
                   <Icons.Cartier />
+                  <Icons.TiffanyAndCo />
                </div>
                <Icons.Border />
             </section>
