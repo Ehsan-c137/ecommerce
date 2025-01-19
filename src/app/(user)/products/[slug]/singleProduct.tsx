@@ -169,12 +169,14 @@ export default function SingleProduct({ slug }: { slug: string }) {
                )}
             </div>
             <div className="flex flex-col gap-4 flex-1 max-w-[438px]">
-               <div
-                  className={clsx("flex items-center justify-between", {
-                     "animate-pulse bg-background": isLoading,
-                  })}
-               >
-                  <h3 className="font-bold text-titleActive">{data?.name}</h3>
+               <div className="flex items-center justify-between">
+                  <h3
+                     className={clsx("font-bold text-titleActive", {
+                        "bg-inputBackground animate-pulse": isLoading,
+                     })}
+                  >
+                     {data?.name}
+                  </h3>
                   <div
                      className="flex items-center justify-center cursor-pointer"
                      onClick={copyToClipboard}
