@@ -67,7 +67,11 @@ export default function Card({
             })}
          >
             <Link href={`products/${data?.slug?.toLowerCase()}`}>
-               <p className="font-medium text-titleActive truncate">
+               <p
+                  className={clsx("font-medium text-titleActive", {
+                     truncate: !isListView,
+                  })}
+               >
                   {data?.name}
                </p>
             </Link>
