@@ -140,7 +140,7 @@ export default function SingleProduct({ slug }: { slug: string }) {
       searchParams.getAll("size").length > 0
 
    return (
-      <div className="flex flex-col pt-4 container mx-auto">
+      <div className="flex flex-col mt-1 container mx-auto">
          <section className="grid grid-cols-1 md:grid-cols-2 lg:gap-[120px] gap-4 flex-1 px-4">
             <div
                className={clsx(
