@@ -1,16 +1,35 @@
 "use client"
 
-import { useState, useRef } from "react"
+import { useState, useRef, useEffect } from "react"
 import { Icons } from "../Icons/icons"
 import clsx from "clsx"
 import Drawer from "@/components/UI/Drawer/Drawer"
+import getAllProduct from "@/services/store/product/products"
+import { useQuery } from "@tanstack/react-query"
+import Card from "./Card"
 
 const SearchInput = ({ ...props }) => {
    const { className, ...otherProps } = props
 
    const [isOpen, setIsOpen] = useState(false)
    const [searchText, setSearchText] = useState("")
+   const [searchQuery, setSearchQuery] = useState("")
    const ref = useRef<HTMLInputElement | null>(null)
+
+   useEffect(() => {
+      const id = setInterval(() => {
+         setSearchQuery(searchText)
+      }, 500)
+
+      return () => {
+         clearInterval(id)
+      }
+   }, [searchText])
+
+   const { data } = useQuery({
+      queryKey: ["products"],
+      queryFn: () => getAllProduct(1, 1),
+   })
 
    const handleOpen = () => {
       setIsOpen(true)
@@ -19,8 +38,18 @@ const SearchInput = ({ ...props }) => {
 
    const clearInput = () => {
       setSearchText("")
-      // ref.current?.focus()
    }
+
+   const filteredData = data?.filter((item: TProduct) => {
+      if (searchText.length < 1) {
+         return
+      }
+      if (searchQuery.trim().length > 1) {
+         return item.name
+            .toLowerCase()
+            .includes(searchText.trim().toLowerCase())
+      }
+   })
 
    return (
       <>
@@ -60,6 +89,17 @@ const SearchInput = ({ ...props }) => {
                         <Icons.Search />
                      </button>
                   </div>
+               </div>
+               <div className="flex flex-col gap-4 mt-4">
+                  {filteredData?.map((item: TProduct) => (
+                     <div
+                        key={item.id}
+                        className="w-full"
+                        onClick={() => setIsOpen(false)}
+                     >
+                        <Card isListView={true} data={item} />
+                     </div>
+                  ))}
                </div>
             </div>
          </Drawer>
