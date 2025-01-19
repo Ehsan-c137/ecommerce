@@ -13,7 +13,6 @@
 }
 
 .drawerClose {
-   /* transform: translateY(100%); */
    animation: closeDrawer 0.3s cubic-bezier(0.32, 0.72, 0, 1) forwards;
 }
 .drawerOpen {
@@ -42,9 +41,8 @@
    position: relative;
    display: flex;
    align-items: center;
-
+   padding-top: 5px;
    width: 28px;
-   /* height: 28px; */
    display: block;
    margin: 0 auto;
    transition: all 0.3s cubic-bezier(0.32, 0.72, 0, 1);
@@ -79,6 +77,7 @@
 
 .burgerMenuClosed .bar:nth-of-type(3) {
    width: 28px;
+   height: 1px;
 }
 
 .burgerMenuClosed:hover .bar:nth-of-type(2) {
@@ -87,10 +86,6 @@
 
 .burgerMenuClosed:hover .bar:nth-of-type(3) {
    width: 100%;
-}
-
-.burgerMenuOpened {
-   padding-top: 5px;
 }
 
 .burgerMenuOpened .bar:nth-of-type(1) {
