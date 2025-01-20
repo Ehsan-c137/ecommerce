@@ -100,7 +100,7 @@ const Carousel = ({ withButton = false }: IProps) => {
                               src={image.main_image}
                               alt={`Slide ${index} ${image.name}`}
                               className={clsx(
-                                 "carousel__img opacity-0 transition -translate-x-4 duration-500",
+                                 "opacity-0 transition -translate-x-4 duration-500",
                                  {
                                     "active opacity-100 transition translate-x-0":
                                        index === activeIndex,
@@ -117,7 +117,7 @@ const Carousel = ({ withButton = false }: IProps) => {
 
                         <p
                            className={clsx(
-                              "carousel__img opacity-0 transition -translate-x-4 duration-500 bottom-0 absolute text-start delay-200 truncate",
+                              "opacity-0 transition -translate-x-4 duration-500 bottom-0 absolute text-start delay-200 truncate",
                               {
                                  "active opacity-100 transition translate-x-0":
                                     index === activeIndex,
