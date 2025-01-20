@@ -138,13 +138,7 @@ export default async function Home() {
                <h3 className="uppercase text-titleActive">Just for you</h3>
                <Icons.Border />
 
-               <Carousel
-                  images={[
-                     "https://i.ibb.co/3NLm4j8/image-4.jpg",
-                     "https://i.ibb.co/3WWMgRN/image-2.jpg",
-                     "https://i.ibb.co/4FNbcwJ/image-15.jpg",
-                  ]}
-               />
+               <Carousel />
             </section>
             <section className="flex flex-col md:flex-row w-full justify-center mx-auto container my-10 rounded-md"></section>
          </main>
