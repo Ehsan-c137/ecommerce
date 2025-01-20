@@ -64,7 +64,7 @@ export default function Cart() {
       <div className="h-full">
          <div className="flex flex-col gap-4 px-4 h-full pb-[224px] overflow-auto">
             {isLoading ? (
-               <div className="w-full flex justify-center min-h-[300px]">
+               <div className="w-full flex justify-center items-center h-[300px]">
                   <span className="loader-black"></span>
                </div>
             ) : (
