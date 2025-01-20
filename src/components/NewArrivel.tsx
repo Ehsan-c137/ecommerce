@@ -26,7 +26,7 @@ export default function NewArrival() {
    console.log(data)
    return (
       <>
-         <div className="px-3 pb-4 flex w-full justify-between truncate gap-2">
+         <div className="px-3 pb-4 flex w-full justify-between truncate gap-2 h-[40px]">
             {categories?.map((item: TCategory) => (
                <button
                   key={item.name}
