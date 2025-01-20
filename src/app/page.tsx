@@ -140,9 +140,9 @@ export default async function Home() {
 
                <Carousel
                   images={[
-                     "https://placehold.co/254x311/000000/FFFFFF/png",
-                     "https://placehold.co/254x311/000000/FAFAFA/png",
-                     "https://placehold.co/254x311/000000/F3F3F3/png",
+                     "https://i.ibb.co/3NLm4j8/image-4.jpg",
+                     "https://i.ibb.co/3WWMgRN/image-2.jpg",
+                     "https://i.ibb.co/4FNbcwJ/image-15.jpg",
                   ]}
                />
             </section>
