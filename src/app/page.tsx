@@ -3,10 +3,10 @@ import { Bodoni_Moda } from "next/font/google"
 import Image from "next/image"
 import Link from "next/link"
 import Footer from "@/components/Footer/Footer"
-import Product from "@/components/UI/Product"
 import Carousel from "@/components/UI/Carousel/Carousel"
 import ScrollToTop from "@/components/UI/ScrollToTop/ScrollToTop"
 import Header from "@/components/Header/Header"
+import NewArrival from "@/components/NewArrivel"
 
 const bodoniModa = Bodoni_Moda({
    subsets: ["latin"],
@@ -53,18 +53,9 @@ export default async function Home() {
             <section className="flex flex-col gap-4 justify-around text-center items-center w-full py-5">
                <p className="text-titleActive uppercase">new Arrival</p>
                <Icons.Border />
-               <div className="w-full flex items-center justify-around px-2">
-                  <button>All</button>
-                  <button>Apparel</button>
-                  <button>Dress</button>
-                  <button>Tshirt</button>
-                  <button>Bag</button>
-               </div>
+
                <div className="flex flex-wrap justify-center gap-4">
-                  <Product />
-                  <Product />
-                  <Product />
-                  <Product />
+                  <NewArrival />
                </div>
                <Link
                   href={"/products"}
