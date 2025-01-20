@@ -4,7 +4,7 @@ export default function manifest(): MetadataRoute.Manifest {
    return {
       name: "Open Fashion",
       short_name: "OpenFashion",
-      description: "A Progressive Web App built with Next.js",
+      description: "a place for find your style",
       start_url: "/",
       display: "standalone",
       background_color: "#ffffff",
