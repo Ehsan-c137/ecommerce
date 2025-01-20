@@ -89,9 +89,7 @@ const config: Config = {
                y900: "#F3B40A",
             },
          },
-         typography: {},
       },
    },
-   plugins: [require("@tailwindcss/typography")],
 }
 export default config
