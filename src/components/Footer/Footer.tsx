@@ -3,16 +3,16 @@ import Link from "next/link"
 
 export default function Footer() {
    return (
-      <footer className="grid grid-cols-1 gap-8 w-full  pt-20">
+      <footer className="grid grid-cols-1 gap-8 w-full pt-1">
          <div className="grid grid-cols-1 lg:grid-cols-3 justify-between gap-8 p-4 lg:p-0 w-full container mx-auto">
             <div className="flex flex-col gap-4">
                <div className="flex items-center gap-4">
                   <Icons.Logo />
                </div>
                <p className="text-neutral-500">
-                  Lorem ipsum dolor sit amet consectetur, adipisicing elit.{" "}
-                  <br />
-                  Quae possimus autem, voluptate esse quidem in!
+                  Elevate your style with the latest trends. Shop now for chic
+                  everyday wear and glamorous evening outfits.
+                  <br /> Enjoy exclusive deals and free shipping!”
                </p>
             </div>
             <div className="flex gap-16 text-sm lg:text-base text-nowrap">
