@@ -116,7 +116,7 @@ export default function Products({
             <div>
                <div className="relative inline-block text-left">
                   <div className="flex items-center gap-2">
-                     <button
+                     {/* <button
                         className="w-[72px] h-[36px] bg-[#c4c4c42c] flex items-center justify-center rounded-full gap-2"
                         onClick={() => setIsDropdownOpen(!isDropdownOpen)}
                      >
@@ -133,7 +133,7 @@ export default function Products({
                               fill="#333333"
                            />
                         </svg>
-                     </button>
+                     </button> */}
                      <button
                         id="menu-button"
                         onClick={() => {
