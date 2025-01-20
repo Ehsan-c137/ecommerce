@@ -3,7 +3,7 @@ import DoubleRangePicker from "@/components/UI/DubleRangePicker/DoubleRangePicke
 import Products from "./Products"
 import { useRouter, usePathname, useSearchParams } from "next/navigation"
 import { useQuery } from "@tanstack/react-query"
-import getAllCategory from "@/services/store/category/getAllCategory"
+import { getAllCategory } from "@/services/store/category/category"
 import { useCallback } from "react"
 import products from "@/services/store/product/products"
 
