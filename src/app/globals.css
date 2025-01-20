@@ -140,7 +140,6 @@ body {
    transition: opacity 300ms, transform 300ms;
 }
 
-/* typography */
 .title {
    font-size: 18px;
    letter-spacing: 4px;
@@ -184,31 +183,22 @@ body {
    transform: translateX(-50%) rotate(45deg);
 }
 
-/* scrollbar width */
 ::-webkit-scrollbar {
    width: 6px;
 }
-
-/* Track */
 ::-webkit-scrollbar-track {
    background: #f1f1f1;
 }
-
-/* Handle */
 ::-webkit-scrollbar-thumb {
    background: #dd8560;
 }
-
-/* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
    background: #a8715a;
 }
 
 .animate-opacity {
-   animation: change-opacity 500ms ease-in-out forwards;
-   animation-delay: 500ms;
+   animation: change-opacity 350s ease-in-out forwards;
 }
-
 @keyframes change-opacity {
    from {
       opacity: 0;
