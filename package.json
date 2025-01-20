@@ -7,7 +7,7 @@
       "build": "next build",
       "start": "next start",
       "lint": "next lint",
-      "exprimental": "next dev --experimental-https"
+      "exprimental_dev": "next dev --experimental-https"
    },
    "dependencies": {
       "@gsap/react": "^2.1.1",
