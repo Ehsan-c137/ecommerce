@@ -27,7 +27,7 @@ export default function NewArrival() {
    return (
       <>
          <div className="px-3 pb-4 flex w-full justify-between truncate gap-2">
-            {categories?.map((item) => (
+            {categories?.map((item: TCategory) => (
                <button
                   key={item.name}
                   className={clsx({
@@ -44,10 +44,10 @@ export default function NewArrival() {
                Array.from({ length: 4 }).map((_, i) => (
                   <div
                      key={i}
-                     className="w-[165px] h-[200px] bg-label animate-pulse"
+                     className="w-[165px] h-[280px] bg-inputBackground animate-pulse"
                   ></div>
                ))}
-            {data?.slice(0, 4)?.map((item) => (
+            {data?.slice(0, 4)?.map((item: TProduct) => (
                <Product key={item.id} item={item} />
             ))}
          </div>
