@@ -4,7 +4,7 @@ export default function Product({ item }: { item: TProduct }) {
    const [isLoaded, setIsLoaded] = useState(false)
    return (
       <div className={`w-[165px] text-center`}>
-         <div className="h-[220px]">
+         <div className="h-[220px] overflow-y-hidden">
             <Image
                src={item?.main_image}
                width={"165"}
