@@ -30,7 +30,7 @@ export default function NewArrival() {
             {categories?.map((item: TCategory) => (
                <button
                   key={item.name}
-                  className={clsx({
+                  className={clsx("text-titleActive", {
                      "active-section": item.id === activeCategory,
                   })}
                   onClick={() => setActiveCategory(item.id)}
