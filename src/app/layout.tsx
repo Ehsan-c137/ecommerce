@@ -20,11 +20,6 @@ export const metadata: Metadata = {
    ],
 }
 
-export const viewport: Viewport = {
-   maximumScale: 1,
-   userScalable: false,
-}
-
 const tenor_sans = Tenor_Sans({ subsets: ["latin"], weight: "400" })
 
 export default function RootLayout({
