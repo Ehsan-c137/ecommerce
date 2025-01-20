@@ -403,10 +403,10 @@ export default function SingleProduct({ slug }: { slug: string }) {
                <Icons.Border />
             </div>
             <div className="grid grid-cols-2 gap-4">
+               {/* <Product />
                <Product />
                <Product />
-               <Product />
-               <Product />
+               <Product /> */}
             </div>
          </section>
          <Footer />
