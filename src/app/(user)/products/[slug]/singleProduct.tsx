@@ -186,7 +186,9 @@ export default function SingleProduct({ slug }: { slug: string }) {
                </div>
                <div className="flex flex-col">
                   <div className="flex items-center justify-between gap-4">
-                     <h4 className="text-secondary">${data?.price}</h4>
+                     <h4 className="text-secondary">
+                        {!isLoading && `$ ${data?.price} `}
+                     </h4>
                      <div className="flex items-center gap-2">
                         {isHaveRating && (
                            <div className="flex items-center rounded-full bg-neutral-100 h-7 px-4">
