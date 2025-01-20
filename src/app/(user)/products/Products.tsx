@@ -11,7 +11,6 @@ import useHandleQueryParams from "@/utils/useHandleQueryParams"
 import { Icons } from "@/components/Icons/icons"
 import { useState } from "react"
 import clsx from "clsx"
-import Link from "next/link"
 
 export default function Products({
    maxPrice,
@@ -100,27 +99,6 @@ export default function Products({
    )
 
    const cardContainerRef = useRef<HTMLDivElement | null>(null)
-
-   // useGSAP(
-   //    () => {
-   //       if (cardContainerRef.current) {
-   //          gsap.fromTo(
-   //             ".card-item",
-   //             {
-   //                opacity: 0,
-   //                ease: "power3.inOut",
-   //                duration: 300,
-   //             },
-   //             { opacity: 1, stagger: 0.25 }
-   //          )
-   //       }
-   //    },
-   //    {
-   //       scope: cardContainerRef.current!,
-   //       dependencies: [filteredData, isListView],
-   //       revertOnUpdate: false,
-   //    }
-   // )
 
    return (
       <>
