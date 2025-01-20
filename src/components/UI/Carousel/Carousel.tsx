@@ -81,7 +81,7 @@ const Carousel = ({ withButton = false }: IProps) => {
 
             <div
                className={clsx(
-                  "overflow-hidden flex relative w-[254px] h-[325px]",
+                  "overflow-hidden flex relative w-[254px] h-[345px]",
                   { "animate-pulse bg-inputBackground": isLoading }
                )}
             >
