@@ -66,10 +66,13 @@ export default async function Home() {
                   <Product />
                   <Product />
                </div>
-               <div className="flex items-center gap-2 py-4">
+               <Link
+                  href={"/products"}
+                  className="flex items-center gap-2 py-4"
+               >
                   <p className="text-titleActive body-1">Explore More</p>
                   <Icons.ArrowRight />
-               </div>
+               </Link>
             </section>
             <section className="grid grid-cols-1 items-center justify-items-center md:grid-cols-2 container mx-auto my-4">
                <Icons.Border />
