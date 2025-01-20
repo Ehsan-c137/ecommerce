@@ -15,7 +15,7 @@ export default function Product({ item }: { item: TProduct }) {
             }}
             onLoad={() => setIsLoaded(true)}
          />
-         <p className="text-body body-s">{item?.name}</p>
+         <p className="text-body body-s truncate">{item?.name}</p>
          <p className="text-primary text-md">${item?.price}</p>
       </div>
    )
