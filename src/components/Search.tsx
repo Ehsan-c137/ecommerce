@@ -53,7 +53,7 @@ const SearchInput = ({ ...props }) => {
 
    return (
       <>
-         <button onClick={handleOpen}>
+         <button onClick={handleOpen} aria-label="search">
             <Icons.Search />
          </button>
          <Drawer isOpen={isOpen} setIsOpen={setIsOpen}>

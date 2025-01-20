@@ -19,6 +19,7 @@ export default function ScrollToTop() {
    })
    return (
       <button
+         aria-label="go to top"
          onClick={scrollToTop}
          style={{
             backgroundColor: "rgba(49, 49, 49, 0.105)",
