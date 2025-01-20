@@ -5,6 +5,9 @@ import style from "./Carousel.module.css"
 import Image from "next/image"
 import { Icons } from "../../Icons/icons"
 import clsx from "clsx"
+import { useQuery } from "@tanstack/react-query"
+import getProduct from "@/services/store/product/products"
+import Link from "next/link"
 
 interface IIndicatorsProps {
    images: string[]
@@ -18,7 +21,7 @@ const CarouselIndicators = ({
 }: IIndicatorsProps) => {
    return (
       <div className="flex items-center gap-4 pb-2 pt-4">
-         {images.map((_, index) => (
+         {images?.map((_, index) => (
             <span
                key={index}
                className={clsx(style.carousel__indicator, {
@@ -36,28 +39,34 @@ interface IProps {
    withButton?: boolean
 }
 
-const Carousel = ({ images, withButton = false }: IProps) => {
+const Carousel = ({ withButton = false }: IProps) => {
+   const { data, isLoading } = useQuery({
+      queryKey: ["allproducts"],
+      queryFn: () => getProduct(1, 1),
+   })
+   const images = data?.slice(0, 3)
+
    const [activeIndex, setActiveIndex] = useState(0)
    const nextSlide = () => {
       setActiveIndex((prevIndex) =>
-         prevIndex === images.length - 1 ? 0 : prevIndex + 1
+         prevIndex === images?.length - 1 ? 0 : prevIndex + 1
       )
    }
    const prevSlide = () => {
       setActiveIndex((prevIndex) =>
-         prevIndex === 0 ? images.length - 1 : prevIndex - 1
+         prevIndex === 0 ? images?.length - 1 : prevIndex - 1
       )
    }
 
    useEffect(() => {
       const timer = setInterval(() => {
-         setActiveIndex((prev) => (prev === images.length - 1 ? 0 : prev + 1))
+         setActiveIndex((prev) => (prev === images?.length - 1 ? 0 : prev + 1))
       }, 5000)
 
       return () => {
          clearInterval(timer)
       }
-   }, [activeIndex, images.length])
+   }, [activeIndex, images?.length])
 
    return (
       <div className="carousel flex flex-col items-center max-w-[600px] px-4">
@@ -71,31 +80,53 @@ const Carousel = ({ images, withButton = false }: IProps) => {
                </button>
             )}
 
-            <div className="overflow-hidden flex relative w-[254px] h-[311px]">
-               {images.map((image: string, index: number) => {
+            <div
+               className={clsx(
+                  "overflow-hidden flex relative w-[254px] h-[325px]",
+                  { "animate-pulse bg-inputBackground": isLoading }
+               )}
+            >
+               {images?.map((image: TProduct, index: number) => {
                   return (
-                     <div
-                        className="items-center flex absolute left-0 bottom-0 transition overflow-hidden"
-                        key={image}
-                     >
-                        <Image
-                           src={image}
-                           alt={`Slide ${index}`}
+                     <div key={image.id} className="flex flex-col gap-4">
+                        <Link
+                           href={`product/${image.slug}`}
+                           className="items-center flex absolute left-0 bottom-[10%] transition overflow-hidden"
+                           style={{
+                              backgroundPosition: "top",
+                              objectPosition: "top",
+                           }}
+                        >
+                           <Image
+                              src={image.main_image}
+                              alt={`Slide ${index} ${image.name}`}
+                              className={clsx(
+                                 "carousel__img opacity-0 transition -translate-x-4 duration-500",
+                                 {
+                                    "active opacity-100 transition translate-x-0":
+                                       index === activeIndex,
+                                 }
+                              )}
+                              style={{
+                                 objectFit: "cover",
+                              }}
+                              unoptimized
+                              width={254}
+                              height={311}
+                           />
+                        </Link>
+
+                        <p
                            className={clsx(
-                              "carousel__img opacity-0 transition -translate-x-4 duration-500",
+                              "carousel__img opacity-0 transition -translate-x-4 duration-500 bottom-0 absolute text-start delay-200 truncate",
                               {
                                  "active opacity-100 transition translate-x-0":
                                     index === activeIndex,
                               }
                            )}
-                           style={{
-                              objectFit: "cover",
-                              objectPosition: "top",
-                           }}
-                           unoptimized
-                           width={254}
-                           height={311}
-                        />
+                        >
+                           {image.name}
+                        </p>
                      </div>
                   )
                })}
