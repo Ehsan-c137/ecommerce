@@ -1,26 +1,42 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import "./Carousel.css"
+import style from "./Carousel.module.css"
 import Image from "next/image"
 import { Icons } from "../../Icons/icons"
+import clsx from "clsx"
 
-// const CarouselIndicators = ({ images, activeIndex, onClick }) => {
-//    return (
-//       <div className="carousel__indicators">
-//          {images.map((_, index) => (
-//             <span
-//                key={index}
-//                className={`carousel__indicator ${
-//                   index === activeIndex ? "active" : ""
-//                }`}
-//                onClick={() => onClick(index)}
-//             />
-//          ))}
-//       </div>
-//    )
-// }
-const Carousel = ({ images }: { images: string[] }) => {
+interface IIndicatorsProps {
+   images: string[]
+   activeIndex: number
+   onClick: (index: number) => void
+}
+const CarouselIndicators = ({
+   images,
+   activeIndex,
+   onClick,
+}: IIndicatorsProps) => {
+   return (
+      <div className="flex items-center gap-4 pb-2 pt-4">
+         {images.map((_, index) => (
+            <span
+               key={index}
+               className={clsx(style.carousel__indicator, {
+                  [style.carousel__indicator__active]: index === activeIndex,
+               })}
+               onClick={() => onClick(index)}
+            ></span>
+         ))}
+      </div>
+   )
+}
+
+interface IProps {
+   images: string[]
+   withButton?: boolean
+}
+
+const Carousel = ({ images, withButton = false }: IProps) => {
    const [activeIndex, setActiveIndex] = useState(0)
    const nextSlide = () => {
       setActiveIndex((prevIndex) =>
@@ -36,7 +52,7 @@ const Carousel = ({ images }: { images: string[] }) => {
    useEffect(() => {
       const timer = setInterval(() => {
          setActiveIndex((prev) => (prev === images.length - 1 ? 0 : prev + 1))
-      }, 3000)
+      }, 5000)
 
       return () => {
          clearInterval(timer)
@@ -44,49 +60,60 @@ const Carousel = ({ images }: { images: string[] }) => {
    }, [activeIndex, images.length])
 
    return (
-      <div className="carousel flex items-center max-w-[600px]">
-         <button
-            onClick={prevSlide}
-            className="carousel__btn carousel__btn--prev"
-         >
-            <Icons.ArrowLeft />
-         </button>
-         <div className="overflow-hidden">
-            <div
-               style={{
-                  transform: `translateX(-${activeIndex * 100}%)`,
-                  transitionDuration: "500ms",
-               }}
-               className=" w-full items-center flex [transition-timing-function:cubic-bezier(0.61,1,0.88,1)]"
-            >
+      <div className="carousel flex flex-col items-center max-w-[600px] px-4">
+         <div className="flex gap-4">
+            {withButton && (
+               <button
+                  onClick={prevSlide}
+                  className="carousel__btn carousel__btn--prev"
+               >
+                  <Icons.ArrowLeft />
+               </button>
+            )}
+
+            <div className="overflow-hidden flex relative w-[254px] h-[311px]">
                {images.map((image: string, index: number) => {
                   return (
-                     <Image
+                     <div
+                        className="items-center flex absolute left-0 bottom-0 transition overflow-hidden"
                         key={image}
-                        src={image}
-                        alt={`Slide ${index}`}
-                        className={`carousel__img ${
-                           index === activeIndex ? "active" : ""
-                        }`}
-                        sizes="100vw"
-                        style={{
-                           width: "100%",
-                           height: "100%",
-                           objectFit: "cover",
-                        }}
-                        width={0}
-                        height={0}
-                     />
+                     >
+                        <Image
+                           src={image}
+                           alt={`Slide ${index}`}
+                           className={clsx(
+                              "carousel__img opacity-0 transition -translate-x-4 duration-500",
+                              {
+                                 "active opacity-100 transition translate-x-0":
+                                    index === activeIndex,
+                              }
+                           )}
+                           style={{
+                              objectFit: "cover",
+                              objectPosition: "top",
+                           }}
+                           unoptimized
+                           width={254}
+                           height={311}
+                        />
+                     </div>
                   )
                })}
             </div>
+            {withButton && (
+               <button
+                  onClick={nextSlide}
+                  className="carousel__btn carousel__btn--next"
+               >
+                  <Icons.ArrowRight />
+               </button>
+            )}
          </div>
-         <button
-            onClick={nextSlide}
-            className="carousel__btn carousel__btn--next"
-         >
-            <Icons.ArrowRight />
-         </button>
+         <CarouselIndicators
+            images={images}
+            activeIndex={activeIndex}
+            onClick={setActiveIndex}
+         />
       </div>
    )
 }
