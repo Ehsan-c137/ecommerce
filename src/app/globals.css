@@ -140,6 +140,23 @@ body {
    transition: opacity 300ms, transform 300ms;
 }
 
+.active-section {
+   height: 1px;
+   position: relative;
+}
+
+.active-section::after {
+   content: "";
+   position: absolute;
+   bottom: -28px;
+   left: 50%;
+   width: 6px;
+   height: 6px;
+   rotate: 45deg;
+   background-color: #dd8560;
+   opacity: 1;
+}
+
 .title {
    font-size: 18px;
    letter-spacing: 4px;
