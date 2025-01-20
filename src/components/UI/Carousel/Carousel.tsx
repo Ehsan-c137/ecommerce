@@ -117,7 +117,7 @@ const Carousel = ({ withButton = false }: IProps) => {
 
                         <p
                            className={clsx(
-                              "opacity-0 transition -translate-x-4 duration-500 bottom-0 absolute text-start delay-200 truncate",
+                              "opacity-0 transition -translate-x-4 duration-500 bottom-0 absolute text-start delay-200 truncate text-titleActive",
                               {
                                  "active opacity-100 transition translate-x-0":
                                     index === activeIndex,
