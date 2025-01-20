@@ -1,6 +1,6 @@
 import Image from "next/image"
 import { useState } from "react"
-export default function Product({ item }) {
+export default function Product({ item }: { item: TProduct }) {
    const [isLoaded, setIsLoaded] = useState(false)
    return (
       <div className={`w-[165px] text-center`}>
