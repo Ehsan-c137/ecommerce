@@ -35,7 +35,6 @@ const CarouselIndicators = ({
 }
 
 interface IProps {
-   images: string[]
    withButton?: boolean
 }
 
