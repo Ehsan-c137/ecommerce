@@ -2,8 +2,6 @@
    overflow: hidden;
 }
 .carousel__btn {
-   /* position: absolute; */
-   /* top: 50%; */
    transform: translateY(-50%);
    color: white;
    font-size: 1.5rem;
@@ -19,4 +17,17 @@
    height: auto;
    display: block;
    transition: transform 0.3s ease-in-out;
+}
+
+.carousel__indicator {
+   content: " ";
+   width: 6px;
+   height: 6px;
+   background-color: gray;
+   transform: rotate(45deg);
+   transition: ease-in 500ms;
+}
+
+.carousel__indicator__active {
+   background-color: #dd8560 !important;
 }
