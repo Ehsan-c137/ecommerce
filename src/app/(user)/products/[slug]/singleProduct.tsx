@@ -364,7 +364,11 @@ export default function SingleProduct({ slug }: { slug: string }) {
                className="flex items-center justify-center w-[43px]"
                onClick={handleFavorite}
             >
-               {isFavorite ? <Icons.HeartRed /> : <Icons.Heart />}
+               {isFavorite ? (
+                  <Icons.Heart stroke="red" fill="red" />
+               ) : (
+                  <Icons.Heart />
+               )}
             </div>
          </div>
          <section className="flex flex-col items-center justify-start gap-4 min-h-64">
