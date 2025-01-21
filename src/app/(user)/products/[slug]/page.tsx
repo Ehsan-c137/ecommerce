@@ -18,10 +18,8 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-   // read route params
    const id = (await params).slug
 
-   // fetch data
    const product = await fetch(
       `${process.env.NEXT_PUBLIC_BASE_URL}/store/product/slug/${id}`
    ).then((res) => res.json())
