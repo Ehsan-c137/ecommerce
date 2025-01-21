@@ -2,7 +2,7 @@
 
 import Image from "next/image"
 import { Icons } from "@/components/Icons/icons"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query"
 import getSingleProduct from "@/services/store/product/singleProduct"
 import { useRouter, useSearchParams } from "next/navigation"
@@ -14,6 +14,7 @@ import Details from "./singleproduct/Details"
 import clsx from "clsx"
 import Product from "@/components/UI/Product"
 import Footer from "@/components/Footer/Footer"
+import NotFound from "@/app/not-found"
 
 export default function SingleProduct({ slug }: { slug: string }) {
    const [isImageLoaded, setIsImageLoaded] = useState(false)
@@ -32,6 +33,12 @@ export default function SingleProduct({ slug }: { slug: string }) {
       queryKey: ["single product", slug],
       queryFn: () => getSingleProduct(slug),
    })
+
+   useEffect(() => {
+      if (data?.response?.status == 404) {
+         NotFound()
+      }
+   }, [data])
 
    const mutation = useMutation({
       mutationFn: (data: IPutCart[]) => putCart(data),
