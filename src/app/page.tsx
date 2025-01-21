@@ -23,7 +23,7 @@ export default async function Home() {
          <main className="flex flex-col mx-auto items-center sm:items-start">
             <section className="w-full items-end relative h-[600px]">
                <Image
-                  src="/mobile/hero-section.jpg"
+                  src="/mobile/hero-section.webp"
                   alt="spring season"
                   priority={true}
                   width={0}
@@ -81,7 +81,7 @@ export default async function Home() {
                <p className="text-titleActive uppercase title">Collections</p>
                <div className="w-full relative">
                   <Image
-                     src="/mobile/october.jpg"
+                     src="/mobile/october.webp"
                      alt="10 october collections"
                      className="absoloute left-0 top-0"
                      width={0}
@@ -112,7 +112,7 @@ export default async function Home() {
             </section>
             <section className="p-10 relative">
                <Image
-                  src="/mobile/autumn_collection.jpg"
+                  src="/mobile/autumn_collection.webp"
                   alt="autumn collection"
                   unoptimized
                   sizes="100vw"
