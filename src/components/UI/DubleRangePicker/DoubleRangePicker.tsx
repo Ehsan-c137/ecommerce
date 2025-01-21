@@ -77,6 +77,7 @@ function DoubleRangePicker({ min, max, setMaxPrice, setMinPrice }: IProps) {
             }}
             className="thumb thumb--left"
             style={{ zIndex: minVal > max - 100 ? "5" : "auto" }}
+            aria-label="minimum price"
          />
          <input
             type="range"
@@ -92,6 +93,7 @@ function DoubleRangePicker({ min, max, setMaxPrice, setMinPrice }: IProps) {
                setMaxPrice(maxVal)
             }}
             className="thumb thumb--right"
+            aria-label="maximum price"
          />
 
          <div className="slider">
