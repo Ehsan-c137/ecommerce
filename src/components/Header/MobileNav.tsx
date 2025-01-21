@@ -12,7 +12,7 @@ export default async function MobileNav() {
             <div className="w-[56px] flex items-center">
                <HamburgerMenu isLoggedIn={isLoggedin} />
             </div>
-            <Link href={"/"}>
+            <Link href={"/"} aria-label="logo">
                <Icons.Logo />
             </Link>
             <div className="flex items-center gap-2">
