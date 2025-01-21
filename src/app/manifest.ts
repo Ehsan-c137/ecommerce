@@ -23,5 +23,12 @@ export default function manifest(): MetadataRoute.Manifest {
             purpose: "maskable",
          },
       ],
+      screenshots: [
+         {
+            src: "/screenshot_mobile.webp",
+            sizes: "640x320",
+            type: "image/gif",
+         },
+      ],
    }
 }
