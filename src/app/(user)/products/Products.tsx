@@ -102,38 +102,10 @@ export default function Products({
 
    return (
       <>
-         {/* {allSearchParams.filter(
-            (item) =>
-               item.name !== "max price" &&
-               item.name !== "min price" &&
-               item.name !== "ascending"
-         ).length > 0 && (
-            <p className="text-neutral-900 font-medium">Applied Filters:</p>
-         )} */}
          <div className="text-neutral-500 justify-end flex items-center w-full mt-4">
-            {/* <p>Showing 1-9 of {filteredData?.length} results.</p> */}
-
             <div>
                <div className="relative inline-block text-left">
                   <div className="flex items-center gap-2">
-                     {/* <button
-                        className="w-[72px] h-[36px] bg-[#c4c4c42c] flex items-center justify-center rounded-full gap-2"
-                        onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-                     >
-                        <p>New</p>
-                        <svg
-                           width="8"
-                           height="6"
-                           viewBox="0 0 8 6"
-                           fill="none"
-                           xmlns="http://www.w3.org/2000/svg"
-                        >
-                           <path
-                              d="M3.71492 5.27472L0.235658 0.574577L7.19418 0.574577L3.71492 5.27472Z"
-                              fill="#333333"
-                           />
-                        </svg>
-                     </button> */}
                      <button
                         id="menu-button"
                         aria-label={
