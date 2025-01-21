@@ -21,7 +21,7 @@ export default function Error({
    return (
       <>
          <div className="w-[100vw] h-[100vh] flex flex-col p-8 text-center items-center justify-around">
-            <div className="w-full h-100 d-flex flex-column gap-8 justify-content-center align-items-center text-center">
+            <div className="w-full h-100 flex flex-col gap-8 justify-center items-center text-center">
                <p className="text-titleActive">Something went wrong</p>
             </div>
             <div className="flex flex-col items-center gap-10">
@@ -38,16 +38,16 @@ export default function Error({
                   the
                </p>
 
-               <div className="d-flex gap-4">
+               <div className="flex flex-col gap-4">
                   <Button
-                     className="text-titleActive"
+                     className="bg-titleActive text-offWhite"
                      intent={"primary"}
                      onClick={() => router.push("/")}
                   >
                      Home
                   </Button>
                   <Button
-                     className="text-titleActive"
+                     className="bg-titleActive text-offWhite"
                      intent={"primary"}
                      onClick={() => reset()}
                   >
