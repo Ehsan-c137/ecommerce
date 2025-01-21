@@ -17,7 +17,7 @@ export default async function MobileNav() {
             </Link>
             <div className="flex items-center gap-2">
                <Search />
-               <Link href={"/cart"}>
+               <Link href={"/cart"} aria-label="shop cart">
                   <Icons.ShopCart />
                </Link>
             </div>

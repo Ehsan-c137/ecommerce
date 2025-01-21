@@ -13,7 +13,10 @@ export default async function Header() {
 
          <header className="hidden lg:fixed w-full h-21 top-0 z-10 bg-white-900 px-4">
             <div className="flex items-center justify-between h-[84px] 3xl:container mx-auto">
-               <div className="flex items-center gap-4 lg:w-[337px]">
+               <div
+                  className="flex items-center gap-4 lg:w-[337px]"
+                  aria-label="logo"
+               >
                   <Icons.Logo />
                </div>
                <nav>
@@ -36,7 +39,10 @@ export default async function Header() {
                   </ul>
                </nav>
                <div className="flex items-center gap-8 justify-between">
-                  <div className="hidden lg:flex border rounded-md border-neutral-300 bg-white-900 focus-within:border-neutral-700 gap-2 px-2 py-2 transition">
+                  <div
+                     className="hidden lg:flex border rounded-md border-neutral-300 bg-white-900 focus-within:border-neutral-700 gap-2 px-2 py-2 transition"
+                     aria-label="search"
+                  >
                      <Icons.Search />
                      <input
                         type="text"
