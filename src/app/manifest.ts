@@ -26,7 +26,7 @@ export default function manifest(): MetadataRoute.Manifest {
       screenshots: [
          {
             src: "/screenshot_mobile.webp",
-            sizes: "640x320",
+            sizes: "373x651",
             type: "image/gif",
          },
       ],
