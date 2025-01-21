@@ -136,6 +136,11 @@ export default function Products({
                      </button> */}
                      <button
                         id="menu-button"
+                        aria-label={
+                           searchParams.get("listView") == "true"
+                              ? "group view"
+                              : "list view"
+                        }
                         onClick={() => {
                            handleQueryParams("listView", "true")
                            setIsListView((prev) => !prev)
@@ -153,6 +158,7 @@ export default function Products({
                         onClick={() => {
                            handleQueryParams("decending", "true")
                         }}
+                        aria-label="decending filter"
                         className="w-[36px] h-[36px] bg-[#c4c4c42c] flex items-center justify-center rounded-full"
                      >
                         <Icons.Filter
