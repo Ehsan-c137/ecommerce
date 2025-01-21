@@ -1,4 +1,4 @@
-import type { Metadata, Viewport } from "next"
+import type { Metadata } from "next"
 import { Tenor_Sans } from "next/font/google"
 import "./globals.css"
 import Providers from "@/providers"
@@ -29,7 +29,7 @@ export default function RootLayout({
 }>) {
    return (
       <html lang="en">
-         <body className={`antialiased ${tenor_sans.className}`}>
+         <body className={`antialiased scroll-smooth ${tenor_sans.className}`}>
             <Providers>{children}</Providers>
          </body>
       </html>
