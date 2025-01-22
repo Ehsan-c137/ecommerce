@@ -106,7 +106,7 @@ export default function LandingPage() {
                className="grid grid-cols-1 items-center justify-items-center md:grid-cols-2 container mx-auto my-4 show-item"
                ref={(el) => {
                   if (el) {
-                     itemRef.current[1] = el
+                     itemRef.current[0] = el
                   }
                }}
             >
@@ -125,7 +125,7 @@ export default function LandingPage() {
                className="flex flex-col md:flex-row justify-center items-center gap-4 container mx-auto w-full mt-10  show-item"
                ref={(el) => {
                   if (el) {
-                     itemRef.current[2] = el
+                     itemRef.current[1] = el
                   }
                }}
             >
@@ -165,7 +165,7 @@ export default function LandingPage() {
                className="p-10 relative show-item"
                ref={(el) => {
                   if (el) {
-                     itemRef.current[3] = el
+                     itemRef.current[2] = el
                   }
                }}
             >
