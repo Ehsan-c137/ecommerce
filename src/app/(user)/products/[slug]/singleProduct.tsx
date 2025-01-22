@@ -156,7 +156,7 @@ export default function SingleProduct({ slug }: { slug: string }) {
                >
                   {!isLoading && (
                      <Image
-                        src={data?.main_image}
+                        src={data?.main_image + "?imwidth=620"}
                         alt={data?.name}
                         width="255"
                         height="0"

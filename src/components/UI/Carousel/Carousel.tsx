@@ -97,7 +97,7 @@ const Carousel = ({ withButton = false }: IProps) => {
                            }}
                         >
                            <Image
-                              src={image.main_image}
+                              src={image.main_image + "?imwidth=320"}
                               alt={`Slide ${index} ${image.name}`}
                               className={clsx(
                                  "opacity-0 transition -translate-x-4 duration-500",
