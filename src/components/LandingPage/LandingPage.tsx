@@ -7,6 +7,10 @@ import Link from "next/link"
 import Carousel from "@/components/UI/Carousel/Carousel"
 import NewArrival from "@/components/LandingPage/NewArrivel"
 import { useEffect, useRef, useMemo } from "react"
+import gsap from "gsap"
+import { useGSAP } from "@gsap/react"
+
+gsap.registerPlugin(useGSAP)
 
 const bodoniModa = Bodoni_Moda({
    subsets: ["latin"],
@@ -51,10 +55,25 @@ export default function LandingPage() {
       }
    }, [options])
 
+   useGSAP(() => {
+      const tl = gsap.timeline()
+
+      tl.fromTo(
+         ".hero-text-1",
+         { marginLeft: -100, duration: 350, ease: "power3.in" },
+         { marginLeft: 20, opacity: 1 }
+      )
+      tl.fromTo(
+         ".hero-text-2",
+         { opacity: 0, animationDelay: 500 },
+         { opacity: 1 }
+      )
+   }, [])
+
    return (
       <>
          <main className="flex flex-col mx-auto items-center sm:items-start">
-            <section className="w-full items-end relative h-[600px]">
+            <section className="w-full flex justify-center items-end relative h-[600px]">
                <Image
                   src="/mobile/hero-section.webp"
                   alt="spring season"
@@ -63,6 +82,7 @@ export default function LandingPage() {
                   height={600}
                   sizes="100vw"
                   unoptimized={true}
+                  className="abolute left-0 top-0"
                   style={{
                      width: "100%",
                      height: "600px",
@@ -71,10 +91,13 @@ export default function LandingPage() {
                   }}
                />
                <p
-                  className={`font-bold italic text-body absolute left-1/2 -translate-x-1/2 text-nowrap bottom-[40%] ${bodoniModa.className} uppercase text-[30px] bg-blend-multiply opacity-70 leading-tight`}
+                  className={`font-bold italic text-body absolute left-1/2 -translate-x-1/2 text-nowrap bottom-[50%] ${bodoniModa.className} uppercase text-[30px] bg-blend-multiply opacity-70 leading-tight`}
                >
-                  <span className="ml-5">Fashion </span>
-                  <br /> & Accessories
+                  <span className="ml-5 opacity-0 hero-text-1">Fashion </span>
+                  <br />
+                  <span className="hero-text-2 translate-x-10 opacity-0">
+                     & Accessories
+                  </span>
                </p>
                <Link
                   href={"/products"}
