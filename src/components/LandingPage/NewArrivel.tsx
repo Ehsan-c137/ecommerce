@@ -5,7 +5,7 @@ import {
    getAllCategory,
 } from "@/services/store/category/category"
 import { useState } from "react"
-import Product from "./UI/Product"
+import Product from "../UI/Product"
 import clsx from "clsx"
 
 export default function NewArrival() {
@@ -23,7 +23,6 @@ export default function NewArrival() {
 
    const categories = allCategory?.slice(0, 4)
 
-   console.log(data)
    return (
       <>
          <div className="px-3 pb-4 flex w-full justify-between truncate gap-2 h-[40px]">
