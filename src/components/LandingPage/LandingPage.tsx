@@ -18,9 +18,7 @@ const bodoniModa = Bodoni_Moda({
 export default function LandingPage() {
    const callback = (entries: IntersectionObserverEntry[]) => {
       entries?.forEach((entry) => {
-         console.log(entry)
          if (entry.isIntersecting) {
-            console.log(entry)
             entry.target.classList.add("show-opacity")
          }
       })
@@ -43,7 +41,6 @@ export default function LandingPage() {
             observer.observe(item)
          })
       }
-      // if (itemRef.current) observer.observe(itemRef.current)
 
       return () => {
          targets?.map((item) => {
@@ -51,7 +48,6 @@ export default function LandingPage() {
                observer.unobserve(item)
             }
          })
-         // if (itemRef.current) observer.unobserve(itemRef.current)
       }
    }, [options])
 
