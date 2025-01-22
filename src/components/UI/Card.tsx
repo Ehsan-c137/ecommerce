@@ -36,7 +36,7 @@ export default function Card({
             )}
          >
             <Image
-               src={data?.main_image + "?imwidth=320"}
+               src={data?.main_image + "?imwidth=220"}
                alt={data?.name}
                width={isListView ? 130 : 165}
                height={isListView ? 165 : 134}
