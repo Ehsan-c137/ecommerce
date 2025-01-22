@@ -213,10 +213,21 @@ body {
    background: #a8715a;
 }
 
+.show-item {
+   opacity: 0;
+   /* translate: -40px; */
+   transition: all 600ms cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+.show-opacity {
+   opacity: 1 !important;
+   translate: 0px !important;
+}
+
 .animate-opacity {
    animation: change-opacity 350s ease-in-out forwards;
 }
-@keyframes change-opacity {
+@keyframes changeOpacity {
    from {
       opacity: 0;
    }
