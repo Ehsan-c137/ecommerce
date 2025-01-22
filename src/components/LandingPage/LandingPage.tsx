@@ -93,7 +93,7 @@ export default function LandingPage() {
                <p
                   className={`font-bold italic text-body absolute left-1/2 -translate-x-1/2 text-nowrap bottom-[50%] ${bodoniModa.className} uppercase text-[30px] bg-blend-multiply opacity-70 leading-tight`}
                >
-                  <span className="ml-5 opacity-0 hero-text-1">Fashion </span>
+                  <span className="opacity-0 hero-text-1">Fashion </span>
                   <br />
                   <span className="hero-text-2 translate-x-10 opacity-0">
                      & Accessories
