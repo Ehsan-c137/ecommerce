@@ -56,7 +56,7 @@ export default function LandingPage() {
    }, [options])
 
    useGSAP(() => {
-      const tl = gsap.timeline({ delay: 0.3 })
+      const tl = gsap.timeline()
       tl.fromTo(
          ".hero-text-1",
          {
