@@ -60,8 +60,17 @@ export default function LandingPage() {
 
       tl.fromTo(
          ".hero-text-1",
-         { marginLeft: -100, duration: 350, ease: "power3.in" },
-         { marginLeft: 20, opacity: 1 }
+         {
+            transform: "translateX(-100%)",
+            duration: 350,
+            ease: "bounce.inOut",
+         },
+         { transform: "translateX(-60%)", opacity: 1 }
+      )
+      tl.fromTo(
+         ".hero-text-s",
+         { opacity: 0, animationDelay: 500 },
+         { opacity: 1 }
       )
       tl.fromTo(
          ".hero-text-2",
@@ -90,15 +99,22 @@ export default function LandingPage() {
                      objectPosition: "top",
                   }}
                />
-               <p
-                  className={`font-bold italic text-body absolute left-1/2 -translate-x-1/2 text-nowrap bottom-[50%] ${bodoniModa.className} uppercase text-[30px] bg-blend-multiply opacity-70 leading-tight`}
+               <div
+                  className={`font-bold italic text-body absolute bottom-[50%] text-nowrap ${bodoniModa.className} uppercase text-[30px] bg-blend-multiply opacity-70 leading-tight`}
                >
-                  <span className="opacity-0 hero-text-1">Fashion </span>
-                  <br />
-                  <span className="hero-text-2 translate-x-10 opacity-0">
-                     & Accessories
+                  <span className="hero-text-1 absolute opacity-0 left-1/2 -translate-x-1/2">
+                     Fashion
                   </span>
-               </p>
+                  <br />
+                  <div className="absolute left-0">
+                     <span className="hero-text-s absolute translate-x-[-120px] opacity-0">
+                        &
+                     </span>
+                     <span className="hero-text-2 absolute opacity-0 -translate-x-[40%]">
+                        Accessories
+                     </span>
+                  </div>
+               </div>
                <Link
                   href={"/products"}
                   className="absolute rounded-[30px] px-[30px] py-2 uppercase bg-opacity-70 bg-body bottom-[60px] text-nowrap left-[50%] text-offWhite transform -translate-x-1/2"
