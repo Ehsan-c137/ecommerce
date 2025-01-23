@@ -27,6 +27,7 @@
 
 .noisy-background {
    background-image: url("/nnnoise.svg");
+   background-repeat: repeat;
 }
 
 @media (prefers-color-scheme: dark) {
