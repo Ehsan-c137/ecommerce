@@ -173,7 +173,7 @@ export default function SingleProduct({ slug }: { slug: string }) {
                   )}
                </div>
                <div className="flex flex-col gap-4 flex-1 max-w-[438px]">
-                  <div className="flex items-center justify-between">
+                  <div className="flex items-center justify-between h-[24px]">
                      <h3
                         className={clsx("font-bold text-titleActive", {
                            "bg-inputBackground animate-pulse": isLoading,
@@ -189,7 +189,7 @@ export default function SingleProduct({ slug }: { slug: string }) {
                      </div>
                   </div>
                   <div className="flex flex-col">
-                     <div className="flex items-center justify-between gap-4">
+                     <div className="flex items-center justify-between gap-4 h-[24px]">
                         <h4 className="text-secondary">
                            {!isLoading && `$ ${data?.price} `}
                         </h4>
@@ -223,7 +223,7 @@ export default function SingleProduct({ slug }: { slug: string }) {
                         }}
                         className="flex gap-9 h-[56px]"
                      >
-                        <div className="flex gap-4 items-center">
+                        <div className="flex gap-4 items-center min-w-[85px]">
                            <p className="label font-medium text-xs text-neutral-500 uppercase">
                               color
                            </p>
