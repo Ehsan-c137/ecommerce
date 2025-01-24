@@ -57,6 +57,9 @@ export default function LandingPage() {
 
    useGSAP(() => {
       const tl = gsap.timeline()
+      tl.to(".hero-text", {
+         opacity: 1,
+      })
       tl.from(".hero-text", {
          duration: 1.8,
          y: 100,
@@ -95,11 +98,13 @@ export default function LandingPage() {
                   className={`font-bold italic text-body absolute bottom-[50%] left-1/2 -translate-x-1/2 text-nowrap ${bodoniModa.className} uppercase text-[30px] bg-blend-multiply opacity-70 leading-tight`}
                >
                   <div className="h-[38px] w-[250px] overflow-y-hidden relative">
-                     <p className="hero-text ml-5 absolute">Fashion</p>
+                     <p className="hero-text ml-5 absolute opacity-0">
+                        Fashion
+                     </p>
                   </div>
                   <div className="h-[42px] w-[250px] overflow-hidden relative">
-                     <p className="hero-text absolute">&</p>
-                     <p className="hero-text absolute left-[15%]">
+                     <p className="hero-text absolute opacity-0">&</p>
+                     <p className="hero-text absolute left-[15%] opacity-0">
                         Accessories
                      </p>
                   </div>
