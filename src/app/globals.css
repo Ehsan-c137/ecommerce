@@ -225,3 +225,7 @@ html {
       opacity: 1;
    }
 }
+
+/* .hero-text {
+   will-change: transform, opacity;
+} */

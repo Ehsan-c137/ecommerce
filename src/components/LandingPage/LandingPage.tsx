@@ -66,6 +66,8 @@ export default function LandingPage() {
          stagger: {
             amount: 0.3,
          },
+         snap: { y: 0.3 },
+         force3D: false,
       })
    }, [])
 
