@@ -14,6 +14,7 @@ import Details from "./singleproduct/Details"
 import clsx from "clsx"
 import Footer from "@/components/Footer/Footer"
 import NotFound from "@/app/not-found"
+import { toPastel } from "@/utils/toPastelColor"
 
 export default function SingleProduct({ slug }: { slug: string }) {
    const [isImageLoaded, setIsImageLoaded] = useState(false)
@@ -242,7 +243,7 @@ export default function SingleProduct({ slug }: { slug: string }) {
                                           style={{
                                              border:
                                                 "1px solid transparent w-full h-full",
-                                             backgroundColor: color,
+                                             backgroundColor: toPastel(color),
                                              borderColor: isChecked
                                                 ? "black"
                                                 : "transparent",
