@@ -9,16 +9,9 @@
    --custom-ease: cubic-bezier(0.32, 0.72, 0, 1);
 }
 
-.background {
+html {
    background-image: url("/nnnoise.svg");
    background-repeat: repeat;
-   transition: transform cubic-bezier(0.32, 0.72, 0, 1) 500ms;
-   height: auto;
-   opacity: 1;
-}
-
-.backdrop header {
-   transition: cubic-bezier(0.075, 0.82, 0.165, 1);
 }
 
 .backdrop.background {
@@ -35,11 +28,6 @@
       --background: #0a0a0a;
       --foreground: #ededed;
    }
-}
-
-body {
-   color: var(--foreground);
-   background: var(--background);
 }
 
 @layer utilities {
