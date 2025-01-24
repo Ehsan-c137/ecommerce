@@ -57,25 +57,16 @@ export default function LandingPage() {
 
    useGSAP(() => {
       const tl = gsap.timeline()
-      tl.fromTo(
-         ".hero-text-1",
-         {
-            transform: "translateX(-100%)",
-            duration: 350,
-            ease: "bounce.inOut",
+      tl.from(".hero-text", {
+         duration: 1.8,
+         y: 100,
+         ease: "power4.out",
+         delay: 1,
+         skewY: 7,
+         stagger: {
+            amount: 0.3,
          },
-         { transform: "translateX(-60%)", opacity: 1 }
-      )
-      tl.fromTo(
-         ".hero-text-s",
-         { opacity: 0, animationDelay: 500 },
-         { opacity: 1 }
-      )
-      tl.fromTo(
-         ".hero-text-2",
-         { opacity: 0, animationDelay: 500 },
-         { opacity: 1 }
-      )
+      })
    }, [])
 
    return (
@@ -99,19 +90,16 @@ export default function LandingPage() {
                   }}
                />
                <div
-                  className={`font-bold italic text-body absolute bottom-[50%] text-nowrap ${bodoniModa.className} uppercase text-[30px] bg-blend-multiply opacity-70 leading-tight`}
+                  className={`font-bold italic text-body absolute bottom-[50%] left-1/2 -translate-x-1/2 text-nowrap ${bodoniModa.className} uppercase text-[30px] bg-blend-multiply opacity-70 leading-tight`}
                >
-                  <span className="hero-text-1 absolute opacity-0 left-1/2 -translate-x-1/2">
-                     Fashion
-                  </span>
-                  <br />
-                  <div className="absolute left-0">
-                     <span className="hero-text-s absolute translate-x-[-120px] opacity-0">
-                        &
-                     </span>
-                     <span className="hero-text-2 absolute opacity-0 -translate-x-[40%]">
+                  <div className="h-[38px] w-[250px] overflow-y-hidden relative">
+                     <p className="hero-text ml-5 absolute">Fashion</p>
+                  </div>
+                  <div className="h-[42px] w-[250px] overflow-hidden relative">
+                     <p className="hero-text absolute">&</p>
+                     <p className="hero-text absolute left-[15%]">
                         Accessories
-                     </span>
+                     </p>
                   </div>
                </div>
                <Link
