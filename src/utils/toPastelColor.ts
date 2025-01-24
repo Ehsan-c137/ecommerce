@@ -33,7 +33,7 @@ function desaturateColor(r: number, g: number, b: number, factor = 0.5) {
 function toPastel(color: string) {
    const skipColor = ["black", "blue"]
    if (skipColor.includes(color.toLowerCase())) return color
-   const colorMap = {
+   const colorMap: Record<string, string> = {
       black: "#000000",
       blue: "#0000FF",
    }
