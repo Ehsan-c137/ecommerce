@@ -333,10 +333,13 @@ export default function SingleProduct({ slug }: { slug: string }) {
                      onClick={handleCart}
                      disabled={!isItOkToOrder || mutation.isPending}
                   >
-                     <Icons.PlusWhite />
+                     {mutation.isPending ? (
+                        <span className="loader"></span>
+                     ) : (
+                        <Icons.PlusWhite />
+                     )}
                      <p>Add</p>
                   </button>
-                  {mutation.isPending && <span className="loader"></span>}
                </div>
                {/* <button
                className="flex items-center justify-center  cursor-pointer w-full"
