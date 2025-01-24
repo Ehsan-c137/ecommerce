@@ -61,7 +61,9 @@ const SearchInput = ({ ...props }) => {
                <div className="py-1 px-2 h-[40px] flex items-center bg-transparent border-b text-titleActive focus-within:border-b-titleActive transition">
                   <input
                      ref={(el) => {
-                        el?.focus()
+                      if(el){
+                        el.focus()
+                      }
                      }}
                      value={searchText}
                      placeholder="Search..."
