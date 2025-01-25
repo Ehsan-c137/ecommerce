@@ -49,12 +49,10 @@ function toPastel(color: string) {
 
    const hex = colorMap[color?.toLowerCase()] || color
    const rgb = hexToRgb(hex)
-   console.log(rgb)
    if (!rgb) return color
 
    const lightened = lightenColor(rgb.r, rgb.g, rgb.b)
    const pastel = desaturateColor(lightened.r, lightened.g, lightened.b)
-   console.log(color, rgbToHex(pastel.r, pastel.g, pastel.b))
    return rgbToHex(pastel.r, pastel.g, pastel.b)
 }
 
