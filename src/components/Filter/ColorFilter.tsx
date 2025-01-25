@@ -24,7 +24,7 @@ export function ColorFilter({
                            backgroundColor: toPastel(color),
                         }}
                         htmlFor={`${color}--color`}
-                        className="w-7 h-7 rounded-full transition p-[3px] bg-clip-content cursor-pointer relative hover:scale-105"
+                        className="w-7 h-7 rounded-full transition p-[3px] bg-clip-content cursor-pointer hover:scale-105 relative after:bg-black after:opacity-10 after:absolute after:inset-0 after:rounded-full"
                      />
                      <input
                         type="checkbox"
