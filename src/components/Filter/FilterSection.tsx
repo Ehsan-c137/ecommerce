@@ -9,11 +9,11 @@ export function FilterSection({
    onSelect,
 }: FilterSectionProps) {
    return (
-      <div className="flex flex-col gap-2 px-4 pt-6">
+      <div className="flex flex-col gap-2 px-4 pt-6 w-[228px]">
          <p className="text-neutral-900 font-medium">{title}</p>
          <div className="flex flex-col text-nowrap">
             {isLoading && (
-               <div className="w-full bg-white-200 animate-pulse h-10 rounded-md" />
+               <div className="w-full bg-white-200 animate-pulse h-[135px] rounded-md" />
             )}
             {items?.map((data) => {
                const item = data.name
@@ -21,7 +21,7 @@ export function FilterSection({
 
                return (
                   <div
-                     className="flex items-center py-3 px-1 border-b border-neutral-200"
+                     className="flex items-center py-3 px-1 border-b border-neutral-200 w-full"
                      key={item}
                   >
                      <input
