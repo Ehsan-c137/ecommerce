@@ -13,6 +13,8 @@ import {
    SizeFilter,
 } from "@/components/Filter"
 import Drawer from "@/components/UI/Drawer/Drawer"
+import { useGSAP } from "@gsap/react"
+import gsap from "gsap"
 
 export default function Filters() {
    const searchParams = useSearchParams()
@@ -100,9 +102,22 @@ export default function Filters() {
       }
    }
 
+   useGSAP(() => {
+      gsap.from(".filter-section", {
+         x: -100,
+         opacity: 0,
+         ease: "power3.out",
+      })
+      gsap.to(".filter-section", {
+         opacity: 1,
+         duration: 0.5,
+         ease: "power3.out",
+      })
+   }, [])
+
    return (
       <>
-         <div className="hidden sm:flex flex-col gap-6 border border-neutral-100 rounded-sm w-[248px] sticky top-[--header-height] pb-14 left-0 h-fit">
+         <div className="hidden filter-section sm:flex flex-col gap-6 border border-neutral-100 rounded-sm w-[228px] sticky top-[--header-height] left-0 h-fit">
             <FilterSection
                title="Categories"
                isLoading={categoriesLoading}
@@ -116,12 +131,14 @@ export default function Filters() {
                colors={colors}
                searchParams={searchParams}
                onSelect={handleQueryParams}
+               isLoading={productsLoading}
             />
 
             <SizeFilter
                sizes={sizes}
                searchParams={searchParams}
                onSelect={handleQueryParams}
+               isLoading={productsLoading}
             />
 
             <PriceFilter
@@ -139,43 +156,44 @@ export default function Filters() {
                maxPrice={searchParams.get("max price") ?? maxPrice}
             />
          </div>
-         <div className="flex sm:hidden">
-            <Drawer
-               isOpen={searchParams.get("filter-drawer") === "true"}
-               setIsOpen={() => handleQueryParams("filter-drawer", "true")}
-            >
-               <div className="flex flex-col gap-2 px-4">
-                  <FilterSection
-                     title="Categories"
-                     isLoading={categoriesLoading}
-                     items={categories}
-                     paramName="category"
-                     onSelect={handleQueryParams}
-                     searchParams={searchParams}
-                  />
 
-                  <ColorFilter
-                     colors={colors}
-                     searchParams={searchParams}
-                     onSelect={handleQueryParams}
-                  />
+         <Drawer
+            isOpen={searchParams.get("filter-drawer") === "true"}
+            setIsOpen={() => handleQueryParams("filter-drawer", "true")}
+         >
+            <div className="flex flex-col gap-2 px-4 overflow-y-auto">
+               <FilterSection
+                  title="Categories"
+                  isLoading={categoriesLoading}
+                  items={categories}
+                  paramName="category"
+                  onSelect={handleQueryParams}
+                  searchParams={searchParams}
+               />
 
-                  <SizeFilter
-                     sizes={sizes}
-                     searchParams={searchParams}
-                     onSelect={handleQueryParams}
-                  />
+               <ColorFilter
+                  colors={colors}
+                  searchParams={searchParams}
+                  isLoading={productsLoading}
+                  onSelect={handleQueryParams}
+               />
 
-                  <PriceFilter
-                     minPrice={minPrice}
-                     maxPrice={maxPrice}
-                     isLoading={productsLoading}
-                     searchParams={searchParams}
-                     onSelect={handleQueryParams}
-                  />
-               </div>
-            </Drawer>
-         </div>
+               <SizeFilter
+                  sizes={sizes}
+                  searchParams={searchParams}
+                  onSelect={handleQueryParams}
+                  isLoading={productsLoading}
+               />
+
+               <PriceFilter
+                  minPrice={minPrice}
+                  maxPrice={maxPrice}
+                  isLoading={productsLoading}
+                  searchParams={searchParams}
+                  onSelect={handleQueryParams}
+               />
+            </div>
+         </Drawer>
       </>
    )
 }
