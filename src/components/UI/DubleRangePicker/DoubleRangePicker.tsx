@@ -13,14 +13,13 @@ interface IProps {
 
 function DoubleRangePicker({ min, max, setMaxPrice, setMinPrice }: IProps) {
    const searchParams = useSearchParams()
-   // this comes from products price
+
    const [minVal, setMinVal] = useState(min)
    const [maxVal, setMaxVal] = useState(max)
    const minValRef = useRef(minVal)
    const maxValRef = useRef(maxVal)
    const range = useRef<HTMLInputElement | null>(null)
 
-   // Convert to percentage
    const getPercent = useCallback(
       (value: number) => Math.round(((value - min) / (max - min)) * 100),
       [min, max]
@@ -36,11 +35,8 @@ function DoubleRangePicker({ min, max, setMaxPrice, setMinPrice }: IProps) {
          setMaxVal(Number(searchParams.get("max price")))
          maxValRef.current = Number(searchParams.get("max price"))
       }
+   }, [searchParams])
 
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-   }, [])
-
-   // Set width of the range to decrease from the right side
    useEffect(() => {
       const maxPercent = getPercent(maxVal)
       const minPercent = getPercent(minValRef.current)
@@ -49,7 +45,6 @@ function DoubleRangePicker({ min, max, setMaxPrice, setMinPrice }: IProps) {
       }
    }, [maxVal, getPercent])
 
-   // Set width of the range to decrease from the left side
    useEffect(() => {
       const minPercent = getPercent(minVal)
       const maxPercent = getPercent(maxValRef.current)
@@ -75,6 +70,9 @@ function DoubleRangePicker({ min, max, setMaxPrice, setMinPrice }: IProps) {
             onMouseUp={() => {
                setMinPrice(minVal)
             }}
+            onTouchEnd={() => {
+               setMinPrice(minVal)
+            }}
             className="thumb thumb--left"
             style={{ zIndex: minVal > max - 100 ? "5" : "auto" }}
             aria-label="minimum price"
@@ -90,6 +88,9 @@ function DoubleRangePicker({ min, max, setMaxPrice, setMinPrice }: IProps) {
                maxValRef.current = value
             }}
             onMouseUp={() => {
+               setMaxPrice(maxVal)
+            }}
+            onTouchEnd={() => {
                setMaxPrice(maxVal)
             }}
             className="thumb thumb--right"
