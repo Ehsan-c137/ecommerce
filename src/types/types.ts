@@ -13,10 +13,12 @@ export interface Product {
    }
 }
 
-export interface PriceFilterProps extends FilterProps {
+export interface PriceFilterProps {
    minPrice: number
    maxPrice: number
    isLoading: boolean
+   handleSetMinPrice: (min: number) => void
+   handleSetMaxPrice: (max: number) => void
 }
 
 export interface FilterSectionProps extends FilterProps {
