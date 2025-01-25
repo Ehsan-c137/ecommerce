@@ -56,7 +56,7 @@ function DoubleRangePicker({ min, max, setMaxPrice, setMinPrice }: IProps) {
    }, [minVal, getPercent])
 
    return (
-      <div className="w-full">
+      <div className="slider">
          <input
             type="range"
             min={min}
@@ -96,13 +96,10 @@ function DoubleRangePicker({ min, max, setMaxPrice, setMinPrice }: IProps) {
             className="thumb thumb--right"
             aria-label="maximum price"
          />
-
-         <div className="slider">
-            <div className="slider__track" />
-            <div ref={range} className="slider__range" />
-            <div className="slider__left-value">{minVal}$</div>
-            <div className="slider__right-value">{maxVal}$</div>
-         </div>
+         <div className="slider__track" />
+         <div ref={range} className="slider__range" />
+         <div className="slider__left-value">{minVal}$</div>
+         <div className="slider__right-value">{maxVal}$</div>
       </div>
    )
 }
