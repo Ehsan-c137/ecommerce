@@ -12,6 +12,7 @@ import {
    ColorFilter,
    SizeFilter,
 } from "@/components/Filter"
+import Drawer from "@/components/UI/Drawer/Drawer"
 
 export default function Filters() {
    const searchParams = useSearchParams()
@@ -137,6 +138,43 @@ export default function Filters() {
                minPrice={searchParams.get("min price") ?? minPrice}
                maxPrice={searchParams.get("max price") ?? maxPrice}
             />
+         </div>
+         <div className="flex sm:hidden">
+            <Drawer
+               isOpen={searchParams.get("filter-drawer") === "true"}
+               setIsOpen={() => handleQueryParams("filter-drawer", "true")}
+            >
+               <div className="flex flex-col gap-2 px-4">
+                  <FilterSection
+                     title="Categories"
+                     isLoading={categoriesLoading}
+                     items={categories}
+                     paramName="category"
+                     onSelect={handleQueryParams}
+                     searchParams={searchParams}
+                  />
+
+                  <ColorFilter
+                     colors={colors}
+                     searchParams={searchParams}
+                     onSelect={handleQueryParams}
+                  />
+
+                  <SizeFilter
+                     sizes={sizes}
+                     searchParams={searchParams}
+                     onSelect={handleQueryParams}
+                  />
+
+                  <PriceFilter
+                     minPrice={minPrice}
+                     maxPrice={maxPrice}
+                     isLoading={productsLoading}
+                     searchParams={searchParams}
+                     onSelect={handleQueryParams}
+                  />
+               </div>
+            </Drawer>
          </div>
       </>
    )

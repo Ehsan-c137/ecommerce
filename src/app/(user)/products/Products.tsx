@@ -11,6 +11,8 @@ import useHandleQueryParams from "@/utils/useHandleQueryParams"
 import { Icons } from "@/components/Icons/icons"
 import { useState } from "react"
 import clsx from "clsx"
+import Drawer from "@/components/UI/Drawer/Drawer"
+import Filters from "./Filters"
 
 export default function Products({
    maxPrice,
@@ -21,6 +23,7 @@ export default function Products({
 }) {
    const searchParams = useSearchParams()
    const [isDropdownOpen, setIsDropdownOpen] = useState(false)
+   const [isFilterOpen, setIsFilterOpen] = useState(false)
    const [isListView, setIsListView] = useState(!!searchParams.get("listView"))
    const handleQueryParams = useHandleQueryParams()
    const allSearchParams = useGetAllSearchParams()
@@ -140,6 +143,14 @@ export default function Products({
                                  : "black"
                            }
                         />
+                     </button>
+                     <button
+                        onClick={() => {
+                           handleQueryParams("filter-drawer", "true")
+                        }}
+                        className="w-[36px] h-[36px] bg-[#c4c4c42c] flex items-center justify-center rounded-full"
+                     >
+                        F
                      </button>
                   </div>
                   {isDropdownOpen && (
