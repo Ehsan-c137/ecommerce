@@ -37,7 +37,7 @@ export default function Filters() {
 
    const sizes = allProducts
       ?.flatMap((product: TProduct) => product.options.sizes)
-      .map((item: string) => item.toLowerCase())
+      .map((item: string) => item?.toLowerCase())
       .filter(
          (color: string, index: number, self: string[]) =>
             self.indexOf(color) === index
