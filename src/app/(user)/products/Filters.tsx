@@ -18,9 +18,6 @@ export default function Filters() {
    const pathname = usePathname()
    const router = useRouter()
 
-   const sizes = ["S", "M", "L", "XL", "XXL"]
-   const colors = ["yellow", "red", "blue", "black", "white"]
-
    const { data: categories, isLoading: categoriesLoading } = useQuery({
       queryKey: ["categories"],
       queryFn: () => getAllCategory(),
@@ -30,6 +27,21 @@ export default function Filters() {
       queryKey: ["allproducts"],
       queryFn: () => products(2, 1),
    })
+
+   const colors = allProducts
+      ?.flatMap((product: TProduct) => product.options.colors)
+      .filter(
+         (color: string, index: number, self: string[]) =>
+            self.indexOf(color) === index
+      )
+
+   const sizes = allProducts
+      ?.flatMap((product: TProduct) => product.options.sizes)
+      .map((item: string) => item.toLowerCase())
+      .filter(
+         (color: string, index: number, self: string[]) =>
+            self.indexOf(color) === index
+      )
 
    const minPrice = allProducts?.reduce(
       (min: number, item: { price: number }) => Math.min(min, item.price),
