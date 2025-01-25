@@ -28,16 +28,6 @@ export default function Error({
                <p>
                   <Icons.Dress />
                </p>
-               <p
-                  className="text-titleActive"
-                  style={{
-                     fontSize: "16px",
-                  }}
-               >
-                  We can&apos;t find the page you looking for, it will return to
-                  the
-               </p>
-
                <div className="flex flex-col gap-4">
                   <Button
                      className="bg-titleActive text-offWhite"
