@@ -61,6 +61,10 @@ export default function Filters() {
          const current = new URLSearchParams(Array.from(searchParams.entries()))
          const currentQuery = current.getAll(name)
 
+         if (!value) {
+            current.delete(name)
+         }
+
          if (currentQuery.includes(value)) {
             current.delete(name, value)
          } else {
@@ -89,7 +93,12 @@ export default function Filters() {
    }
 
    const handleSetMaxPrice = (max: number) => {
-      if (max <= maxPrice) {
+      if (max == maxPrice) {
+         const current = new URLSearchParams(Array.from(searchParams.entries()))
+         current.delete("max price")
+         const search = current.toString()
+         router.push(`${pathname}${search ? `?${search}` : ""}`)
+      } else if (max <= maxPrice) {
          const current = new URLSearchParams(Array.from(searchParams.entries()))
          current.set("max price", `${max}`)
          const search = current.toString()
@@ -145,8 +154,8 @@ export default function Filters() {
                minPrice={minPrice}
                maxPrice={maxPrice}
                isLoading={productsLoading}
-               searchParams={searchParams}
-               onSelect={handleQueryParams}
+               handleSetMinPrice={handleSetMinPrice}
+               handleSetMaxPrice={handleSetMaxPrice}
             />
          </div>
 
@@ -189,8 +198,8 @@ export default function Filters() {
                   minPrice={minPrice}
                   maxPrice={maxPrice}
                   isLoading={productsLoading}
-                  searchParams={searchParams}
-                  onSelect={handleQueryParams}
+                  handleSetMinPrice={handleSetMinPrice}
+                  handleSetMaxPrice={handleSetMaxPrice}
                />
             </div>
          </Drawer>
