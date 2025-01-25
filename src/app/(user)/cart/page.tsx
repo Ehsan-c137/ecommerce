@@ -15,6 +15,8 @@ export default function Cart() {
    const { data: cart, isLoading } = useQuery({
       queryKey: ["cart"],
       queryFn: () => getCart(),
+      staleTime: 0,
+      gcTime: 0,
    })
 
    const queryClient = useQueryClient()
