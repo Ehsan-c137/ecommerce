@@ -56,7 +56,7 @@ function DoubleRangePicker({ min, max, setMaxPrice, setMinPrice }: IProps) {
    }, [minVal, getPercent])
 
    return (
-      <div className="container w-full">
+      <div className="w-full">
          <input
             type="range"
             min={min}
