@@ -1,5 +1,5 @@
 import { FilterProps } from "@/types/types"
-
+import { toPastel } from "@/utils/toPastelColor"
 interface ColorFilterProps extends FilterProps {
    colors: string[]
 }
@@ -12,8 +12,8 @@ export function ColorFilter({
    return (
       <div className="flex flex-col gap-4 px-4">
          <p className="text-neutral-900 font-medium">Color</p>
-         <div className="flex items-center gap-3">
-            {colors.map((color) => {
+         <div className="flex items-center  flex-wrap gap-3">
+            {colors?.map((color) => {
                const isChecked = searchParams.getAll("color")?.includes(color)
                return (
                   <div key={color} className="flex items-center">
@@ -21,10 +21,10 @@ export function ColorFilter({
                         style={{
                            border: "1px solid transparent",
                            borderColor: isChecked ? "black" : "transparent",
-                           backgroundColor: color,
+                           backgroundColor: toPastel(color),
                         }}
                         htmlFor={`${color}--color`}
-                        className="w-7 h-7 rounded-full transition p-[3px] bg-clip-content cursor-pointer"
+                        className="w-7 h-7 rounded-full transition p-[3px] bg-clip-content cursor-pointer relative hover:scale-105"
                      />
                      <input
                         type="checkbox"
