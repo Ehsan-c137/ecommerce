@@ -104,6 +104,7 @@ export default function Item({ item, handleCart, isLoading }: IProps) {
             </div>
             <p className="text-secondary font-medium text-base text-nowrap ">
                $ {item?.data.price}
+               <span className="text-sm text-neutral-500"> x{item.count}</span>
             </p>
          </div>
          <div
