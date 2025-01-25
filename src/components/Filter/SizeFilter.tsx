@@ -9,7 +9,7 @@ export function SizeFilter({ sizes, searchParams, onSelect }: SizeFilterProps) {
       <div className="flex flex-col gap-4 px-4">
          <p className="text-neutral-900 font-medium">Size</p>
          <div className="flex items-center flex-wrap gap-3 text-sm">
-            {sizes.map((size) => {
+            {sizes?.map((size) => {
                const isChecked = searchParams.getAll("size")?.includes(size)
                return (
                   <div key={size} className="flex items-center">
