@@ -33,6 +33,7 @@ export default function Filters() {
 
    const colors = allProducts
       ?.flatMap((product: TProduct) => product.options.colors)
+      .map((item: string) => item?.toLowerCase())
       .filter(
          (color: string, index: number, self: string[]) =>
             self.indexOf(color) === index

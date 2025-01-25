@@ -11,8 +11,6 @@ import useHandleQueryParams from "@/utils/useHandleQueryParams"
 import { Icons } from "@/components/Icons/icons"
 import { useState } from "react"
 import clsx from "clsx"
-import Drawer from "@/components/UI/Drawer/Drawer"
-import Filters from "./Filters"
 
 export default function Products({
    maxPrice,
@@ -23,7 +21,6 @@ export default function Products({
 }) {
    const searchParams = useSearchParams()
    const [isDropdownOpen, setIsDropdownOpen] = useState(false)
-   const [isFilterOpen, setIsFilterOpen] = useState(false)
    const [isListView, setIsListView] = useState(!!searchParams.get("listView"))
    const handleQueryParams = useHandleQueryParams()
    const allSearchParams = useGetAllSearchParams()
@@ -191,6 +188,7 @@ export default function Products({
                   "acending",
                   "decending",
                   "listView",
+                  "filter-drawer",
                ]
                if (skipKey.includes(key)) {
                   return
