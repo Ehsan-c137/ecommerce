@@ -9,7 +9,7 @@ export function FilterSection({
    onSelect,
 }: FilterSectionProps) {
    return (
-      <div className="flex flex-col gap-2 px-4 pt-6 w-[228px]">
+      <div className="flex flex-col gap-2 px-4 pt-6 md:w-[228px] w-full">
          <p className="text-neutral-900 font-medium">{title}</p>
          <div className="flex flex-col text-nowrap">
             {isLoading && (
