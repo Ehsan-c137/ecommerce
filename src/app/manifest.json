@@ -6,6 +6,21 @@
    "display": "standalone",
    "background_color": "#ffffff",
    "theme_color": "#000000",
+   "id": "open-fashion",
+   "dir": "ltr",
+   "lang": "en-US",
+   "categories": [
+      "business",
+      "shopping",
+      "fashion",
+      "accessories",
+      "clothing",
+      "jewelry",
+      "men",
+      "women",
+      "kids",
+      "home"
+   ],
    "icons": [
       {
          "src": "/android-chrome-192x192.png",
