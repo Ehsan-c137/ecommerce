@@ -7,6 +7,7 @@ import {
 } from "@tanstack/react-query"
 import { useState } from "react"
 import { Toaster } from "react-hot-toast"
+import getProducts from "@/services/store/product/products"
 
 function makeQueryClient() {
    return new QueryClient({
@@ -33,6 +34,12 @@ function getQueryClient() {
 
 export default function Providers({ children }: { children: React.ReactNode }) {
    const [queryClient] = useState(getQueryClient())
+
+   queryClient.prefetchQuery({
+      queryKey: ["allproducts"],
+      queryFn: () => getProducts(1, 1),
+   })
+
    return (
       <>
          <Toaster
