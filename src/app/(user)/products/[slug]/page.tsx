@@ -3,8 +3,7 @@ import SingleProduct from "./singleProduct"
 import type { Metadata } from "next"
 
 type Props = {
-   params: Promise<{ slug: string }>
-   searchParams: Promise<{ [key: string]: string | string[] | undefined }>
+   params: { slug: string }
 }
 
 export async function generateStaticParams() {
@@ -12,16 +11,16 @@ export async function generateStaticParams() {
 
    return products.data.map((product: { slug: string }) => {
       return {
-         slug: product.slug,
+         slug: product.slug.toLowerCase(),
       }
    })
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-   const id = (await params).slug
+   const { slug } = params
 
    const product = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_URL}/store/product/slug/${id}`
+      `${process.env.NEXT_PUBLIC_BASE_URL}/store/product/slug/${slug}`
    ).then((res) => res.json())
 
    return {
@@ -30,7 +29,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function Page({ params }: Props) {
-   const slug = (await params).slug.toLowerCase()
+   const slug = params.slug.toLowerCase()
 
    return <SingleProduct slug={slug} />
 }
