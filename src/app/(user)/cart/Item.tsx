@@ -39,7 +39,7 @@ export default function Item({ item, handleCart, isLoading }: IProps) {
                <Icons.X />
             </div>
             <Image
-               src={item.data.main_image}
+               src={item.data.main_image + "?imwidth=140"}
                alt={item.data.name}
                width={100}
                height={134}
