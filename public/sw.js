@@ -20,3 +20,16 @@ self.addEventListener("notificationclick", function (event) {
    event.notification.close()
    event.waitUntil(clients.openWindow("<https://your-website.com>"))
 })
+
+self.addEventListener("fetch", (event) => {
+   event.respondWith(
+      caches.match(event.request).then((respond) => {
+         return (
+            respond ||
+            fetch(event.request).catch(() => {
+               return caches.match("/offline")
+            })
+         )
+      })
+   )
+})
