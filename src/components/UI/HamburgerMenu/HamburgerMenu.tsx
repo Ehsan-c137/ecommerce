@@ -1,14 +1,15 @@
 "use client"
 
 import { useEffect, useRef, useState } from "react"
-import style from "./HamburgerMenu.module.css"
+import ham_style from "./HamburgerMenu.module.css"
+import drawer_style from "../Drawer/drawer.module.css"
 import clsx from "clsx"
-import CreatePortal from "@/components/CreatePortal"
 import { Icons } from "@/components/Icons/icons"
 import Accordion from "../Accordion/Accordion"
 import Link from "next/link"
 import logout from "@/services/user/logout"
 import { useRouter } from "next/navigation"
+import Drawer from "../Drawer/Drawer"
 
 enum Tabs {
    Women = 1,
@@ -53,24 +54,18 @@ export default function HamburgerMenu({ isLoggedIn }: { isLoggedIn: boolean }) {
             onBlur={handleCloseDrawer}
          >
             <div
-               className={clsx(style.burgerMenu, {
-                  [style.burgerMenuClosed]: !isOpen,
-                  [style.burgerMenuOpened]: isOpen,
+               className={clsx(ham_style.burgerMenu, {
+                  [ham_style.burgerMenuClosed]: !isOpen,
+                  [ham_style.burgerMenuOpened]: isOpen,
                })}
             >
-               <div className={style.bar}></div>
-               <div className={style.bar}></div>
-               <div className={style.bar}></div>
+               <div className={ham_style.bar}></div>
+               <div className={ham_style.bar}></div>
+               <div className={ham_style.bar}></div>
             </div>
          </div>
-         <CreatePortal show={isOpen} selector="my-portal">
-            <div
-               onBlur={handleCloseDrawer}
-               className={clsx("flex flex-col justify-between", style.drawer, {
-                  [style.drawerOpen]: isOpen,
-                  [style.drawerClose]: !isOpen,
-               })}
-            >
+         <Drawer isOpen={isOpen} setIsOpen={setIsOpen}>
+            <div className="flex flex-col h-full justify-between">
                <div>
                   <div className="uppercase transition justify-around items-center border-b grid grid-cols-3 relative">
                      <p
@@ -95,7 +90,7 @@ export default function HamburgerMenu({ isLoggedIn }: { isLoggedIn: boolean }) {
                      <div
                         className={clsx(
                            "active-border w-full col-start-1",
-                           style.border,
+                           ham_style.border,
                            {
                               "col-start-1": activeTab === 1,
                               "col-start-2": activeTab === 2,
@@ -137,7 +132,7 @@ export default function HamburgerMenu({ isLoggedIn }: { isLoggedIn: boolean }) {
                   </div>
                </div>
             </div>
-         </CreatePortal>
+         </Drawer>
       </>
    )
 }
