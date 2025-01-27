@@ -207,10 +207,12 @@ export default function LandingPage() {
                </div>
                <Link
                   href={"/products"}
-                  className="flex items-center gap-2 py-4"
+                  className="flex items-center gap-2 py-4 group"
                >
-                  <p className="text-titleActive body-1">Explore More</p>
-                  <Icons.ArrowRight />
+                  <p className="text-titleActive body-1 ">Explore More</p>
+                  <span className="transition-transform duration-300 group-hover:translate-x-1">
+                     <Icons.ArrowRight />
+                  </span>
                </Link>
             </section>
             <section
@@ -241,11 +243,11 @@ export default function LandingPage() {
                }}
             >
                <p className="text-titleActive uppercase title">Collections</p>
-               <div className="w-full relative">
+               <div className="w-full relative md:flex md:justify-center md:w-[500px] md:h-[600px]">
                   <Image
                      src="/mobile/october.webp"
                      alt="10 october collections"
-                     className="absoloute left-0 top-0"
+                     className="absoloute left-0 top-0 md:hidden"
                      width={0}
                      height={0}
                      sizes="100vw"
@@ -255,7 +257,23 @@ export default function LandingPage() {
                         height: "100%",
                      }}
                   />
-                  <div className={`absolute top-[20%] italic right-12`}>
+                  <Image
+                     src="/october.webp"
+                     alt="10 october collections"
+                     className="flex left-0 top-0"
+                     width={500}
+                     height={600}
+                     sizes="100vw"
+                     unoptimized
+                     style={{
+                        width: "500px",
+                        height: "600px",
+                        objectFit: "cover",
+                     }}
+                  />
+                  <div
+                     className={`absolute top-[20%] italic right-12 md:top-[70%] md:right-[50%] md:translate-x-[40%]`}
+                  >
                      <p
                         className={`text-body font-extrabold text-[160px] opacity-30 leading-none -tracking-[0.2em] ${bodoniModa.className}`}
                      >
