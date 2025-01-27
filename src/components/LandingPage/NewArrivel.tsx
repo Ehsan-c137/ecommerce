@@ -25,7 +25,7 @@ export default function NewArrival() {
 
    return (
       <>
-         <div className="px-3 pb-4 flex w-full justify-between truncate gap-2 h-[40px]">
+         <div className="px-3 pb-4 flex w-full justify-between lg:justify-center lg:gap-6 truncate gap-2 h-[40px]">
             {categories?.map((item: TCategory) => (
                <button
                   key={item.name}
@@ -38,7 +38,7 @@ export default function NewArrival() {
                </button>
             ))}
          </div>
-         <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
+         <div className="grid justify-center grid-cols-2 md:grid-cols-4 lg:flex lg:justify-center gap-4">
             {isLoading &&
                Array.from({ length: 4 }).map((_, i) => (
                   <div
