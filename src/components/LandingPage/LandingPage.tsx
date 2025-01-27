@@ -56,6 +56,7 @@ export default function LandingPage() {
    }, [options])
 
    useGSAP(() => {
+      const mm = gsap.matchMedia()
       const tl = gsap.timeline()
       tl.to(".hero-text", {
          opacity: 1,
@@ -72,12 +73,28 @@ export default function LandingPage() {
          snap: { y: 0.3 },
          force3D: false,
       })
+
+      mm.add("(min-width: 769px)", () => {
+         const tl = gsap.timeline()
+         gsap.to(".hero-item-desktop", {
+            opacity: 1,
+            delay: 0.5,
+         })
+         tl.from(".hero-item-desktop", {
+            opacity: 0,
+            ease: "power4.out",
+            delay: 0.5,
+            x: (index) => [-100, 0, 100][index],
+            y: (index) => (index === 1 ? 100 : 0),
+            force3D: false,
+         })
+      })
    }, [])
 
    return (
       <>
          <main className="flex flex-col mx-auto items-center sm:items-start">
-            <section className="w-full flex justify-center items-end relative h-[600px]">
+            <section className="w-full md:hidden flex justify-center items-end relative h-[600px]">
                <Image
                   src="/mobile/hero-section.webp"
                   alt="spring season"
@@ -116,6 +133,65 @@ export default function LandingPage() {
                   Explore Collection
                </Link>
             </section>
+            <section className="hidden md:grid grid-cols-3 relative overflow-hidden">
+               <Image
+                  src="/hero-desktop-1.webp"
+                  alt="spring season"
+                  priority={true}
+                  width={0}
+                  height={0}
+                  className="hero-item-desktop opacity-0"
+                  style={{
+                     width: "100%",
+                     height: "100%",
+                  }}
+                  sizes="100vw"
+                  unoptimized={true}
+               />
+               <Image
+                  src="/hero-desktop-2.webp"
+                  alt="spring season"
+                  priority={true}
+                  width={0}
+                  height={0}
+                  className="hero-item-desktop opacity-0"
+                  style={{
+                     width: "100%",
+                     height: "100%",
+                  }}
+                  sizes="100vw"
+                  unoptimized={true}
+               />
+               <Image
+                  src="/hero-desktop-3.webp"
+                  alt="spring season"
+                  priority={true}
+                  width={0}
+                  height={0}
+                  className="hero-item-desktop opacity-0"
+                  style={{
+                     width: "100%",
+                     height: "100%",
+                  }}
+                  sizes="100vw"
+                  unoptimized={true}
+               />
+               <div
+                  className={`font-bold italic text-body absolute top-[15%] left-1/2 -translate-x-1/2 text-nowrap ${bodoniModa.className} uppercase text-[30px] bg-blend-multiply opacity-70 leading-tight`}
+               >
+                  <div className="h-[38px] w-[250px] overflow-y-hidden relative">
+                     <p className="hero-text ml-5 absolute opacity-0">
+                        Fashion
+                     </p>
+                  </div>
+                  <div className="h-[42px] w-[250px] overflow-hidden relative">
+                     <p className="hero-text absolute opacity-0">&</p>
+                     <p className="hero-text absolute left-[15%] opacity-0">
+                        Accessories
+                     </p>
+                  </div>
+               </div>
+            </section>
             <section className="flex flex-col gap-4 justify-around text-center items-center w-full py-5">
                <p className="text-titleActive uppercase">new Arrival</p>
                <Icons.Border />
@@ -132,7 +208,7 @@ export default function LandingPage() {
                </Link>
             </section>
             <section
-               className="grid grid-cols-1 items-center justify-items-center md:grid-cols-2 container mx-auto my-4 show-item"
+               className="grid grid-cols-1 items-center justify-items-center container mx-auto my-4 show-item"
                ref={(el) => {
                   if (el) {
                      itemRef.current[0] = el
@@ -151,7 +227,7 @@ export default function LandingPage() {
                <Icons.Border />
             </section>
             <section
-               className="flex flex-col md:flex-row justify-center items-center gap-4 container mx-auto w-full mt-10  show-item"
+               className="flex flex-col justify-center items-center gap-4 container mx-auto w-full mt-10  show-item"
                ref={(el) => {
                   if (el) {
                      itemRef.current[1] = el
@@ -221,14 +297,13 @@ export default function LandingPage() {
                      itemRef.current[3] = el
                   }
                }}
-               className="flex flex-col md:flex-row flex-wrap items-center gap-4 text-center justify-center w-full pt-0 mx-auto container mt-10 show-item"
+               className="flex flex-col flex-wrap items-center gap-4 text-center justify-center w-full pt-0 mx-auto container mt-10 show-item"
             >
                <h3 className="uppercase text-titleActive">Just for you</h3>
                <Icons.Border />
 
                <Carousel />
             </section>
-            <section className="flex flex-col md:flex-row w-full justify-center mx-auto container my-10 rounded-md"></section>
          </main>
       </>
    )
