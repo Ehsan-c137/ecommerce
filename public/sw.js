@@ -22,14 +22,30 @@ self.addEventListener("notificationclick", function (event) {
 })
 
 self.addEventListener("fetch", (event) => {
-   event.respondWith(
-      caches.match(event.request).then((respond) => {
-         return (
-            respond ||
-            fetch(event.request).catch(() => {
+   const request = event.request
+
+   if (
+      request.destination === "image" ||
+      request.destination === "style" ||
+      request.destination === "script"
+   ) {
+      event.respondWith(
+         caches
+            .match(request)
+            .then((response) => response || fetch(request))
+            .catch(() => {
+               if (request.destination === "image") {
+                  return caches.match("/android-chrome-512x512.png")
+               }
                return caches.match("/offline")
             })
-         )
+      )
+      return
+   }
+
+   event.respondWith(
+      fetch(request).catch(() => {
+         return caches.match(request) || caches.match("/offline")
       })
    )
 })
