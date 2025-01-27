@@ -2,7 +2,6 @@
 
 import { useEffect, useRef, useState } from "react"
 import ham_style from "./HamburgerMenu.module.css"
-import drawer_style from "../Drawer/drawer.module.css"
 import clsx from "clsx"
 import { Icons } from "@/components/Icons/icons"
 import Accordion from "../Accordion/Accordion"
