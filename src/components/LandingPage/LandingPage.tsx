@@ -164,7 +164,7 @@ export default function LandingPage() {
                />
                <Image
                   src="/hero-desktop-3.webp"
-                  alt="spring season"
+                  alt="accessories"
                   priority={true}
                   width={0}
                   height={0}
