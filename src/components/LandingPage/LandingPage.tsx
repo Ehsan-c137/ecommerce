@@ -93,7 +93,7 @@ export default function LandingPage() {
 
    return (
       <>
-         <main className="flex flex-col mx-auto items-center sm:items-start">
+         <main className="flex flex-col mx-auto items-center sm:items-start mt-[54px] md:mt-0">
             <section className="w-full md:hidden flex justify-center items-end relative h-[600px]">
                <Image
                   src="/mobile/hero-section.webp"
@@ -177,7 +177,7 @@ export default function LandingPage() {
                   unoptimized={true}
                />
                <div
-                  className={`font-bold italic text-body absolute top-[15%] left-1/2 -translate-x-1/2 text-nowrap ${bodoniModa.className} uppercase text-[30px] bg-blend-multiply opacity-70 leading-tight`}
+                  className={`font-bold italic text-body absolute top-[25%] left-1/2 -translate-x-1/2 text-nowrap ${bodoniModa.className} uppercase text-[30px] bg-blend-multiply opacity-70 leading-tight`}
                >
                   <div className="h-[38px] w-[250px] overflow-y-hidden relative">
                      <p className="hero-text ml-5 absolute opacity-0">
@@ -191,6 +191,12 @@ export default function LandingPage() {
                      </p>
                   </div>
                </div>
+               <Link
+                  href={"/products"}
+                  className="absolute rounded-[30px] px-[30px] py-2 uppercase bg-opacity-70 bg-body bottom-[60px] text-nowrap left-[50%] text-offWhite transform -translate-x-1/2"
+               >
+                  Explore Collection
+               </Link>
             </section>
             <section className="flex flex-col gap-4 justify-around text-center items-center w-full py-5">
                <p className="text-titleActive uppercase">new Arrival</p>
