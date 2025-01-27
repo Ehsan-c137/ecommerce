@@ -39,8 +39,8 @@ export default function Drawer({
             <div
                onBlur={handleCloseDrawer}
                className={clsx("flex flex-col justify-between", style.drawer, {
-                  drawer_open: isOpen,
-                  drawer_close: !isOpen,
+                  [style.drawer_open]: isOpen,
+                  [style.drawer_close]: !isOpen,
                })}
             >
                {children}
