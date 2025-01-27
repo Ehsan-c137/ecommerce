@@ -11,7 +11,7 @@ export default async function Header() {
       <>
          <MobileNav />
 
-         <header className="hidden lg:fixed w-full h-21 top-0 z-10 bg-white-900 px-4">
+         <header className="hidden lg:fixed w-full h-21 top-0 z-10 px-4">
             <div className="flex items-center justify-between h-[84px] 3xl:container mx-auto">
                <div
                   className="flex items-center gap-4 lg:w-[337px]"
