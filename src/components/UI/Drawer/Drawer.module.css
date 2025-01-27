@@ -9,19 +9,19 @@
    border-top-right-radius: 16px;
    background-image: url("/nnnoise.svg");
    background-color: white;
+   border-radius: 0px;
    padding: 18px;
-   box-shadow: 0px 0px 30px 10px rgb(184, 190, 196);
+   box-shadow: 0px 0px 30px 10px rgba(100, 100, 100, 0.337);
 }
 
-.drawerClose {
-   /* transform: translateY(100%); */
-   animation: closeDrawer 0.3s cubic-bezier(0.32, 0.72, 0, 1) forwards;
+.drawer_close {
+   animation: close_drawer 0.3s cubic-bezier(0.32, 0.72, 0, 1) forwards;
 }
-.drawerOpen {
-   animation: openDrawer 0.3s cubic-bezier(0.32, 0.72, 0, 1) forwards;
+.drawer_open {
+   animation: open_drawer 0.3s cubic-bezier(0.32, 0.72, 0, 1) forwards;
 }
 
-@keyframes openDrawer {
+@keyframes open_drawer {
    from {
       transform: translateY(100%);
    }
@@ -30,12 +30,53 @@
    }
 }
 
-@keyframes closeDrawer {
+@keyframes close_drawer {
    from {
       transform: translateY(0);
    }
    to {
       transform: translateY(100%);
+   }
+}
+
+@media screen and (min-width: 768px) {
+   .drawer {
+      position: fixed;
+      width: 400px !important;
+      height: 100%;
+      left: 0px;
+      bottom: 0px;
+      z-index: 10;
+      border-radius: 4px;
+      background-image: url("/nnnoise.svg");
+      background-color: white;
+      padding: 18px;
+      box-shadow: 0px 0px 30px 10px rgba(52, 52, 52, 0.575);
+   }
+
+   .drawer_close {
+      animation: closeDrawerDesktop 0.3s cubic-bezier(0.32, 0.72, 0, 1) forwards;
+   }
+   .drawerOpen {
+      animation: openDrawerDesktop 0.3s cubic-bezier(0.32, 0.72, 0, 1) forwards;
+   }
+}
+
+@keyframes openDrawerDesktop {
+   from {
+      transform: translateX(100%);
+   }
+   to {
+      transform: translateX(0);
+   }
+}
+
+@keyframes closeDrawerDesktop {
+   from {
+      transform: translateX(0);
+   }
+   to {
+      transform: translateX(100%);
    }
 }
 

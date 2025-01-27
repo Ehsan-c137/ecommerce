@@ -1,9 +1,9 @@
 "use client"
 
 import { useCallback, useEffect, useRef } from "react"
-import style from "./Drawer.module.css"
 import clsx from "clsx"
 import CreatePortal from "@/components/CreatePortal"
+import style from "./drawer.module.css"
 
 export default function Drawer({
    children,
@@ -39,8 +39,8 @@ export default function Drawer({
             <div
                onBlur={handleCloseDrawer}
                className={clsx("flex flex-col justify-between", style.drawer, {
-                  [style.drawerOpen]: isOpen,
-                  [style.drawerClose]: !isOpen,
+                  drawer_open: isOpen,
+                  drawer_close: !isOpen,
                })}
             >
                {children}
