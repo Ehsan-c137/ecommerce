@@ -15,10 +15,10 @@
 }
 
 .drawer_close {
-   animation: close_drawer 0.3s cubic-bezier(0.32, 0.72, 0, 1) forwards;
+   animation: close_drawer 0.5s cubic-bezier(0.32, 0.72, 0, 1) forwards;
 }
 .drawer_open {
-   animation: open_drawer 0.3s cubic-bezier(0.32, 0.72, 0, 1) forwards;
+   animation: open_drawer 0.5s cubic-bezier(0.32, 0.72, 0, 1) forwards;
 }
 
 @keyframes open_drawer {
@@ -47,7 +47,6 @@
       left: 0px;
       bottom: 0px;
       z-index: 10;
-      border-radius: 4px;
       background-image: url("/nnnoise.svg");
       background-color: white;
       padding: 18px;
@@ -55,16 +54,16 @@
    }
 
    .drawer_close {
-      animation: closeDrawerDesktop 0.3s cubic-bezier(0.32, 0.72, 0, 1) forwards;
+      animation: closeDrawerDesktop 0.5s cubic-bezier(0.32, 0.72, 0, 1) forwards;
    }
-   .drawerOpen {
-      animation: openDrawerDesktop 0.3s cubic-bezier(0.32, 0.72, 0, 1) forwards;
+   .drawer_open {
+      animation: openDrawerDesktop 0.5s cubic-bezier(0.32, 0.72, 0, 1) forwards;
    }
 }
 
 @keyframes openDrawerDesktop {
    from {
-      transform: translateX(100%);
+      transform: translateX(-100%);
    }
    to {
       transform: translateX(0);
@@ -76,7 +75,7 @@
       transform: translateX(0);
    }
    to {
-      transform: translateX(100%);
+      transform: translateX(-100%);
    }
 }
 
