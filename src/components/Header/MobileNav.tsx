@@ -8,7 +8,7 @@ export default async function MobileNav() {
    const isLoggedin = await checkLoggedin()
    return (
       <>
-         <header className="flex justify-between py-3 px-4 background noisy-background">
+         <header className="flex justify-between py-3 px-4 background ">
             <div className="w-[56px] flex items-center">
                <HamburgerMenu isLoggedIn={isLoggedin} />
             </div>
