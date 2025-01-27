@@ -6,7 +6,9 @@ import LandingPage from "@/components/LandingPage/LandingPage"
 export default function Home() {
    return (
       <div className="background">
-         <Header />
+         <div className="fixed w-full top-0 z-10">
+            <Header />
+         </div>
          <ScrollToTop />
          <LandingPage />
          <Footer />
