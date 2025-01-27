@@ -222,7 +222,7 @@ export default function LandingPage() {
                }}
             >
                <Icons.Border />
-               <div className="grid grid-cols-3 py-6 place-items-center items-center justify-center gap-6">
+               <div className="grid grid-cols-3 md:grid-cols-6 py-6 place-items-center items-center justify-center gap-6">
                   <Icons.Prada />
                   <Icons.Burberry />
                   <Icons.HugoBossIcon />
