@@ -97,7 +97,9 @@ export default function CartLayout({ children }: { children: ReactNode }) {
                               <div className="sr-only">loading</div>
                            </div>
                         ) : (
-                           <p className="text-neutral-900">${subtotal + 3}</p>
+                           <p className="text-neutral-900">
+                              ${(subtotal + 3).toFixed(2)}
+                           </p>
                         )}
                      </div>
                      <Link
