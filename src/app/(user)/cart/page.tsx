@@ -64,13 +64,18 @@ export default function Cart() {
 
    return (
       <div className="h-full">
-         <div className="flex flex-col gap-4 px-4 h-full pb-[224px] overflow-auto">
+         <div className="flex flex-col gap-4 px-4 h-full pb-[224px]">
+            <div className="w-full justify-around items-center flex">
+               <div className="justify-center flex-col items-center flex gap-1 w-full relative">
+                  <Icons.Border />
+               </div>
+            </div>
             {isLoading ? (
                <div className="w-full flex justify-center items-center h-[300px]">
                   <span className="loader-black"></span>
                </div>
             ) : (
-               <>
+               <div className="flex flex-col gap-2 h-full overflow-y-hidden">
                   {cart?.data?.map(
                      (item: {
                         data: TProduct
@@ -94,7 +99,7 @@ export default function Cart() {
                         </p>
                      </div>
                   )}
-               </>
+               </div>
             )}
          </div>
          {!isCartEmpty && (

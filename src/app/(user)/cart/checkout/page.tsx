@@ -78,7 +78,7 @@ export default function Checkout() {
                   <span className="loader-black"></span>
                </div>
             ) : (
-               <div className="flex flex-col gap-2 px-4 h-full overflow-auto">
+               <div className="flex flex-col gap-2 px-4 h-full overflow-y-hidden">
                   {cart?.data?.map(
                      (item: {
                         data: TProduct
