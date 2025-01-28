@@ -10,8 +10,17 @@ import Link from "next/link"
 import { Icons } from "@/components/Icons/icons"
 import style from "./cart.module.css"
 import clsx from "clsx"
+import { useEffect, useRef } from "react"
 
 export default function Cart() {
+   const pathnameRef = useRef<HTMLDivElement | null>(null)
+
+   useEffect(() => {
+      if (pathnameRef.current) {
+         pathnameRef.current.style.transform = "translateX(0)"
+      }
+   }, [])
+
    const { data: cart, isLoading } = useQuery({
       queryKey: ["cart"],
       queryFn: () => getCart(),
@@ -65,6 +74,14 @@ export default function Cart() {
    return (
       <div className="h-full">
          <div className="flex flex-col gap-4 px-4 h-full pb-[224px]">
+            <div
+               ref={pathnameRef}
+               className={clsx(
+                  "text-titleActive uppercase px-4 flex items-center justify-center gap-2 -translate-x-4 transition-transform"
+               )}
+            >
+               Cart
+            </div>
             <div className="w-full justify-around items-center flex">
                <div className="justify-center flex-col items-center flex gap-1 w-full relative">
                   <Icons.Border />
