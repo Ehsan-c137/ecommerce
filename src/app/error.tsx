@@ -5,13 +5,7 @@ import { Button } from "@/components/UI/Button"
 import { useRouter } from "next/navigation"
 import { Icons } from "@/components/Icons/icons"
 
-export default function Error({
-   error,
-   reset,
-}: {
-   error: Error
-   reset: () => void
-}) {
+export default function Error({ error }: { error: Error; reset: () => void }) {
    const router = useRouter()
    useEffect(() => {
       console.error(error)
@@ -38,7 +32,7 @@ export default function Error({
                   <Button
                      className="bg-titleActive text-offWhite"
                      intent={"primary"}
-                     onClick={() => reset()}
+                     onClick={() => router.refresh()}
                   >
                      Refresh
                   </Button>
