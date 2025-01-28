@@ -267,7 +267,7 @@ export default function LandingPage() {
                   <Image
                      src="/october.webp"
                      alt="10 october collections"
-                     className="flex left-0 top-0 hidden md:flex"
+                     className="left-0 top-0 hidden md:flex"
                      width={500}
                      height={600}
                      sizes="100vw"
