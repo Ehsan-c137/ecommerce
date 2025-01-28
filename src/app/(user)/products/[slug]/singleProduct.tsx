@@ -149,7 +149,7 @@ export default function SingleProduct({ slug }: { slug: string }) {
             <section className="grid grid-cols-1 md:grid-cols-2 lg:gap-[120px] gap-4 flex-1 px-4">
                <div
                   className={clsx(
-                     "w-full h-[464px] bg-white-100 flex items-center justify-center min-h-[460px]",
+                     "w-full h-[464px] bg-white-100 flex items-center justify-center min-h-[460px] lg:h-[600px]",
                      {
                         "animate-pulse bg-background": isLoading,
                      }
@@ -342,35 +342,6 @@ export default function SingleProduct({ slug }: { slug: string }) {
                      <p>Add</p>
                   </button>
                </div>
-               {/* <button
-               className="flex items-center justify-center  cursor-pointer w-full"
-               disabled={productCount == 1 && dataInCart?.count == 1}
-               style={{
-                  opacity: productCount === 1 ? "0.4" : 1,
-               }}
-               onClick={() => setProductCount((prev) => prev - 1)}
-            >
-               <Icons.Minus />
-            </button>
-            <p className="w-full text-center">
-               {cartLoading ? (
-                  <span className="loader"></span>
-               ) : (
-                  dataInCart?.count ?? productCount
-               )}
-            </p>
-            <button
-               className="flex items-center justify-center  w-full"
-               disabled={data?.remaining == productCount}
-               style={{
-                  opacity: data?.remaining == productCount ? 0.4 : 1,
-               }}
-               onClick={() => {
-                  setProductCount((prev) => prev + 1)
-               }}
-            >
-               <Icons.Plus />
-            </button> */}
                <div
                   className="flex items-center justify-center w-[43px]"
                   onClick={handleFavorite}
@@ -412,7 +383,7 @@ export default function SingleProduct({ slug }: { slug: string }) {
                   {section == "reviews" && <Reviews />}
                </div>
             </section>
-            <section className="text-center flex flex-col items-center mt-4">
+            {/* <section className="text-center flex flex-col items-center mt-4">
                <div className="flex flex-col items-center gap-2 py-4">
                   <p className="uppercase text-titleActive">
                      You may also like
@@ -420,12 +391,12 @@ export default function SingleProduct({ slug }: { slug: string }) {
                   <Icons.Border />
                </div>
                <div className="grid grid-cols-2 gap-4">
-                  {/* <Product />
+                  <Product />
                <Product />
                <Product />
-               <Product /> */}
+               <Product />
                </div>
-            </section>
+            </section> */}
             <Footer />
          </div>
       </>
