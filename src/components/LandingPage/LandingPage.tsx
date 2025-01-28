@@ -271,6 +271,7 @@ export default function LandingPage() {
                         objectFit: "cover",
                      }}
                   />
+
                   <div
                      className={`absolute top-[20%] italic right-12 md:top-[70%] md:right-[50%] md:translate-x-[40%]`}
                   >
@@ -291,7 +292,7 @@ export default function LandingPage() {
                </div>
             </section>
             <section
-               className="p-10 relative show-item"
+               className="p-10 relative lg:static show-item lg:flex lg:justify-center w-full"
                ref={(el) => {
                   if (el) {
                      itemRef.current[2] = el
@@ -302,16 +303,45 @@ export default function LandingPage() {
                   src="/mobile/autumn_collection.webp"
                   alt="autumn collection"
                   unoptimized
+                  className="md:hidden"
                   sizes="100vw"
                   width={292}
                   height={260}
                />
+               <Image
+                  src="/autumn-collection-2.webp"
+                  alt="10 october collections"
+                  className="hidden md:flex left-0 top-0"
+                  width={480}
+                  height={600}
+                  sizes="100vw"
+                  unoptimized
+                  style={{
+                     width: "480px",
+                     height: "600px",
+                     objectFit: "cover",
+                  }}
+               />
+               <Image
+                  src="/autumn-collection-3.webp"
+                  alt="10 october collections"
+                  className="hidden md:flex left-0 top-0"
+                  width={480}
+                  height={600}
+                  sizes="100vw"
+                  unoptimized
+                  style={{
+                     width: "480px",
+                     height: "600px",
+                     objectFit: "contain",
+                  }}
+               />
                <p
-                  className={`right-[20%] top-[20%] text-body italic opacity-80 font-bold absolute ${bodoniModa.className} text-4xl`}
+                  className={`right-[20%] top-[20%] md:top-[70%] md:right-[50%] md:translate-x-[50%] text-body italic opacity-80 font-bold absolute ${bodoniModa.className} text-4xl`}
                >
                   Autumn
                </p>
-               <p className="uppercase body-s text-body  right-[20%] top-[30%] absolute !tracking-[5px]">
+               <p className="uppercase body-s text-body  right-[20%] top-[30%] md:top-[65%] md:right-[50%] md:translate-x-[50%] absolute !tracking-[5px]">
                   collection
                </p>
             </section>
