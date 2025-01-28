@@ -127,7 +127,7 @@ export default function Filters() {
 
    return (
       <>
-         <div className="hidden filter-section sm:flex flex-col gap-6 border border-neutral-100 rounded-sm w-[228px] pb-4 sticky top-[--header-height] left-0 h-fit">
+         <div className="hidden filter-section sm:flex flex-col gap-6 border border-neutral-100 rounded-sm w-[228px] py-4 sticky top-[--header-height] left-0 h-fit">
             {/* <FilterSection
                title="Categories"
                isLoading={categoriesLoading}
