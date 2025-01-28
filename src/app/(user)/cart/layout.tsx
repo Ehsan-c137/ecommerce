@@ -31,14 +31,6 @@ export default function CartLayout({ children }: { children: ReactNode }) {
    return (
       <>
          <div className="container flex flex-col md:flex-row gap-4 justify-between pt-4 pathContainer">
-            <div
-               className="text-titleActive uppercase px-4 pathnameref flex items-center gap-2"
-               ref={pathnameRef}
-            >
-               {pathname.split("/").map((item) => {
-                  return <p key={item}>{item}</p>
-               })}
-            </div>
             <div>{children}</div>
             {cart?.data?.length > 0 && (
                <div className="hidden lg:flex flex-col border border-neutral-100 rounded-md px-6 py-8 w-[300px] max-w-[340px]">
