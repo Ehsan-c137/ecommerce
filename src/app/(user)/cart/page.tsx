@@ -92,7 +92,7 @@ export default function Cart() {
                   <span className="loader-black"></span>
                </div>
             ) : (
-               <div className="flex flex-col gap-2 h-full overflow-y-hidden">
+               <div className="flex flex-col gap-6 h-full overflow-y-hidden">
                   {cart?.data?.map(
                      (item: {
                         data: TProduct
