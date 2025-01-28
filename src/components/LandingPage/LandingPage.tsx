@@ -242,7 +242,7 @@ export default function LandingPage() {
                <Icons.Border />
             </section>
             <section
-               className="flex flex-col justify-center items-center gap-4 container mx-auto w-full mt-10  show-item"
+               className="flex flex-col justify-center items-center gap-4 container mx-auto w-full mt-10 show-item"
                ref={(el) => {
                   if (el) {
                      itemRef.current[1] = el
@@ -267,7 +267,7 @@ export default function LandingPage() {
                   <Image
                      src="/october.webp"
                      alt="10 october collections"
-                     className="flex left-0 top-0"
+                     className="flex left-0 top-0 hidden md:flex"
                      width={500}
                      height={600}
                      sizes="100vw"
