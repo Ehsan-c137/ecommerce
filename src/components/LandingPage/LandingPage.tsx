@@ -84,7 +84,7 @@ export default function LandingPage() {
             opacity: 0,
             ease: "power4.out",
             delay: 0.5,
-            x: (index) => [-100, 0, 100][index],
+            x: (index) => [-100, 100][index],
             y: (index) => (index === 1 ? 100 : 0),
             force3D: false,
          })
@@ -133,49 +133,56 @@ export default function LandingPage() {
                   Explore Collection
                </Link>
             </section>
-            <section className="hidden md:grid grid-cols-3 relative overflow-hidden">
-               <Image
-                  src="/hero-desktop-1.webp"
-                  alt="spring season"
-                  priority={true}
-                  width={0}
-                  height={0}
-                  className="hero-item-desktop opacity-0"
-                  style={{
-                     width: "100%",
-                     height: "100%",
-                  }}
-                  sizes="100vw"
-                  unoptimized={true}
-               />
+            <section className="hidden md:flex relative overflow-hidden h-[100vh] md:w-full">
+               <div className="absolute top-20 left-20 z-10 max-w-[500px] max-h-[600px]">
+                  <Image
+                     src="/hero-desktop-1.webp"
+                     alt="spring season"
+                     priority={true}
+                     width={0}
+                     height={0}
+                     className="hero-item-desktop opacity-0"
+                     style={{
+                        width: "100%",
+                        height: "100%",
+                        objectFit: "contain",
+                     }}
+                     sizes="100vw"
+                     unoptimized={true}
+                  />
+               </div>
+
                <Image
                   src="/hero-desktop-2.webp"
                   alt="spring season"
                   priority={true}
                   width={0}
                   height={0}
-                  className="hero-item-desktop opacity-0"
                   style={{
                      width: "100%",
                      height: "100%",
+                     objectFit: "cover",
                   }}
                   sizes="100vw"
                   unoptimized={true}
                />
-               <Image
-                  src="/hero-desktop-3.webp"
-                  alt="accessories"
-                  priority={true}
-                  width={0}
-                  height={0}
-                  className="hero-item-desktop opacity-0"
-                  style={{
-                     width: "100%",
-                     height: "100%",
-                  }}
-                  sizes="100vw"
-                  unoptimized={true}
-               />
+               <div className="absolute  top-20 right-20 z-10 max-w-[500px] h-[750px]">
+                  <Image
+                     src="/hero-desktop-3.webp"
+                     alt="accessories"
+                     priority={true}
+                     width={0}
+                     height={0}
+                     className="hero-item-desktop opacity-0 "
+                     style={{
+                        width: "100%",
+                        height: "100%",
+                        objectFit: "cover",
+                     }}
+                     sizes="100vw"
+                     unoptimized={true}
+                  />
+               </div>
                <div
                   className={`font-bold italic text-body absolute top-[25%] left-1/2 -translate-x-1/2 text-nowrap ${bodoniModa.className} uppercase text-[30px] bg-blend-multiply opacity-70 leading-tight`}
                >
