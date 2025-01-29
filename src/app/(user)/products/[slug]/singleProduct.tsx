@@ -192,7 +192,11 @@ export default function SingleProduct({ slug }: { slug: string }) {
                   <div className="flex flex-col">
                      <div className="flex items-center justify-between gap-4 h-[24px]">
                         <h4 className="text-secondary">
-                           {!isLoading && `$ ${data?.price} `}
+                           {!isLoading ? (
+                              `$ ${data?.price} `
+                           ) : (
+                              <div className="w-[54px] bg-inputBackground animate-pulse"></div>
+                           )}
                         </h4>
                         <div className="flex items-center gap-2">
                            {isHaveRating && (
@@ -203,16 +207,20 @@ export default function SingleProduct({ slug }: { slug: string }) {
                                  </p>
                               </div>
                            )}
-                           <p
-                              className="btn-outline text-xs uppercase"
-                              style={{
-                                 textDecoration: !isRemaining
-                                    ? "line-through"
-                                    : "none",
-                              }}
-                           >
-                              IN STOCK
-                           </p>
+                           {!isLoading ? (
+                              <p
+                                 className="btn-outline text-xs uppercase"
+                                 style={{
+                                    textDecoration: !isRemaining
+                                       ? "line-through"
+                                       : "none",
+                                 }}
+                              >
+                                 IN STOCK
+                              </p>
+                           ) : (
+                              <div className="w-[64px] h-[24px] bg-inputBackground animate-pulse"></div>
+                           )}
                         </div>
                      </div>
                      <div
