@@ -12,7 +12,7 @@ export function ColorFilter({
    isLoading,
 }: ColorFilterProps) {
    return (
-      <div className="flex flex-col gap-4 px-4">
+      <div className="flex flex-col gap-2 px-4">
          <p className="text-neutral-900 font-medium">Color</p>
          {isLoading ? (
             <div className="h-[90px] animate-pulse bg-white-200 rounded-sm"></div>

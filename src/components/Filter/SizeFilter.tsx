@@ -12,7 +12,7 @@ export function SizeFilter({
    isLoading,
 }: SizeFilterProps) {
    return (
-      <div className="flex flex-col gap-4 px-4">
+      <div className="flex flex-col gap-2 px-4">
          <p className="text-neutral-900 font-medium">Size</p>
          {isLoading ? (
             <div className="h-[58px] w-full animate-pulse bg-white-200 rounded-sm"></div>
@@ -28,9 +28,9 @@ export function SizeFilter({
                               borderColor: isChecked ? "black" : "#e6e7e8",
                            }}
                            htmlFor={`${size}--size`}
-                           className="flex items-center justify-center w-8 h-8 rounded-md cursor-pointer border border-neutral-100 transition"
+                           className="flex items-center justify-center w-8 h-8 rounded-md cursor-pointer border border-neutral-100 transition body-s"
                         >
-                           {size}
+                           {size.toUpperCase()}
                         </label>
                         <input
                            type="checkbox"
