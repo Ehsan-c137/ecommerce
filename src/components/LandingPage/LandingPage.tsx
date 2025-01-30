@@ -205,7 +205,7 @@ export default function LandingPage() {
                   Explore Collection
                </Link>
             </section>
-            <section className="flex flex-col gap-4 justify-around text-center items-center w-full py-5 check-bg">
+            <section className="flex flex-col gap-4 justify-around text-center items-center w-full py-5">
                <p className="text-titleActive uppercase">new Arrival</p>
                <Icons.Border />
 
