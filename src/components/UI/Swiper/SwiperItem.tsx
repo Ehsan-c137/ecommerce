@@ -29,7 +29,7 @@ export default function CarouselItem({
             height={311}
          />
 
-         <Link href={`product/${image.slug}`}>
+         <Link href={`products/${image.slug}`}>
             <p
                className={clsx("text-starttruncate text-titleActive", {
                   "active opacity-100 transition translate-x-0":
