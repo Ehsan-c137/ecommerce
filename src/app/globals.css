@@ -230,17 +230,6 @@ html {
    will-change: transform, opacity;
 } */
 
-.check-bg {
-   background: rgb(224, 228, 220);
-   background: linear-gradient(
-      180deg,
-      rgba(224, 228, 220, 1) 0%,
-      rgba(234, 238, 230, 0.24413515406162467) 100%,
-      rgba(255, 255, 255, 0.8155637254901961) 100%,
-      rgba(255, 255, 255, 0.16010154061624648) 100%
-   );
-}
-
 .autumn_background {
    background: rgb(212, 207, 197);
    background: radial-gradient(
