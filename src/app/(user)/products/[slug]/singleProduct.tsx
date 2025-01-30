@@ -22,9 +22,10 @@ export default function SingleProduct({ slug }: { slug: string }) {
    const router = useRouter()
    const queryClient = useQueryClient()
 
-   const { data: isLogged } = useQuery({
+   const { data: cookie } = useQuery({
       queryKey: ["isLogged"],
       queryFn: () => checkLoggedin(),
+      staleTime: 0,
    })
 
    const [section, setSection] = useState<"details" | "reviews">("details")
@@ -107,7 +108,7 @@ export default function SingleProduct({ slug }: { slug: string }) {
    const dataInCart = oldCartData?.[duplicateProuduct]
    console.log(dataInCart, "data in cart")
    const handleCart = () => {
-      if (!isLogged) {
+      if (!cookie?.isLoggedIn) {
          router.push("/login")
          return
       }
