@@ -9,6 +9,7 @@ import { z } from "zod"
 import toast from "react-hot-toast"
 import { useRouter } from "next/navigation"
 import Input from "@/components/UI/Input"
+import { Button } from "@/components/UI/Button"
 
 const SignupSchema = z
    .object({
@@ -112,14 +113,15 @@ export default function Signup() {
                </p>
             </div>
 
-            <button
+            <Button
+               intent="primary"
                className="btn w-full flex items-center justify-center text-titleActive"
                disabled={isValid || signupMutation.isPending}
                onClick={handleSignup}
             >
                Create account
                {signupMutation.isPending && <span className="loader"></span>}
-            </button>
+            </Button>
          </form>
          <p className="text-neutral-500 mt-6">
             Already have an account? <Link href="/login"> Log in </Link>
