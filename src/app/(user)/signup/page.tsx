@@ -78,7 +78,7 @@ export default function Signup() {
             <div className="flex flex-col">
                <label
                   htmlFor="username"
-                  className="text-neutral-600 font-medium text-sm"
+                  className="font-medium text-sm text-titleActive"
                >
                   Username
                </label>
@@ -90,7 +90,7 @@ export default function Signup() {
             <div className="flex flex-col">
                <label
                   htmlFor="email"
-                  className="text-neutral-600 font-medium text-sm"
+                  className="font-medium text-sm text-titleActive"
                >
                   Email
                </label>
@@ -115,7 +115,7 @@ export default function Signup() {
 
             <Button
                intent="primary"
-               className="btn w-full flex items-center justify-center text-titleActive"
+               className="btn w-full flex items-center justify-center text-offWhite"
                disabled={isValid || signupMutation.isPending}
                onClick={handleSignup}
             >
