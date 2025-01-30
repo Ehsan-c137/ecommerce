@@ -120,15 +120,16 @@ const Carousel = () => {
    })
    const images = data?.slice(0, 3)
 
-   useEffect(() => {
-      const timer = setInterval(() => {
-         setCurrentIndex((prev) => (prev === images?.length - 1 ? 0 : prev + 1))
-      }, 5000)
+   // useEffect(() => {
+   //    const timer = setInterval(() => {
+   //       setCurrentIndex((prev) => (prev === images?.length - 1 ? 0 : prev + 1))
 
-      return () => {
-         clearInterval(timer)
-      }
-   }, [currentIndex, images?.length])
+   //    }, 5000)
+
+   //    return () => {
+   //       clearInterval(timer)
+   //    }
+   // }, [currentIndex, images?.length])
 
    const indicatorOnClick = (index: number) => {
       const containerEl = getRefValue(containerRef)
