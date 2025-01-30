@@ -145,7 +145,7 @@ export default function Products({
                         onClick={() => {
                            handleQueryParams("filter-drawer", "true")
                         }}
-                        className="w-[36px] h-[36px] bg-[#c4c4c42c] flex items-center justify-center rounded-full"
+                        className="w-[36px] h-[36px] bg-[#c4c4c42c] flex items-center justify-center rounded-full md:hidden"
                      >
                         F
                      </button>
