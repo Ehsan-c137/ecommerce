@@ -19,6 +19,7 @@ export function SizeFilter({
          ) : (
             <div className="flex items-center flex-wrap gap-3 text-sm">
                {sizes?.map((size) => {
+                  if (!size) return
                   const isChecked = searchParams.getAll("size")?.includes(size)
                   return (
                      <div key={size} className="flex items-center">
