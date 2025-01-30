@@ -21,10 +21,10 @@ export default function Filters() {
    const pathname = usePathname()
    const router = useRouter()
 
-   const { data: categories, isLoading: categoriesLoading } = useQuery({
-      queryKey: ["categories"],
-      queryFn: () => getAllCategory(),
-   })
+   // const { data: categories, isLoading: categoriesLoading } = useQuery({
+   //    queryKey: ["categories"],
+   //    queryFn: () => getAllCategory(),
+   // })
 
    const { data: allProducts, isLoading: productsLoading } = useQuery({
       queryKey: ["allproducts"],
@@ -171,15 +171,15 @@ export default function Filters() {
             isOpen={searchParams.get("filter-drawer") === "true"}
             setIsOpen={() => handleQueryParams("filter-drawer", "true")}
          >
-            <div className="flex flex-col gap-2 px-4 overflow-y-auto">
-               <FilterSection
+            <div className="flex flex-col gap-6 px-4 overflow-y-auto">
+               {/* <FilterSection
                   title="Categories"
                   isLoading={categoriesLoading}
                   items={categories}
                   paramName="category"
                   onSelect={handleQueryParams}
                   searchParams={searchParams}
-               />
+               /> */}
 
                <ColorFilter
                   colors={colors}
