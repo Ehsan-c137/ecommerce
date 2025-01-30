@@ -4,7 +4,7 @@ import { Icons } from "@/components/Icons/icons"
 import { Bodoni_Moda } from "next/font/google"
 import Image from "next/image"
 import Link from "next/link"
-import Carousel from "@/components/UI/Carousel/Carousel"
+import Swiper from "@/components/UI/Swiper/Swiper"
 import NewArrival from "@/components/LandingPage/NewArrivel"
 import { useEffect, useRef, useMemo } from "react"
 import gsap from "gsap"
@@ -363,7 +363,7 @@ export default function LandingPage() {
                <h3 className="uppercase text-titleActive">Just for you</h3>
                <Icons.Border />
 
-               <Carousel />
+               <Swiper />
             </section>
          </main>
       </>

@@ -1,0 +1,51 @@
+.swiper_container {
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+   width: 100%;
+   max-width: 500px;
+   max-height: 600px;
+   overflow: hidden;
+   touch-action: pan-y;
+   padding: 16px;
+}
+.swiper_list {
+   transition: transform 0.3s ease-out;
+   min-width: 100%;
+   display: flex;
+   flex-direction: row;
+   list-style: none;
+   padding: 0px;
+   margin: 0px;
+}
+
+.swiper_list.is_swiping {
+   transition: none;
+}
+
+.swiper_item {
+   display: flex;
+   flex-direction: column;
+   gap: 8px;
+   width: 100%;
+   flex-shrink: 0;
+   padding: 16px;
+   cursor: pointer;
+}
+
+.swiper_img {
+   width: 100%;
+   height: auto;
+   user-select: none;
+}
+
+.swiper_indicator {
+   width: 8px;
+   height: 8px;
+   transform: rotate(45deg);
+   background-color: #e0e0e0;
+}
+.swiper_indicator_active {
+   background-color: #dd8560 !important;
+}
