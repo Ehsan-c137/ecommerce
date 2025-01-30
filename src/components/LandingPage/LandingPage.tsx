@@ -205,7 +205,7 @@ export default function LandingPage() {
                   Explore Collection
                </Link>
             </section>
-            <section className="flex flex-col gap-4 justify-around text-center items-center w-full py-5">
+            <section className="flex flex-col gap-4 justify-around text-center items-center w-full py-5 check-bg">
                <p className="text-titleActive uppercase">new Arrival</p>
                <Icons.Border />
 
@@ -299,7 +299,7 @@ export default function LandingPage() {
                </div>
             </section>
             <section
-               className="p-10 relative lg:static show-item lg:flex lg:justify-center w-full"
+               className="p-10 relative lg:static show-item lg:flex lg:justify-center w-full autumn_background"
                ref={(el) => {
                   if (el) {
                      itemRef.current[2] = el
