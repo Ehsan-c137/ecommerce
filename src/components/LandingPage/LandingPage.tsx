@@ -31,8 +31,8 @@ export default function LandingPage() {
    const options = useMemo(() => {
       return {
          root: null,
-         rootMargin: "0px",
-         threshold: 1.0,
+         rootMargin: "30px",
+         threshold: 0.3,
       }
    }, [])
 
