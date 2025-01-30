@@ -9,6 +9,7 @@ import Link from "next/link"
 import logout from "@/services/user/logout"
 import { useRouter } from "next/navigation"
 import Drawer from "../Drawer/Drawer"
+import { getRefValue } from "@/utils/hooks"
 
 enum Tabs {
    Women = 1,
@@ -18,10 +19,11 @@ enum Tabs {
 
 export default function HamburgerMenu({ isLoggedIn }: { isLoggedIn: boolean }) {
    const [isOpen, setIsOpen] = useState(false)
-   const [activeTab, setActiveTab] = useState(2)
+   const [activeTab, setActiveTab] = useState(1)
    const router = useRouter()
    const ref = useRef<Element | null>(null)
-
+   const itemRef = useRef<HTMLParagraphElement | null>(null)
+   const itemWidthRef = getRefValue(itemRef)
    const handleCloseDrawer = () => {
       setIsOpen(false)
    }
@@ -45,6 +47,7 @@ export default function HamburgerMenu({ isLoggedIn }: { isLoggedIn: boolean }) {
          ref.current?.removeEventListener("click", handleCloseDrawer)
       }
    }, [isOpen])
+
    return (
       <>
          <div
@@ -68,6 +71,7 @@ export default function HamburgerMenu({ isLoggedIn }: { isLoggedIn: boolean }) {
                <div>
                   <div className="uppercase transition justify-around items-center border-b grid grid-cols-3 relative">
                      <p
+                        ref={itemRef}
                         className="w-full text-center py-4 cursor-pointer text-titleActive"
                         onClick={() => setActiveTab(1)}
                      >
@@ -87,14 +91,14 @@ export default function HamburgerMenu({ isLoggedIn }: { isLoggedIn: boolean }) {
                      </p>
 
                      <div
+                        style={{
+                           transform: `translateX(${
+                              itemWidthRef?.offsetWidth * (activeTab - 1)
+                           }px)`,
+                        }}
                         className={clsx(
-                           "active-border w-full col-start-1",
-                           ham_style.border,
-                           {
-                              "col-start-1": activeTab === 1,
-                              "col-start-2": activeTab === 2,
-                              "col-start-3": activeTab === 3,
-                           }
+                           "active-border w-full transition-transform duration-300",
+                           ham_style.border
                         )}
                      ></div>
                   </div>
