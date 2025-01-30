@@ -99,6 +99,7 @@ export default function LandingPage() {
                   src="/mobile/hero-section.webp"
                   alt="spring season"
                   priority={true}
+                  loading="eager"
                   width={0}
                   height={600}
                   sizes="100vw"
