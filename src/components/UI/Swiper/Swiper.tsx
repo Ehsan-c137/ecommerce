@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useEffect, useState, useRef } from "react"
+import React, { useState, useRef } from "react"
 import styles from "./Swiper.module.css"
 import clsx from "clsx"
 import { useQuery } from "@tanstack/react-query"
@@ -36,7 +36,7 @@ const SwiperIndicators = ({
 
 const MIN_SWIPE_Required = 100
 
-const Carousel = () => {
+const Swiper = () => {
    const containerRef = useRef<HTMLUListElement>(null)
    const containerWidthRef = useRef(0)
    const minOffsetXRef = useRef(0)
@@ -64,6 +64,26 @@ const Carousel = () => {
       }
 
       setOffsetX(newOffsetX)
+   }
+
+   const onTouchStart = (
+      e: React.TouchEvent<HTMLElement> | React.MouseEvent<HTMLElement>
+   ) => {
+      setIsSwiping(true)
+
+      currentOffsetXRef.current = getRefValue(offsetXRef)
+      startXRef.current = getTouchEventData(e.nativeEvent).clientX
+
+      const containerEl = getRefValue(containerRef)
+      const containerWidth = containerEl.offsetWidth
+
+      containerWidthRef.current = containerWidth
+      minOffsetXRef.current = containerWidth - containerEl.scrollWidth
+
+      window.addEventListener("touchmove", onTouchMove)
+      window.addEventListener("touchend", onTouchEnd)
+      window.addEventListener("mouseup", onTouchEnd)
+      window.addEventListener("mousemove", onTouchMove)
    }
 
    const onTouchEnd = () => {
@@ -94,42 +114,11 @@ const Carousel = () => {
       window.removeEventListener("mousemove", onTouchMove)
    }
 
-   const onTouchStart = (
-      e: React.TouchEvent<HTMLElement> | React.MouseEvent<HTMLElement>
-   ) => {
-      setIsSwiping(true)
-
-      currentOffsetXRef.current = getRefValue(offsetXRef)
-      startXRef.current = getTouchEventData(e.nativeEvent).clientX
-
-      const containerEl = getRefValue(containerRef)
-      const containerWidth = containerEl.offsetWidth
-
-      containerWidthRef.current = containerWidth
-      minOffsetXRef.current = containerWidth - containerEl.scrollWidth
-
-      window.addEventListener("touchmove", onTouchMove)
-      window.addEventListener("touchend", onTouchEnd)
-      window.addEventListener("mouseup", onTouchEnd)
-      window.addEventListener("mousemove", onTouchMove)
-   }
-
    const { data, isLoading } = useQuery({
       queryKey: ["allproducts"],
       queryFn: () => getProduct(1, 1),
    })
    const images = data?.slice(0, 3)
-
-   // useEffect(() => {
-   //    const timer = setInterval(() => {
-   //       setCurrentIndex((prev) => (prev === images?.length - 1 ? 0 : prev + 1))
-
-   //    }, 5000)
-
-   //    return () => {
-   //       clearInterval(timer)
-   //    }
-   // }, [currentIndex, images?.length])
 
    const indicatorOnClick = (index: number) => {
       const containerEl = getRefValue(containerRef)
@@ -175,4 +164,4 @@ const Carousel = () => {
    )
 }
 
-export default Carousel
+export default Swiper
