@@ -6,7 +6,7 @@ import signin from "@/services/user/signin"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { z } from "zod"
-import { useRouter } from "next/navigation"
+import { useRouter, useSearchParams } from "next/navigation"
 import toast from "react-hot-toast"
 import Input from "@/components/UI/Input"
 import { Icons } from "@/components/Icons/icons"
@@ -32,10 +32,10 @@ export default function Login() {
       resolver: zodResolver(SigninSchema),
       mode: "onChange",
    })
-
+   const searchParams = useSearchParams()
    const queryClient = useQueryClient()
    const router = useRouter()
-
+   const callbackUrl = searchParams.get("callbackUrl") || "/"
    const signinMutation = useMutation({
       mutationFn: (data: { username: string; password: string }) =>
          signin(data),
@@ -51,7 +51,7 @@ export default function Login() {
             return
          }
          queryClient.invalidateQueries({ queryKey: ["profile"] })
-         router.push("/")
+         router.push(callbackUrl)
       },
       onError: (error) => {
          console.log("error")
