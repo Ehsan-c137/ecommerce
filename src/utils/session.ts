@@ -24,10 +24,10 @@ export async function getSession() {
    }
 }
 
-export function deleteSession() {
+export async function deleteSession() {
    cookies().delete("session")
 }
 
-export function setSession(session: string) {
+export async function setSession(session: string) {
    cookies().set("session", session)
 }
