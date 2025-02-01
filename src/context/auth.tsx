@@ -3,6 +3,7 @@ import { createContext, useContext, useEffect, useState } from "react"
 
 interface AuthContextType {
    isAuthenticated: boolean
+   setIsAuthenticated: (value: boolean) => void
 }
 
 const AuthContext = createContext<AuthContextType | null>(null)
@@ -20,16 +21,16 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
    // const login = (user: any) => setIsAuthenticated(true)
    // const logout = () => setIsAuthenticated(false)
 
+   const checkSession = async () => {
+      const cookie = await getSession()
+      setIsAuthenticated(cookie.isAuthenticated)
+   }
    useEffect(() => {
-      const checkSession = async () => {
-         const cookie = await getSession()
-         setIsAuthenticated(cookie.isAuthenticated)
-      }
       checkSession()
    }, [])
 
    return (
-      <AuthContext.Provider value={{ isAuthenticated }}>
+      <AuthContext.Provider value={{ isAuthenticated, setIsAuthenticated }}>
          {children}
       </AuthContext.Provider>
    )
