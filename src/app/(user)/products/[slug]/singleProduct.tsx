@@ -13,13 +13,17 @@ import Details from "./singleproduct/Details"
 import clsx from "clsx"
 import Footer from "@/components/Footer/Footer"
 import NotFound from "@/app/not-found"
-import { useAuth } from "@/context/auth"
 import Colors from "@/components/SingleProduct/Colors"
 import Sizes from "@/components/SingleProduct/Sizes"
 
-export default function SingleProduct({ slug }: { slug: string }) {
+export default function SingleProduct({
+   slug,
+   isAuthenticated,
+}: {
+   slug: string
+   isAuthenticated: boolean
+}) {
    const [isImageLoaded, setIsImageLoaded] = useState(false)
-   const { isAuthenticated } = useAuth()
    console.log(isAuthenticated, "isAuthenticated")
    const searchParams = useSearchParams()
    const router = useRouter()
