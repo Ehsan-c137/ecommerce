@@ -110,7 +110,8 @@ export default function SingleProduct({
    console.log(dataInCart, "data in cart")
    const handleCart = () => {
       if (!isAuthenticated) {
-         router.push("/protected/login")
+         const currentPath = window.location.pathname + window.location.search
+         router.push(`/login?callbackUrl=${currentPath}`)
          return
       }
 
