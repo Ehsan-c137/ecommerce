@@ -40,8 +40,6 @@ export default function Login() {
       mutationFn: (data: { username: string; password: string }) =>
          signin(data),
       onSuccess: (data) => {
-         // toast
-
          if (data?.message?.includes("already exists")) {
             toast.error("user already exist")
             return
