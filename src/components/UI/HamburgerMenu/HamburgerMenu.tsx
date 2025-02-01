@@ -10,6 +10,7 @@ import logout from "@/services/user/logout"
 import { useRouter } from "next/navigation"
 import Drawer from "../Drawer/Drawer"
 import { getRefValue } from "@/utils/hooks"
+import { useAuth } from "@/context/auth"
 
 enum Tabs {
    Women = 1,
@@ -18,6 +19,7 @@ enum Tabs {
 }
 
 export default function HamburgerMenu({ isLoggedIn }: { isLoggedIn: boolean }) {
+   const { setIsAuthenticated } = useAuth()
    const [isOpen, setIsOpen] = useState(false)
    const [activeTab, setActiveTab] = useState(1)
    const router = useRouter()
@@ -30,6 +32,7 @@ export default function HamburgerMenu({ isLoggedIn }: { isLoggedIn: boolean }) {
 
    const handleLogout = async () => {
       await logout()
+      setIsAuthenticated(false)
       router.refresh()
    }
 
