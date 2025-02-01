@@ -49,7 +49,7 @@ export default function Login() {
             return
          }
          queryClient.invalidateQueries({ queryKey: ["profile"] })
-         const callbackUrl = searchParams.get("callbackUrl") || "/"
+         const callbackUrl = searchParams?.get("callbackUrl") || "/"
          router.push(callbackUrl)
       },
       onError: (error) => {
