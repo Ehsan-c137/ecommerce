@@ -1,16 +1,15 @@
 import HamburgerMenu from "@/components/UI/HamburgerMenu/HamburgerMenu"
 import { Icons } from "../Icons/icons"
-import checkLoggedin from "@/services/user/check_loggedin"
 import Link from "next/link"
 import Search from "@/components/UI/Search"
-
+import { useAuth } from "@/context/auth"
 export default async function MobileNav() {
-   const isLoggedin = await checkLoggedin()
+   const { isAuthenticated } = useAuth()
    return (
       <>
          <header className="flex justify-between py-3 px-4 background ">
             <div className="w-[56px] flex items-center">
-               <HamburgerMenu isLoggedIn={isLoggedin} />
+               <HamburgerMenu isLoggedIn={isAuthenticated} />
             </div>
             <Link href={"/"} aria-label="logo">
                <Icons.Logo />
