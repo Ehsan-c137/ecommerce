@@ -110,7 +110,7 @@ export default function SingleProduct({
    console.log(dataInCart, "data in cart")
    const handleCart = () => {
       if (!isAuthenticated) {
-         router.push("/login")
+         router.push("/protected/login")
          return
       }
 

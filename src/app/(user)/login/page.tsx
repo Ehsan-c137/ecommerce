@@ -35,7 +35,7 @@ export default function Login() {
    const searchParams = useSearchParams()
    const queryClient = useQueryClient()
    const router = useRouter()
-   const callbackUrl = searchParams.get("callbackUrl") || "/"
+
    const signinMutation = useMutation({
       mutationFn: (data: { username: string; password: string }) =>
          signin(data),
@@ -51,6 +51,7 @@ export default function Login() {
             return
          }
          queryClient.invalidateQueries({ queryKey: ["profile"] })
+         const callbackUrl = searchParams.get("callbackUrl") || "/"
          router.push(callbackUrl)
       },
       onError: (error) => {
