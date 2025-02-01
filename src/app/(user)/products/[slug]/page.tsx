@@ -30,7 +30,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function Page({ params }: Props) {
-   const slug = params.slug.toLowerCase()
-   const { isAuthenticated } = await getSession()
-   return <SingleProduct slug={slug} isAuthenticated={isAuthenticated} />
+   const session = await getSession()
+
+   return (
+      <SingleProduct
+         slug={params.slug}
+         isAuthenticated={session.isAuthenticated}
+      />
+   )
 }
