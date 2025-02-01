@@ -1,5 +1,6 @@
 "use client"
 
+import { AuthProvider } from "@/context/auth"
 import {
    isServer,
    QueryClient,
@@ -53,7 +54,7 @@ export default function Providers({ children }: { children: React.ReactNode }) {
          />
          <div id="my-portal"></div>
          <QueryClientProvider client={queryClient}>
-            {children}
+            <AuthProvider>{children}</AuthProvider>
          </QueryClientProvider>
       </>
    )
