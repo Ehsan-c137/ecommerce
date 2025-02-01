@@ -13,8 +13,9 @@ import Details from "./singleproduct/Details"
 import clsx from "clsx"
 import Footer from "@/components/Footer/Footer"
 import NotFound from "@/app/not-found"
-import { toPastel } from "@/utils/toPastelColor"
 import { useAuth } from "@/context/auth"
+import Colors from "@/components/SingleProduct/Colors"
+import Sizes from "@/components/SingleProduct/Sizes"
 
 export default function SingleProduct({ slug }: { slug: string }) {
    const [isImageLoaded, setIsImageLoaded] = useState(false)
@@ -229,101 +230,16 @@ export default function SingleProduct({ slug }: { slug: string }) {
                         }}
                         className="flex gap-9 h-[56px]"
                      >
-                        <div className="flex gap-4 items-center min-w-[85px]">
-                           <p className="label font-medium text-xs text-neutral-500 uppercase">
-                              color
-                           </p>
-                           <div className="flex items-center  gap-2">
-                              {colors?.map((color: string) => {
-                                 const isChecked = searchParams
-                                    .getAll("color")
-                                    ?.includes(color)
-
-                                 return (
-                                    <div
-                                       key={color}
-                                       className="flex items-center w-[24px] h-[24px]"
-                                    >
-                                       <label
-                                          style={{
-                                             border:
-                                                "1px solid transparent w-full h-full",
-                                             backgroundColor: toPastel(color),
-                                             borderColor: isChecked
-                                                ? "black"
-                                                : "transparent",
-                                          }}
-                                          htmlFor={`${color}--color-single`}
-                                          className={`w-[24px] h-[24px] rounded-full transition p-[3px] bg-clip-content border-[1px] bg-black cursor-pointer`}
-                                       ></label>
-                                       <input
-                                          type="radio"
-                                          value={color}
-                                          id={`${color}--color-single`}
-                                          className="hidden"
-                                          checked={isChecked}
-                                          onChange={(e) => {
-                                             handleQueryParams(
-                                                "color",
-                                                e.target.value
-                                             )
-                                          }}
-                                       />
-                                    </div>
-                                 )
-                              })}
-                           </div>
-                        </div>
-                        <div className="flex gap-4 items-center">
-                           <p className="label font-medium text-xs text-neutral-500 uppercase">
-                              size
-                           </p>
-                           <div className="flex items-center gap-2">
-                              {sizes?.map((item: string) => {
-                                 const isChecked = searchParams
-                                    .getAll("size")
-                                    ?.includes(item)
-
-                                 return (
-                                    <div
-                                       key={item}
-                                       className="flex items-center"
-                                    >
-                                       <label
-                                          style={{
-                                             borderColor: isChecked
-                                                ? "black"
-                                                : "#e6e7e8",
-                                             backgroundColor: isChecked
-                                                ? "black"
-                                                : "transparent",
-                                             color: isChecked
-                                                ? "#e6e7e8"
-                                                : "black",
-                                          }}
-                                          htmlFor={`${item}--size`}
-                                          className="flex items-center text-[10px] uppercase justify-center w-[24px] h-[24px] rounded-full text-inputBackground cursor-pointer border border-neutral-100 transition"
-                                       >
-                                          {item}
-                                       </label>
-                                       <input
-                                          type="checkbox"
-                                          value={item}
-                                          id={`${item}--size`}
-                                          className="hidden"
-                                          checked={isChecked}
-                                          onChange={(e) => {
-                                             handleQueryParams(
-                                                "size",
-                                                e.target.value
-                                             )
-                                          }}
-                                       />
-                                    </div>
-                                 )
-                              })}
-                           </div>
-                        </div>
+                        <Colors
+                           colors={colors}
+                           handleQueryParams={handleQueryParams}
+                           searchParams={searchParams}
+                        />
+                        <Sizes
+                           sizes={sizes}
+                           handleQueryParams={handleQueryParams}
+                           searchParams={searchParams}
+                        />
                      </div>
                   </div>
                </div>
