@@ -8,25 +8,20 @@ import getSingleProduct from "@/services/store/product/singleProduct"
 import { useRouter, useSearchParams } from "next/navigation"
 import { IPutCart, putCart, getCart } from "@/services/store/cart/Cart"
 import toast from "react-hot-toast"
-import checkLoggedin from "@/services/user/check_loggedin"
 import Reviews from "./singleproduct/Reviews"
 import Details from "./singleproduct/Details"
 import clsx from "clsx"
 import Footer from "@/components/Footer/Footer"
 import NotFound from "@/app/not-found"
 import { toPastel } from "@/utils/toPastelColor"
+import { useAuth } from "@/context/auth"
 
 export default function SingleProduct({ slug }: { slug: string }) {
    const [isImageLoaded, setIsImageLoaded] = useState(false)
+   const { isAuthenticated } = useAuth()
    const searchParams = useSearchParams()
    const router = useRouter()
    const queryClient = useQueryClient()
-
-   const { data: cookie } = useQuery({
-      queryKey: ["isLogged"],
-      queryFn: () => checkLoggedin(),
-      staleTime: 0,
-   })
 
    const [section, setSection] = useState<"details" | "reviews">("details")
 
@@ -108,7 +103,7 @@ export default function SingleProduct({ slug }: { slug: string }) {
    const dataInCart = oldCartData?.[duplicateProuduct]
    console.log(dataInCart, "data in cart")
    const handleCart = () => {
-      if (!cookie?.isLoggedIn) {
+      if (!isAuthenticated) {
          router.push("/login")
          return
       }
