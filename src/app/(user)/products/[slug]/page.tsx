@@ -1,6 +1,7 @@
 import api from "@/services/index"
 import SingleProduct from "./singleProduct"
 import type { Metadata } from "next"
+import { getSession } from "@/utils/session"
 
 type Props = {
    params: { slug: string }
@@ -30,6 +31,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function Page({ params }: Props) {
    const slug = params.slug.toLowerCase()
-
-   return <SingleProduct slug={slug} />
+   const { isAuthenticated } = await getSession()
+   return <SingleProduct slug={slug} isAuthenticated={isAuthenticated} />
 }
