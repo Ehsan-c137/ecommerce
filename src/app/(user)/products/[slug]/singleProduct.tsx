@@ -19,6 +19,7 @@ import { useAuth } from "@/context/auth"
 export default function SingleProduct({ slug }: { slug: string }) {
    const [isImageLoaded, setIsImageLoaded] = useState(false)
    const { isAuthenticated } = useAuth()
+   console.log(isAuthenticated, "isAuthenticated")
    const searchParams = useSearchParams()
    const router = useRouter()
    const queryClient = useQueryClient()
