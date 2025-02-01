@@ -2,9 +2,9 @@ import HamburgerMenu from "@/components/UI/HamburgerMenu/HamburgerMenu"
 import { Icons } from "../Icons/icons"
 import Link from "next/link"
 import Search from "@/components/UI/Search"
-import { useAuth } from "@/context/auth"
+import { getSession } from "@/utils/session"
 export default async function MobileNav() {
-   const { isAuthenticated } = useAuth()
+   const { isAuthenticated } = await getSession()
    return (
       <>
          <header className="flex justify-between py-3 px-4 background ">
