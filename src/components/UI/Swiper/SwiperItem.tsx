@@ -3,7 +3,7 @@ import Link from "next/link"
 import Image from "next/image"
 import styles from "./Swiper.module.css"
 
-export default function CarouselItem({
+export default function SwiperItem({
    image,
    activeIndex,
    index,
