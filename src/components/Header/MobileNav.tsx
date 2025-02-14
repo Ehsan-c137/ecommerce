@@ -2,14 +2,26 @@ import HamburgerMenu from "@/components/UI/HamburgerMenu/HamburgerMenu"
 import { Icons } from "../Icons/icons"
 import Link from "next/link"
 import Search from "@/components/UI/Search"
-import { getSession } from "@/utils/session"
-export default async function MobileNav() {
-   const { isAuthenticated } = await getSession()
+import { clsx } from "clsx"
+export default async function MobileNav({
+   isLoggedIn,
+   isScrolled,
+}: {
+   isLoggedIn: boolean
+   isScrolled: boolean
+}) {
    return (
       <>
-         <header className="flex justify-between py-3 px-4 background ">
+         <header
+            style={{
+               background: isScrolled ? "white" : "",
+            }}
+            className={clsx("flex justify-between py-3 px-4 background", {
+               "!bg-black": isScrolled,
+            })}
+         >
             <div className="w-[56px] flex items-center">
-               <HamburgerMenu isLoggedIn={isAuthenticated} />
+               <HamburgerMenu isLoggedIn={isLoggedIn} />
             </div>
             <Link href={"/"} aria-label="logo">
                <Icons.Logo />
