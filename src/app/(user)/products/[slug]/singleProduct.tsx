@@ -24,7 +24,6 @@ export default function SingleProduct({
    isAuthenticated: boolean
 }) {
    const [isImageLoaded, setIsImageLoaded] = useState(false)
-   console.log(isAuthenticated, "isAuthenticated")
    const searchParams = useSearchParams()
    const router = useRouter()
    const queryClient = useQueryClient()
