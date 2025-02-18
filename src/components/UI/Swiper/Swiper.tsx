@@ -3,14 +3,16 @@
 import React, { useState, useRef } from "react"
 import styles from "./Swiper.module.css"
 import clsx from "clsx"
-import { useQuery } from "@tanstack/react-query"
-import getProduct from "@/services/store/product/products"
 import SwiperItem from "./SwiperItem"
 import { useStateRef, getRefValue } from "@/utils/hooks"
 import { getTouchEventData } from "@/utils/dom"
 
 interface IIndicatorsProps {
-   images: string[]
+   images: {
+      main_image: string
+      name: string
+      slug: string
+   }[]
    activeIndex: number
    onSelect: (index: number) => void
 }
@@ -34,9 +36,19 @@ const SwiperIndicators = ({
    )
 }
 
-const MIN_SWIPE_Required = 100
+const MIN_SWIPE_Required = 50
 
-const Swiper = () => {
+interface IProps {
+   images: {
+      main_image: string
+      name: string
+      slug: string
+      id: number
+   }[]
+   isLoading: boolean
+}
+
+const Swiper = ({ images, isLoading }: IProps) => {
    const containerRef = useRef<HTMLUListElement>(null)
    const containerWidthRef = useRef(0)
    const minOffsetXRef = useRef(0)
@@ -54,7 +66,7 @@ const Swiper = () => {
 
       const maxOffsetX = 0
       const minOffsetX = getRefValue(minOffsetXRef)
-
+      console.log({ maxOffsetX, minOffsetX, newOffsetX, currentX, diff })
       if (newOffsetX > maxOffsetX) {
          newOffsetX = maxOffsetX
       }
@@ -114,12 +126,6 @@ const Swiper = () => {
       window.removeEventListener("mousemove", onTouchMove)
    }
 
-   const { data, isLoading } = useQuery({
-      queryKey: ["allproducts"],
-      queryFn: () => getProduct(1, 1),
-   })
-   const images = data?.slice(0, 3)
-
    const indicatorOnClick = (index: number) => {
       const containerEl = getRefValue(containerRef)
       const containerWidth = containerEl.offsetWidth
@@ -132,6 +138,7 @@ const Swiper = () => {
       <div className={styles.swiper_container}>
          <ul
             ref={containerRef}
+            aria-label="swiper-container"
             onTouchStart={onTouchStart}
             onTouchEnd={onTouchEnd}
             onMouseDown={onTouchStart}
@@ -144,7 +151,7 @@ const Swiper = () => {
                is_swiping: isSwiping,
             })}
          >
-            {images?.map((image: TProduct, index: number) => {
+            {images?.map((image, index) => {
                return (
                   <SwiperItem
                      key={image.id}

@@ -4,6 +4,8 @@ import { Icons } from "@/components/Icons/icons"
 import { Bodoni_Moda } from "next/font/google"
 import Image from "next/image"
 import Link from "next/link"
+import { useQuery } from "@tanstack/react-query"
+import getProduct from "@/services/store/product/products"
 import Swiper from "@/components/UI/Swiper/Swiper"
 import NewArrival from "@/components/LandingPage/NewArrivel"
 import { useEffect, useRef, useMemo } from "react"
@@ -20,6 +22,12 @@ const bodoniModa = Bodoni_Moda({
 })
 
 export default function LandingPage() {
+   const { data, isLoading } = useQuery({
+      queryKey: ["allproducts"],
+      queryFn: () => getProduct(1, 1),
+   })
+   const images = data?.slice(0, 3)
+
    const callback = (entries: IntersectionObserverEntry[]) => {
       entries?.forEach((entry) => {
          if (entry.isIntersecting) {
@@ -364,7 +372,7 @@ export default function LandingPage() {
                <h3 className="uppercase text-titleActive">Just for you</h3>
                <Icons.Border />
 
-               <Swiper />
+               <Swiper images={images} isLoading={isLoading} />
             </section>
          </main>
       </>
