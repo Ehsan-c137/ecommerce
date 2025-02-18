@@ -3,12 +3,18 @@ import Link from "next/link"
 import Image from "next/image"
 import styles from "./Swiper.module.css"
 
+type imageProp = {
+   main_image: string
+   name: string
+   slug: string
+}
+
 export default function SwiperItem({
    image,
    activeIndex,
    index,
 }: {
-   image: TProduct
+   image: imageProp
    activeIndex: number
    index: number
 }) {
