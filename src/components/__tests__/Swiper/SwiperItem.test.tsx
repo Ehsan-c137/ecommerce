@@ -1,5 +1,5 @@
 import { describe, expect, it } from "@jest/globals"
-import SwiperItem from "../UI/Swiper/SwiperItem"
+import SwiperItem from "../../UI/Swiper/SwiperItem"
 import { render, screen } from "@testing-library/react"
 import "@testing-library/jest-dom"
 
