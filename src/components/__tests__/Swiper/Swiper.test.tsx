@@ -29,7 +29,7 @@ describe("<Swiper/>", () => {
       }
    })
 
-   it("goes to next item", () => {
+   it("check swipe", () => {
       render(<Swiper images={mockImages} isLoading={false} />)
       const containerWidth = 300
       const containerScrollWidth = containerWidth * mockImages.length
@@ -40,7 +40,7 @@ describe("<Swiper/>", () => {
       setReadOnlyProperty(listEl, "scrollWidth", containerScrollWidth)
 
       const startX = 0
-      const endX = -60
+      let endX = -60
 
       expect(listEl).toHaveStyle({
          transform: `translateX(0px)`,
@@ -52,6 +52,22 @@ describe("<Swiper/>", () => {
 
       expect(listEl).toHaveStyle({
          transform: `translateX(${-containerWidth}px)`,
+      })
+
+      endX = 60
+      fireEvent.mouseDown(listEl, { clientX: startX })
+      fireEvent.mouseMove(listEl, { clientX: endX })
+      fireEvent.mouseUp(listEl)
+      expect(listEl).toHaveStyle({
+         transform: `translateX(${startX}px)`,
+      })
+
+      endX = 30
+      fireEvent.mouseDown(listEl, { clientX: startX })
+      fireEvent.mouseMove(listEl, { clientX: endX })
+      fireEvent.mouseUp(listEl)
+      expect(listEl).toHaveStyle({
+         transform: `translateX(${startX}px)`,
       })
    })
 
