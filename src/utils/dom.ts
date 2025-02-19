@@ -2,8 +2,8 @@ export function getTouchEventData(
    e:
       | TouchEvent
       | MouseEvent
-      | React.TouchEvent<HTMLDivElement>
-      | React.MouseEvent<HTMLDivElement>
+      | React.TouchEvent<HTMLElement>
+      | React.MouseEvent<HTMLElement>
 ) {
    return "changedTouches" in e ? e.changedTouches[0] : e
 }
