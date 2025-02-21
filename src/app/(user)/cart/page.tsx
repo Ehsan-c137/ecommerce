@@ -1,11 +1,9 @@
 "use client"
 
 import Item from "./Item"
-import { useQuery, useMutation } from "@tanstack/react-query"
-import { getCart } from "@/services/store/cart/Cart"
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query"
+import { IPutCart, putCart, getCart } from "@/services/store/cart/Cart"
 import toast from "react-hot-toast"
-import { useQueryClient } from "@tanstack/react-query"
-import { IPutCart, putCart } from "@/services/store/cart/Cart"
 import Link from "next/link"
 import { Icons } from "@/components/Icons/icons"
 import style from "./cart.module.css"
