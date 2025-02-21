@@ -24,13 +24,14 @@ const SwiperIndicators = ({
    return (
       <div className="flex items-center gap-4 pb-2 pt-4">
          {images?.map((_, index) => (
-            <span
+            <li
+               data-testid="indicator"
                key={index}
                className={clsx(styles.swiper_indicator, {
                   [styles.swiper_indicator_active]: index === activeIndex,
                })}
                onClick={() => onSelect(index)}
-            ></span>
+            ></li>
          ))}
       </div>
    )

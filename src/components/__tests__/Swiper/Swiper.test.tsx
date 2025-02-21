@@ -144,4 +144,28 @@ describe("<Swiper/>", () => {
          transform: `translateX(${-minOffsetX}px)`,
       })
    })
+
+   it("check active indicator", () => {
+      render(<Swiper images={mockImages} isLoading={false} />)
+      const containerWidth = 300
+      const containerScrollWidth = containerWidth * mockImages.length
+
+      const listEl = screen.queryAllByRole("list")[0]
+
+      setReadOnlyProperty(listEl, "offsetWidth", containerWidth)
+      setReadOnlyProperty(listEl, "scrollWidth", containerScrollWidth)
+
+      expect(listEl).toHaveStyle({ transform: `translateX(0px)` })
+
+      const firtsIndicator = screen.queryAllByTestId("indicator")[0]
+      expect(firtsIndicator).toHaveClass("swiper_indicator_active")
+
+      const secondIndicator = screen.queryAllByTestId("indicator")[1]
+      expect(secondIndicator).not.toHaveClass("swiper_indicator_active")
+
+      fireEvent.click(secondIndicator)
+      expect(listEl).toHaveStyle({
+         transform: `translateX(${-containerWidth}px)`,
+      })
+   })
 })
