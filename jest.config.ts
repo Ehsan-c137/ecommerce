@@ -83,16 +83,16 @@ const config: Config = {
    // ],
 
    // An array of file extensions your modules use
-   // moduleFileExtensions: [
-   //   "js",
-   //   "mjs",
-   //   "cjs",
-   //   "jsx",
-   //   "ts",
-   //   "tsx",
-   //   "json",
-   //   "node"
-   // ],
+   moduleFileExtensions: [
+      "js",
+      "mjs",
+      "cjs",
+      "jsx",
+      "ts",
+      "tsx",
+      "json",
+      "node",
+   ],
 
    moduleNameMapper: {
       "^@/(.*)$": "<rootDir>/src/$1",
