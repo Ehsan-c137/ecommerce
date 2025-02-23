@@ -15,7 +15,10 @@ export function ColorFilter({
       <div className="flex flex-col gap-2 px-4">
          <p className="text-neutral-900 font-medium">Color</p>
          {isLoading ? (
-            <div className="h-[90px] animate-pulse bg-white-200 rounded-sm"></div>
+            <div
+               className="h-[90px] animate-pulse bg-white-200 rounded-sm"
+               aria-label="loading"
+            ></div>
          ) : (
             <div className="flex items-center  flex-wrap gap-3">
                {colors?.map((color) => {
