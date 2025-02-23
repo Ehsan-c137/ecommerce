@@ -1,5 +1,5 @@
-import { expect, it } from "@jest/globals"
-import { render, screen } from "@testing-library/react"
+import "@testing-library/jest-dom"
+import { fireEvent, render, screen } from "@testing-library/react"
 import { SizeFilter } from "@/components/Filter"
 
 const sizes = ["xl", "m", "s"]
@@ -33,6 +33,32 @@ describe("render size filters", () => {
       sizes.map((c) => {
          const size = screen.queryByLabelText(c)
          expect(size).toBeDefined()
+      })
+   })
+
+   it("check if size selected", () => {
+      const mockSelect = jest.fn()
+
+      render(
+         <SizeFilter
+            sizes={sizes}
+            isLoading={false}
+            searchParams={new URLSearchParams()}
+            onSelect={mockSelect}
+         />
+      )
+
+      sizes.map((size) => {
+         const sizeEl = screen.getByText(size.toUpperCase())
+         const labelEl = sizeEl.closest("label")
+         expect(labelEl).toHaveStyle({
+            borderColor: "#e6e7e8",
+         })
+      })
+      sizes.map((size) => {
+         const sizeEl = screen.getByText(size.toUpperCase())
+         fireEvent.click(sizeEl)
+         expect(mockSelect).toHaveBeenCalledWith("size", size)
       })
    })
 })
