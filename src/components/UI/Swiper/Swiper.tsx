@@ -67,7 +67,7 @@ const Swiper = ({ images, isLoading }: IProps) => {
 
       const maxOffsetX = 0
       const minOffsetX = getRefValue(minOffsetXRef)
-      console.log({ maxOffsetX, minOffsetX, newOffsetX, currentX, diff })
+
       if (newOffsetX > maxOffsetX) {
          newOffsetX = maxOffsetX
       }
