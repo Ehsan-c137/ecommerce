@@ -22,7 +22,6 @@ export function SizeFilter({
          ) : (
             <div className="flex items-center flex-wrap gap-3 text-sm">
                {sizes?.map((size) => {
-                  if (!size) return
                   const isChecked = searchParams.getAll("size")?.includes(size)
                   return (
                      <div key={size} className="flex items-center">
@@ -30,6 +29,7 @@ export function SizeFilter({
                            style={{
                               borderColor: isChecked ? "black" : "#e6e7e8",
                            }}
+                           aria-label="size"
                            htmlFor={`${size}--size`}
                            className="flex items-center justify-center w-8 h-8 rounded-md cursor-pointer border border-neutral-100 transition body-s"
                         >
