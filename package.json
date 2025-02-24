@@ -8,7 +8,8 @@
       "start": "next start",
       "lint": "next lint",
       "exprimental_dev": "next dev --experimental-https",
-      "test": "jest --"
+      "test": "jest --",
+      "cy:open": "cypress open"
    },
    "dependencies": {
       "@gsap/react": "^2.1.1",
