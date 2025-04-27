@@ -5,11 +5,11 @@ import Profile from "./Profile"
 import MobileNav from "./MobileNav"
 
 export default async function Header() {
-   const isLogged = await checkLoggedin()
+   const { isLoggedIn } = await checkLoggedin()
 
    return (
       <>
-         <MobileNav />
+         <MobileNav isLoggedIn={isLoggedIn} />
 
          <header className="hidden lg:fixed w-full h-21 top-0 z-10 px-4">
             <div className="flex items-center justify-between h-[84px] 3xl:container mx-auto">
@@ -51,7 +51,7 @@ export default async function Header() {
                      />
                   </div>
 
-                  {isLogged ? (
+                  {isLoggedIn ? (
                      <Profile />
                   ) : (
                      <Link className="btn" href={"/login"}>
