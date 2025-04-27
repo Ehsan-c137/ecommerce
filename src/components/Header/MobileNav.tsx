@@ -2,24 +2,11 @@ import HamburgerMenu from "@/components/UI/HamburgerMenu/HamburgerMenu"
 import { Icons } from "../Icons/icons"
 import Link from "next/link"
 import Search from "@/components/UI/Search"
-import { clsx } from "clsx"
-export default async function MobileNav({
-   isLoggedIn,
-   isScrolled,
-}: {
-   isLoggedIn: boolean
-   isScrolled: boolean
-}) {
+
+export default function MobileNav({ isLoggedIn }: { isLoggedIn: boolean }) {
    return (
       <>
-         <header
-            style={{
-               background: isScrolled ? "white" : "",
-            }}
-            className={clsx("flex justify-between py-3 px-4 background", {
-               "!bg-black": isScrolled,
-            })}
-         >
+         <header className={"flex justify-between py-3 px-4 background"}>
             <div className="w-[56px] flex items-center">
                <HamburgerMenu isLoggedIn={isLoggedIn} />
             </div>
