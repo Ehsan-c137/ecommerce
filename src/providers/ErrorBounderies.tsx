@@ -34,7 +34,9 @@ export class ErrorBoundary extends React.Component<
                <Header />
                <div className="w-[100vw] h-[100vh] flex flex-col p-8 text-center items-center justify-around">
                   <div className="w-full h-100 d-flex flex-column gap-8 justify-content-center align-items-center text-center">
-                     <p className="text-titleActive">Something went wrong</p>
+                     <p className="text-titleActive uppercase">
+                        Something went wrong
+                     </p>
                   </div>
                   <div className="flex flex-col items-center gap-10">
                      <p>

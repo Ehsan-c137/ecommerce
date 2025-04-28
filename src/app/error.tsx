@@ -15,7 +15,9 @@ export default function Error({ error }: { error: Error; reset: () => void }) {
       <>
          <div className="w-[100vw] h-[100vh] flex flex-col p-8 text-center items-center justify-around overflow-hidden">
             <div className="w-full h-100 flex flex-col gap-8 justify-center items-center text-center">
-               <p className="text-titleActive">Something went wrong</p>
+               <p className="text-titleActive uppercase">
+                  Something went wrong
+               </p>
             </div>
             <div className="flex flex-col items-center gap-10">
                <p>
