@@ -2,7 +2,7 @@
 
 import { useQuery } from "@tanstack/react-query"
 import { getCart } from "@/services/store/cart/Cart"
-import { ReactNode, useRef } from "react"
+import { ReactNode } from "react"
 import Link from "next/link"
 import { usePathname, useRouter } from "next/navigation"
 import gsap from "gsap"
@@ -17,7 +17,6 @@ export default function CartLayout({ children }: { children: ReactNode }) {
    })
    gsap.registerPlugin(Flip)
 
-   const pathnameRef = useRef<HTMLDivElement | null>(null)
    const subtotal = cart?.data?.reduce(
       (
          acc: number,
