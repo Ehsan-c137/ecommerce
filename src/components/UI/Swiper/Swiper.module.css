@@ -9,6 +9,7 @@
    overflow: hidden;
    touch-action: pan-y;
    padding: 16px;
+   list-style-type: none;
 }
 .swiper_list {
    transition: transform 0.3s ease-out;
