@@ -1,5 +1,5 @@
 import type { Metadata } from "next"
-import HeaderWrapper from "@/components/Header/HeaderWrapper"
+import Header from "@/components/Header/Header"
 
 export const metadata: Metadata = {
    title: "Open Fashion",
@@ -25,7 +25,7 @@ export default function RootLayout({
 }>) {
    return (
       <div className="background">
-         <HeaderWrapper />
+         <Header />
          <main
             className="background"
             style={{
