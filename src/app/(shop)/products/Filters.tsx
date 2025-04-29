@@ -59,7 +59,9 @@ export default function Filters() {
 
    const handleQueryParams = useCallback(
       (name: string, value: string) => {
-         const current = new URLSearchParams(Array.from(searchParams.entries()))
+         const current = new URLSearchParams(
+            Array.from(searchParams!.entries())
+         )
          const currentQuery = current.getAll(name)
 
          if (!value) {
