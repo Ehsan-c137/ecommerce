@@ -5,7 +5,7 @@ import {
    getAllCategory,
 } from "@/services/store/category/category"
 import { useState } from "react"
-import Product from "../UI/Product"
+import Product from "../../components/UI/Product"
 import clsx from "clsx"
 
 export default function NewArrival() {

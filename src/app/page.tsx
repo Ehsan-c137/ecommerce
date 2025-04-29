@@ -1,7 +1,7 @@
-import Footer from "@/components/Footer/Footer"
+import Footer from "@/components/layout/Footer/Footer"
 import ScrollToTop from "@/components/UI/ScrollToTop/ScrollToTop"
-import Header from "@/components/Header/Header"
-import LandingPage from "@/components/LandingPage/LandingPage"
+import Header from "@/components/layout/Header/Header"
+import LandingPage from "@/pages/Landing/LandingPage"
 
 export default function Home() {
    return (

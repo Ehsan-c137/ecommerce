@@ -1,4 +1,4 @@
-import { Icons } from "../Icons/icons"
+import { Icons } from "../../Icons/icons"
 import Link from "next/link"
 
 export default function Footer() {

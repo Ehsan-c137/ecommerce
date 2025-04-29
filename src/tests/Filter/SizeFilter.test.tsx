@@ -1,6 +1,6 @@
 import "@testing-library/jest-dom"
 import { fireEvent, render, screen } from "@testing-library/react"
-import { SizeFilter } from "@/components/Filter"
+import { SizeFilter } from "@/components/common/Filter"
 
 const sizes = ["xl", "m", "s"]
 

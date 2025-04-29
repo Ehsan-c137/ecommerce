@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { Icons } from "../Icons/icons"
+import { Icons } from "../../Icons/icons"
 import checkLoggedin from "@/services/user/check_loggedin"
 import Profile from "./Profile"
 import MobileNav from "./MobileNav"

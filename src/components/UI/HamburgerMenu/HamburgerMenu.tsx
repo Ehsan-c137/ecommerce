@@ -9,7 +9,7 @@ import Link from "next/link"
 import logout from "@/services/user/logout"
 import { useRouter } from "next/navigation"
 import Drawer from "../Drawer/Drawer"
-import { getRefValue } from "@/utils/hooks"
+import { getRefValue } from "@/lib/hooks/hooks"
 import { useAuth } from "@/context/auth"
 
 enum Tabs {

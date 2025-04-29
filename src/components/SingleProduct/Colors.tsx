@@ -1,4 +1,4 @@
-import { toPastel } from "@/utils/toPastelColor"
+import { toPastel } from "@/lib/utils/toPastelColor"
 
 interface IProps {
    colors: string[]

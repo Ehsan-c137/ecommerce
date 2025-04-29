@@ -1,5 +1,5 @@
 import HamburgerMenu from "@/components/UI/HamburgerMenu/HamburgerMenu"
-import { Icons } from "../Icons/icons"
+import { Icons } from "../../Icons/icons"
 import Link from "next/link"
 import Search from "@/components/UI/Search"
 

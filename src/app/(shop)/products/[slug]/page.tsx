@@ -1,7 +1,7 @@
 import api from "@/services/index"
 import SingleProduct from "./singleProduct"
 import type { Metadata } from "next"
-import { getSession } from "@/utils/session"
+import { getSession } from "@/lib/utils/session"
 
 type Props = {
    params: { slug: string }

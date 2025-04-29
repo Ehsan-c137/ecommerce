@@ -1,6 +1,6 @@
-import Footer from "@/components/Footer/Footer"
+import Footer from "@/components/layout/Footer/Footer"
 import { Icons } from "@/components/Icons/icons"
-import NotFoundButton from "@/components/NotFound"
+import NotFoundButton from "@/components/common/NotFound"
 
 export default function NotFound() {
    return (

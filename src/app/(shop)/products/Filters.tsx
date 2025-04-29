@@ -11,7 +11,7 @@ import {
    PriceFilter,
    ColorFilter,
    SizeFilter,
-} from "@/components/Filter"
+} from "@/components/common/Filter"
 import Drawer from "@/components/UI/Drawer/Drawer"
 import { useGSAP } from "@gsap/react"
 import gsap from "gsap"

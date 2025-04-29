@@ -1,6 +1,6 @@
 import { fireEvent, render, screen } from "@testing-library/react"
-import Swiper from "../../UI/Swiper/Swiper"
-import { setReadOnlyProperty } from "@/utils/test-helpers"
+import Swiper from "../../components/UI/Swiper/Swiper"
+import { setReadOnlyProperty } from "@/lib/test/test-helpers"
 
 describe("<Swiper/>", () => {
    const mockImages = [

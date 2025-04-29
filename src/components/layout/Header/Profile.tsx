@@ -2,7 +2,7 @@
 import { useQuery } from "@tanstack/react-query"
 import { getUserInfo } from "@/services/user/change_info"
 import logout from "@/services/user/logout"
-import { Icons } from "../Icons/icons"
+import { Icons } from "../../Icons/icons"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 

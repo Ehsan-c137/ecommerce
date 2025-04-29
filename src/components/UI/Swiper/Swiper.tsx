@@ -4,8 +4,8 @@ import React, { useState, useRef } from "react"
 import styles from "./Swiper.module.css"
 import clsx from "clsx"
 import SwiperItem from "./SwiperItem"
-import { useStateRef, getRefValue } from "@/utils/hooks"
-import { getTouchEventData } from "@/utils/dom"
+import { useStateRef, getRefValue } from "@/lib/hooks/hooks"
+import { getTouchEventData } from "@/lib/utils/dom"
 
 interface IIndicatorsProps {
    images: {

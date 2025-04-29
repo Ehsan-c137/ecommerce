@@ -1,7 +1,7 @@
 import React, { PropsWithChildren } from "react"
 import { Button } from "@/components/UI/Button"
-import Header from "@/components/Header/Header"
-import Footer from "@/components/Footer/Footer"
+import Header from "@/components/layout/Header/Header"
+import Footer from "@/components/layout/Footer/Footer"
 import { Icons } from "@/components/Icons/icons"
 
 interface ErroryBoundaryState {

@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useRef } from "react"
 import clsx from "clsx"
-import CreatePortal from "@/components/CreatePortal"
+import CreatePortal from "@/components/common/CreatePortal"
 import style from "./Drawer.module.css"
 
 export default function Drawer({

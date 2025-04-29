@@ -1,4 +1,4 @@
-import { getSession } from "@/utils/session"
+import { getSession } from "@/lib/utils/session"
 import { createContext, useContext, useEffect, useState } from "react"
 
 interface AuthContextType {

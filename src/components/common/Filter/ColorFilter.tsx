@@ -1,5 +1,5 @@
 import { FilterProps } from "@/types/types"
-import { toPastel } from "@/utils/toPastelColor"
+import { toPastel } from "@/lib/utils/toPastelColor"
 interface ColorFilterProps extends FilterProps {
    colors: string[]
    isLoading: boolean
