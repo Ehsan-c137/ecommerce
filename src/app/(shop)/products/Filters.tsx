@@ -3,11 +3,9 @@
 import Products from "./Products"
 import { useRouter, usePathname, useSearchParams } from "next/navigation"
 import { useQuery } from "@tanstack/react-query"
-import { getAllCategory } from "@/services/store/category/category"
 import { useCallback } from "react"
 import products from "@/services/store/product/products"
 import {
-   FilterSection,
    PriceFilter,
    ColorFilter,
    SizeFilter,
@@ -59,9 +57,7 @@ export default function Filters() {
 
    const handleQueryParams = useCallback(
       (name: string, value: string) => {
-         const current = new URLSearchParams(
-            Array.from(searchParams!.entries())
-         )
+         const current = new URLSearchParams(Array.from(searchParams.entries()))
          const currentQuery = current.getAll(name)
 
          if (!value) {
@@ -82,7 +78,7 @@ export default function Filters() {
    )
 
    const handleSetMinPrice = (min: number) => {
-      const current = new URLSearchParams(Array.from(searchParams!.entries()))
+      const current = new URLSearchParams(Array.from(searchParams.entries()))
       if (min > minPrice) {
          current.set("min price", `${min}`)
          const search = current.toString()
@@ -95,7 +91,7 @@ export default function Filters() {
    }
 
    const handleSetMaxPrice = (max: number) => {
-      const current = new URLSearchParams(Array.from(searchParams!.entries()))
+      const current = new URLSearchParams(Array.from(searchParams.entries()))
       if (max == maxPrice) {
          current.delete("max price")
          const search = current.toString()
@@ -129,15 +125,6 @@ export default function Filters() {
    return (
       <>
          <div className="hidden filter-section sm:flex flex-col gap-6 border border-neutral-100 rounded-sm w-[228px] py-4 sticky top-[--header-height] left-0 h-fit">
-            {/* <FilterSection
-               title="Categories"
-               isLoading={categoriesLoading}
-               items={categories}
-               paramName="category"
-               onSelect={handleQueryParams}
-               searchParams={searchParams}
-            /> */}
-
             <ColorFilter
                colors={colors}
                searchParams={searchParams}
@@ -173,15 +160,6 @@ export default function Filters() {
             setIsOpen={() => handleQueryParams("filter-drawer", "true")}
          >
             <div className="flex flex-col gap-6 px-4 overflow-y-auto">
-               {/* <FilterSection
-                  title="Categories"
-                  isLoading={categoriesLoading}
-                  items={categories}
-                  paramName="category"
-                  onSelect={handleQueryParams}
-                  searchParams={searchParams}
-               /> */}
-
                <ColorFilter
                   colors={colors}
                   searchParams={searchParams}
