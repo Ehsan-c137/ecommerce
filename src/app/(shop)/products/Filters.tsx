@@ -82,36 +82,35 @@ export default function Filters() {
    )
 
    const handleSetMinPrice = (min: number) => {
+      const current = new URLSearchParams(Array.from(searchParams!.entries()))
       if (min > minPrice) {
-         const current = new URLSearchParams(Array.from(searchParams.entries()))
          current.set("min price", `${min}`)
          const search = current.toString()
          router.push(`${pathname}${search ? `?${search}` : ""}`)
-      } else {
-         const current = new URLSearchParams(Array.from(searchParams.entries()))
-         current.delete("min price")
-         const search = current.toString()
-         router.push(`${pathname}${search ? `?${search}` : ""}`)
+         return
       }
+      current.delete("min price")
+      const search = current.toString()
+      router.push(`${pathname}${search ? `?${search}` : ""}`)
    }
 
    const handleSetMaxPrice = (max: number) => {
+      const current = new URLSearchParams(Array.from(searchParams!.entries()))
       if (max == maxPrice) {
-         const current = new URLSearchParams(Array.from(searchParams.entries()))
          current.delete("max price")
          const search = current.toString()
          router.push(`${pathname}${search ? `?${search}` : ""}`)
-      } else if (max <= maxPrice) {
-         const current = new URLSearchParams(Array.from(searchParams.entries()))
+         return
+      }
+      if (max <= maxPrice) {
          current.set("max price", `${max}`)
          const search = current.toString()
          router.push(`${pathname}${search ? `?${search}` : ""}`)
-      } else {
-         const current = new URLSearchParams(Array.from(searchParams.entries()))
-         current.delete("max price")
-         const search = current.toString()
-         router.push(`${pathname}${search ? `?${search}` : ""}`)
+         return
       }
+      current.delete("max price")
+      const search = current.toString()
+      router.push(`${pathname}${search ? `?${search}` : ""}`)
    }
 
    useGSAP(() => {
