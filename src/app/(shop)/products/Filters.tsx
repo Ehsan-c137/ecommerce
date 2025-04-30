@@ -14,15 +14,17 @@ import Drawer from "@/components/UI/Drawer/Drawer"
 import { useGSAP } from "@gsap/react"
 import gsap from "gsap"
 
+const toPathname = (pathname: string, search: string) =>
+   `${pathname}${search ? `?${search}` : ""}`
+
 export default function Filters() {
    const searchParams = useSearchParams()
    const pathname = usePathname()
    const router = useRouter()
 
-   // const { data: categories, isLoading: categoriesLoading } = useQuery({
-   //    queryKey: ["categories"],
-   //    queryFn: () => getAllCategory(),
-   // })
+   if (!searchParams) {
+      return null
+   }
 
    const { data: allProducts, isLoading: productsLoading } = useQuery({
       queryKey: ["allproducts"],
@@ -71,8 +73,8 @@ export default function Filters() {
          }
 
          const search = current.toString()
-
-         router.push(`${pathname}${search ? `?${search}` : ""}`)
+         const query = search ? `?${search}` : ""
+         router.push(`${pathname}${query}`)
       },
       [router, searchParams, pathname]
    )
@@ -82,12 +84,12 @@ export default function Filters() {
       if (min > minPrice) {
          current.set("min price", `${min}`)
          const search = current.toString()
-         router.push(`${pathname}${search ? `?${search}` : ""}`)
+         router.push(toPathname(pathname, search))
          return
       }
       current.delete("min price")
       const search = current.toString()
-      router.push(`${pathname}${search ? `?${search}` : ""}`)
+      router.push(toPathname(pathname, search))
    }
 
    const handleSetMaxPrice = (max: number) => {
@@ -95,18 +97,18 @@ export default function Filters() {
       if (max == maxPrice) {
          current.delete("max price")
          const search = current.toString()
-         router.push(`${pathname}${search ? `?${search}` : ""}`)
+         router.push(toPathname(pathname, search))
          return
       }
       if (max <= maxPrice) {
          current.set("max price", `${max}`)
          const search = current.toString()
-         router.push(`${pathname}${search ? `?${search}` : ""}`)
+         router.push(toPathname(pathname, search))
          return
       }
       current.delete("max price")
       const search = current.toString()
-      router.push(`${pathname}${search ? `?${search}` : ""}`)
+      router.push(toPathname(pathname, search))
    }
 
    useGSAP(() => {
