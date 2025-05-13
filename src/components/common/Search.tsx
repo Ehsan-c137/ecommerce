@@ -1,12 +1,12 @@
 "use client"
 
 import { useState, useRef, useEffect } from "react"
-import { Icons } from "./Icons/icons"
+import { Icons } from "../Icons/icons"
 import clsx from "clsx"
 import Drawer from "@/components/UI/Drawer/Drawer"
 import getAllProduct from "@/services/store/product/products"
 import { useQuery } from "@tanstack/react-query"
-import Card from "./UI/Card"
+import Card from "../UI/Card"
 
 const SearchInput = ({ ...props }) => {
    const { className, ...otherProps } = props
