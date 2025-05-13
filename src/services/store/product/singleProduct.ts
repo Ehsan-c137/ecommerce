@@ -1,3 +1,4 @@
+import { useQuery } from "@tanstack/react-query"
 import api from "@/services/index"
 import { AxiosError } from "axios"
 
@@ -12,4 +13,11 @@ export default async function getSingleProduct(slug: string) {
       }
       return error
    }
+}
+
+export const useGetSingleProduct = function (id: string) {
+   return useQuery({
+      queryKey: ["single-product", id],
+      queryFn: () => getSingleProduct(id),
+   })
 }
