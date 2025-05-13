@@ -1,9 +1,7 @@
 "use client"
 
 import Card from "@/components/UI/Card"
-import products from "@/services/store/product/products"
 import useGetAllSearchParams from "@/lib/hooks/useGetAllSearchParams"
-import { useQuery } from "@tanstack/react-query"
 import { Categories } from "@/lib/constant"
 import { useSearchParams } from "next/navigation"
 import { useCallback, useMemo, useRef } from "react"
@@ -11,6 +9,7 @@ import useHandleQueryParams from "@/lib/hooks/useHandleQueryParams"
 import { Icons } from "@/components/Icons/icons"
 import { useState } from "react"
 import clsx from "clsx"
+import useGetAllProducts from "@/services/store/product/products"
 
 export default function Products({
    maxPrice,
@@ -34,11 +33,7 @@ export default function Products({
    const checkParams = (array: string[], items: []) => {
       return items?.some((item) => array?.includes(item))
    }
-
-   const { data, isLoading, isError, error } = useQuery({
-      queryKey: ["allproducts"],
-      queryFn: () => products(2, 1),
-   })
+   const { data, isLoading, isError, error } = useGetAllProducts(2, 1)
 
    const filterProduct = useCallback(
       (data: TProduct[]) => {
