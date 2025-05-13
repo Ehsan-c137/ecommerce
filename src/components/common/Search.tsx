@@ -4,9 +4,8 @@ import { useState, useRef, useEffect } from "react"
 import { Icons } from "../Icons/icons"
 import clsx from "clsx"
 import Drawer from "@/components/UI/Drawer/Drawer"
-import getAllProduct from "@/services/store/product/products"
-import { useQuery } from "@tanstack/react-query"
 import Card from "../UI/Card"
+import useGetAllProducts from "@/services/store/product/products"
 
 const SearchInput = ({ ...props }) => {
    const { className, ...otherProps } = props
@@ -26,10 +25,7 @@ const SearchInput = ({ ...props }) => {
       }
    }, [searchText])
 
-   const { data } = useQuery({
-      queryKey: ["products"],
-      queryFn: () => getAllProduct(1, 1),
-   })
+   const { data } = useGetAllProducts(1, 1)
 
    const handleOpen = () => {
       setIsOpen(true)
