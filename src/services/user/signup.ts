@@ -1,6 +1,5 @@
 "use server"
 
-import { BASE_URL } from "../index"
 import { cookies } from "next/headers"
 
 export default async function signup(data: {
@@ -31,8 +30,6 @@ export default async function signup(data: {
             httpOnly: true,
          })
       }
-
-      console.log({ data, response })
       return data
    } catch (error) {
       return error
