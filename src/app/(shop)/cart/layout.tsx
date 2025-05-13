@@ -1,7 +1,5 @@
 "use client"
-
-import { useQuery } from "@tanstack/react-query"
-import { getCart } from "@/services/store/cart/Cart"
+import { useGetCart } from "@/services/store/cart/Cart"
 import { ReactNode } from "react"
 import Link from "next/link"
 import { usePathname, useRouter } from "next/navigation"
@@ -11,10 +9,7 @@ import { Flip } from "gsap/Flip"
 export default function CartLayout({ children }: { children: ReactNode }) {
    const pathname = usePathname()
    const router = useRouter()
-   const { data: cart, isLoading } = useQuery({
-      queryKey: ["cart"],
-      queryFn: () => getCart(),
-   })
+   const { data: cart, isLoading } = useGetCart()
    gsap.registerPlugin(Flip)
 
    const subtotal = cart?.data?.reduce(
