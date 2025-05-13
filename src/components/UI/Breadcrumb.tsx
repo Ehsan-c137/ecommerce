@@ -4,7 +4,7 @@ import { Icons } from "../Icons/icons"
 import Link from "next/link"
 
 export default function Breadcrumb() {
-   const pathname = usePathname().trim().split("/").slice(1)
+   const pathname = usePathname()?.trim().split("/").slice(1) || []
 
    const notAllowed = ["", "admin"]
 
