@@ -6,20 +6,21 @@ import React from "react"
 import { Icons } from "@/components/Icons/icons"
 import Breadcrumb from "@/components/UI/Breadcrumb"
 
+const items = [
+   "Dashboard",
+   "products",
+   "Orders",
+   "Customers",
+   "Reviews",
+   "Settings",
+]
+
 export default function AdminPanelLayout({
    children,
 }: {
    children: React.ReactNode
 }) {
    const pathname = usePathname()
-   const items = [
-      "Dashboard",
-      "products",
-      "Orders",
-      "Customers",
-      "Reviews",
-      "Settings",
-   ]
 
    const NavItems = items.map((item) => {
       const url = `/admin/${item.toLowerCase()}`
