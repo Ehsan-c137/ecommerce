@@ -1,7 +1,6 @@
-"use server"
-
 import api from "@/services/index"
-import { cookies } from "next/headers"
+import { useQuery } from "@tanstack/react-query"
+// import { cookies } from "next/headers"
 
 export interface IPutCart {
    product_slug: string
@@ -11,17 +10,9 @@ export interface IPutCart {
 }
 export async function putCart(data: IPutCart[]) {
    try {
-      const response = await api.put(
-         "/store/temporary_basket",
-         {
-            data: data,
-         },
-         {
-            headers: {
-               Authorization: `Token ${cookies().get("session")?.value}`,
-            },
-         }
-      )
+      const response = await api.put("/store/temporary_basket", {
+         data: data,
+      })
 
       return response.data
    } catch (error) {
@@ -31,13 +22,18 @@ export async function putCart(data: IPutCart[]) {
 
 export async function getCart() {
    try {
-      const response = await api.get("/store/temporary_basket", {
-         headers: {
-            Authorization: `Token ${cookies().get("session")?.value}`,
-         },
-      })
+      const response = await api.get("/store/temporary_basket")
       return response.data
    } catch (error) {
       return error
    }
+}
+
+export function useGetCart() {
+   return useQuery({
+      queryKey: ["cart"],
+      queryFn: () => getCart(),
+      staleTime: 0,
+      gcTime: 0,
+   })
 }
