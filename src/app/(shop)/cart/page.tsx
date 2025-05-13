@@ -1,8 +1,8 @@
 "use client"
 
 import Item from "./Item"
-import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query"
-import { IPutCart, putCart, getCart } from "@/services/store/cart/Cart"
+import { useMutation, useQueryClient } from "@tanstack/react-query"
+import { IPutCart, putCart, useGetCart } from "@/services/store/cart/Cart"
 import toast from "react-hot-toast"
 import Link from "next/link"
 import { Icons } from "@/components/Icons/icons"
@@ -19,13 +19,7 @@ export default function Cart() {
       }
    }, [])
 
-   const { data: cart, isLoading } = useQuery({
-      queryKey: ["cart"],
-      queryFn: () => getCart(),
-      staleTime: 0,
-      gcTime: 0,
-   })
-
+   const { data: cart, isLoading } = useGetCart()
    const queryClient = useQueryClient()
 
    const mutation = useMutation({
