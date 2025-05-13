@@ -2,9 +2,7 @@
 
 import Products from "./Products"
 import { useRouter, usePathname, useSearchParams } from "next/navigation"
-import { useQuery } from "@tanstack/react-query"
 import { useCallback } from "react"
-import products from "@/services/store/product/products"
 import {
    PriceFilter,
    ColorFilter,
@@ -13,8 +11,9 @@ import {
 import Drawer from "@/components/UI/Drawer/Drawer"
 import { useGSAP } from "@gsap/react"
 import gsap from "gsap"
+import useGetAllProducts from "@/services/store/product/products"
 
-const toPathname = (pathname: string, search: string) =>
+const toPathname = (pathname: string | null, search: string | null) =>
    `${pathname}${search ? `?${search}` : ""}`
 
 export default function Filters() {
@@ -22,14 +21,10 @@ export default function Filters() {
    const pathname = usePathname()
    const router = useRouter()
 
-   if (!searchParams) {
-      return null
-   }
-
-   const { data: allProducts, isLoading: productsLoading } = useQuery({
-      queryKey: ["allproducts"],
-      queryFn: () => products(2, 1),
-   })
+   const { data: allProducts, isLoading: productsLoading } = useGetAllProducts(
+      1,
+      2
+   )
 
    const colors = allProducts
       ?.flatMap((product: TProduct) => product.options.colors)
@@ -59,6 +54,7 @@ export default function Filters() {
 
    const handleQueryParams = useCallback(
       (name: string, value: string) => {
+         if (!searchParams) return
          const current = new URLSearchParams(Array.from(searchParams.entries()))
          const currentQuery = current.getAll(name)
 
@@ -80,6 +76,7 @@ export default function Filters() {
    )
 
    const handleSetMinPrice = (min: number) => {
+      if (!searchParams) return
       const current = new URLSearchParams(Array.from(searchParams.entries()))
       if (min > minPrice) {
          current.set("min price", `${min}`)
@@ -93,6 +90,7 @@ export default function Filters() {
    }
 
    const handleSetMaxPrice = (max: number) => {
+      if (!searchParams) return
       const current = new URLSearchParams(Array.from(searchParams.entries()))
       if (max == maxPrice) {
          current.delete("max price")
@@ -123,6 +121,10 @@ export default function Filters() {
          ease: "power3.out",
       })
    }, [])
+
+   if (!searchParams) {
+      return null
+   }
 
    return (
       <>
