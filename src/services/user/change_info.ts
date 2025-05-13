@@ -1,6 +1,7 @@
 "use server"
 
 import api from "@/services/index"
+import { AxiosError } from "axios"
 import { cookies } from "next/headers"
 
 export async function getUserInfo() {
@@ -11,14 +12,15 @@ export async function getUserInfo() {
          {
             headers: {
                Authorization: `Token ${cookies().get("session")?.value}`,
-               "Content-Type": "application/json",
             },
          }
       )
 
       return response.data
    } catch (error) {
-      // console.log(error);
+      if (error instanceof AxiosError) {
+         return error.response?.data
+      }
       return error
    }
 }
@@ -29,13 +31,11 @@ export async function changePassword() {
       const response = await api.put("user/change_password/", body, {
          headers: {
             Authorization: `Token ${cookies().get("session")?.value}`,
-            "Content-Type": "application/json",
          },
       })
 
       return response.data
    } catch (error) {
-      // console.log(error);
       return error
    }
 }
